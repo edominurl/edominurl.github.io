@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programa Programación 1 - Python & Flask | URL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --url-yellow: #ffd971;
+            --url-navy: #150F5D;
+            --url-gray: #64748b;
+            --url-light-gray: #f1f5f9;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .nav-sidebar {
+            position: sticky;
+            top: 20px;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+
+        .nav-sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .nav-sidebar::-webkit-scrollbar-track {
+            background: var(--url-light-gray);
+            border-radius: 3px;
+        }
+
+        .nav-sidebar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 10px 16px;
+            margin: 4px 0;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--url-gray);
+            transition: all 0.2s ease;
+            font-size: 14px;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-link:hover {
+            background-color: var(--url-light-gray);
+            color: var(--url-navy);
+            border-left-color: var(--url-navy);
+            transform: translateX(3px);
+        }
+
+        .nav-link.active {
+            background-color: var(--url-navy);
+            color: white;
+            border-left-color: var(--url-yellow);
+            font-weight: 600;
+        }
+
+        .nav-link i {
+            width: 20px;
+            margin-right: 12px;
+            text-align: center;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .section-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100">
+
+    <div class="min-h-screen">
+        <!-- Header Principal -->
+        <header style="background: linear-gradient(135deg, #150F5D 0%, #1a1566 50%, #150F5D 100%);" class="text-white py-16 shadow-2xl">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-6">
+                    <p class="text-sm font-medium opacity-90 mb-2">
+                        <i class="fas fa-university mr-2"></i>Universidad Rafael Landívar | Facultad de Humanidades | Departamento de Educación
+                    </p>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight">
+                        PROGRAMACIÓN 1
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-6">
+                        Python + Flask | Modalidad Intensiva
+                    </h2>
+                    <p class="text-lg md:text-xl max-w-3xl mx-auto opacity-95">
+                        Formando futuros docentes de tecnología con enfoque en <strong>pensamiento computacional</strong> 
+                        y <strong>desarrollo de soluciones educativas con impacto social</strong>
+                    </p>
+                </div>
+                
+                <!-- Badges -->
+                <div class="flex flex-wrap justify-center gap-3 mt-8">
+                    <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-white bg-opacity-20">
+                        <i class="fab fa-python mr-2"></i>Python 3.10+
+                    </span>
+                    <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-white bg-opacity-20">
+                        <i class="fas fa-flask mr-2"></i>Flask Framework
+                    </span>
+                    <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-white bg-opacity-20">
+                        <i class="fas fa-database mr-2"></i>SQLite
+                    </span>
+                    <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-white bg-opacity-20">
+                        <i class="fas fa-calendar-alt mr-2"></i>4 Semanas Intensivas
+                    </span>
+                    <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-white bg-opacity-20">
+                        <i class="fas fa-star mr-2"></i>4 Créditos
+                    </span>
+                </div>
+            </div>
+        </header>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="lg:grid lg:grid-cols-4 lg:gap-8">
+                <!-- Sidebar Navigation -->
+                <aside class="lg:col-span-1 mb-8 lg:mb-0">
+                    <nav class="nav-sidebar bg-white rounded-xl shadow-lg p-6">
+                        <h3 class="font-bold text-gray-900 mb-4 text-lg">
+                            <i class="fas fa-bars mr-2 text-blue-600"></i>Contenido del Programa
+                        </h3>
+                        <a href="#seccion1" class="nav-link" onclick="setActive(this)">
+                            <i class="fas fa-info-circle"></i>Información General
+                        </a>
+                        <a href="#seccion2" class="nav-link" onclick="setActive(this)">
+                            <i class="fas fa-book"></i>Descripción del Curso
+                        </a>
+                        <a href="#seccion3" class="nav-link" onclick="setActive(this)">
+                            <i class="fas fa-target"></i>Competencias
+                        </a>
+                        <a href="#proyecto" class="nav-link" onclick="setActive(this)">
+                            <i class="fas fa-project-diagram"></i>Proyecto Integrador
+                        </a>
+                        <a href="#semana1" class="nav-link" onclick="setActive(this)">
+                            <i class="fas fa-calendar-day"></i>Semana 1
+                        </a>
+                        <a href="#semana2" class="nav-link" onclick="setActive(this)">
+                            <i class="fas fa-calendar-day"></i>Semana 2
+                        </a>
+                        <a href="#semana3" class="nav-link" onclick="setActive(this)">
+                            <i class="fas fa-calendar-day"></i>Semana 3
+                        </a>
+                        <a href="#semana4" class="nav-link" onclick="setActive(this)">
+                            <i class="fas fa-calendar-day"></i>Semana 4
+                        </a>
+                        <a href="#evaluacion" class="nav-link" onclick="setActive(this)">
+                            <i class="fas fa-clipboard-check"></i>Evaluación
+                        </a>
+                        <a href="#rubricas" class="nav-link" onclick="setActive(this)">
+                            <i class="fas fa-list-check"></i>Rúbricas
+                        </a>
+                        <a href="#calendario" class="nav-link" onclick="setActive(this)">
+                            <i class="fas fa-calendar-alt"></i>Calendario
+                        </a>
+                        <a href="#politicas" class="nav-link" onclick="setActive(this)">
+                            <i class="fas fa-gavel"></i>Políticas
+                        </a>
+                        <a href="#recursos" class="nav-link" onclick="setActive(this)">
+                            <i class="fas fa-book-open"></i>Referencias
+                        </a>
+                        <a href="#mensaje" class="nav-link" onclick="setActive(this)">
+                            <i class="fas fa-heart"></i>Mensaje del Docente
+                        </a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="lg:col-span-3 space-y-8">
+                    
+                    <!-- Sección 1: Información del Profesor -->
+                    <section id="seccion1" class="section-card bg-white rounded-xl shadow-lg p-8 fade-in-up">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6 border-l-4 border-blue-600 pl-4">
+                            <i class="fas fa-user-tie mr-3 text-blue-600"></i>Información del Profesor
+                        </h2>
+                        
+                        <div class="overflow-x-auto rounded-lg border border-gray-200">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr class="hover:bg-gray-50 transition">
+                                        <th class="px-6 py-4 text-left text-sm font-bold text-gray-700 bg-gray-50 w-1/3">
+                                            Nombre del profesor
+                                        </th>
+                                        <td class="px-6 py-4 text-sm text-gray-600">
+                                            Emilio Dominguez
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition">
+                                        <th class="px-6 py-4 text-left text-sm font-bold text-gray-700 bg-gray-50">
+                                            Correo electrónico
+                                        </th>
+                                        <td class="px-6 py-4 text-sm text-gray-600">
+                                            <a href="mailto:emiliodom@gmail.com" class="text-blue-600 hover:underline">
+                                                emiliodom@gmail.com
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition">
+                                        <th class="px-6 py-4 text-left text-sm font-bold text-gray-700 bg-gray-50">
+                                            Día y horario
+                                        </th>
+                                        <td class="px-6 py-4 text-sm text-gray-600">
+                                            Sábados de 07:00 a 12:45 horas
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition">
+                                        <th class="px-6 py-4 text-left text-sm font-bold text-gray-700 bg-gray-50">
+                                            Salón
+                                        </th>
+                                        <td class="px-6 py-4 text-sm text-gray-600">
+                                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium" style="background-color: #fffbeb; color: #92400e;">
+                                                <i class="fas fa-video mr-2"></i>Online
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition">
+                                        <th class="px-6 py-4 text-left text-sm font-bold text-gray-700 bg-gray-50">
+                                            Enlace sesión virtual
+                                        </th>
+                                        <td class="px-6 py-4 text-sm text-gray-600">
+                                            <a href="http://url.zoom.com" target="_blank" class="hover:underline font-medium" style="color: #150F5D;">
+                                                <i class="fas fa-external-link-alt mr-2"></i>url.zoom.com
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="mt-6 p-4 rounded-lg border-l-4" style="background-color: #f0f4ff; border-color: #150F5D;">
+                            <p class="text-sm" style="color: #1a1566;">
+                                <i class="fas fa-info-circle mr-2"></i>
+                                <strong>Modalidad Intensiva:</strong> Ciclo I, Módulo I - Año Psicopedagógico 2025 | 4 Créditos
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Sección 2: Descripción del Curso -->
+                    <section id="seccion2" class="section-card bg-white rounded-xl shadow-lg p-8">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6 border-l-4 pl-4" style="border-color: #150F5D;">
+                            <i class="fas fa-book mr-3" style="color: #150F5D;"></i>Descripción del Curso
+                        </h2>
+                        
+                        <div class="prose prose-lg max-w-none">
+                            <p class="text-gray-700 leading-relaxed mb-4">
+                                Este curso intensivo de <strong>4 semanas</strong> está diseñado para formar futuros docentes de tecnología en los principios fundamentales del <strong>pensamiento computacional</strong> y la <strong>programación funcional con Python</strong>. A diferencia de un enfoque tradicional de ciencias de la computación, este programa prioriza la <strong>aplicación práctica</strong> y el <strong>impacto social</strong>, preparando a los estudiantes para enseñar programación de manera contextualizada y significativa.
+                            </p>
+                            
+                            <p class="text-gray-700 leading-relaxed">
+                                Los estudiantes aprenderán a desarrollar <strong>aplicaciones web funcionales utilizando Flask</strong>, con un enfoque en la resolución de problemas educativos reales de Guatemala. El curso combina competencias técnicas esenciales con estrategias pedagógicas, permitiendo a los futuros docentes no solo programar, sino también <strong>diseñar experiencias de aprendizaje efectivas</strong> para sus estudiantes.
+                            </p>
+                        </div>
+
+                        <div class="mt-8 grid md:grid-cols-2 gap-6">
+                            <div class="p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-200">
+                                <h3 class="font-bold text-blue-900 mb-3 text-lg">
+                                    <i class="fas fa-chalkboard-teacher mr-2"></i>Modalidad Intensiva
+                                </h3>
+                                <ul class="text-blue-800 space-y-2 text-sm">
+                                    <li>
+                                        <i class="fas fa-check-circle mr-2 text-blue-600"></i>
+                                        <strong>Sesiones sincrónicas:</strong> Sábados 5h 45min (práctica supervisada + retroalimentación inmediata)
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-check-circle mr-2 text-blue-600"></i>
+                                        <strong>Trabajo autónomo:</strong> 8-10 horas semanales con guías de aprendizaje
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-check-circle mr-2 text-blue-600"></i>
+                                        <strong>Enfoque funcional:</strong> Conceptos aplicables inmediatamente sobre abstracciones complejas
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-lg border border-green-200">
+                                <h3 class="font-bold text-green-900 mb-3 text-lg">
+                                    <i class="fas fa-graduation-cap mr-2"></i>Metodología
+                                </h3>
+                                <ul class="text-green-800 space-y-2 text-sm">
+                                    <li>
+                                        <i class="fas fa-arrow-right mr-2 text-green-600"></i>
+                                        Aprendizaje invertido adaptado
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-arrow-right mr-2 text-green-600"></i>
+                                        Aprendizaje basado en proyectos con impacto social
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-arrow-right mr-2 text-green-600"></i>
+                                        Práctica reflexiva docente
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-arrow-right mr-2 text-green-600"></i>
+                                        Aprendizaje entre pares
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Sección 3: Competencias -->
+                    <section id="seccion3" class="section-card bg-white rounded-xl shadow-lg p-8">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6 border-l-4 border-green-600 pl-4">
+                            <i class="fas fa-target mr-3 text-green-600"></i>Competencias e Indicadores de Logro
+                        </h2>
+                        
+                        <!-- Competencia General -->
+                        <div class="mb-8 p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border-l-4 border-green-600">
+                            <h3 class="font-bold text-green-900 mb-3 text-xl">
+                                <i class="fas fa-star mr-2"></i>COMPETENCIA GENERAL
+                            </h3>
+                            <p class="text-green-800 leading-relaxed">
+                                Desarrollar aplicaciones web funcionales utilizando Python y Flask para resolver problemas educativos y sociales del contexto guatemalteco, integrando pensamiento computacional con estrategias pedagógicas efectivas para la enseñanza de la programación.
+                            </p>
+                        </div>
+
+                        <!-- Competencias Específicas -->
+                        <div class="space-y-4 mb-8">
+                            <h3 class="font-bold text-gray-800 text-xl mb-4">Competencias Específicas:</h3>
+                            
+                            <div class="p-5 rounded-lg border-l-4" style="background-color: #f0f4ff; border-color: #150F5D;">
+                                <h4 class="font-bold mb-2" style="color: #150F5D;">
+                                    <i class="fas fa-code mr-2"></i>1. Técnica-Funcional
+                                </h4>
+                                <p class="text-sm" style="color: #1a1566;">
+                                    Aplicar fundamentos de Python (variables, estructuras de control, funciones, manejo de datos) y Flask (rutas, templates, formularios) para crear aplicaciones web que resuelvan problemas reales, con manejo básico de datos y validaciones.
+                                </p>
+                            </div>
+                            
+                            <div class="p-5 rounded-lg border-l-4" style="background-color: #fffbeb; border-color: #ffd971;">
+                                <h4 class="font-bold mb-2" style="color: #92400e;">
+                                    <i class="fas fa-chalkboard-teacher mr-2"></i>2. Pedagógica-Didáctica
+                                </h4>
+                                <p class="text-sm" style="color: #78350f;">
+                                    Diseñar estrategias didácticas contextualizadas para enseñar programación a estudiantes de educación media, reflexionando sobre métodos efectivos de enseñanza del pensamiento computacional y adaptando contenidos técnicos a diferentes niveles.
+                                </p>
+                            </div>
+                            
+                            <div class="p-5 rounded-lg border-l-4" style="background-color: #f3f4f6; border-color: #6b7280;">
+                                <h4 class="font-bold mb-2" style="color: #374151;">
+                                    <i class="fas fa-users mr-2"></i>3. Social-Reflexiva
+                                </h4>
+                                <p class="text-sm" style="color: #4b5563;">
+                                    Identificar problemas sociales y educativos del contexto guatemalteco que pueden abordarse mediante soluciones tecnológicas, considerando las implicaciones éticas del manejo de datos y la inclusión digital.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Indicadores de Logro -->
+                        <div class="p-6 bg-gray-50 rounded-lg">
+                            <h3 class="font-bold text-gray-800 text-xl mb-4">
+                                <i class="fas fa-check-double mr-2 text-green-600"></i>Indicadores de Logro:
+                            </h3>
+                            <ul class="grid md:grid-cols-2 gap-3 text-sm text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-600 mr-2 mt-1"></i>
+                                    <span>Implementa algoritmos utilizando estructuras de control y funciones modulares en Python</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-600 mr-2 mt-1"></i>
+                                    <span>Desarrolla aplicaciones web con Flask integrando rutas dinámicas y templates</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-600 mr-2 mt-1"></i>
+                                    <span>Gestiona datos mediante archivos JSON y SQLite (CRUD completo)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-600 mr-2 mt-1"></i>
+                                    <span>Valida datos de entrada y maneja errores apropiadamente</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-600 mr-2 mt-1"></i>
+                                    <span>Crea interfaces web funcionales con HTML, CSS y Bootstrap</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-600 mr-2 mt-1"></i>
+                                    <span>Documenta procesos técnicos con enfoque pedagógico</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-600 mr-2 mt-1"></i>
+                                    <span>Reflexiona críticamente sobre implicaciones éticas de soluciones tecnológicas</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Proyecto Integrador -->
+                    <section id="proyecto" class="section-card bg-gradient-to-br from-purple-600 via-purple-700 to-indigo-700 text-white rounded-xl shadow-2xl p-8">
+                        <h2 class="text-3xl font-bold mb-6 flex items-center">
+                            <i class="fas fa-project-diagram mr-3"></i>Proyecto Integrador
+                        </h2>
+                        
+                        <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-6 mb-6">
+                            <h3 class="text-2xl font-bold mb-4">
+                                "Sistema de Seguimiento de Estudiantes en Riesgo Académico"
+                            </h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                Los estudiantes desarrollarán una <strong>aplicación web completa</strong> para identificar y dar seguimiento a estudiantes en situación de riesgo de deserción escolar o bajo rendimiento académico. Este sistema permitirá a docentes y directores tomar decisiones informadas y realizar intervenciones oportunas.
+                            </p>
+                            
+                            <div class="p-4 rounded-lg border-l-4" style="background-color: rgba(255, 249, 235, 0.9); border-color: #ffd971;">
+                                <h4 class="font-bold mb-2" style="color: #92400e;">
+                                    <i class="fas fa-heart mr-2"></i>JUSTIFICACIÓN SOCIAL
+                                </h4>
+                                <p class="text-sm" style="color: #78350f;">
+                                    La deserción escolar es un problema crítico en Guatemala, especialmente en áreas rurales. Este sistema permite identificar tempranamente señales de alerta (inasistencias frecuentes, bajo rendimiento, situaciones familiares difíciles) y documentar las intervenciones realizadas. Es una herramienta práctica que los estudiantes podrían implementar en sus futuras escuelas.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-xl mb-3">
+                                <i class="fas fa-tasks mr-2"></i>FASES DEL PROYECTO:
+                            </h4>
+                            
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-white bg-opacity-15 backdrop-blur-sm rounded-lg p-4">
+                                    <div class="flex items-center mb-2">
+                                        <span class="flex items-center justify-center w-8 h-8 rounded-full font-bold mr-3" style="background-color: #150F5D; color: white;">1</span>
+                                        <h5 class="font-bold">Semana 1</h5>
+                                    </div>
+                                    <p class="text-sm">
+                                        Estructura base y lógica: Aplicación Flask con rutas, templates y funciones Python usando diccionarios y listas. Interfaz simple para mostrar información.
+                                    </p>
+                                </div>
+                                
+                                <div class="bg-white bg-opacity-15 backdrop-blur-sm rounded-lg p-4">
+                                    <div class="flex items-center mb-2">
+                                        <span class="flex items-center justify-center w-8 h-8 rounded-full font-bold mr-3" style="background-color: #150F5D; color: white;">2</span>
+                                        <h5 class="font-bold">Semana 2</h5>
+                                    </div>
+                                    <p class="text-sm">
+                                        Persistencia de datos: Almacenamiento en archivos JSON y SQLite con operaciones básicas (INSERT y SELECT). Sistema de categorización por nivel de riesgo (verde, amarillo, rojo).
+                                    </p>
+                                </div>
+                                
+                                <div class="bg-white bg-opacity-15 backdrop-blur-sm rounded-lg p-4">
+                                    <div class="flex items-center mb-2">
+                                        <span class="flex items-center justify-center w-8 h-8 rounded-full font-bold mr-3" style="background-color: #ffd971; color: #150F5D;">3</span>
+                                        <h5 class="font-bold">Semana 3</h5>
+                                    </div>
+                                    <p class="text-sm">
+                                        Interactividad y visualización: Formularios HTML funcionales con validación. Visualización mediante colores y gráficas simples. CRUD completo implementado.
+                                    </p>
+                                </div>
+                                
+                                <div class="bg-white bg-opacity-15 backdrop-blur-sm rounded-lg p-4">
+                                    <div class="flex items-center mb-2">
+                                        <span class="flex items-center justify-center w-8 h-8 rounded-full font-bold mr-3" style="background-color: #ffd971; color: #150F5D;">4</span>
+                                        <h5 class="font-bold">Semana 4</h5>
+                                    </div>
+                                    <p class="text-sm">
+                                        Refinamiento y preparación: Manejo de errores, documentación completa, plan de clase para enseñanza, empaquetado para despliegue local o PythonAnywhere.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 p-5 bg-white bg-opacity-20 rounded-lg">
+                            <h4 class="font-bold mb-3">
+                                <i class="fas fa-trophy mr-2 text-yellow-300"></i>PRODUCTO FINAL:
+                            </h4>
+                            <ul class="grid md:grid-cols-2 gap-2 text-sm">
+                                <li class="flex items-center"><i class="fas fa-check-circle mr-2 text-green-300"></i>Aplicación Flask funcional con CRUD completo</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle mr-2 text-green-300"></i>Base de datos SQLite operativa</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle mr-2 text-green-300"></i>Interfaz web responsive con alertas visuales</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle mr-2 text-green-300"></i>Dashboard con estadísticas y visualizaciones</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle mr-2 text-green-300"></i>Formularios con validación robusta</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle mr-2 text-green-300"></i>Sistema de categorización automática</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle mr-2 text-green-300"></i>Documentación técnica y pedagógica completa</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle mr-2 text-green-300"></i>Plan de clase para replicar proyecto</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle mr-2 text-green-300"></i>Video de demostración (5 minutos)</li>
+                            </ul>
+                        </div>
+                    </section>
+
+<!-- CONTINUARÁ EN EL SIGUIENTE MENSAJE DEBIDO A LÍMITE DE CARACTERES -->
+
+
+                    <!-- PROGRAMACIÓN SEMANAL DETALLADA -->
+                    
+                    <!-- Semana 1 -->
+                    <section id="semana1" class="section-card bg-white rounded-xl shadow-lg p-8">
+                        <div class="flex items-center mb-6">
+                            <span class="flex items-center justify-center w-14 h-14 rounded-full" style="background-color: #150F5D; color: white;" class="font-black text-xl mr-4">1</span>
+                            <div>
+                                <h2 class="text-2xl font-bold text-gray-900">SEMANA 1</h2>
+                                <p class="text-gray-600">Fundamentos de Python y Flask Básico</p>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 rounded-lg mb-6 border-l-4" style="background-color: #f0f4ff; border-color: #150F5D;">
+                            <h3 class="font-bold mb-2" style="color: #150F5D;">
+                                <i class="fas fa-lightbulb mr-2"></i>APRENDIZAJES ESPERADOS
+                            </h3>
+                            <p class="text-sm" style="color: #1a1566;">
+                                Comprender los fundamentos del pensamiento computacional y la sintaxis básica de Python. Crear una primera aplicación web con Flask que muestre información dinámica. Reflexionar sobre cómo enseñar conceptos abstractos de programación de manera concreta.
+                            </p>
+                        </div>
+
+                        <div class="grid lg:grid-cols-2 gap-6 mb-6">
+                            <!-- Sesión Sincrónica 1 -->
+                            <div class="p-6 rounded-lg border" style="background: linear-gradient(to bottom right, #f0f4ff, #e6ebff); border-color: #cbd5e1;">
+                                <h4 class="font-bold mb-3 text-lg flex items-center" style="color: #150F5D;">
+                                    <i class="fas fa-video mr-2"></i>Sesión Sincrónica 1 (5h 45min)
+                                </h4>
+                                
+                                <div class="mb-4">
+                                    <h5 class="font-semibold text-sm mb-2" style="color: #1a1566;">
+                                        <i class="fas fa-book-open mr-2"></i>SABERES:
+                                    </h5>
+                                    <ul class="text-xs space-y-1 ml-4" style="color: #374151;">
+                                        <li>• Introducción al pensamiento computacional y algoritmos</li>
+                                        <li>• Tipos de datos en Python (int, float, str, bool)</li>
+                                        <li>• Variables y operadores</li>
+                                        <li>• Estructuras de control: condicionales (if-elif-else)</li>
+                                        <li>• Estructuras de control: ciclos (for, while)</li>
+                                        <li>• Instalación de Python y Flask</li>
+                                        <li>• Primera aplicación Flask: "Hola Mundo"</li>
+                                        <li>• Rutas básicas y parámetros en URLs</li>
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <h5 class="font-semibold text-sm mb-2" style="color: #1a1566;">
+                                        <i class="fas fa-tasks mr-2"></i>DESEMPEÑOS:
+                                    </h5>
+                                    <ul class="text-xs space-y-1 ml-4" style="color: #374151;">
+                                        <li>• Escritura de scripts Python para resolver problemas lógicos simples</li>
+                                        <li>• Implementación de algoritmos con condicionales y ciclos</li>
+                                        <li>• Configuración del entorno de desarrollo (Python, Flask, editor)</li>
+                                        <li>• Creación de rutas básicas en Flask</li>
+                                        <li>• Paso de parámetros dinámicos en URLs</li>
+                                        <li>• Depuración básica de errores de sintaxis</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Guía de Aprendizaje 1 -->
+                            <div class="p-6 rounded-lg border" style="background: linear-gradient(to bottom right, #fffbeb, #fef3c7); border-color: #ffd971;">
+                                <h4 class="font-bold mb-3 text-lg flex items-center" style="color: #92400e;">
+                                    <i class="fas fa-file-alt mr-2"></i>Guía de Aprendizaje 1 (Trabajo autónomo)
+                                </h4>
+                                
+                                <div class="mb-4">
+                                    <h5 class="font-semibold text-sm mb-2" style="color: #92400e;">
+                                        <i class="fas fa-book-open mr-2"></i>SABERES:
+                                    </h5>
+                                    <ul class="text-xs space-y-1 ml-4" style="color: #78350f;">
+                                        <li>• Funciones en Python: definición, parámetros, return</li>
+                                        <li>• Modularidad y reutilización de código</li>
+                                        <li>• Listas: creación, acceso, métodos básicos</li>
+                                        <li>• Diccionarios: estructura clave-valor, acceso y modificación</li>
+                                        <li>• Flask: función render_template()</li>
+                                        <li>• Templates básicos con Jinja2</li>
+                                        <li>• Variables dinámicas en templates</li>
+                                        <li>• Paso de datos desde Flask a HTML</li>
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <h5 class="font-semibold text-sm mb-2" style="color: #92400e;">
+                                        <i class="fas fa-tasks mr-2"></i>DESEMPEÑOS:
+                                    </h5>
+                                    <ul class="text-xs space-y-1 ml-4" style="color: #78350f;">
+                                        <li>• Creación de funciones modulares y reutilizables</li>
+                                        <li>• Manipulación de listas y diccionarios para almacenar información de estudiantes</li>
+                                        <li>• Integración de templates HTML con Flask</li>
+                                        <li>• Implementación de rutas dinámicas con parámetros</li>
+                                        <li>• Renderizado de datos de Python en HTML usando Jinja2</li>
+                                        <li>• Creación de primeros componentes del proyecto: estructura base y visualización de lista de estudiantes</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actitudes y Reflexión -->
+                        <div class="grid lg:grid-cols-2 gap-4">
+                            <div class="p-4 bg-gray-50 rounded-lg border-l-4 border-gray-500">
+                                <h5 class="font-semibold text-gray-900 mb-2 text-sm">
+                                    <i class="fas fa-heart mr-2"></i>ACTITUDES:
+                                </h5>
+                                <ul class="text-gray-700 text-xs space-y-1">
+                                    <li>• Responsabilidad en la formación como futuro docente de tecnología</li>
+                                    <li>• Ética en el uso de tecnología para resolver problemas sociales</li>
+                                    <li>• Proactividad en el aprendizaje autónomo</li>
+                                    <li>• Paciencia ante errores y frustración inicial</li>
+                                    <li>• Mentalidad de crecimiento: los errores son oportunidades de aprendizaje</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="p-4 rounded-lg border-l-4" style="background-color: #fffbeb; border-color: #ffd971;">
+                                <h5 class="font-semibold mb-2 text-sm" style="color: #92400e;">
+                                    <i class="fas fa-brain mr-2"></i>REFLEXIÓN PEDAGÓGICA 1:
+                                </h5>
+                                <p class="text-xs mb-2" style="color: #78350f;">
+                                    ¿Cómo motivarías a estudiantes de áreas rurales, con acceso limitado a tecnología, a aprender programación? ¿Qué ejemplos concretos de su contexto usarías para explicar variables, condicionales o ciclos?
+                                </p>
+                                <p class="text-xs font-semibold" style="color: #92400e;">
+                                    <i class="fas fa-file-invoice mr-1"></i>ENTREGABLE: Texto reflexivo de 300-400 palabras con al menos 3 estrategias didácticas específicas.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Semana 2 -->
+                    <section id="semana2" class="section-card bg-white rounded-xl shadow-lg p-8">
+                        <div class="flex items-center mb-6">
+                            <span class="flex items-center justify-center w-14 h-14 rounded-full" style="background-color: #150F5D; color: white;" class="font-black text-xl mr-4">2</span>
+                            <div>
+                                <h2 class="text-2xl font-bold text-gray-900">SEMANA 2</h2>
+                                <p class="text-gray-600">Manejo de Datos y Almacenamiento</p>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 rounded-lg mb-6 border-l-4" style="background-color: #f0f4ff; border-color: #150F5D;">
+                            <h3 class="font-bold mb-2" style="color: #150F5D;">
+                                <i class="fas fa-lightbulb mr-2"></i>APRENDIZAJES ESPERADOS
+                            </h3>
+                            <p class="text-sm" style="color: #1a1566;">
+                                Gestionar datos de manera estructurada utilizando archivos JSON y bases de datos SQLite básicas. Implementar operaciones de creación y lectura de información. Comprender la importancia ética del manejo de datos sensibles de estudiantes.
+                            </p>
+                        </div>
+
+                        <div class="grid lg:grid-cols-2 gap-6 mb-6">
+                            <!-- Sesión Sincrónica 2 -->
+                            <div class="p-6 rounded-lg border" style="background: linear-gradient(to bottom right, #f0f4ff, #e6ebff); border-color: #cbd5e1;">
+                                <h4 class="font-bold mb-3 text-lg flex items-center" style="color: #150F5D;">
+                                    <i class="fas fa-video mr-2"></i>Sesión Sincrónica 2 (5h 45min)
+                                </h4>
+                                
+                                <div class="mb-4">
+                                    <h5 class="font-semibold text-sm mb-2" style="color: #1a1566;">
+                                        <i class="fas fa-book-open mr-2"></i>SABERES:
+                                    </h5>
+                                    <ul class="text-xs space-y-1 ml-4" style="color: #374151;">
+                                        <li>• Persistencia de datos: conceptos básicos</li>
+                                        <li>• Archivos JSON: lectura y escritura con Python</li>
+                                        <li>• Módulo json: dump, load, dumps, loads</li>
+                                        <li>• Introducción a bases de datos: ¿por qué y cuándo usarlas?</li>
+                                        <li>• SQLite: base de datos local sin servidor</li>
+                                        <li>• SQL básico: CREATE TABLE, INSERT, SELECT</li>
+                                        <li>• Conexión Python-SQLite con módulo sqlite3</li>
+                                        <li>• Operaciones básicas: agregar y consultar registros</li>
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <h5 class="font-semibold text-sm mb-2" style="color: #1a1566;">
+                                        <i class="fas fa-tasks mr-2"></i>DESEMPEÑOS:
+                                    </h5>
+                                    <ul class="text-xs space-y-1 ml-4" style="color: #374151;">
+                                        <li>• Creación de funciones para guardar y cargar datos desde archivos JSON</li>
+                                        <li>• Diseño de estructura de datos para registros de estudiantes</li>
+                                        <li>• Configuración de base de datos SQLite simple</li>
+                                        <li>• Implementación de operaciones CREATE (agregar estudiante)</li>
+                                        <li>• Implementación de operaciones READ (consultar estudiantes, buscar por criterios)</li>
+                                        <li>• Migración de datos desde JSON a SQLite</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Guía de Aprendizaje 2 -->
+                            <div class="p-6 rounded-lg border" style="background: linear-gradient(to bottom right, #fffbeb, #fef3c7); border-color: #ffd971;">
+                                <h4 class="font-bold mb-3 text-lg flex items-center" style="color: #92400e;">
+                                    <i class="fas fa-file-alt mr-2"></i>Guía de Aprendizaje 2 (Trabajo autónomo)
+                                </h4>
+                                
+                                <div class="mb-4">
+                                    <h5 class="font-semibold text-sm mb-2" style="color: #92400e;">
+                                        <i class="fas fa-book-open mr-2"></i>SABERES:
+                                    </h5>
+                                    <ul class="text-xs space-y-1 ml-4" style="color: #78350f;">
+                                        <li>• Funciones CRUD: Create, Read, Update, Delete (enfoque en C y R)</li>
+                                        <li>• Organización de código en módulos</li>
+                                        <li>• Integración de datos dinámicos en templates</li>
+                                        <li>• Iteración sobre listas en Jinja2 ({% for %})</li>
+                                        <li>• Condicionales en templates ({% if %})</li>
+                                        <li>• Formateo de datos para presentación</li>
+                                        <li>• Sistema de categorización por nivel de riesgo</li>
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <h5 class="font-semibold text-sm mb-2" style="color: #92400e;">
+                                        <i class="fas fa-tasks mr-2"></i>DESEMPEÑOS:
+                                    </h5>
+                                    <ul class="text-xs space-y-1 ml-4" style="color: #78350f;">
+                                        <li>• Definición de funciones modulares para operaciones CRUD</li>
+                                        <li>• Implementación de sistema de categorización automática (verde/amarillo/rojo según indicadores)</li>
+                                        <li>• Renderizado de listas dinámicas de estudiantes en HTML</li>
+                                        <li>• Operaciones básicas de consulta y filtrado de datos</li>
+                                        <li>• Integración completa de JSON o SQLite con el proyecto Flask</li>
+                                        <li>• Creación de página de inicio con estadísticas básicas</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actitudes y Reflexión -->
+                        <div class="grid lg:grid-cols-2 gap-4">
+                            <div class="p-4 bg-gray-50 rounded-lg border-l-4 border-gray-500">
+                                <h5 class="font-semibold text-gray-900 mb-2 text-sm">
+                                    <i class="fas fa-heart mr-2"></i>ACTITUDES:
+                                </h5>
+                                <ul class="text-gray-700 text-xs space-y-1">
+                                    <li>• Pensamiento organizado y estructurado en el diseño de datos</li>
+                                    <li>• Responsabilidad en el manejo ético de información sensible</li>
+                                    <li>• Colaboración efectiva en la resolución de problemas técnicos</li>
+                                    <li>• Respeto por la privacidad y confidencialidad de datos de estudiantes</li>
+                                    <li>• Compromiso con la calidad y limpieza del código</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="p-4 rounded-lg border-l-4" style="background-color: #fffbeb; border-color: #ffd971;">
+                                <h5 class="font-semibold mb-2 text-sm" style="color: #92400e;">
+                                    <i class="fas fa-brain mr-2"></i>REFLEXIÓN PEDAGÓGICA 2:
+                                </h5>
+                                <p class="text-xs mb-2" style="color: #78350f;">
+                                    ¿Qué consideraciones éticas deben tenerse al manejar datos personales de estudiantes? ¿Cómo enseñarías a tus futuros estudiantes sobre privacidad y protección de datos de manera práctica?
+                                </p>
+                                <p class="text-xs font-semibold" style="color: #92400e;">
+                                    <i class="fas fa-file-invoice mr-1"></i>ENTREGABLE: Texto reflexivo de 300-400 palabras que incluya un código de ética básico para el uso del sistema.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Semana 3 -->
+                    <section id="semana3" class="section-card bg-white rounded-xl shadow-lg p-8">
+                        <div class="flex items-center mb-6">
+                            <span class="flex items-center justify-center w-14 h-14 rounded-full" style="background-color: #150F5D; color: white;" class="font-black text-xl mr-4">3</span>
+                            <div>
+                                <h2 class="text-2xl font-bold text-gray-900">SEMANA 3</h2>
+                                <p class="text-gray-600">Interactividad, Validación y Visualización</p>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 rounded-lg mb-6 border-l-4" style="background-color: #f0f4ff; border-color: #150F5D;">
+                            <h3 class="font-bold mb-2" style="color: #150F5D;">
+                                <i class="fas fa-lightbulb mr-2"></i>APRENDIZAJES ESPERADOS
+                            </h3>
+                            <p class="text-sm" style="color: #1a1566;">
+                                Crear interfaces interactivas mediante formularios HTML funcionales. Implementar validación de datos robusta. Desarrollar visualizaciones básicas para comunicar información de manera efectiva. Completar operaciones CRUD.
+                            </p>
+                        </div>
+
+                        <div class="grid lg:grid-cols-2 gap-6 mb-6">
+                            <!-- Sesión Sincrónica 3 -->
+                            <div class="p-6 rounded-lg border" style="background: linear-gradient(to bottom right, #f0f4ff, #e6ebff); border-color: #cbd5e1;">
+                                <h4 class="font-bold mb-3 text-lg flex items-center" style="color: #150F5D;">
+                                    <i class="fas fa-video mr-2"></i>Sesión Sincrónica 3 (5h 45min)
+                                </h4>
+                                
+                                <div class="mb-4">
+                                    <h5 class="font-semibold text-sm mb-2" style="color: #1a1566;">
+                                        <i class="fas fa-book-open mr-2"></i>SABERES:
+                                    </h5>
+                                    <ul class="text-xs space-y-1 ml-4" style="color: #374151;">
+                                        <li>• Formularios HTML: elementos input, textarea, select, button</li>
+                                        <li>• Métodos HTTP: POST vs GET (cuándo usar cada uno)</li>
+                                        <li>• Validación en el servidor con Flask (request.form)</li>
+                                        <li>• Validación en el cliente con HTML5 y JavaScript</li>
+                                        <li>• Operaciones UPDATE y DELETE en SQLite</li>
+                                        <li>• Bootstrap: framework CSS para diseño responsive</li>
+                                        <li>• Visualización de datos: introducción a gráficas básicas</li>
+                                        <li>• Chart.js o alternativas para dashboard</li>
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <h5 class="font-semibold text-sm mb-2" style="color: #1a1566;">
+                                        <i class="fas fa-tasks mr-2"></i>DESEMPEÑOS:
+                                    </h5>
+                                    <ul class="text-xs space-y-1 ml-4" style="color: #374151;">
+                                        <li>• Creación de formulario para agregar/editar estudiantes con validaciones</li>
+                                        <li>• Implementación de operación UPDATE (modificar datos de estudiante)</li>
+                                        <li>• Implementación de operación DELETE (eliminar con confirmación)</li>
+                                        <li>• Aplicación de estilos Bootstrap para interfaz profesional</li>
+                                        <li>• Desarrollo de dashboard con estadísticas visuales</li>
+                                        <li>• Creación de gráfica básica (barras/pastel) para distribución de categorías</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Guía de Aprendizaje 3 -->
+                            <div class="p-6 rounded-lg border" style="background: linear-gradient(to bottom right, #fffbeb, #fef3c7); border-color: #ffd971;">
+                                <h4 class="font-bold mb-3 text-lg flex items-center" style="color: #92400e;">
+                                    <i class="fas fa-file-alt mr-2"></i>Guía de Aprendizaje 3 (Trabajo autónomo)
+                                </h4>
+                                
+                                <div class="mb-4">
+                                    <h5 class="font-semibold text-sm mb-2" style="color: #92400e;">
+                                        <i class="fas fa-book-open mr-2"></i>SABERES:
+                                    </h5>
+                                    <ul class="text-xs space-y-1 ml-4" style="color: #78350f;">
+                                        <li>• Sistema CRUD completo: integración de todas las operaciones</li>
+                                        <li>• UX básica: diseño centrado en el usuario</li>
+                                        <li>• Mensajes flash en Flask para retroalimentación</li>
+                                        <li>• Diseño responsive: adaptación a diferentes pantallas</li>
+                                        <li>• Accesibilidad web básica: etiquetas, contraste, navegabilidad</li>
+                                        <li>• Componentes Bootstrap: cards, tables, modals, alerts</li>
+                                        <li>• Visualización efectiva: elección de gráficas según datos</li>
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <h5 class="font-semibold text-sm mb-2" style="color: #92400e;">
+                                        <i class="fas fa-tasks mr-2"></i>DESEMPEÑOS:
+                                    </h5>
+                                    <ul class="text-xs space-y-1 ml-4" style="color: #78350f;">
+                                        <li>• Sistema CRUD completamente funcional y probado</li>
+                                        <li>• Dashboard con al menos 3 visualizaciones diferentes</li>
+                                        <li>• Interfaz responsive que funcione en móvil y escritorio</li>
+                                        <li>• Implementación de mensajes de confirmación y error</li>
+                                        <li>• Navegación intuitiva entre diferentes secciones</li>
+                                        <li>• Aplicación coherente de estilos Bootstrap</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actitudes y Reflexión -->
+                        <div class="grid lg:grid-cols-2 gap-4">
+                            <div class="p-4 bg-gray-50 rounded-lg border-l-4 border-gray-500">
+                                <h5 class="font-semibold text-gray-900 mb-2 text-sm">
+                                    <i class="fas fa-heart mr-2"></i>ACTITUDES:
+                                </h5>
+                                <ul class="text-gray-700 text-xs space-y-1">
+                                    <li>• Atención al detalle en la experiencia del usuario</li>
+                                    <li>• Empatía con las necesidades de los usuarios finales</li>
+                                    <li>• Creatividad en la presentación visual de información</li>
+                                    <li>• Perseverancia ante desafíos técnicos complejos</li>
+                                    <li>• Orgullo por la calidad del trabajo entregado</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="p-4 rounded-lg border-l-4" style="background-color: #fffbeb; border-color: #ffd971;">
+                                <h5 class="font-semibold mb-2 text-sm" style="color: #92400e;">
+                                    <i class="fas fa-brain mr-2"></i>REFLEXIÓN PEDAGÓGICA 3:
+                                </h5>
+                                <p class="text-xs mb-2" style="color: #78350f;">
+                                    ¿Cómo puede la visualización de datos ayudar a los docentes a tomar mejores decisiones pedagógicas? ¿Qué competencias digitales necesitan los docentes del siglo XXI para usar estas herramientas?
+                                </p>
+                                <p class="text-xs font-semibold" style="color: #92400e;">
+                                    <i class="fas fa-file-invoice mr-1"></i>ENTREGABLE: Análisis de 300-400 palabras con propuesta de 3 visualizaciones clave para el aula.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Semana 4 -->
+                    <section id="semana4" class="section-card bg-white rounded-xl shadow-lg p-8">
+                        <div class="flex items-center mb-6">
+                            <span class="flex items-center justify-center w-14 h-14 rounded-full" style="background-color: #150F5D; color: white;" class="font-black text-xl mr-4">4</span>
+                            <div>
+                                <h2 class="text-2xl font-bold text-gray-900">SEMANA 4</h2>
+                                <p class="text-gray-600">Manejo de Errores, Documentación y Presentación</p>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 rounded-lg mb-6 border-l-4" style="background-color: #f0f4ff; border-color: #150F5D;">
+                            <h3 class="font-bold mb-2" style="color: #150F5D;">
+                                <i class="fas fa-lightbulb mr-2"></i>APRENDIZAJES ESPERADOS
+                            </h3>
+                            <p class="text-sm" style="color: #1a1566;">
+                                Implementar manejo robusto de errores con mensajes comprensibles. Documentar el proyecto de manera técnica y pedagógica. Preparar el sistema para uso real o demostración. Reflexionar sobre el proceso de aprendizaje y la transición de estudiante a docente.
+                            </p>
+                        </div>
+
+                        <div class="grid lg:grid-cols-2 gap-6 mb-6">
+                            <!-- Sesión Sincrónica 4 -->
+                            <div class="p-6 rounded-lg border" style="background: linear-gradient(to bottom right, #f0f4ff, #e6ebff); border-color: #cbd5e1;">
+                                <h4 class="font-bold mb-3 text-lg flex items-center" style="color: #150F5D;">
+                                    <i class="fas fa-video mr-2"></i>Sesión Sincrónica 4 (5h 45min)
+                                </h4>
+                                
+                                <div class="mb-4">
+                                    <h5 class="font-semibold text-sm mb-2" style="color: #1a1566;">
+                                        <i class="fas fa-book-open mr-2"></i>SABERES:
+                                    </h5>
+                                    <ul class="text-xs space-y-1 ml-4" style="color: #374151;">
+                                        <li>• Manejo de excepciones en Python: try, except, finally</li>
+                                        <li>• Tipos de errores: sintaxis, lógica, ejecución</li>
+                                        <li>• Logging básico para debugging</li>
+                                        <li>• Mensajes de error amigables para usuarios</li>
+                                        <li>• Documentación técnica: README.md, docstrings, comentarios</li>
+                                        <li>• Documentación pedagógica: guía de uso, objetivos, sugerencias didácticas</li>
+                                        <li>• Preparación para deployment: requirements.txt, configuración</li>
+                                        <li>• Presentaciones efectivas: estructura, timing, storytelling</li>
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <h5 class="font-semibold text-sm mb-2" style="color: #1a1566;">
+                                        <i class="fas fa-tasks mr-2"></i>DESEMPEÑOS:
+                                    </h5>
+                                    <ul class="text-xs space-y-1 ml-4" style="color: #374151;">
+                                        <li>• Implementación de try-except en puntos críticos del código</li>
+                                        <li>• Creación de README.md completo con instrucciones de instalación</li>
+                                        <li>• Generación de archivo requirements.txt</li>
+                                        <li>• Pruebas exhaustivas del sistema completo</li>
+                                        <li>• Preparación de video demostrativo de 5 minutos</li>
+                                        <li>• Estructuración de presentación final</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Guía de Aprendizaje 4 -->
+                            <div class="p-6 rounded-lg border" style="background: linear-gradient(to bottom right, #fffbeb, #fef3c7); border-color: #ffd971;">
+                                <h4 class="font-bold mb-3 text-lg flex items-center" style="color: #92400e;">
+                                    <i class="fas fa-file-alt mr-2"></i>Guía de Aprendizaje 4 (Trabajo autónomo)
+                                </h4>
+                                
+                                <div class="mb-4">
+                                    <h5 class="font-semibold text-sm mb-2" style="color: #92400e;">
+                                        <i class="fas fa-book-open mr-2"></i>SABERES:
+                                    </h5>
+                                    <ul class="text-xs space-y-1 ml-4" style="color: #78350f;">
+                                        <li>• Ciclo de vida completo de un proyecto de software educativo</li>
+                                        <li>• Testing básico: casos de prueba, escenarios edge case</li>
+                                        <li>• Versionado con Git y GitHub (introducción)</li>
+                                        <li>• Licencias de software: ¿cuál elegir para proyectos educativos?</li>
+                                        <li>• Ética en el desarrollo de software para educación</li>
+                                        <li>• Comunicación técnica vs comunicación pedagógica</li>
+                                        <li>• Reflexión metacognitiva sobre el aprendizaje de programación</li>
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <h5 class="font-semibold text-sm mb-2" style="color: #92400e;">
+                                        <i class="fas fa-tasks mr-2"></i>DESEMPEÑOS:
+                                    </h5>
+                                    <ul class="text-xs space-y-1 ml-4" style="color: #78350f;">
+                                        <li>• Proyecto completamente funcional y probado</li>
+                                        <li>• README.md con sección pedagógica (cómo usar en el aula)</li>
+                                        <li>• Video de 5 minutos mostrando instalación y uso básico</li>
+                                        <li>• Documento de reflexión final sobre aprendizaje (500-600 palabras)</li>
+                                        <li>• Propuesta de plan de clase para enseñar este proyecto a estudiantes de secundaria</li>
+                                        <li>• Sistema instalable en otra computadora sin errores</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actitudes y Reflexión -->
+                        <div class="grid lg:grid-cols-2 gap-4 mb-6">
+                            <div class="p-4 bg-gray-50 rounded-lg border-l-4 border-gray-500">
+                                <h5 class="font-semibold text-gray-900 mb-2 text-sm">
+                                    <i class="fas fa-heart mr-2"></i>ACTITUDES:
+                                </h5>
+                                <ul class="text-gray-700 text-xs space-y-1">
+                                    <li>• Perfeccionismo saludable y atención a detalles finales</li>
+                                    <li>• Orgullo profesional por el trabajo bien hecho</li>
+                                    <li>• Humildad para reconocer limitaciones y áreas de mejora</li>
+                                    <li>• Gratitud hacia compañeros y docente por apoyo mutuo</li>
+                                    <li>• Visión de futuro: de estudiante a docente transformador</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="p-4 rounded-lg border-l-4" style="background-color: #fffbeb; border-color: #ffd971;">
+                                <h5 class="font-semibold mb-2 text-sm" style="color: #92400e;">
+                                    <i class="fas fa-brain mr-2"></i>REFLEXIÓN PEDAGÓGICA 4:
+                                </h5>
+                                <p class="text-xs mb-2" style="color: #78350f;">
+                                    ¿Cómo ha cambiado tu percepción sobre la programación después de este curso? ¿Cómo podrías inspirar a tus futuros estudiantes a ver la programación como herramienta de cambio social y no solo como habilidad técnica?
+                                </p>
+                                <p class="text-xs font-semibold" style="color: #92400e;">
+                                    <i class="fas fa-file-invoice mr-1"></i>ENTREGABLE: Reflexión final de 500-600 palabras sobre tu transformación como futuro docente tecnológico.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Presentación Final -->
+                        <div class="p-6 rounded-lg border-l-4" style="background: linear-gradient(to right, #fffbeb, #fef3c7); border-color: #ffd971;">
+                            <h4 class="font-bold mb-3" style="color: #92400e;">
+                                <i class="fas fa-presentation mr-2"></i>PRESENTACIÓN FINAL DEL PROYECTO
+                            </h4>
+                            <p class="text-sm mb-3" style="color: #78350f;">
+                                Cada estudiante presenta su proyecto completo en <strong>10-12 minutos</strong>, incluyendo:
+                            </p>
+                            <ul class="text-xs space-y-1 ml-4" style="color: #78350f;">
+                                <li><strong>1. Demostración en vivo</strong> de todas las funcionalidades CRUD (3-4 min)</li>
+                                <li><strong>2. Explicación del problema social</strong> que resuelve el sistema (1-2 min)</li>
+                                <li><strong>3. Reflexión técnica:</strong> lo aprendido en programación, desafíos superados (2 min)</li>
+                                <li><strong>4. Reflexión pedagógica:</strong> cómo enseñaría este proyecto a estudiantes de secundaria (2-3 min)</li>
+                                <li><strong>5. Limitaciones y mejoras futuras:</strong> qué agregarías con más tiempo (1-2 min)</li>
+                            </ul>
+                            <p class="text-xs mt-3 font-semibold" style="color: #92400e;">
+                                <i class="fas fa-users mr-1"></i>Se fomenta la retroalimentación constructiva entre compañeros después de cada presentación.
+                            </p>
+                        </div>
+                    </section>
+
+
+                    <!-- EVALUACIÓN -->
+                    <section id="evaluacion" class="section-card bg-white rounded-xl shadow-lg p-8">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6 border-l-4 pl-4" style="border-color: #150F5D;">
+                            <i class="fas fa-clipboard-check mr-3" style="color: #150F5D;"></i>Evaluación del Curso
+                        </h2>
+                        
+                        <div class="prose prose-lg max-w-none mb-8">
+                            <p class="text-gray-700 leading-relaxed">
+                                La evaluación del curso intensivo se basa en un enfoque <strong>formativo-sumativo</strong> que valora el progreso técnico continuo, la aplicación práctica, la reflexión pedagógica y el trabajo colaborativo. Se busca identificar dificultades tempranamente para ofrecer apoyo oportuno.
+                            </p>
+                        </div>
+
+                        <div class="overflow-x-auto rounded-lg border border-gray-300 shadow-sm">
+                            <table class="min-w-full divide-y divide-gray-200 text-sm">
+                                <thead class="bg-gradient-to-r from-gray-800 to-gray-700 text-white">
+                                    <tr>
+                                        <th class="px-6 py-4 text-left font-bold">Componente Evaluativo</th>
+                                        <th class="px-6 py-4 text-left font-bold">Actividad Específica</th>
+                                        <th class="px-6 py-4 text-center font-bold w-24">Punteo</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <!-- Actividades Sincrónicas -->
+                                    <tr style="background-color: #f0f4ff;">
+                                        <td colspan="3" class="px-6 py-3 font-bold uppercase tracking-wide" style="color: #150F5D;">
+                                            <i class="fas fa-video mr-2"></i>ACTIVIDADES EN SESIONES SINCRÓNICAS - 20 PUNTOS
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 text-gray-800">Actividad sesión 1</td>
+                                        <td class="px-6 py-4 text-gray-600">Script Python + Flask "Hola Mundo" con 3 rutas dinámicas</td>
+                                        <td class="px-6 py-4 text-center font-semibold" style="color: #150F5D;">5</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 text-gray-800">Actividad sesión 2</td>
+                                        <td class="px-6 py-4 text-gray-600">Funciones CRUD + JSON + migración a SQLite (INSERT/SELECT)</td>
+                                        <td class="px-6 py-4 text-center font-semibold" style="color: #150F5D;">5</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 text-gray-800">Actividad sesión 3</td>
+                                        <td class="px-6 py-4 text-gray-600">Formulario HTML con validación + DELETE + visualización por colores</td>
+                                        <td class="px-6 py-4 text-center font-semibold" style="color: #150F5D;">5</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 text-gray-800">Actividad sesión 4</td>
+                                        <td class="px-6 py-4 text-gray-600">Manejo de errores try-except + mensajes amigables + depuración</td>
+                                        <td class="px-6 py-4 text-center font-semibold" style="color: #150F5D;">5</td>
+                                    </tr>
+
+                                    <!-- Guías de Aprendizaje -->
+                                    <tr style="background-color: #fffbeb;">
+                                        <td colspan="3" class="px-6 py-3 font-bold uppercase tracking-wide" style="color: #92400e;">
+                                            <i class="fas fa-file-alt mr-2"></i>GUÍAS DE APRENDIZAJE - 30 PUNTOS
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 text-gray-800">Guía 1</td>
+                                        <td class="px-6 py-4 text-gray-600">Ejercicios de lógica + Proyecto Flask con rutas/templates + Lista de estudiantes básica</td>
+                                        <td class="px-6 py-4 text-center font-semibold" style="color: #92400e;">7.5</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 text-gray-800">Guía 2</td>
+                                        <td class="px-6 py-4 text-gray-600">Funciones CRUD modulares + CREATE/READ con JSON/SQLite + Sistema de categorización</td>
+                                        <td class="px-6 py-4 text-center font-semibold" style="color: #92400e;">7.5</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 text-gray-800">Guía 3</td>
+                                        <td class="px-6 py-4 text-gray-600">CRUD completo funcional + Formularios con validación + Dashboard con gráfica + Diseño responsive</td>
+                                        <td class="px-6 py-4 text-center font-semibold" style="color: #92400e;">7.5</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 text-gray-800">Guía 4</td>
+                                        <td class="px-6 py-4 text-gray-600">Manejo de errores completo + README documentación + Video de 5 min + Instalación funcionando</td>
+                                        <td class="px-6 py-4 text-center font-semibold" style="color: #92400e;">7.5</td>
+                                    </tr>
+
+                                    <!-- Reflexiones Pedagógicas -->
+                                    <tr class="bg-gray-50">
+                                        <td colspan="3" class="px-6 py-3 font-bold text-gray-900 uppercase tracking-wide">
+                                            <i class="fas fa-brain mr-2"></i>REFLEXIONES PEDAGÓGICAS - 10 PUNTOS
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 text-gray-800">Reflexiones 1-4</td>
+                                        <td class="px-6 py-4 text-gray-600">Textos reflexivos y diseño de actividades didácticas (2.5 pts c/u)</td>
+                                        <td class="px-6 py-4 text-center font-semibold text-gray-700">10</td>
+                                    </tr>
+
+                                    <!-- Autoevaluación -->
+                                    <tr style="background-color: #f0f4ff;">
+                                        <td colspan="3" class="px-6 py-3 font-bold uppercase tracking-wide" style="color: #150F5D;">
+                                            <i class="fas fa-user-check mr-2"></i>AUTOEVALUACIÓN Y COEVALUACIÓN - 10 PUNTOS
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 text-gray-800">Metacognición + Colaboración</td>
+                                        <td class="px-6 py-4 text-gray-600">Autoevaluación estructurada (5 pts) + Coevaluación de 2 compañeros (5 pts)</td>
+                                        <td class="px-6 py-4 text-center font-semibold" style="color: #150F5D;">10</td>
+                                    </tr>
+
+                                    <!-- Proyecto Final -->
+                                    <tr style="background-color: #fffbeb;">
+                                        <td colspan="3" class="px-6 py-3 font-bold uppercase tracking-wide" style="color: #92400e;">
+                                            <i class="fas fa-trophy mr-2"></i>PROYECTO FINAL INTEGRADOR - 30 PUNTOS
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 text-gray-800">Funcionalidad Técnica</td>
+                                        <td class="px-6 py-4 text-gray-600">CRUD completo, validaciones, manejo de errores, visualizaciones</td>
+                                        <td class="px-6 py-4 text-center font-semibold" style="color: #92400e;">12</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 text-gray-800">Impacto y Diseño Social</td>
+                                        <td class="px-6 py-4 text-gray-600">Solución efectiva al problema, interfaz comprensible</td>
+                                        <td class="px-6 py-4 text-center font-semibold" style="color: #92400e;">5</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 text-gray-800">Documentación Completa</td>
+                                        <td class="px-6 py-4 text-gray-600">README, código comentado, plan de clase estructurado</td>
+                                        <td class="px-6 py-4 text-center font-semibold" style="color: #92400e;">5</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 text-gray-800">Presentación Final</td>
+                                        <td class="px-6 py-4 text-gray-600">Demostración clara, reflexión pedagógica, propuesta didáctica</td>
+                                        <td class="px-6 py-4 text-center font-semibold" style="color: #92400e;">8</td>
+                                    </tr>
+
+                                    <!-- TOTAL -->
+                                    <tr class="bg-gradient-to-r from-gray-800 to-gray-700 text-white">
+                                        <td colspan="2" class="px-6 py-4 text-right font-black text-lg uppercase">TOTAL PUNTOS</td>
+                                        <td class="px-6 py-4 text-center font-black text-2xl">100</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="mt-6 p-5 rounded-lg border-l-4" style="background: linear-gradient(to right, #fffbeb, #fef3c7); border-color: #ffd971;">
+                            <h3 class="font-bold mb-2" style="color: #92400e;">
+                                <i class="fas fa-check-circle mr-2"></i>Criterios de Aprobación:
+                            </h3>
+                            <ul class="text-sm space-y-1" style="color: #78350f;">
+                                <li><strong>• Nota mínima:</strong> 61 puntos de 100</li>
+                                <li><strong>• Asistencia:</strong> Mínimo 75% (3 de 4 sábados)</li>
+                                <li><strong>• Requisitos obligatorios:</strong> Entregar las 4 guías, presentar proyecto final, completar al menos 3 reflexiones pedagógicas</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- RÚBRICAS -->
+                    <section id="rubricas" class="section-card bg-white rounded-xl shadow-lg p-8">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6 border-l-4 pl-4" style="border-color: #150F5D;">
+                            <i class="fas fa-list-check mr-3" style="color: #150F5D;"></i>Rúbricas Específicas
+                        </h2>
+
+                        <!-- Rúbrica 1: Funcionalidad Técnica -->
+                        <div class="mb-8 border border-gray-300 rounded-lg overflow-hidden">
+                            <div class="bg-gradient-to-r from-gray-800 to-gray-700 text-white px-6 py-4">
+                                <h3 class="font-bold text-lg">
+                                    <i class="fas fa-code mr-2"></i>Proyecto Final - Funcionalidad Técnica (12 puntos)
+                                </h3>
+                            </div>
+                            <div class="p-6 space-y-4">
+                                <div class="p-4 bg-green-50 border-l-4 border-green-600 rounded-r-lg">
+                                    <p class="font-bold text-green-900 mb-2">��� Excelente (10-12 puntos)</p>
+                                    <p class="text-green-800 text-sm">
+                                        CRUD completo funcionando sin errores, validaciones robustas, manejo de errores en todos los casos críticos, visualizaciones claras, interfaz responsive, base de datos bien estructurada, código organizado y comentado, sistema de categorización automático operando correctamente.
+                                    </p>
+                                </div>
+                                <div class="p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                                    <p class="font-bold text-blue-900 mb-2">✅ Satisfactorio (7-9 puntos)</p>
+                                    <p class="text-blue-800 text-sm">
+                                        CRUD funcionando con errores menores, validaciones básicas presentes, manejo de errores en casos principales, al menos una visualización funcionando, interfaz funcional aunque no perfectamente responsive, base de datos operativa, código mayormente organizado.
+                                    </p>
+                                </div>
+                                <div class="p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-lg">
+                                    <p class="font-bold text-yellow-900 mb-2">⚠️ Básico (4-6 puntos)</p>
+                                    <p class="text-yellow-800 text-sm">
+                                        Al menos operaciones CREATE y READ funcionando, validaciones mínimas, manejo de errores limitado, intento de visualización presente, interfaz funcional pero sin diseño cuidado, base de datos operativa con estructura simple.
+                                    </p>
+                                </div>
+                                <div class="p-4 bg-red-50 border-l-4 border-red-500 rounded-r-lg">
+                                    <p class="font-bold text-red-900 mb-2">❌ Insuficiente (0-3 puntos)</p>
+                                    <p class="text-red-800 text-sm">
+                                        Funcionalidades incompletas, errores frecuentes al usar el sistema, validaciones ausentes o no funcionando, sin visualizaciones, interfaz confusa o no funcional, problemas con base de datos.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rúbrica 2: Presentación Final -->
+                        <div class="mb-8 border border-gray-300 rounded-lg overflow-hidden">
+                            <div class="bg-gradient-to-r from-gray-800 to-gray-700 text-white px-6 py-4">
+                                <h3 class="font-bold text-lg">
+                                    <i class="fas fa-presentation mr-2"></i>Presentación Final (8 puntos)
+                                </h3>
+                            </div>
+                            <div class="p-6 space-y-4">
+                                <div class="p-4 bg-green-50 border-l-4 border-green-600 rounded-r-lg">
+                                    <p class="font-bold text-green-900 mb-2">��� Excelente (7-8 puntos)</p>
+                                    <p class="text-green-800 text-sm">
+                                        Demostración fluida y completa de todas las funcionalidades, explicación clara del problema social y su relevancia, reflexión profunda sobre aprendizajes técnicos y pedagógicos, propuesta didáctica detallada y viable, discusión honesta de limitaciones con ideas de mejora, comunicación segura y profesional, respuestas sólidas a preguntas.
+                                    </p>
+                                </div>
+                                <div class="p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                                    <p class="font-bold text-blue-900 mb-2">✅ Satisfactorio (5-6 puntos)</p>
+                                    <p class="text-blue-800 text-sm">
+                                        Demostración de funcionalidades principales, explicación adecuada del problema social, reflexión presente sobre aprendizajes, propuesta didáctica con elementos básicos, mención de algunas limitaciones, comunicación clara aunque con nerviosismo, respuestas aceptables.
+                                    </p>
+                                </div>
+                                <div class="p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-lg">
+                                    <p class="font-bold text-yellow-900 mb-2">⚠️ Básico (3-4 puntos)</p>
+                                    <p class="text-yellow-800 text-sm">
+                                        Demostración parcial de funcionalidades, explicación superficial del problema social, reflexión limitada, propuesta didáctica vaga, limitaciones no discutidas o minimizadas, comunicación insegura, dificultad para responder preguntas.
+                                    </p>
+                                </div>
+                                <div class="p-4 bg-red-50 border-l-4 border-red-500 rounded-r-lg">
+                                    <p class="font-bold text-red-900 mb-2">❌ Insuficiente (0-2 puntos)</p>
+                                    <p class="text-red-800 text-sm">
+                                        Demostración incompleta o con errores constantes, sin conexión clara con problema social, sin reflexión pedagógica, sin propuesta didáctica, comunicación deficiente o presentación no preparada.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rúbrica 3: Reflexiones Pedagógicas -->
+                        <div class="border border-gray-300 rounded-lg overflow-hidden">
+                            <div class="bg-gradient-to-r from-orange-600 to-orange-700 text-white px-6 py-4">
+                                <h3 class="font-bold text-lg">
+                                    <i class="fas fa-brain mr-2"></i>Reflexiones Pedagógicas (2.5 puntos cada una)
+                                </h3>
+                            </div>
+                            <div class="p-6 space-y-4">
+                                <div class="p-4 bg-green-50 border-l-4 border-green-600 rounded-r-lg">
+                                    <p class="font-bold text-green-900 mb-2">��� Excelente (2.5 puntos)</p>
+                                    <p class="text-green-800 text-sm">
+                                        Reflexión profunda y bien articulada, conexión explícita entre teoría y práctica, ejemplos concretos y contextualizados al entorno guatemalteco, evidencia de pensamiento crítico, propuestas viables y creativas, extensión y formato adecuados, redacción clara.
+                                    </p>
+                                </div>
+                                <div class="p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                                    <p class="font-bold text-blue-900 mb-2">✅ Satisfactorio (1.5-2 puntos)</p>
+                                    <p class="text-blue-800 text-sm">
+                                        Reflexión adecuada con ideas relevantes, conexión presente pero podría profundizarse, algunos ejemplos concretos, pensamiento crítico emergente, propuestas viables aunque genéricas, cumple extensión, redacción aceptable.
+                                    </p>
+                                </div>
+                                <div class="p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-lg">
+                                    <p class="font-bold text-yellow-900 mb-2">⚠️ Básico (1 punto)</p>
+                                    <p class="text-yellow-800 text-sm">
+                                        Reflexión superficial, conexión débil con práctica docente, ejemplos vagos o ausentes, poco pensamiento crítico, propuestas poco desarrolladas, extensión insuficiente o excesiva, redacción con problemas.
+                                    </p>
+                                </div>
+                                <div class="p-4 bg-red-50 border-l-4 border-red-500 rounded-r-lg">
+                                    <p class="font-bold text-red-900 mb-2">❌ Insuficiente (0-0.5 puntos)</p>
+                                    <p class="text-red-800 text-sm">
+                                        Reflexión ausente o irrelevante, sin conexión con docencia, sin ejemplos, sin propuestas, no cumple requisitos mínimos.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <!-- CALENDARIO Y POLÍTICAS -->
+                    <section id="calendario" class="section-card bg-white rounded-xl shadow-lg p-8">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6 border-l-4 pl-4" style="border-color: #150F5D;">
+                            <i class="fas fa-calendar-alt mr-3" style="color: #150F5D;"></i>Calendario Detallado
+                        </h2>
+
+                        <div class="space-y-6">
+                            <!-- SEMANA 1 -->
+                            <div class="p-6 rounded-lg border-l-4" style="background: linear-gradient(to right, #f0f4ff, #e6ebff); border-color: #150F5D;">
+                                <h3 class="font-bold mb-3 text-lg" style="color: #150F5D;">
+                                    <i class="fas fa-calendar-day mr-2"></i>SEMANA 1: Sábado [Fecha según calendario académico URL - Enero 2025]
+                                </h3>
+                                <div class="space-y-2 text-sm" style="color: #1a1566;">
+                                    <p><strong style="color: #150F5D;">��� SESIÓN SINCRÓNICA (07:00 - 12:45):</strong></p>
+                                    <ul class="ml-6 space-y-1" style="color: #374151;">
+                                        <li>• <strong>07:00-07:20:</strong> Bienvenida oficial, presentación de docente y estudiantes, revisión del programa, configuración de herramientas (Python, VS Code, Git)</li>
+                                        <li>• <strong>07:20-08:45:</strong> Fundamentos de programación: Pensamiento computacional, tipos de datos, variables, operadores, condicionales (if-elif-else)</li>
+                                        <li>• <strong>08:45-09:00:</strong> <span class="font-bold" style="color: #ffd971;">☕ RECESO</span></li>
+                                        <li>• <strong>09:00-10:45:</strong> Estructuras de control: Ciclos (for, while), ejercicios prácticos de lógica, resolución de problemas algorítmicos</li>
+                                        <li>• <strong>10:45-11:00:</strong> <span class="font-bold" style="color: #ffd971;">☕ RECESO</span></li>
+                                        <li>• <strong>11:00-12:30:</strong> Instalación de Flask, creación de entorno virtual, primera aplicación "Hola Mundo", rutas básicas, parámetros en URLs</li>
+                                        <li>• <strong>12:30-12:45:</strong> <span class="font-bold" style="color: #92400e;">��� Actividad evaluada sesión 1 (5 pts)</span> - Script Python con rutas dinámicas, cierre y asignación de Guía 1</li>
+                                    </ul>
+                                    <p class="mt-3"><strong style="color: #150F5D;">��� TRABAJO AUTÓNOMO (8-10 horas):</strong></p>
+                                    <ul class="ml-6 space-y-1" style="color: #374151;">
+                                        <li>• <strong>Guía de Aprendizaje 1:</strong> Funciones modulares, listas y diccionarios, templates Jinja2, integración Flask-HTML</li>
+                                        <li>• <strong>Reflexión Pedagógica 1:</strong> Estrategias didácticas para enseñar programación en contextos rurales (300-400 palabras)</li>
+                                    </ul>
+                                    <p class="font-semibold mt-2" style="color: #150F5D;"><i class="fas fa-clock mr-1"></i>��� ENTREGAS: Guía 1 (Viernes 11:59 PM) | Reflexión 1 (Domingo 11:59 PM)</p>
+                                </div>
+                            </div>
+
+                            <!-- SEMANA 2 -->
+                            <div class="p-6 rounded-lg border-l-4" style="background: linear-gradient(to right, #fffbeb, #fef3c7); border-color: #ffd971;">
+                                <h3 class="font-bold mb-3 text-lg" style="color: #92400e;">
+                                    <i class="fas fa-calendar-day mr-2"></i>SEMANA 2: Sábado [Una semana después] - Manejo de Datos
+                                </h3>
+                                <div class="space-y-2 text-sm" style="color: #78350f;">
+                                    <p><strong style="color: #92400e;">��� SESIÓN SINCRÓNICA (07:00 - 12:45):</strong></p>
+                                    <ul class="ml-6 space-y-1" style="color: #374151;">
+                                        <li>• <strong>07:00-07:30:</strong> Retroalimentación Guía 1, dudas técnicas, mejores prácticas identificadas</li>
+                                        <li>• <strong>07:30-08:45:</strong> Persistencia de datos: Archivos JSON (lectura/escritura), módulo json en Python, estructuración de datos</li>
+                                        <li>• <strong>08:45-09:00:</strong> <span class="font-bold" style="color: #ffd971;">☕ RECESO</span></li>
+                                        <li>• <strong>09:00-10:45:</strong> Introducción a bases de datos: SQLite sin servidor, SQL básico (CREATE TABLE, INSERT, SELECT), módulo sqlite3</li>
+                                        <li>• <strong>10:45-11:00:</strong> <span class="font-bold" style="color: #ffd971;">☕ RECESO</span></li>
+                                        <li>• <strong>11:00-12:30:</strong> Integración Python-SQLite, operaciones CRUD (CREATE y READ), migración de datos JSON a SQLite</li>
+                                        <li>• <strong>12:30-12:45:</strong> <span class="font-bold" style="color: #92400e;">��� Actividad evaluada sesión 2 (5 pts)</span> - Funciones CRUD con SQLite, asignación de Guía 2</li>
+                                    </ul>
+                                    <p class="mt-3"><strong style="color: #92400e;">��� TRABAJO AUTÓNOMO (10-12 horas):</strong></p>
+                                    <ul class="ml-6 space-y-1" style="color: #374151;">
+                                        <li>• <strong>Guía de Aprendizaje 2:</strong> Funciones CRUD modulares, sistema de categorización por riesgo (verde/amarillo/rojo), integración completa con proyecto</li>
+                                        <li>• <strong>Reflexión Pedagógica 2:</strong> Ética en el manejo de datos de estudiantes, código de conducta (300-400 palabras)</li>
+                                    </ul>
+                                    <p class="font-semibold mt-2" style="color: #92400e;"><i class="fas fa-clock mr-1"></i>��� ENTREGAS: Guía 2 (Viernes 11:59 PM) | Reflexión 2 (Domingo 11:59 PM)</p>
+                                </div>
+                            </div>
+
+                            <!-- SEMANA 3 -->
+                            <div class="p-6 rounded-lg border-l-4" style="background: linear-gradient(to right, #f0f4ff, #e6ebff); border-color: #150F5D;">
+                                <h3 class="font-bold mb-3 text-lg" style="color: #150F5D;">
+                                    <i class="fas fa-calendar-day mr-2"></i>SEMANA 3: Sábado [Dos semanas después] - Interactividad y Visualización
+                                </h3>
+                                <div class="space-y-2 text-sm" style="color: #1a1566;">
+                                    <p><strong style="color: #150F5D;">��� SESIÓN SINCRÓNICA (07:00 - 12:45):</strong></p>
+                                    <ul class="ml-6 space-y-1" style="color: #374151;">
+                                        <li>• <strong>07:00-07:30:</strong> Retroalimentación Guía 2, showcase de mejores proyectos, solución de problemas comunes</li>
+                                        <li>• <strong>07:30-08:45:</strong> Formularios HTML: elementos (input, textarea, select), métodos HTTP (GET vs POST), validación HTML5</li>
+                                        <li>• <strong>08:45-09:00:</strong> <span class="font-bold" style="color: #ffd971;">☕ RECESO</span></li>
+                                        <li>• <strong>09:00-10:45:</strong> Bootstrap framework: grid system, componentes (cards, tables, modals), diseño responsive, operaciones UPDATE y DELETE</li>
+                                        <li>• <strong>10:45-11:00:</strong> <span class="font-bold" style="color: #ffd971;">☕ RECESO</span></li>
+                                        <li>• <strong>11:00-12:30:</strong> Visualización de datos: Chart.js o alternativas, creación de dashboard, gráficas de barras/pastel, estadísticas visuales</li>
+                                        <li>• <strong>12:30-12:45:</strong> <span class="font-bold" style="color: #92400e;">��� Actividad evaluada sesión 3 (5 pts)</span> - Formulario con validación + DELETE, asignación de Guía 3</li>
+                                    </ul>
+                                    <p class="mt-3"><strong style="color: #150F5D;">��� TRABAJO AUTÓNOMO (12-15 horas):</strong></p>
+                                    <ul class="ml-6 space-y-1" style="color: #374151;">
+                                        <li>• <strong>Guía de Aprendizaje 3:</strong> CRUD completo funcionando, formularios con validación robusta, dashboard con 3 visualizaciones, interfaz responsive</li>
+                                        <li>• <strong>Reflexión Pedagógica 3:</strong> Visualización de datos para decisiones pedagógicas, competencias digitales docentes (300-400 palabras)</li>
+                                    </ul>
+                                    <p class="font-semibold mt-2" style="color: #150F5D;"><i class="fas fa-clock mr-1"></i>��� ENTREGAS: Guía 3 (Viernes 11:59 PM) | Reflexión 3 (Domingo 11:59 PM)</p>
+                                </div>
+                            </div>
+
+                            <!-- SEMANA 4 -->
+                            <div class="p-6 rounded-lg border-l-4" style="background: linear-gradient(to right, #fffbeb, #fef3c7); border-color: #ffd971;">
+                                <h3 class="font-bold mb-3 text-lg" style="color: #92400e;">
+                                    <i class="fas fa-calendar-day mr-2"></i>SEMANA 4: Sábado [Tres semanas después] - Cierre y Presentaciones
+                                </h3>
+                                <div class="space-y-2 text-sm" style="color: #78350f;">
+                                    <p><strong style="color: #92400e;">��� SESIÓN SINCRÓNICA (07:00 - 12:45):</strong></p>
+                                    <ul class="ml-6 space-y-1" style="color: #374151;">
+                                        <li>• <strong>07:00-07:20:</strong> Retroalimentación final de Guía 3, resolución de dudas técnicas de último momento</li>
+                                        <li>• <strong>07:20-08:45:</strong> Manejo de errores: try-except-finally, tipos de excepciones, logging, mensajes amigables para usuarios</li>
+                                        <li>• <strong>08:45-09:00:</strong> <span class="font-bold" style="color: #ffd971;">☕ RECESO</span></li>
+                                        <li>• <strong>09:00-10:45:</strong> Documentación profesional: README.md efectivo, docstrings, comentarios de código, requirements.txt, guía de instalación</li>
+                                        <li>• <strong>10:45-11:00:</strong> <span class="font-bold" style="color: #ffd971;">☕ RECESO y preparación para presentaciones</span></li>
+                                        <li>• <strong>11:00-12:45:</strong> <span class="font-bold text-lg" style="color: #150F5D;">��� PRESENTACIONES FINALES (10-12 min c/u)</span></li>
+                                        <li class="ml-4">→ Demostración en vivo del proyecto completo</li>
+                                        <li class="ml-4">→ Reflexión técnica y pedagógica</li>
+                                        <li class="ml-4">→ Propuesta didáctica para enseñanza</li>
+                                        <li class="ml-4">→ Retroalimentación entre pares</li>
+                                    </ul>
+                                    <p class="mt-3"><strong style="color: #92400e;">��� TRABAJO AUTÓNOMO (10-12 horas - ANTES del sábado):</strong></p>
+                                    <ul class="ml-6 space-y-1" style="color: #374151;">
+                                        <li>• <strong>Guía de Aprendizaje 4:</strong> Manejo de errores implementado, README completo, video demostrativo 5 min, sistema instalable</li>
+                                        <li>• <strong>Reflexión Pedagógica 4:</strong> Transformación personal como futuro docente tecnológico (500-600 palabras)</li>
+                                        <li>• <strong>Autoevaluación y Coevaluación:</strong> Rúbricas completadas, feedback constructivo a 2 compañeros</li>
+                                        <li>• <strong>Proyecto Final Completo:</strong> Todo el material listo para presentación</li>
+                                    </ul>
+                                    <p class="font-semibold mt-2" style="color: #92400e;"><i class="fas fa-exclamation-triangle mr-1"></i>��� ENTREGA FINAL: Viernes 11:59 PM (SIN EXTENSIÓN) - Todo el material debe estar subido antes de la presentación</p>
+                                </div>
+                            </div>
+
+                            <!-- Resumen de fechas importantes -->
+                            <div class="p-6 rounded-lg border-2" style="border-color: #150F5D; background-color: #f9fafb;">
+                                <h3 class="font-bold mb-4 text-lg" style="color: #150F5D;">
+                                    <i class="fas fa-exclamation-circle mr-2"></i>��� RESUMEN DE FECHAS IMPORTANTES
+                                </h3>
+                                <div class="grid md:grid-cols-2 gap-4 text-sm">
+                                    <div>
+                                        <p class="font-bold mb-2" style="color: #150F5D;">Entregas Semanales:</p>
+                                        <ul class="space-y-1 text-gray-700">
+                                            <li>• <strong>Guías:</strong> Cada viernes 11:59 PM</li>
+                                            <li>• <strong>Reflexiones:</strong> Cada domingo 11:59 PM</li>
+                                            <li>• <strong>Actividades sincrónicas:</strong> Durante sesión</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold mb-2" style="color: #92400e;">Proyecto Final:</p>
+                                        <ul class="space-y-1 text-gray-700">
+                                            <li>• <strong>Entrega completa:</strong> Viernes antes de presentación</li>
+                                            <li>• <strong>Presentaciones:</strong> Sábado semana 4 (11:00-12:45)</li>
+                                            <li>• <strong>Evaluaciones:</strong> Junto con entrega final</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <p class="mt-4 text-xs text-gray-600 italic">
+                                    <i class="fas fa-info-circle mr-1"></i>Las fechas específicas serán confirmadas según el calendario académico oficial de la Universidad Rafael Landívar para el Ciclo I, Módulo I del año psicopedagógico 2025.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- POLÍTICAS -->
+                    <section id="politicas" class="section-card bg-white rounded-xl shadow-lg p-8">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6 border-l-4 border-gray-600 pl-4">
+                            <i class="fas fa-gavel mr-3 text-gray-600"></i>Políticas del Curso
+                        </h2>
+
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="font-bold text-gray-800 mb-3 text-lg">
+                                    <i class="fas fa-user-clock mr-2 text-blue-600"></i>Asistencia y Puntualidad
+                                </h3>
+                                <ul class="text-gray-700 text-sm space-y-2 ml-6">
+                                    <li>• Asistencia mínima del 75% (3 de 4 sábados) obligatoria</li>
+                                    <li>• Puntualidad fundamental: sesiones inician a las 7:00 AM. Llegadas después de 7:20 AM = inasistencia</li>
+                                    <li>• Inasistencias justificadas: comunicar ANTES de la sesión con documentación</li>
+                                    <li>• Recesos programados: 8:45-9:00 AM y 10:45-11:00 AM</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h3 class="font-bold text-gray-800 mb-3 text-lg">
+                                    <i class="fas fa-calendar-check mr-2 text-green-600"></i>Entregas y Plazos
+                                </h3>
+                                <ul class="text-gray-700 text-sm space-y-2 ml-6">
+                                    <li>• Guías de aprendizaje: Viernes 11:59 PM antes de siguiente sesión</li>
+                                    <li>• Reflexiones pedagógicas: Domingo 11:59 PM</li>
+                                    <li>• Entregas tardías: -20% por día (máximo 2 días)</li>
+                                    <li>• Después de 2 días: calificación 0</li>
+                                    <li>• Proyecto final: NO hay extensión, debe entregarse el día de la presentación</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h3 class="font-bold text-gray-800 mb-3 text-lg">
+                                    <i class="fas fa-shield-alt mr-2 text-red-600"></i>Integridad Académica
+                                </h3>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                                        <p class="font-semibold text-green-900 mb-2">✅ PERMITIDO:</p>
+                                        <ul class="text-green-800 text-xs space-y-1">
+                                            <li>• Consultar documentación oficial</li>
+                                            <li>• Adaptar ejemplos online (citando fuente)</li>
+                                            <li>• Colaborar en depuración</li>
+                                            <li>• Pedir ayuda al docente/compañeros</li>
+                                            <li>• Usar IA como asistente (declarándolo)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-500">
+                                        <p class="font-semibold text-red-900 mb-2">❌ NO PERMITIDO:</p>
+                                        <ul class="text-red-800 text-xs space-y-1">
+                                            <li>• Copiar código sin entender</li>
+                                            <li>• Presentar trabajo ajeno como propio</li>
+                                            <li>• Usar IA sin supervisión ni comprensión</li>
+                                            <li>• Compartir soluciones completas</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-gray-700 mt-3 italic">
+                                    <i class="fas fa-info-circle mr-2"></i>
+                                    El objetivo es APRENDER, no solo entregar. Código imperfecto pero propio > código perfecto copiado.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h3 class="font-bold text-gray-800 mb-3 text-lg">
+                                    <i class="fas fa-laptop mr-2 text-purple-600"></i>Recursos Técnicos Requeridos
+                                </h3>
+                                <ul class="text-gray-700 text-sm space-y-2 ml-6">
+                                    <li>• <strong>Computadora:</strong> Windows 10+, macOS 10.14+, o Linux (Ubuntu 20.04+) | 4 GB RAM mínimo (8 GB recomendado) | 5 GB espacio libre</li>
+                                    <li>• <strong>Internet:</strong> 5 Mbps mínimo para Zoom (10+ Mbps recomendado)</li>
+                                    <li>• <strong>Software:</strong> Python 3.10+, VS Code, navegador actualizado, Git (opcional)</li>
+                                    <li>• <strong>Cuentas:</strong> GitHub (opcional), PythonAnywhere (opcional)</li>
+                                    <li>• <strong>Respaldo:</strong> Mantener copias de código en 2 lugares (computadora + nube)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- RECURSOS Y REFERENCIAS -->
+                    <section id="recursos" class="section-card bg-white rounded-xl shadow-lg p-8">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6 border-l-4 border-orange-600 pl-4">
+                            <i class="fas fa-book-open mr-3 text-orange-600"></i>Referencias y Recursos
+                        </h2>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="p-5 bg-blue-50 rounded-lg border border-blue-200">
+                                <h3 class="font-bold text-blue-900 mb-3">
+                                    <i class="fas fa-code mr-2"></i>Documentación Técnica Oficial
+                                </h3>
+                                <ul class="text-blue-800 text-sm space-y-2">
+                                    <li>• <strong>Python:</strong> docs.python.org/3/tutorial/</li>
+                                    <li>• <strong>Flask:</strong> flask.palletsprojects.com</li>
+                                    <li>• <strong>SQLite:</strong> sqlite.org/docs.html</li>
+                                    <li>• <strong>Jinja2:</strong> jinja.palletsprojects.com</li>
+                                    <li>• <strong>Bootstrap:</strong> getbootstrap.com</li>
+                                </ul>
+                            </div>
+
+                            <div class="p-5 bg-green-50 rounded-lg border border-green-200">
+                                <h3 class="font-bold text-green-900 mb-3">
+                                    <i class="fas fa-video mr-2"></i>Tutoriales y Aprendizaje
+                                </h3>
+                                <ul class="text-green-800 text-sm space-y-2">
+                                    <li>• <strong>Real Python:</strong> realpython.com/tutorials/flask/</li>
+                                    <li>• <strong>Corey Schafer:</strong> YouTube - Python Flask Tutorial</li>
+                                    <li>• <strong>freeCodeCamp:</strong> Python for Beginners</li>
+                                    <li>• <strong>W3Schools:</strong> w3schools.com</li>
+                                    <li>• <strong>MDN Web Docs:</strong> developer.mozilla.org</li>
+                                </ul>
+                            </div>
+
+                            <div class="p-5 bg-purple-50 rounded-lg border border-purple-200">
+                                <h3 class="font-bold text-purple-900 mb-3">
+                                    <i class="fas fa-chalkboard-teacher mr-2"></i>Metodologías Pedagógicas
+                                </h3>
+                                <ul class="text-purple-800 text-sm space-y-2">
+                                    <li>• Tecnológico de Monterrey: Edu Trends (Aprendizaje Invertido, ABP)</li>
+                                    <li>• Wing, J. M. (2006): Computational Thinking</li>
+                                    <li>• Resnick, M. et al. (2009): Scratch - Programming for All</li>
+                                    <li>• García Peñalvo, F. J.: Enseñanza de la Programación</li>
+                                </ul>
+                            </div>
+
+                            <div class="p-5 bg-yellow-50 rounded-lg border border-yellow-200">
+                                <h3 class="font-bold text-yellow-900 mb-3">
+                                    <i class="fas fa-globe-americas mr-2"></i>Contexto Guatemalteco
+                                </h3>
+                                <ul class="text-yellow-800 text-sm space-y-2">
+                                    <li>• MINEDUC: Currículo Nacional Base - Productividad y Desarrollo</li>
+                                    <li>• UNESCO: Digital Skills and ICT in Education (LAC)</li>
+                                    <li>• Banco Mundial: Guatemala - Panorama General Educación</li>
+                                    <li>• Diálogo Interamericano: Educación y Tecnología en América Latina</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 p-5 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg border-l-4 border-indigo-600">
+                            <h3 class="font-bold text-indigo-900 mb-2">
+                                <i class="fas fa-tools mr-2"></i>Herramientas y Plataformas
+                            </h3>
+                            <p class="text-indigo-800 text-sm">
+                                Python.org • Visual Studio Code • PythonAnywhere • DB Browser for SQLite • GitHub • Postman
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- MENSAJE DEL DOCENTE -->
+                    <section id="mensaje" class="section-card bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 text-white rounded-xl shadow-2xl p-10">
+                        <h2 class="text-3xl font-bold mb-6 flex items-center">
+                            <i class="fas fa-heart mr-3"></i>Mensaje Final del Docente
+                        </h2>
+                        
+                        <div class="space-y-5 text-lg leading-relaxed">
+                            <p class="font-semibold text-xl">Estimados futuros docentes de tecnología:</p>
+                            
+                            <p>
+                                Este curso intensivo será <strong>desafiante</strong>. En solo 4 semanas aprenderán conceptos que normalmente se enseñan en un semestre completo. Habrá momentos de frustración cuando el código no funcione, cuando los errores parezcan incomprensibles, cuando sientan que no avanzan lo suficientemente rápido.
+                            </p>
+
+                            <p class="bg-white bg-opacity-20 backdrop-blur-sm p-5 rounded-lg border-l-4 border-yellow-300">
+                                Pero quiero que recuerden tres cosas fundamentales:
+                            </p>
+
+                            <div class="space-y-4 ml-4">
+                                <div class="flex items-start">
+                                    <span class="flex items-center justify-center w-10 h-10 rounded-full bg-blue-500 text-white font-bold mr-4 flex-shrink-0">1</span>
+                                    <p>
+                                        <strong>No están aquí para convertirse en ingenieros de software.</strong> Están aquí para entender programación lo suficiente como para inspirar a sus futuros estudiantes, para mostrarles que la tecnología no es magia inaccesible sino una herramienta que pueden dominar para cambiar su realidad.
+                                    </p>
+                                </div>
+
+                                <div class="flex items-start">
+                                    <span class="flex items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white font-bold mr-4 flex-shrink-0">2</span>
+                                    <p>
+                                        <strong>Cada error es una oportunidad de aprendizaje.</strong> Los mejores programadores del mundo pasan más tiempo depurando código que escribiéndolo. La diferencia es que ellos han aprendido a ser pacientes y sistemáticos. Ustedes también lo lograrán.
+                                    </p>
+                                </div>
+
+                                <div class="flex items-start">
+                                    <span class="flex items-center justify-center w-10 h-10 rounded-full bg-red-500 text-white font-bold mr-4 flex-shrink-0">3</span>
+                                    <p>
+                                        <strong>El proyecto que desarrollarán puede tener un impacto real.</strong> El sistema de seguimiento de estudiantes en riesgo no es un ejercicio académico abstracto - es una herramienta que podrían implementar en sus escuelas para ayudar a prevenir la deserción, para identificar a tiempo cuando un estudiante necesita apoyo.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <p class="text-xl font-semibold mt-8">
+                                Guatemala necesita docentes de tecnología que no solo enseñen a usar herramientas, sino que formen <strong>pensadores computacionales</strong> capaces de ver problemas y imaginar soluciones.
+                            </p>
+
+                            <p class="italic">
+                                Este curso es su primer paso en esa dirección. Sean pacientes consigo mismos, apoyen a sus compañeros, hagan preguntas sin miedo, experimenten, equivóquense, aprendan.
+                            </p>
+
+                            <div class="mt-8 text-center p-6 bg-white bg-opacity-20 backdrop-blur-sm rounded-lg">
+                                <p class="text-3xl font-black mb-3">¡Vamos a programar para transformar!</p>
+                                <div class="mt-6">
+                                    <p class="font-bold text-xl">Emilio Dominguez</p>
+                                    <p class="text-lg opacity-90">Instructor del curso</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 text-center text-sm opacity-75 italic border-t border-white border-opacity-30 pt-4">
+                            <i class="fas fa-info-circle mr-2"></i>
+                            Este programa está sujeto a ajustes menores según el ritmo de aprendizaje del grupo. Cualquier modificación será comunicada oportunamente.
+                        </div>
+                    </section>
+
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-sm">
+                <strong class="text-white">Universidad Rafael Landívar</strong> | Facultad de Humanidades | Departamento de Educación
+            </p>
+            <p class="text-xs mt-2 opacity-75">
+                Programa del Curso - Programación 1 con Python y Flask | Año Psicopedagógico 2025 | Modalidad Intensiva
+            </p>
+            <p class="text-xs mt-4 text-gray-500">
+                Documento generado: Octubre 2025 | <i class="fas fa-code mr-1"></i>Desarrollado con propósito educativo y social
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript para navegación -->
+    <script>
+        // Activar navegación
+        function setActive(element) {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+        // Detectar scroll para activar automáticamente
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Inicializar primera sección como activa
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstLink = document.querySelector('.nav-link');
+            if (firstLink) {
+                firstLink.classList.add('active');
+            }
+            
+            console.log('✅ Programa del curso cargado correctamente');
+            console.log('��� Universidad Rafael Landívar - Programación 1 con Python y Flask');
+        });
+    </script>
+
+</body>
+</html>
