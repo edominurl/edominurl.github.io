@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía de Instalación: Python, VS Code y Flask</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f7fb;
+      color: #333;
+    }
+
+    header {
+      background-color: #2b5797;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom: 5px solid #1e3e70;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #2b5797;
+      border-left: 6px solid #2b5797;
+      padding-left: 10px;
+      margin-top: 40px;
+    }
+
+    ol {
+      counter-reset: paso;
+      padding-left: 0;
+    }
+
+    ol li {
+      list-style: none;
+      margin: 20px 0;
+      padding: 20px;
+      background: #f0f5ff;
+      border-left: 5px solid #2b5797;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    ol li::before {
+      counter-increment: paso;
+      content: counter(paso);
+      position: absolute;
+      left: -25px;
+      top: 20px;
+      background: #2b5797;
+      color: white;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      font-weight: bold;
+    }
+
+    code {
+      background: #000;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-size: 0.95em;
+      font-family: monospace;
+      color: #0f0;
+    }
+
+    pre {
+      background: #222;
+      color: #0f0;
+      padding: 15px;
+      border-radius: 10px;
+      overflow-x: auto;
+    }
+
+    a {
+      color: #2b5797;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .note {
+      background: #e8f4ff;
+      border-left: 5px solid #2b5797;
+      padding: 15px;
+      margin-top: 30px;
+      border-radius: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #666;
+      margin-top: 50px;
+    }
+
+    .highlight {
+      background-color: #fff8d1;
+      border-left: 5px solid #ffcc00;
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🐍 Guía de Instalación de Python, Visual Studio Code y Flask</h1>
+    <p>Preparación del entorno para clases de programación en Windows</p>
+  </header>
+
+  <main>
+    <h2>Paso 1: Instalar Python</h2>
+    <ol>
+      <li>Ir al sitio oficial de descargas:  
+        👉 <a href="https://www.python.org/downloads/" target="_blank">https://www.python.org/downloads/</a>.
+      </li>
+      <li>Descargar la versión recomendada para Windows.</li>
+      <li>Ejecutar el instalador (<code>python-x.x.x.exe</code>).</li>
+      <li class="highlight"><strong>Muy importante:</strong> marcar la casilla <code>Add Python to PATH</code> antes de hacer clic en <strong>Install Now</strong>.</li>
+      <li>Esperar a que termine la instalación y cerrar el instalador.</li>
+      <li>Verificar la instalación:
+        <ul>
+          <li>Abrir el menú <strong>Inicio</strong>.</li>
+          <li>Buscar y abrir <strong>CMD</strong> (Símbolo del sistema).</li>
+          <li>Escribir: <code>python --version</code></li>
+          <li>Debe aparecer algo como: <code>Python 3.x.x</code></li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>Paso 2: Instalar Visual Studio Code</h2>
+    <ol>
+      <li>Ir a: <a href="https://code.visualstudio.com/" target="_blank">https://code.visualstudio.com/</a>.</li>
+      <li>Descargar e instalar la versión para Windows.</li>
+      <li>Durante la instalación, dejar marcadas las opciones:
+        <ul>
+          <li><code>Add to PATH</code></li>
+          <li><code>Register Code as an editor</code></li>
+        </ul>
+      </li>
+      <li>Abrir Visual Studio Code desde el menú Inicio.</li>
+      <li>Instalar la extensión de Python:
+        <ul>
+          <li>Presionar <code>Ctrl + Shift + X</code> para abrir las extensiones.</li>
+          <li>Buscar “Python”.</li>
+          <li>Instalar la extensión oficial de Microsoft.</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>Paso 3: Crear un proyecto Flask</h2>
+    <ol>
+      <li>Abrir VS Code.</li>
+      <li>Ir a <strong>Archivo → Abrir carpeta</strong> y crear una nueva (por ejemplo, <code>flask_app</code>).</li>
+      <li>Abrir la terminal en VS Code (<code>Ctrl + `</code>).</li>
+      <li>Crear un entorno virtual:
+        <br><code>python -m venv venv</code>
+      </li>
+      <li>Activar el entorno virtual:
+        <br><code>venv\Scripts\activate</code>
+      </li>
+      <li>Instalar Flask:
+        <br><code>pip install flask</code>
+      </li>
+      <li>Crear un archivo <code>app.py</code> con el siguiente contenido:</li>
+    </ol>
+
+    <pre><code>from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "¡Hola, mundo desde Flask!"
+
+if __name__ == '__main__':
+    app.run(debug=True)
+    </code></pre>
+
+    <h2>Paso 4: Ejecutar la aplicación</h2>
+    <ol>
+      <li>En la terminal (con el entorno virtual activado), escribir:
+        <br><code>python app.py</code>
+      </li>
+      <li>En el navegador, abrir:
+        <br><a href="http://127.0.0.1:5000" target="_blank">http://127.0.0.1:5000</a>
+      </li>
+      <li>Debería verse el mensaje: <strong>¡Hola, mundo desde Flask!</strong></li>
+    </ol>
+
+    <div class="note">
+      💡 <strong>Consejo:</strong> Para detener el servidor Flask, presiona <code>Ctrl + C</code> en la terminal.
+    </div>
+  </main>
+
+  <footer>
+    Creado para docentes de tecnología • Guía didáctica elaborada por Emilio ✨
+  </footer>
+
+</body>
+</html>
