@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Aprendizaje Semana 2 - Programación 1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Prism.js para syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #003366;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #003366;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .header-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        .header-info div {
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-left: 3px solid #003366;
+            font-size: 14px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: #003366;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .subsection {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #003366;
+        }
+
+        .subsection h3 {
+            color: #003366;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .field {
+            margin: 20px 0;
+        }
+
+        .field label {
+            font-weight: bold;
+            color: #003366;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .field-content {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .field-content ul {
+            margin: 10px 0 10px 20px;
+        }
+
+        .field-content li {
+            margin: 8px 0;
+        }
+        
+        .cronograma {
+            margin: 30px 0;
+        }
+        
+        .cronograma table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        .cronograma th {
+            background: #003366;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .cronograma td {
+            padding: 12px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .cronograma tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .total-row {
+            font-weight: bold;
+            background: #e9ecef !important;
+        }
+        
+        .resources-section {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin: 30px 0;
+        }
+        
+        .resources-section h3 {
+            color: #856404;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .video-link {
+            display: block;
+            padding: 10px;
+            background: #e3f2fd;
+            border-left: 3px solid #2196f3;
+            margin: 8px 0;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #1976d2;
+        }
+
+        .video-link:hover {
+            background: #bbdefb;
+        }
+
+        .practice-exercise {
+            background: #f3e5f5;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #9c27b0;
+        }
+
+        .practice-exercise h4 {
+            color: #7b1fa2;
+            margin-bottom: 10px;
+        }
+
+        /* Estilos para navegación entre semanas */
+        .course-nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 20px;
+            margin: -40px -40px 30px -40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .course-nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: white;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            margin-top: 0px;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+
+        .dropdown-content a:hover {
+            background: #f8f9fa;
+        }
+
+        .dropdown-content a.active-link {
+            background: #e3f2fd;
+            color: #1976d2;
+            font-weight: bold;
+        }
+
+        .nav-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .nav-home-btn {
+            background: rgba(255,255,255,0.9);
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .course-nav-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .nav-links {
+                flex-direction: column;
+            }
+            .nav-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navegación del curso -->
+        <nav class="course-nav">
+            <div class="course-nav-container">
+                <a href="index.html" class="nav-btn nav-home-btn">
+                    <i class="fas fa-home"></i> Inicio del Curso
+                </a>
+                <div class="nav-links">
+                    <!-- Dropdown Semana 1 -->
+                    <div class="nav-dropdown">
+                        <button class="nav-btn">
+                            <i class="fas fa-book"></i> Semana 1 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="guia-aprendizaje-semana-1.html">
+                                <i class="fas fa-book-reader"></i> Guía de Aprendizaje 1
+                            </a>
+                            <a href="sesion-clase-semana-1.html">
+                                <i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 1
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown Semana 2 -->
+                    <div class="nav-dropdown">
+                        <button class="nav-btn active">
+                            <i class="fas fa-book"></i> Semana 2 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="guia-aprendizaje-semana-2.html" class="active-link">
+                                <i class="fas fa-book-reader"></i> Guía de Aprendizaje 2
+                            </a>
+                            <a href="sesion-clase-semana-2.html">
+                                <i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 2
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown Semana 3 -->
+                    <div class="nav-dropdown">
+                        <button class="nav-btn">
+                            <i class="fas fa-book"></i> Semana 3 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="guia-aprendizaje-semana-3.html">
+                                <i class="fas fa-book-reader"></i> Guía de Aprendizaje 3
+                            </a>
+                            <a href="sesion-clase-semana-3.html">
+                                <i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 3
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown Semana 4 -->
+                    <div class="nav-dropdown">
+                        <button class="nav-btn">
+                            <i class="fas fa-book"></i> Semana 4 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="guia-aprendizaje-semana-4.html">
+                                <i class="fas fa-book-reader"></i> Guía de Aprendizaje 4
+                            </a>
+                            <a href="sesion-clase-semana-4.html">
+                                <i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 4
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="header">
+            <h1>Universidad Rafael Landívar</h1>
+            <p>Facultad de Humanidades</p>
+            <p>Departamento de Educación</p>
+            <h2 style="margin-top: 20px; color: #003366;">Guía de aprendizaje núm. 2</h2>
+            
+            <div class="header-info">
+                <div><strong>Profesorado:</strong> Profesorados con Especialidad en Tecnología</div>
+                <div><strong>Año:</strong> Psicopedagógico 2025</div>
+                <div><strong>Curso:</strong> Programación 1 - Python + Flask</div>
+                <div><strong>Semana:</strong> 2 - Manejo de Datos y Almacenamiento</div>
+            </div>
+        </div>
+
+        <!-- Objetivos de aprendizaje -->
+        <h2 class="section-title">
+            <i class="fas fa-bullseye"></i>
+            Objetivos de aprendizaje de esta semana
+        </h2>
+
+        <div class="field">
+            <div class="field-content">
+                Al finalizar esta guía de aprendizaje autónomo, el estudiante será capaz de:
+                <ul>
+                    <li><strong>Comprender</strong> los conceptos fundamentales de persistencia de datos y su importancia en aplicaciones reales</li>
+                    <li><strong>Manejar</strong> archivos JSON en Python para guardar y cargar datos estructurados</li>
+                    <li><strong>Aplicar</strong> operaciones CRUD básicas (Create, Read) en bases de datos SQLite</li>
+                    <li><strong>Integrar</strong> datos dinámicos en templates HTML usando Jinja2</li>
+                    <li><strong>Reflexionar</strong> sobre las consideraciones éticas en el manejo de datos sensibles de estudiantes</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
+            <h3 style="color: #856404; margin-bottom: 10px;"><i class="fas fa-lightbulb"></i> Metodología de Aprendizaje Invertido</h3>
+            <p style="color: #856404; font-size: 14px;">
+                Esta guía contiene el material de <strong>estudio previo</strong> que debes completar <strong>antes</strong> de la sesión sincrónica del sábado. Durante la clase aplicarás estos conceptos en ejercicios prácticos en Salas de Teams. <strong>Tiempo estimado: 9.5 horas distribuidas durante la semana.</strong>
+            </p>
+        </div>
+
+        <!-- Contenido de aprendizaje -->
+        <h2 class="section-title">
+            <i class="fas fa-book-open"></i>
+            Contenido de aprendizaje
+        </h2>
+
+        <!-- PARTE 1: Persistencia de Datos con JSON -->
+        <div class="subsection">
+            <h3><i class="fas fa-database"></i> Parte 1: Persistencia de Datos con JSON (3 horas)</h3>
+            
+            <div class="field">
+                <label><i class="fas fa-info-circle"></i> ¿Por qué necesitamos persistencia de datos?</label>
+                <div class="field-content">
+                    <p>Hasta ahora, los datos en nuestros programas desaparecen cuando el programa termina. La <strong>persistencia de datos</strong> nos permite:</p>
+                    <ul>
+                        <li>Guardar información entre ejecuciones del programa</li>
+                        <li>Compartir datos entre diferentes partes de la aplicación</li>
+                        <li>Mantener registros históricos</li>
+                        <li>Trabajar con grandes volúmenes de información</li>
+                    </ul>
+                    <p><strong>JSON (JavaScript Object Notation)</strong> es un formato ligero para intercambio de datos, muy usado en aplicaciones web.</p>
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-video"></i> Video tutorial recomendado (45 min)</label>
+                <div class="field-content">
+                    <a href="https://www.youtube.com/watch?v=pTT7HMqDnJw" target="_blank" class="video-link">
+                        <i class="fas fa-play-circle"></i> Python JSON Tutorial (en español) - Programación en Python
+                    </a>
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-code"></i> Conceptos clave a estudiar (1 hora)</label>
+                <div class="field-content">
+                    <strong>1. Estructura de archivos JSON:</strong>
+                    <pre><code class="language-json">{
+    "nombre": "María López",
+    "edad": 16,
+    "notas": [85, 90, 78],
+    "activo": true
+}</code></pre>
+
+                    <strong>2. Módulo json en Python:</strong>
+                    <pre><code class="language-python">import json
+
+# Guardar datos en JSON (dump)
+datos = {"nombre": "Juan", "edad": 15}
+with open("datos.json", "w", encoding="utf-8") as archivo:
+    json.dump(datos, archivo, indent=4, ensure_ascii=False)
+
+# Leer datos desde JSON (load)
+with open("datos.json", "r", encoding="utf-8") as archivo:
+    datos_leidos = json.load(archivo)</code></pre>
+
+                    <strong>3. Trabajar con listas de diccionarios:</strong>
+                    <pre><code class="language-python">estudiantes = [
+    {"id": 1, "nombre": "Ana", "promedio": 85},
+    {"id": 2, "nombre": "Carlos", "promedio": 78},
+    {"id": 3, "nombre": "María", "promedio": 92}
+]
+
+# Guardar lista completa
+with open("estudiantes.json", "w") as f:
+    json.dump(estudiantes, f, indent=4)
+
+# Buscar un estudiante específico
+for est in estudiantes:
+    if est["nombre"] == "María":
+        print(f"Promedio de María: {est['promedio']}")</code></pre>
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-book"></i> Lectura complementaria (45 min)</label>
+                <div class="field-content">
+                    <p>Documentación oficial de Python sobre JSON:</p>
+                    <a href="https://docs.python.org/es/3/library/json.html" target="_blank" class="video-link">
+                        <i class="fas fa-external-link-alt"></i> Documentación: Módulo json en Python (español)
+                    </a>
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-pencil-alt"></i> Actividad práctica de estudio (30 min)</label>
+                <div class="field-content">
+                    <p>Crea un archivo <code>practica_json.py</code> y realiza lo siguiente:</p>
+                    <ol>
+                        <li>Define una lista con al menos 5 estudiantes (cada uno con: id, nombre, grado, promedio, ausentismo)</li>
+                        <li>Guarda la lista en un archivo <code>estudiantes.json</code></li>
+                        <li>Lee el archivo y muestra todos los estudiantes</li>
+                        <li>Agrega un nuevo estudiante a la lista</li>
+                        <li>Guarda nuevamente el archivo actualizado</li>
+                    </ol>
+                    <p><em>Esta práctica NO se entrega, es solo para tu aprendizaje.</em></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PARTE 2: Bases de Datos con SQLite -->
+        <div class="subsection">
+            <h3><i class="fas fa-database"></i> Parte 2: Bases de Datos con SQLite (3.5 horas)</h3>
+            
+            <div class="field">
+                <label><i class="fas fa-info-circle"></i> ¿Por qué usar bases de datos?</label>
+                <div class="field-content">
+                    <p>Aunque JSON es útil, las bases de datos ofrecen ventajas importantes:</p>
+                    <ul>
+                        <li><strong>Eficiencia:</strong> Consultas rápidas en grandes volúmenes de datos</li>
+                        <li><strong>Integridad:</strong> Validación automática de datos</li>
+                        <li><strong>Relaciones:</strong> Conexión entre diferentes tipos de información</li>
+                        <li><strong>Concurrencia:</strong> Múltiples usuarios accediendo simultáneamente</li>
+                    </ul>
+                    <p><strong>SQLite</strong> es una base de datos completa contenida en un solo archivo, perfecta para aprender y para aplicaciones pequeñas.</p>
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-video"></i> Video tutorial recomendado (1 hora)</label>
+                <div class="field-content">
+                    <a href="https://www.youtube.com/watch?v=Ohj-CqALrwk" target="_blank" class="video-link">
+                        <i class="fas fa-play-circle"></i> Python SQLite Tutorial (en español) - Base de datos con Python
+                    </a>
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-code"></i> Conceptos clave a estudiar (1.5 horas)</label>
+                <div class="field-content">
+                    <strong>1. Conexión a SQLite:</strong>
+                    <pre><code class="language-python">import sqlite3
+
+# Conectar (crea el archivo si no existe)
+conexion = sqlite3.connect('mi_base_datos.db')
+cursor = conexion.cursor()
+
+# Siempre cerrar al final
+conexion.close()</code></pre>
+
+                    <strong>2. Crear tabla (CREATE TABLE):</strong>
+                    <pre><code class="language-python">cursor.execute('''
+    CREATE TABLE IF NOT EXISTS estudiantes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nombre TEXT NOT NULL,
+        grado TEXT,
+        promedio REAL,
+        ausentismo INTEGER,
+        fecha_registro DATE
+    )
+''')
+conexion.commit()</code></pre>
+
+                    <strong>3. Insertar datos (INSERT):</strong>
+                    <pre><code class="language-python"># Insertar un estudiante
+cursor.execute('''
+    INSERT INTO estudiantes (nombre, grado, promedio, ausentismo, fecha_registro)
+    VALUES (?, ?, ?, ?, ?)
+''', ("María López", "5to Primaria", 85.5, 2, "2025-01-15"))
+conexion.commit()
+
+# Insertar múltiples estudiantes
+estudiantes = [
+    ("Carlos Pérez", "6to Primaria", 78.0, 5, "2025-01-15"),
+    ("Ana Martínez", "5to Primaria", 92.0, 1, "2025-01-15")
+]
+cursor.executemany('''
+    INSERT INTO estudiantes (nombre, grado, promedio, ausentismo, fecha_registro)
+    VALUES (?, ?, ?, ?, ?)
+''', estudiantes)
+conexion.commit()</code></pre>
+
+                    <strong>4. Consultar datos (SELECT):</strong>
+                    <pre><code class="language-python"># Obtener todos los estudiantes
+cursor.execute('SELECT * FROM estudiantes')
+todos = cursor.fetchall()
+for estudiante in todos:
+    print(estudiante)
+
+# Buscar estudiantes específicos
+cursor.execute('SELECT * FROM estudiantes WHERE promedio < 60')
+en_riesgo = cursor.fetchall()
+
+# Buscar por nombre
+cursor.execute('SELECT * FROM estudiantes WHERE nombre LIKE ?', ('%María%',))
+resultado = cursor.fetchone()</code></pre>
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-book"></i> Lectura complementaria (30 min)</label>
+                <div class="field-content">
+                    <a href="https://www.sqlitetutorial.net/sqlite-python/" target="_blank" class="video-link">
+                        <i class="fas fa-external-link-alt"></i> SQLite Python Tutorial (en inglés - muy claro con ejemplos)
+                    </a>
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-pencil-alt"></i> Actividad práctica de estudio (30 min)</label>
+                <div class="field-content">
+                    <p>Crea un archivo <code>practica_sqlite.py</code> y realiza lo siguiente:</p>
+                    <ol>
+                        <li>Crea una base de datos <code>escuela.db</code></li>
+                        <li>Crea una tabla <code>estudiantes</code> con los campos necesarios</li>
+                        <li>Inserta al menos 10 estudiantes de prueba</li>
+                        <li>Consulta y muestra todos los estudiantes</li>
+                        <li>Consulta solo los estudiantes con ausentismo mayor a 5</li>
+                        <li>Consulta el promedio general de todos los estudiantes</li>
+                    </ol>
+                    <p><em>Esta práctica NO se entrega, es solo para tu aprendizaje.</em></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PARTE 3: Integración con Flask y Templates -->
+        <div class="subsection">
+            <h3><i class="fas fa-layer-group"></i> Parte 3: Templates Dinámicos con Jinja2 (2 horas)</h3>
+            
+            <div class="field">
+                <label><i class="fas fa-info-circle"></i> ¿Qué son los templates dinámicos?</label>
+                <div class="field-content">
+                    <p>Hasta ahora hemos retornado HTML directamente desde Flask. Los <strong>templates</strong> nos permiten:</p>
+                    <ul>
+                        <li>Separar la lógica de Python de la presentación HTML</li>
+                        <li>Reutilizar estructura HTML en múltiples páginas</li>
+                        <li>Mostrar datos dinámicos (listas, condicionales, loops)</li>
+                        <li>Mantener el código organizado y fácil de mantener</li>
+                    </ul>
+                    <p><strong>Jinja2</strong> es el motor de templates que usa Flask.</p>
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-video"></i> Video tutorial recomendado (45 min)</label>
+                <div class="field-content">
+                    <a href="https://www.youtube.com/watch?v=mqhxxeeTbu0" target="_blank" class="video-link">
+                        <i class="fas fa-play-circle"></i> Flask Templates y Jinja2 (en español) - Código Facilito
+                    </a>
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-code"></i> Conceptos clave a estudiar (1 hora)</label>
+                <div class="field-content">
+                    <strong>1. Estructura de carpetas:</strong>
+                    <pre><code class="language-bash">mi_proyecto/
+├── app.py
+├── templates/
+│   ├── inicio.html
+│   └── estudiantes.html
+└── estudiantes.db</code></pre>
+
+                    <strong>2. Renderizar templates desde Flask:</strong>
+                    <pre><code class="language-python">from flask import Flask, render_template
+import sqlite3
+
+app = Flask(__name__)
+
+@app.route('/')
+def inicio():
+    # Obtener datos de la base de datos
+    conexion = sqlite3.connect('estudiantes.db')
+    cursor = conexion.cursor()
+    cursor.execute('SELECT * FROM estudiantes')
+    estudiantes = cursor.fetchall()
+    conexion.close()
+    
+    # Pasar datos al template
+    return render_template('inicio.html', estudiantes=estudiantes)
+
+if __name__ == '__main__':
+    app.run(debug=True)</code></pre>
+
+                    <strong>3. Usar variables en templates (inicio.html):</strong>
+                    <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Sistema de Estudiantes&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Lista de Estudiantes&lt;/h1&gt;
+    &lt;p&gt;Total de estudiantes: {{ estudiantes|length }}&lt;/p&gt;
+    
+    &lt;table&gt;
+        &lt;tr&gt;
+            &lt;th&gt;ID&lt;/th&gt;
+            &lt;th&gt;Nombre&lt;/th&gt;
+            &lt;th&gt;Promedio&lt;/th&gt;
+            &lt;th&gt;Estado&lt;/th&gt;
+        &lt;/tr&gt;
+        {% for estudiante in estudiantes %}
+        &lt;tr&gt;
+            &lt;td&gt;{{ estudiante[0] }}&lt;/td&gt;
+            &lt;td&gt;{{ estudiante[1] }}&lt;/td&gt;
+            &lt;td&gt;{{ estudiante[3] }}&lt;/td&gt;
+            &lt;td&gt;
+                {% if estudiante[3] < 60 %}
+                    &lt;span style="color: red;"&gt;En Riesgo&lt;/span&gt;
+                {% elif estudiante[3] < 75 %}
+                    &lt;span style="color: orange;"&gt;Alerta&lt;/span&gt;
+                {% else %}
+                    &lt;span style="color: green;"&gt;Normal&lt;/span&gt;
+                {% endif %}
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        {% endfor %}
+    &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+                    <strong>4. Sintaxis de Jinja2 más común:</strong>
+                    <ul>
+                        <li><code>{{ variable }}</code> - Mostrar valor de variable</li>
+                        <li><code>{% for item in lista %} ... {% endfor %}</code> - Bucle</li>
+                        <li><code>{% if condicion %} ... {% endif %}</code> - Condicional</li>
+                        <li><code>{{ lista|length }}</code> - Filtros (contar elementos)</li>
+                        <li><code>{{ texto|upper }}</code> - Convertir a mayúsculas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-pencil-alt"></i> Actividad práctica de estudio (15 min)</label>
+                <div class="field-content">
+                    <p>Modifica tu proyecto Flask para:</p>
+                    <ol>
+                        <li>Crear una carpeta <code>templates/</code></li>
+                        <li>Mover tu HTML a un archivo <code>templates/inicio.html</code></li>
+                        <li>Usar <code>render_template()</code> en lugar de retornar HTML directo</li>
+                        <li>Pasar la lista de estudiantes al template</li>
+                        <li>Usar un loop <code>{% for %}</code> para mostrar todos los estudiantes</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- PARTE 4: Reflexión Pedagógica -->
+        <div class="subsection" style="background: #fffbeb; border-left-color: #ffd971;">
+            <h3 style="color: #92400e;"><i class="fas fa-brain"></i> Parte 4: Reflexión Pedagógica - Ética en Datos (1 hora)</h3>
+            
+            <div class="field">
+                <label><i class="fas fa-shield-alt"></i> Tema de reflexión</label>
+                <div class="field-content">
+                    <p><strong>¿Qué consideraciones éticas deben tenerse al manejar datos personales de estudiantes?</strong></p>
+                    <p>Como futuros docentes que manejarán información sensible de estudiantes, es fundamental reflexionar sobre:</p>
+                    <ul>
+                        <li>Privacidad y confidencialidad de datos personales</li>
+                        <li>Consentimiento para recolección y uso de información</li>
+                        <li>Seguridad en el almacenamiento y transmisión de datos</li>
+                        <li>Uso responsable de información para fines educativos</li>
+                        <li>Consecuencias de filtraciones o mal uso de datos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-file-alt"></i> Entregable</label>
+                <div class="field-content">
+                    <p><strong>Escribe un texto reflexivo de 300-400 palabras que incluya:</strong></p>
+                    <ol>
+                        <li><strong>Análisis ético:</strong> ¿Qué datos personales estamos manejando en nuestro sistema? ¿Qué riesgos existen?</li>
+                        <li><strong>Código de ética:</strong> Propón 5 principios básicos que seguirías al manejar este sistema en una escuela real</li>
+                        <li><strong>Aplicación pedagógica:</strong> ¿Cómo enseñarías a tus futuros estudiantes (niños/adolescentes) sobre privacidad y protección de datos de manera práctica?</li>
+                        <li><strong>Reflexión personal:</strong> ¿Qué aprendiste al pensar en estas consideraciones éticas?</li>
+                    </ol>
+                    <p style="color: #92400e; font-weight: bold; margin-top: 15px;">
+                        <i class="fas fa-calendar-check"></i> Fecha de entrega: [A definir por el docente - antes de la sesión de Semana 3]
+                    </p>
+                    <p style="color: #92400e; margin-top: 10px;">
+                        <i class="fas fa-star"></i> <strong>Ponderación:</strong> 10% de la nota de Semana 2
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cronograma sugerido -->
+        <h2 class="section-title">
+            <i class="fas fa-calendar-alt"></i>
+            Cronograma sugerido de trabajo autónomo
+        </h2>
+
+        <div class="cronograma">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Día</th>
+                        <th>Actividades</th>
+                        <th>Tiempo estimado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Domingo</strong></td>
+                        <td>Parte 1: Persistencia con JSON (videos, lectura, práctica)</td>
+                        <td>3 horas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lunes</strong></td>
+                        <td>Parte 2: SQLite - Conceptos y videos (mitad del contenido)</td>
+                        <td>2 horas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Martes</strong></td>
+                        <td>Parte 2: SQLite - Práctica y ejercicios</td>
+                        <td>1.5 horas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Miércoles</strong></td>
+                        <td>Parte 3: Templates con Jinja2 (videos y conceptos)</td>
+                        <td>2 horas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Jueves</strong></td>
+                        <td>Reflexión pedagógica - Escritura y revisión</td>
+                        <td>1 hora</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="2"><strong>TOTAL DE TRABAJO AUTÓNOMO</strong></td>
+                        <td><strong>9.5 horas</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="margin-top: 15px; color: #666; font-size: 14px;">
+                <i class="fas fa-info-circle"></i> <strong>Nota:</strong> Esta distribución es flexible. Puedes ajustarla según tu disponibilidad, pero asegúrate de completar todo el contenido antes del sábado.
+            </p>
+        </div>
+
+        <!-- Recursos adicionales -->
+        <div class="resources-section">
+            <h3><i class="fas fa-toolbox"></i> Recursos adicionales y herramientas</h3>
+            <div class="field-content">
+                <p><strong>Documentación oficial:</strong></p>
+                <ul>
+                    <li><a href="https://docs.python.org/es/3/library/json.html" target="_blank">Módulo JSON - Python (español)</a></li>
+                    <li><a href="https://docs.python.org/es/3/library/sqlite3.html" target="_blank">Módulo SQLite3 - Python (español)</a></li>
+                    <li><a href="https://jinja.palletsprojects.com/en/3.1.x/" target="_blank">Documentación Jinja2 (inglés)</a></li>
+                    <li><a href="https://flask.palletsprojects.com/en/3.0.x/tutorial/" target="_blank">Tutorial oficial Flask (inglés)</a></li>
+                </ul>
+
+                <p style="margin-top: 15px;"><strong>Herramientas útiles:</strong></p>
+                <ul>
+                    <li><a href="https://sqlitebrowser.org/" target="_blank">DB Browser for SQLite</a> - Visualizador gráfico de bases de datos SQLite</li>
+                    <li><a href="https://jsonformatter.org/" target="_blank">JSON Formatter</a> - Para validar y formatear archivos JSON</li>
+                    <li><a href="https://www.w3schools.com/sql/" target="_blank">W3Schools SQL Tutorial</a> - Referencia rápida de SQL</li>
+                </ul>
+
+                <p style="margin-top: 15px;"><strong>Comunidad y soporte:</strong></p>
+                <ul>
+                    <li>Foro del curso en la plataforma</li>
+                    <li>Grupo de WhatsApp de la cohorte</li>
+                    <li>Correo del docente: emiliodom@gmail.com</li>
+                    <li>Horas de oficina virtual: [A definir]</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Preparación para la sesión sincrónica -->
+        <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; margin-top: 30px; border-left: 4px solid #2196f3;">
+            <h3 style="color: #1565c0; margin-bottom: 10px;">
+                <i class="fas fa-users"></i> Preparación para la sesión sincrónica del sábado
+            </h3>
+            <p style="color: #0d47a1; font-size: 14px;">
+                Durante la sesión del sábado trabajarás en <strong>5 ejercicios prácticos en Salas de Teams</strong> que integran todo lo aprendido esta semana:
+            </p>
+            <ul style="color: #0d47a1; font-size: 14px; margin-left: 20px; margin-top: 10px;">
+                <li><strong>Ejercicio 1:</strong> Sistema de registro con JSON</li>
+                <li><strong>Ejercicio 2:</strong> Migración de datos JSON a SQLite</li>
+                <li><strong>Ejercicio 3:</strong> Operaciones CRUD básicas</li>
+                <li><strong>Ejercicio 4:</strong> Templates dinámicos con listas</li>
+                <li><strong>Ejercicio 5:</strong> Proyecto integrador - Sistema completo funcionando</li>
+            </ul>
+            <p style="color: #0d47a1; font-size: 14px; margin-top: 15px;">
+                <strong>¿Qué necesitas llevar listo?</strong>
+            </p>
+            <ul style="color: #0d47a1; font-size: 14px; margin-left: 20px;">
+                <li>Entorno de desarrollo configurado (Python, Flask, VSCode)</li>
+                <li>Conocimiento de conceptos de JSON y SQLite</li>
+                <li>Dudas específicas anotadas para resolver en clase</li>
+                <li>Actitud colaborativa para trabajar en equipo</li>
+            </ul>
+            <p style="color: #0d47a1; font-size: 14px; margin-top: 10px;">
+                <strong>Recuerda:</strong> Los ejercicios en Salas de Teams valen el <strong>60% de tu nota</strong> de esta semana y deben entregarse durante la sesión. ¡Llega preparado(a)!
+            </p>
+            <p style="color: #0d47a1; font-size: 14px; margin-top: 10px;">
+                <strong>Consultas y dudas:</strong> emiliodom@gmail.com o a través del foro del curso en la plataforma virtual.
+            </p>
+        </div>
+    </div>
+
+    <!-- Prism.js Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+</body>
+</html>

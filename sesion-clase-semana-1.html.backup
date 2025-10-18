@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión de Clase Semana 1 - Programación 1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Prism.js para syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #1a237e;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #1a237e;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .header-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        .header-info div {
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-left: 3px solid #1a237e;
+            font-size: 14px;
+        }
+        
+        .session-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .info-card {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #1976d2;
+        }
+        
+        .info-card.skills {
+            background: #f3e5f5;
+            border-left-color: #7b1fa2;
+        }
+        
+        .info-card.values {
+            background: #e8f5e9;
+            border-left-color: #388e3c;
+        }
+        
+        .info-card.products {
+            background: #fff3e0;
+            border-left-color: #f57c00;
+        }
+        
+        .info-card h3 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #1a237e;
+        }
+        
+        .section-title {
+            background: #1a237e;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin: 40px 0 25px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+        }
+        
+        .activity-block {
+            background: #f8f9fa;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 2px solid #dee2e6;
+            position: relative;
+        }
+        
+        .activity-block::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px 0 0 8px;
+        }
+        
+        .activity-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .field {
+            margin: 15px 0;
+            padding-left: 15px;
+        }
+        
+        .field label {
+            font-weight: 600;
+            color: #495057;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .field-content {
+            background: white;
+            padding: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            min-height: 50px;
+        }
+
+        .field-content ul {
+            margin-left: 20px;
+        }
+
+        .field-content li {
+            margin: 6px 0;
+        }
+        
+        .time-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #ffc107;
+            color: #000;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .evaluation-box {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+        
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 30px 0 20px 0;
+            padding: 15px;
+            background: linear-gradient(90deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 8px;
+            border-left: 4px solid #1a237e;
+        }
+        
+        .step-number {
+            background: #1a237e;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .step-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a237e;
+        }
+
+        .code-demo {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        /* Estilos para navegación entre semanas */
+        .course-nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 20px;
+            margin: -40px -40px 30px -40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .course-nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: white;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+
+        .dropdown-content a:hover {
+            background: #f8f9fa;
+        }
+
+        .dropdown-content a.active-link {
+            background: #e3f2fd;
+            color: #1976d2;
+            font-weight: bold;
+        }
+
+        .nav-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .nav-home-btn {
+            background: rgba(255,255,255,0.9);
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navegación del curso -->
+        <nav class="course-nav">
+            <div class="course-nav-container">
+                <a href="index.html" class="nav-btn nav-home-btn">
+                    <i class="fas fa-home"></i> Inicio del Curso
+                </a>
+                <div class="nav-links">
+                    <!-- Dropdown Semana 1 -->
+                    <div class="nav-dropdown">
+                        <button class="nav-btn active">
+                            <i class="fas fa-book"></i> Semana 1 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="guia-aprendizaje-semana-1.html">
+                                <i class="fas fa-book-reader"></i> Guía de Aprendizaje 1
+                            </a>
+                            <a href="sesion-clase-semana-1.html" class="active-link">
+                                <i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 1
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown Semana 2 -->
+                    <div class="nav-dropdown">
+                        <button class="nav-btn">
+                            <i class="fas fa-book"></i> Semana 2 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="guia-aprendizaje-semana-2.html">
+                                <i class="fas fa-book-reader"></i> Guía de Aprendizaje 2
+                            </a>
+                            <a href="sesion-clase-semana-2.html">
+                                <i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 2
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown Semana 3 -->
+                    <div class="nav-dropdown">
+                        <button class="nav-btn">
+                            <i class="fas fa-book"></i> Semana 3 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="guia-aprendizaje-semana-3.html">
+                                <i class="fas fa-book-reader"></i> Guía de Aprendizaje 3
+                            </a>
+                            <a href="sesion-clase-semana-3.html">
+                                <i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 3
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown Semana 4 -->
+                    <div class="nav-dropdown">
+                        <button class="nav-btn">
+                            <i class="fas fa-book"></i> Semana 4 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="guia-aprendizaje-semana-4.html">
+                                <i class="fas fa-book-reader"></i> Guía de Aprendizaje 4
+                            </a>
+                            <a href="sesion-clase-semana-4.html">
+                                <i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 4
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="header">
+            <h1>Universidad Rafael Landívar</h1>
+            <p>Facultad de Humanidades</p>
+            <p>Departamento de Educación</p>
+            <h2 style="margin-top: 20px; color: #1a237e;">Secuencia de aprendizaje</h2>
+            
+            <div class="header-info">
+                <div><strong>Profesorado:</strong> Profesorados con Especialidad</div>
+                <div><strong>Curso:</strong> Programación 1 - Python + Flask</div>
+                <div><strong>Créditos:</strong> 4</div>
+                <div><strong>Ciclo:</strong> I, Módulo I - 2025</div>
+                <div><strong>Duración:</strong> 5h 45min</div>
+                <div><strong>Modalidad:</strong> Sincrónica (Zoom)</div>
+            </div>
+        </div>
+
+        <div class="session-number">
+            <i class="fas fa-chalkboard-teacher"></i>
+            Sesión presencial/sincrónica #1
+            <div style="font-size: 16px; margin-top: 10px; font-weight: normal;">
+                SEMANA 1: Fundamentos de Python y Flask Básico
+            </div>
+        </div>
+
+        <!-- Información importante -->
+        <h2 class="section-title">
+            <i class="fas fa-info-circle"></i>
+            Información importante
+        </h2>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h3><i class="fas fa-bullseye"></i> Aprendizajes esperados</h3>
+                <div class="field-content">
+                    <ul>
+                        <li>Comprender los fundamentos del pensamiento computacional</li>
+                        <li>Dominar la sintaxis básica de Python (variables, operadores, tipos de datos)</li>
+                        <li>Implementar estructuras de control (condicionales y ciclos)</li>
+                        <li>Instalar y configurar el entorno de desarrollo Python + Flask</li>
+                        <li>Crear una primera aplicación web con Flask</li>
+                        <li>Implementar rutas básicas y parámetros dinámicos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3><i class="fas fa-book"></i> Contenidos temáticos</h3>
+                <div class="field-content">
+                    <ul>
+                        <li>Pensamiento computacional y algoritmos</li>
+                        <li>Tipos de datos: int, float, str, bool</li>
+                        <li>Variables y operadores aritméticos, lógicos y de comparación</li>
+                        <li>Condicionales: if, elif, else</li>
+                        <li>Ciclos: for y while</li>
+                        <li>Instalación: Python, Flask, VSCode</li>
+                        <li>Primera app Flask: "Hola Mundo"</li>
+                        <li>Rutas básicas y parámetros en URLs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-card skills">
+                <h3><i class="fas fa-brain"></i> Habilidades y destrezas</h3>
+                <div class="field-content">
+                    <ul>
+                        <li>Análisis y descomposición de problemas</li>
+                        <li>Escritura de código Python básico</li>
+                        <li>Depuración de errores de sintaxis</li>
+                        <li>Configuración de entornos de desarrollo</li>
+                        <li>Uso de editor de código profesional</li>
+                        <li>Pensamiento lógico-matemático aplicado</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-card values">
+                <h3><i class="fas fa-heart"></i> Valores y actitudes</h3>
+                <div class="field-content">
+                    <ul>
+                        <li>Responsabilidad en formación docente</li>
+                        <li>Paciencia ante errores iniciales</li>
+                        <li>Mentalidad de crecimiento</li>
+                        <li>Colaboración y apoyo entre pares</li>
+                        <li>Proactividad en el aprendizaje autónomo</li>
+                        <li>Ética en el uso de tecnología</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-card products" style="grid-column: span 2;">
+                <h3><i class="fas fa-clipboard-check"></i> Productos que evidencian el aprendizaje (Para entregar)</h3>
+                <div class="field-content">
+                    <ul>
+                        <li><strong>Ejercicios en Salas de Teams (60%):</strong> 5 ejercicios prácticos resueltos en equipos durante la sesión</li>
+                        <li><strong>Proyecto Fase 1 (30%):</strong> Estructura base del proyecto con lista de estudiantes funcionando</li>
+                        <li><strong>Reflexión pedagógica (10%):</strong> Texto de 300-400 palabras (trabajo autónomo)</li>
+                    </ul>
+                    <p style="margin-top: 10px; color: #e65100; font-weight: bold;">
+                        <i class="fas fa-exclamation-circle"></i> Los ejercicios de las Salas de Teams deben entregarse antes de finalizar la sesión
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desarrollo de la secuencia -->
+        <h2 class="section-title">
+            <i class="fas fa-list-ol"></i>
+            Desarrollo de la secuencia
+        </h2>
+
+        <!-- 1. Bienvenida y activación de presaberes -->
+        <div class="step-indicator">
+            <div class="step-number">1</div>
+            <div class="step-title"><i class="fas fa-door-open"></i> Bienvenida y activación de presaberes</div>
+        </div>
+
+        <div class="activity-block">
+            <div class="field">
+                <label><i class="fas fa-tasks"></i> Actividad:</label>
+                <div class="field-content">
+                    <strong>Bienvenida al curso:</strong> Presentación del docente, presentación de estudiantes (nombre, experiencia previa con programación, expectativas). Revisión del programa del curso, metodología de trabajo, sistema de evaluación y proyecto integrador.<br><br>
+                    <strong>Activación de conocimientos previos:</strong> Pregunta detonadora: "¿Qué es un algoritmo? ¿Pueden pensar en ejemplos de algoritmos en su vida diaria?" - Discusión en plenaria sobre pensamiento algorítmico (recetas de cocina, instrucciones para llegar a un lugar, procesos repetitivos).
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+                <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> 20 minutos</span></div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-toolbox"></i> Recursos:</label>
+                <div class="field-content">
+                    - Presentación PowerPoint del programa del curso<br>
+                    - Pizarra digital para lluvia de ideas sobre algoritmos<br>
+                    - Encuesta rápida (Mentimeter o similar) sobre experiencia previa
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-user-graduate"></i> Actividad que realizará el estudiante:</label>
+                <div class="field-content">
+                    Los estudiantes se presentarán brevemente, compartirán sus expectativas y participarán en la discusión sobre algoritmos en la vida cotidiana, aportando ejemplos de su contexto.
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Pensamiento computacional -->
+        <div class="step-indicator">
+            <div class="step-number">2</div>
+            <div class="step-title"><i class="fas fa-brain"></i> Introducción al pensamiento computacional</div>
+        </div>
+
+        <div class="activity-block">
+            <div class="field">
+                <label><i class="fas fa-tasks"></i> Actividad:</label>
+                <div class="field-content">
+                    <strong>Exposición teórica:</strong> ¿Qué es el pensamiento computacional? Los 4 pilares: descomposición, reconocimiento de patrones, abstracción y diseño de algoritmos. Importancia en educación del siglo XXI.<br><br>
+                    <strong>Actividad práctica sin computadora:</strong> Ejercicio de "Programa a tu compañero" - Un estudiante da instrucciones para que otro dibuje una figura sin verla. Reflexión sobre precisión, claridad y secuencia lógica en instrucciones.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+                <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> 25 minutos</span></div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-toolbox"></i> Recursos:</label>
+                <div class="field-content">
+                    - Presentación sobre pensamiento computacional<br>
+                    - Pizarra digital para la actividad de dibujo<br>
+                    - Video: "¿Qué es el pensamiento computacional?" (5 min)<br>
+                    - Enlace: <a href="https://www.youtube.com/watch?v=SVVB5RQfYxk" target="_blank">https://www.youtube.com/watch?v=SVVB5RQfYxk</a>
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-user-graduate"></i> Actividad que realizará el estudiante:</label>
+                <div class="field-content">
+                    Participarán en la actividad "Programa a tu compañero", dando y recibiendo instrucciones. Reflexionarán sobre la experiencia y conectarán con conceptos de programación.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-chart-line"></i> Evaluación:</label>
+                <div class="evaluation-box">
+                    <strong>Tipo:</strong> Formativa<br>
+                    <strong>Instrumento:</strong> Observación directa<br>
+                    <strong>Criterios:</strong> Participación, claridad en instrucciones, comprensión del concepto de secuencia lógica
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Fundamentos de Python - Parte 1 -->
+        <div class="step-indicator">
+            <div class="step-number">3</div>
+            <div class="step-title"><i class="fas fa-python"></i> Fundamentos de Python - Parte 1: Variables y tipos de datos</div>
+        </div>
+
+        <div class="activity-block">
+            <span class="activity-number">Actividad 1: Configuración del entorno de desarrollo profesional</span>
+
+            <div class="field">
+                <label><i class="fas fa-tasks"></i> Actividad:</label>
+                <div class="field-content">
+                    <strong>Parte 1 - Verificación de instalación base (15 min):</strong><br>
+                    El docente guiará la verificación de que Python, VSCode y Flask estén instalados correctamente. Para estudiantes con problemas, se abrirán breakout rooms con apoyo de monitor/estudiante avanzado mientras el docente continúa con el grupo principal.
+                    
+                    <div class="code-demo" style="margin: 10px 0;">
+# Verificar versiones en terminal
+python --version        # Debe mostrar 3.10 o superior
+pip --version           # Debe funcionar
+pip show flask          # Debe mostrar Flask instalado&lt;/div&gt;
+
+                    &lt;strong&gt;Parte 2 - Configuración de VSCode (20 min):&lt;/strong&gt;&lt;br&gt;
+                    El docente compartirá pantalla y guiará paso a paso la configuración profesional de VSCode:
+                    
+                    &lt;ul style="margin-top: 10px; margin-left: 20px;"&gt;
+                        &lt;li&gt;&lt;strong&gt;Extensiones esenciales a instalar:&lt;/strong&gt;
+                            &lt;ul style="margin-left: 20px; margin-top: 5px;"&gt;
+                                &lt;li&gt;✅ &lt;strong&gt;Python&lt;/strong&gt; (Microsoft) - Soporte completo para Python&lt;/li&gt;
+                                &lt;li&gt;✅ &lt;strong&gt;Pylance&lt;/strong&gt; (Microsoft) - Autocompletado inteligente&lt;/li&gt;
+                                &lt;li&gt;✅ &lt;strong&gt;Python Indent&lt;/strong&gt; - Ayuda con indentación automática&lt;/li&gt;
+                                &lt;li&gt;✅ &lt;strong&gt;Black Formatter&lt;/strong&gt; (Microsoft) - Formateador automático de código&lt;/li&gt;
+                                &lt;li&gt;✅ &lt;strong&gt;Error Lens&lt;/strong&gt; - Muestra errores en línea&lt;/li&gt;
+                                &lt;li&gt;🎨 &lt;strong&gt;Material Icon Theme&lt;/strong&gt; - Íconos para archivos (opcional pero útil)&lt;/li&gt;
+                            &lt;/ul&gt;
+                        &lt;/li&gt;
+                        &lt;li style="margin-top: 10px;"&gt;&lt;strong&gt;Configuración del formateador automático:&lt;/strong&gt;
+                            &lt;ol style="margin-left: 20px; margin-top: 5px;"&gt;
+                                &lt;li&gt;File → Preferences → Settings (o Ctrl+,)&lt;/li&gt;
+                                &lt;li&gt;Buscar: "format on save"&lt;/li&gt;
+                                &lt;li&gt;✅ Activar "Editor: Format On Save"&lt;/li&gt;
+                                &lt;li&gt;Buscar: "python formatting provider"&lt;/li&gt;
+                                &lt;li&gt;Seleccionar: "black"&lt;/li&gt;
+                                &lt;li&gt;Instalar Black: En terminal ejecutar: &lt;code&gt;pip install black&lt;/code&gt;&lt;/li&gt;
+                            &lt;/ol&gt;
+                        &lt;/li&gt;
+                        &lt;li style="margin-top: 10px;"&gt;&lt;strong&gt;Configuración de Python en VSCode:&lt;/strong&gt;
+                            &lt;ul style="margin-left: 20px; margin-top: 5px;"&gt;
+                                &lt;li&gt;Abrir la paleta de comandos: Ctrl+Shift+P (Windows) o Cmd+Shift+P (Mac)&lt;/li&gt;
+                                &lt;li&gt;Escribir: "Python: Select Interpreter"&lt;/li&gt;
+                                &lt;li&gt;Seleccionar la versión de Python instalada (3.10+)&lt;/li&gt;
+                            &lt;/ul&gt;
+                        &lt;/li&gt;
+                        &lt;li style="margin-top: 10px;"&gt;&lt;strong&gt;Configuración de indentación:&lt;/strong&gt;
+                            &lt;ul style="margin-left: 20px; margin-top: 5px;"&gt;
+                                &lt;li&gt;File → Preferences → Settings&lt;/li&gt;
+                                &lt;li&gt;Buscar: "tab size"&lt;/li&gt;
+                                &lt;li&gt;Establecer: Tab Size = 4&lt;/li&gt;
+                                &lt;li&gt;✅ Activar "Insert Spaces" (usar espacios en vez de Tab)&lt;/li&gt;
+                            &lt;/ul&gt;
+                        &lt;/li&gt;
+                    &lt;/ul&gt;
+
+                    &lt;strong&gt;Parte 3 - Prueba del entorno configurado (10 min):&lt;/strong&gt;&lt;br&gt;
+                    Todos los estudiantes crearán un archivo de prueba para verificar que todo funciona:
+                    
+                    &lt;div class="code-demo" style="margin: 10px 0;"&gt;
+# prueba_entorno.py
+# Este código debe formatearse automáticamente al guardar
+
+def calcular_promedio(nota1,nota2,nota3):
+    # Black formateará los espacios automáticamente
+    total=nota1+nota2+nota3
+    promedio=total/3
+    return promedio
+
+# Prueba
+resultado = calcular_promedio(85, 90, 78)
+print(f"El promedio es: {resultado}")
+
+# Si ves advertencias de Error Lens, todo está funcionando ✅&lt;/div&gt;
+
+                    &lt;strong&gt;Parte 4 - Repaso conceptual rápido (10 min):&lt;/strong&gt;&lt;br&gt;
+                    Revisión express de los conceptos que los estudiantes ya estudiaron en casa: variables, tipos de datos, operadores. Resolución de dudas específicas.
+
+                    &lt;div style="background: #fff3cd; padding: 12px; border-radius: 5px; margin-top: 15px; border-left: 3px solid #ffc107;"&gt;
+                        &lt;strong style="color: #856404;"&gt;📌 Nota importante:&lt;/strong&gt;
+                        &lt;p style="color: #856404; font-size: 14px; margin-top: 5px;"&gt;
+                            Los estudiantes que llegaron con todo instalado aprovecharan este tiempo para configurar su editor profesionalmente. Los que tienen problemas recibirán apoyo personalizado en breakout rooms.
+                        &lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-clock"&gt;&lt;/i&gt; Tiempo estimado:&lt;/label&gt;
+                &lt;div&gt;&lt;span class="time-badge"&gt;&lt;i class="fas fa-hourglass-half"&gt;&lt;/i&gt; 55 minutos&lt;/span&gt; (ampliado para configuración completa)&lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-toolbox"&gt;&lt;/i&gt; Recursos:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    - Guía visual de instalación de extensiones (PDF con capturas de pantalla)&lt;br&gt;
+                    - Lista de extensiones esenciales en documento compartido&lt;br&gt;
+                    - Script de verificación de entorno (prueba_entorno.py)&lt;br&gt;
+                    - Breakout rooms para soporte técnico individualizado&lt;br&gt;
+                    - Monitor/estudiante avanzado como apoyo en sala secundaria&lt;br&gt;
+                    - Documento con configuraciones JSON para VSCode (settings.json)
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-user-graduate"&gt;&lt;/i&gt; Actividad que realizará el estudiante:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    Instalarán y configurarán las extensiones necesarias de VSCode. Configurarán el formateador automático Black. Establecerán preferencias de indentación y Python interpreter. Ejecutarán el script de prueba para verificar que todo funciona correctamente. Harán preguntas sobre conceptos que no quedaron claros durante el estudio autónomo.
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-exclamation-circle"&gt;&lt;/i&gt; Configuración recomendada de VSCode (settings.json):&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    El docente compartirá estas configuraciones para copiar en Settings (JSON):
+                    &lt;div class="code-demo" style="margin-top: 10px;"&gt;
+{
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "python.formatting.provider": "black",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "editor.minimap.enabled": true,
+    "editor.fontSize": 14,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "editor.wordWrap": "on"
+}&lt;/div&gt;
+                    &lt;p style="margin-top: 10px; font-size: 14px; color: #666;"&gt;
+                        &lt;strong&gt;Cómo aplicar:&lt;/strong&gt; File → Preferences → Settings → Click en el ícono {} arriba a la derecha → Pegar estas configuraciones
+                    &lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="activity-block"&gt;
+            &lt;span class="activity-number"&gt;Actividad 2: Demostración práctica y ejercicio en Salas de Teams&lt;/span&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-tasks"&gt;&lt;/i&gt; Actividad:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    &lt;strong&gt;Demostración rápida (10 min):&lt;/strong&gt; El docente muestra ejemplos en vivo de variables y operaciones.
+                    &lt;div class="code-demo"&gt;
+# Ejemplo contextualizado - Sistema educativo
+nombre_estudiante = "María López"
+edad = 16
+promedio = 85.5
+es_becado = True
+
+# Calculando si aprueba el ciclo
+nota_final = (85.5 + 90 + 78) / 3
+aprobado = nota_final &gt;= 60
+
+print(f"{nombre_estudiante} - Promedio: {nota_final:.2f}")
+print(f"Estado: {'APROBADO' if aprobado else 'REPROBADO'}")
+                    &lt;/div&gt;
+                    
+                    &lt;strong&gt;EJERCICIO PRÁCTICO EN SALAS DE TEAMS (30 min):&lt;/strong&gt;&lt;br&gt;
+                    &lt;div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #9c27b0;"&gt;
+                        &lt;h4 style="color: #7b1fa2; margin-bottom: 10px;"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; EJERCICIO 1: Calculadora de Promedio Escolar&lt;/h4&gt;
+                        &lt;p&gt;&lt;strong&gt;Equipos de 3-4 estudiantes | 30 minutos&lt;/strong&gt;&lt;/p&gt;
+                        &lt;p&gt;&lt;strong&gt;Descripción:&lt;/strong&gt; Crear un programa que calcule el promedio de un estudiante a partir de 4 notas y determine su estado (Aprobado/Reprobado) y categoría (Excelente, Muy Bueno, Bueno, Regular).&lt;/p&gt;
+                        &lt;p&gt;&lt;strong&gt;Requisitos:&lt;/strong&gt;&lt;/p&gt;
+                        &lt;ul style="margin-left: 20px;"&gt;
+                            &lt;li&gt;Solicitar nombre del estudiante y 4 notas&lt;/li&gt;
+                            &lt;li&gt;Calcular el promedio&lt;/li&gt;
+                            &lt;li&gt;Determinar si aprobó (&gt;= 60)&lt;/li&gt;
+                            &lt;li&gt;Asignar categoría: Excelente (90-100), Muy Bueno (80-89), Bueno (70-79), Regular (60-69), Insuficiente (&lt;60)&lt;/li&gt;
+                            &lt;li&gt;Mostrar resultados con formato claro&lt;/li&gt;
+                        &lt;/ul&gt;
+                        &lt;p style="margin-top: 10px;"&gt;&lt;strong&gt;Entregable:&lt;/strong&gt; Archivo .py funcionando + captura de pantalla de ejecución&lt;/p&gt;
+                        &lt;p style="color: #7b1fa2; font-weight: bold;"&gt;&lt;i class="fas fa-trophy"&gt;&lt;/i&gt; Puntaje: 12 puntos (60% de ejercicios en clase)&lt;/p&gt;
+                        
+                        &lt;h4 style="color: #4527a0; margin-top: 20px; margin-bottom: 10px;"&gt;&lt;i class="fas fa-code"&gt;&lt;/i&gt; Código de solución ejemplo:&lt;/h4&gt;
+                        &lt;div class="code-demo"&gt;
+# ejercicio1_promedio_escolar.py
+# Sistema de cálculo de promedio y categorización de estudiantes
+
+print("=" * 50)
+print("   CALCULADORA DE PROMEDIO ESCOLAR")
+print("=" * 50)
+
+# Solicitar datos del estudiante
+nombre = input("\nIngrese el nombre del estudiante: ")
+print(f"\nIngrese las 4 notas de {nombre}:")
+
+nota1 = float(input("Nota 1: "))
+nota2 = float(input("Nota 2: "))
+nota3 = float(input("Nota 3: "))
+nota4 = float(input("Nota 4: "))
+
+# Calcular el promedio
+promedio = (nota1 + nota2 + nota3 + nota4) / 4
+
+# Determinar estado (Aprobado/Reprobado)
+aprobado = promedio &gt;= 60
+
+# Determinar categoría
+if promedio &gt;= 90:
+    categoria = "Excelente"
+    emoji = "🌟"
+elif promedio &gt;= 80:
+    categoria = "Muy Bueno"
+    emoji = "😊"
+elif promedio &gt;= 70:
+    categoria = "Bueno"
+    emoji = "👍"
+elif promedio &gt;= 60:
+    categoria = "Regular"
+    emoji = "⚠️"
+else:
+    categoria = "Insuficiente"
+    emoji = "❌"
+
+# Mostrar resultados
+print("\n" + "=" * 50)
+print("           RESULTADOS")
+print("=" * 50)
+print(f"Estudiante: {nombre}")
+print(f"Nota 1: {nota1}")
+print(f"Nota 2: {nota2}")
+print(f"Nota 3: {nota3}")
+print(f"Nota 4: {nota4}")
+print(f"\nPromedio: {promedio:.2f}")
+print(f"Estado: {'APROBADO ✓' if aprobado else 'REPROBADO ✗'}")
+print(f"Categoría: {emoji} {categoria}")
+print("=" * 50)
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-clock"&gt;&lt;/i&gt; Tiempo estimado:&lt;/label&gt;
+                &lt;div&gt;&lt;span class="time-badge"&gt;&lt;i class="fas fa-hourglass-half"&gt;&lt;/i&gt; 40 minutos total&lt;/span&gt;&lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-toolbox"&gt;&lt;/i&gt; Recursos:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    - Breakout rooms (Salas de Teams) para trabajo en equipos&lt;br&gt;
+                    - Documento con instrucciones detalladas del ejercicio&lt;br&gt;
+                    - El docente visitará las salas para apoyar&lt;br&gt;
+                    - Carpeta compartida para entregar archivos
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-user-graduate"&gt;&lt;/i&gt; Actividad que realizará el estudiante:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    Trabajarán en equipos en Salas de Teams para resolver el ejercicio. Un estudiante compartirá pantalla y escribirá código mientras los demás aportan ideas. Entregarán el archivo antes de regresar a la sala principal.
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-chart-line"&gt;&lt;/i&gt; Evaluación:&lt;/label&gt;
+                &lt;div class="evaluation-box"&gt;
+                    &lt;strong&gt;Tipo:&lt;/strong&gt; Sumativa&lt;br&gt;
+                    &lt;strong&gt;Instrumento:&lt;/strong&gt; Rúbrica de ejercicio práctico&lt;br&gt;
+                    &lt;strong&gt;Criterios:&lt;/strong&gt; Funcionalidad (6 pts), Sintaxis correcta (3 pts), Presentación de resultados (3 pts)
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- RECESO --&gt;
+        &lt;div style="background: #fff3cd; padding: 15px; margin: 30px 0; border-radius: 8px; text-align: center; border: 2px dashed #ffc107;"&gt;
+            &lt;h3 style="color: #856404;"&gt;&lt;i class="fas fa-coffee"&gt;&lt;/i&gt; RECESO - 15 MINUTOS&lt;/h3&gt;
+            &lt;p style="color: #856404; margin-top: 5px;"&gt;Los estudiantes pueden tomar un descanso, revisar sus notas o consultar dudas informalmente.&lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;!-- 4. Fundamentos de Python - Parte 2: Estructuras de control --&gt;
+        &lt;div class="step-indicator"&gt;
+            &lt;div class="step-number"&gt;4&lt;/div&gt;
+            &lt;div class="step-title"&gt;&lt;i class="fas fa-code-branch"&gt;&lt;/i&gt; Fundamentos de Python - Parte 2: Estructuras de control&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="activity-block"&gt;
+            &lt;span class="activity-number"&gt;Actividad 1: Condicionales - Repaso y práctica&lt;/span&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-tasks"&gt;&lt;/i&gt; Actividad:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    &lt;strong&gt;Repaso rápido (10 min):&lt;/strong&gt; Revisión de condicionales que estudiaron en casa. Resolución de dudas.&lt;br&gt;&lt;br&gt;
+                    &lt;strong&gt;Live Coding (10 min):&lt;/strong&gt;
+                    &lt;div class="code-demo"&gt;
+# Condicionales - Ejemplo educativo guatemalteco
+nota = float(input("Ingrese la nota del estudiante: "))
+
+if nota &gt;= 90:
+    categoria = "Excelente - Sobresaliente"
+    emoji = "🌟"
+elif nota &gt;= 80:
+    categoria = "Muy Bueno"
+    emoji = "😊"
+elif nota &gt;= 60:
+    categoria = "Aprobado"
+    emoji = "✓"
+else:
+    categoria = "Necesita refuerzo"
+    emoji = "⚠️"
+
+print(f"{emoji} {categoria}")
+                    &lt;/div&gt;
+                    
+                    &lt;strong&gt;EJERCICIO PRÁCTICO EN SALAS DE TEAMS (30 min):&lt;/strong&gt;&lt;br&gt;
+                    &lt;div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #9c27b0;"&gt;
+                        &lt;h4 style="color: #7b1fa2; margin-bottom: 10px;"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; EJERCICIO 2: Sistema de Categorización de Estudiantes&lt;/h4&gt;
+                        &lt;p&gt;&lt;strong&gt;Equipos de 3-4 estudiantes | 30 minutos&lt;/strong&gt;&lt;/p&gt;
+                        &lt;p&gt;&lt;strong&gt;Descripción:&lt;/strong&gt; Crear un programa que categorice estudiantes según múltiples criterios de riesgo educativo.&lt;/p&gt;
+                        &lt;p&gt;&lt;strong&gt;Requisitos:&lt;/strong&gt;&lt;/p&gt;
+                        &lt;ul style="margin-left: 20px;"&gt;
+                            &lt;li&gt;Solicitar: nombre, promedio de notas, días de ausentismo en el bimestre&lt;/li&gt;
+                            &lt;li&gt;Determinar nivel de riesgo:
+                                &lt;ul&gt;
+                                    &lt;li&gt;&lt;strong&gt;ALTO:&lt;/strong&gt; Promedio &lt; 60 O ausentismo &gt; 10 días&lt;/li&gt;
+                                    &lt;li&gt;&lt;strong&gt;MEDIO:&lt;/strong&gt; Promedio 60-69 O ausentismo 6-10 días&lt;/li&gt;
+                                    &lt;li&gt;&lt;strong&gt;BAJO:&lt;/strong&gt; Promedio &gt;= 70 Y ausentismo &lt;= 5 días&lt;/li&gt;
+                                &lt;/ul&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;Mostrar mensaje con recomendaciones según el nivel de riesgo&lt;/li&gt;
+                            &lt;li&gt;Usar emojis o símbolos para hacerlo visual: 🔴 Alto, 🟡 Medio, 🟢 Bajo&lt;/li&gt;
+                        &lt;/ul&gt;
+                        &lt;p style="margin-top: 10px;"&gt;&lt;strong&gt;Entregable:&lt;/strong&gt; Archivo .py funcionando + captura de pantalla con 3 casos diferentes&lt;/p&gt;
+                        &lt;p style="color: #7b1fa2; font-weight: bold;"&gt;&lt;i class="fas fa-trophy"&gt;&lt;/i&gt; Puntaje: 12 puntos&lt;/p&gt;
+                        
+                        &lt;h4 style="color: #4527a0; margin-top: 20px; margin-bottom: 10px;"&gt;&lt;i class="fas fa-code"&gt;&lt;/i&gt; Código de solución ejemplo:&lt;/h4&gt;
+                        &lt;div class="code-demo"&gt;
+# ejercicio2_categorizacion_riesgo.py
+# Sistema de categorización de estudiantes según nivel de riesgo educativo
+
+print("=" * 60)
+print("   SISTEMA DE CATEGORIZACIÓN DE ESTUDIANTES EN RIESGO")
+print("=" * 60)
+
+# Solicitar datos del estudiante
+nombre = input("\nIngrese el nombre del estudiante: ")
+promedio = float(input("Ingrese el promedio del estudiante (0-100): "))
+ausentismo = int(input("Ingrese días de ausentismo en el bimestre: "))
+
+# Determinar nivel de riesgo según criterios
+if promedio &lt; 60 or ausentismo &gt; 10:
+    nivel_riesgo = "ALTO"
+    emoji = "🔴"
+    recomendacion = "URGENTE: Requiere intervención inmediata. Contactar a padres, ofrecer tutorías y seguimiento constante."
+elif promedio &lt; 70 or (ausentismo &gt;= 6 and ausentismo &lt;= 10):
+    nivel_riesgo = "MEDIO"
+    emoji = "🟡"
+    recomendacion = "ATENCIÓN: Monitorear de cerca. Ofrecer apoyo académico y motivar asistencia regular."
+else:
+    nivel_riesgo = "BAJO"
+    emoji = "🟢"
+    recomendacion = "Estudiante en buen estado. Continuar con motivación y seguimiento regular."
+
+# Mostrar resultados
+print("\n" + "=" * 60)
+print("           ANÁLISIS DE RIESGO EDUCATIVO")
+print("=" * 60)
+print(f"\nEstudiante: {nombre}")
+print(f"Promedio: {promedio:.2f}")
+print(f"Ausentismo: {ausentismo} días")
+print(f"\n{emoji} NIVEL DE RIESGO: {nivel_riesgo}")
+print(f"\nRECOMENDACIÓN:")
+print(f"{recomendacion}")
+print("=" * 60)
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-clock"&gt;&lt;/i&gt; Tiempo estimado:&lt;/label&gt;
+                &lt;div&gt;&lt;span class="time-badge"&gt;&lt;i class="fas fa-hourglass-half"&gt;&lt;/i&gt; 50 minutos&lt;/span&gt;&lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-toolbox"&gt;&lt;/i&gt; Recursos:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    - Breakout rooms para trabajo colaborativo&lt;br&gt;
+                    - Documento con especificaciones completas&lt;br&gt;
+                    - Ejemplos de casos de prueba&lt;br&gt;
+                    - El docente rota por las salas para apoyar
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-user-graduate"&gt;&lt;/i&gt; Actividad que realizará el estudiante:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    En equipos, analizarán el problema, diseñarán la lógica (pueden hacer diagrama de flujo primero) y programarán la solución. Probarán con diferentes casos y entregarán su trabajo.
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-chart-line"&gt;&lt;/i&gt; Evaluación:&lt;/label&gt;
+                &lt;div class="evaluation-box"&gt;
+                    &lt;strong&gt;Tipo:&lt;/strong&gt; Sumativa&lt;br&gt;
+                    &lt;strong&gt;Instrumento:&lt;/strong&gt; Rúbrica de ejercicio práctico&lt;br&gt;
+                    &lt;strong&gt;Criterios:&lt;/strong&gt; Lógica correcta (5 pts), Manejo de casos (4 pts), Presentación (3 pts)
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="activity-block"&gt;
+            &lt;span class="activity-number"&gt;Actividad 2: Ciclos - Repaso y práctica&lt;/span&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-tasks"&gt;&lt;/i&gt; Actividad:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    &lt;strong&gt;Repaso rápido (10 min):&lt;/strong&gt; Diferencia entre for y while. Cuándo usar cada uno.&lt;br&gt;&lt;br&gt;
+                    &lt;strong&gt;Live Coding (10 min):&lt;/strong&gt;
+                    &lt;div class="code-demo"&gt;
+# Ciclo FOR - Procesar lista de estudiantes
+estudiantes = ["Ana", "Carlos", "María", "José", "Lucía"]
+print("Lista de asistencia:")
+for i, estudiante in enumerate(estudiantes, 1):
+    print(f"{i}. {estudiante}")
+
+# Ciclo WHILE - Validación de entrada
+intentos = 0
+max_intentos = 3
+while intentos &lt; max_intentos:
+    edad = int(input("Ingrese edad (1-120): "))
+    if 1 &lt;= edad &lt;= 120:
+        print("✓ Edad válida")
+        break
+    else:
+        intentos += 1
+        print(f"Edad inválida. Intentos restantes: {max_intentos - intentos}")
+                    &lt;/div&gt;
+                    
+                    &lt;strong&gt;EJERCICIO PRÁCTICO EN SALAS DE TEAMS (35 min):&lt;/strong&gt;&lt;br&gt;
+                    &lt;div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #9c27b0;"&gt;
+                        &lt;h4 style="color: #7b1fa2; margin-bottom: 10px;"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; EJERCICIO 3: Registro Múltiple de Estudiantes&lt;/h4&gt;
+                        &lt;p&gt;&lt;strong&gt;Equipos de 3-4 estudiantes | 35 minutos&lt;/strong&gt;&lt;/p&gt;
+                        &lt;p&gt;&lt;strong&gt;Descripción:&lt;/strong&gt; Crear un programa que permita registrar múltiples estudiantes y calcular estadísticas del grupo.&lt;/p&gt;
+                        &lt;p&gt;&lt;strong&gt;Requisitos:&lt;/strong&gt;&lt;/p&gt;
+                        &lt;ul style="margin-left: 20px;"&gt;
+                            &lt;li&gt;Usar un ciclo while para preguntar si desea agregar otro estudiante&lt;/li&gt;
+                            &lt;li&gt;Para cada estudiante, solicitar: nombre y nota&lt;/li&gt;
+                            &lt;li&gt;Usar listas para almacenar los datos&lt;/li&gt;
+                            &lt;li&gt;Al finalizar, mostrar:
+                                &lt;ul&gt;
+                                    &lt;li&gt;Lista completa de estudiantes con sus notas (usando for)&lt;/li&gt;
+                                    &lt;li&gt;Cantidad total de estudiantes registrados&lt;/li&gt;
+                                    &lt;li&gt;Promedio general del grupo&lt;/li&gt;
+                                    &lt;li&gt;Cantidad de aprobados y reprobados&lt;/li&gt;
+                                    &lt;li&gt;Estudiante con la nota más alta&lt;/li&gt;
+                                &lt;/ul&gt;
+                            &lt;/li&gt;
+                        &lt;/ul&gt;
+                        &lt;p style="margin-top: 10px;"&gt;&lt;strong&gt;Entregable:&lt;/strong&gt; Archivo .py funcionando + captura de pantalla con al menos 5 estudiantes registrados&lt;/p&gt;
+                        &lt;p style="color: #7b1fa2; font-weight: bold;"&gt;&lt;i class="fas fa-trophy"&gt;&lt;/i&gt; Puntaje: 12 puntos&lt;/p&gt;
+                        
+                        &lt;h4 style="color: #4527a0; margin-top: 20px; margin-bottom: 10px;"&gt;&lt;i class="fas fa-code"&gt;&lt;/i&gt; Código de solución ejemplo:&lt;/h4&gt;
+                        &lt;div class="code-demo"&gt;
+# ejercicio3_registro_multiple.py
+# Sistema de registro múltiple de estudiantes con estadísticas
+
+print("=" * 60)
+print("   SISTEMA DE REGISTRO MÚLTIPLE DE ESTUDIANTES")
+print("=" * 60)
+
+# Listas para almacenar datos
+nombres = []
+notas = []
+
+# Ciclo para registrar estudiantes
+while True:
+    print("\n" + "-" * 60)
+    nombre = input("Ingrese el nombre del estudiante: ")
+    nota = float(input(f"Ingrese la nota de {nombre}: "))
+    
+    # Agregar a las listas
+    nombres.append(nombre)
+    notas.append(nota)
+    
+    # Preguntar si desea continuar
+    continuar = input("\n¿Desea agregar otro estudiante? (s/n): ").lower()
+    if continuar != 's':
+        break
+
+# Calcular estadísticas
+total_estudiantes = len(nombres)
+promedio_general = sum(notas) / total_estudiantes
+aprobados = sum(1 for nota in notas if nota &gt;= 60)
+reprobados = total_estudiantes - aprobados
+nota_maxima = max(notas)
+indice_max = notas.index(nota_maxima)
+mejor_estudiante = nombres[indice_max]
+
+# Mostrar resultados
+print("\n" + "=" * 60)
+print("           LISTADO COMPLETO DE ESTUDIANTES")
+print("=" * 60)
+for i in range(total_estudiantes):
+    estado = "✓ APROBADO" if notas[i] &gt;= 60 else "✗ REPROBADO"
+    print(f"{i+1}. {nombres[i]:.&lt;30} {notas[i]:.2f} {estado}")
+
+print("\n" + "=" * 60)
+print("           ESTADÍSTICAS DEL GRUPO")
+print("=" * 60)
+print(f"Total de estudiantes registrados: {total_estudiantes}")
+print(f"Promedio general del grupo: {promedio_general:.2f}")
+print(f"Estudiantes aprobados: {aprobados}")
+print(f"Estudiantes reprobados: {reprobados}")
+print(f"\n🌟 Mejor estudiante: {mejor_estudiante} con {nota_maxima:.2f}")
+print("=" * 60)
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-clock"&gt;&lt;/i&gt; Tiempo estimado:&lt;/label&gt;
+                &lt;div&gt;&lt;span class="time-badge"&gt;&lt;i class="fas fa-hourglass-half"&gt;&lt;/i&gt; 50 minutos&lt;/span&gt;&lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-toolbox"&gt;&lt;/i&gt; Recursos:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    - Breakout rooms&lt;br&gt;
+                    - Pseudocódigo de apoyo (opcional)&lt;br&gt;
+                    - Ejemplos de uso de listas básicas&lt;br&gt;
+                    - Soporte del docente en las salas
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-user-graduate"&gt;&lt;/i&gt; Actividad que realizará el estudiante:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    Trabajarán en equipo para diseñar y programar el sistema de registro. Deberán coordinar quién escribe, quién piensa la lógica y quién prueba diferentes casos. Al final, entregarán su solución.
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-chart-line"&gt;&lt;/i&gt; Evaluación:&lt;/label&gt;
+                &lt;div class="evaluation-box"&gt;
+                    &lt;strong&gt;Tipo:&lt;/strong&gt; Sumativa&lt;br&gt;
+                    &lt;strong&gt;Instrumento:&lt;/strong&gt; Rúbrica de ejercicio práctico&lt;br&gt;
+                    &lt;strong&gt;Criterios:&lt;/strong&gt; Funcionalidad completa (6 pts), Uso correcto de ciclos y listas (4 pts), Estadísticas correctas (2 pts)
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- 5. Introducción a Flask y Proyecto --&gt;
+        &lt;div class="step-indicator"&gt;
+            &lt;div class="step-number"&gt;5&lt;/div&gt;
+            &lt;div class="step-title"&gt;&lt;i class="fas fa-flask"&gt;&lt;/i&gt; Introducción a Flask y Proyecto Integrador&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="activity-block"&gt;
+            &lt;span class="activity-number"&gt;Actividad 1: Flask - Repaso y demostración&lt;/span&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-tasks"&gt;&lt;/i&gt; Actividad:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    &lt;strong&gt;Repaso rápido (10 min):&lt;/strong&gt; ¿Qué es Flask? ¿Para qué sirve? Repaso de conceptos estudiados en casa.&lt;br&gt;&lt;br&gt;
+                    &lt;strong&gt;Demostración en vivo (15 min):&lt;/strong&gt; El docente crea una aplicación Flask simple desde cero, mostrando:
+                    &lt;div class="code-demo"&gt;
+# app.py - Ejemplo educativo
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+# Datos de ejemplo
+estudiantes = [
+    {"id": 1, "nombre": "Ana García", "nota": 85},
+    {"id": 2, "nombre": "Carlos López", "nota": 92},
+    {"id": 3, "nombre": "María Pérez", "nota": 78}
+]
+
+@app.route('/')
+def inicio():
+    return "Sistema de Gestión de Estudiantes"
+
+@app.route('/estudiantes')
+def lista_estudiantes():
+    html = "&lt;h1&gt;Lista de Estudiantes&lt;/h1&gt;&lt;ul&gt;"
+    for est in estudiantes:
+        html += f"&lt;li&gt;{est['nombre']} - Nota: {est['nota']}&lt;/li&gt;"
+    html += "&lt;/ul&gt;"
+    return html
+
+@app.route('/estudiante/&lt;int:id&gt;')
+def detalle(id):
+    est = next((e for e in estudiantes if e['id'] == id), None)
+    if est:
+        return f"&lt;h2&gt;{est['nombre']}&lt;/h2&gt;&lt;p&gt;Nota: {est['nota']}&lt;/p&gt;"
+    return "Estudiante no encontrado", 404
+
+if __name__ == '__main__':
+    app.run(debug=True)
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-clock"&gt;&lt;/i&gt; Tiempo estimado:&lt;/label&gt;
+                &lt;div&gt;&lt;span class="time-badge"&gt;&lt;i class="fas fa-hourglass-half"&gt;&lt;/i&gt; 25 minutos&lt;/span&gt;&lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-toolbox"&gt;&lt;/i&gt; Recursos:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    - VSCode para live coding&lt;br&gt;
+                    - Navegador para mostrar resultados&lt;br&gt;
+                    - Código de ejemplo compartido
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-user-graduate"&gt;&lt;/i&gt; Actividad que realizará el estudiante:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    Observarán la demostración, tomarán notas sobre la estructura de Flask y harán preguntas sobre dudas específicas.
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="activity-block"&gt;
+            &lt;span class="activity-number"&gt;Actividad 2: PROYECTO INTEGRADOR - Fase 1 en Salas de Teams&lt;/span&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-tasks"&gt;&lt;/i&gt; Actividad:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    &lt;strong&gt;EJERCICIOS 4 y 5: PROYECTO - Sistema de Estudiantes en Riesgo (2 partes)&lt;/strong&gt;&lt;br&gt;&lt;br&gt;
+                    
+                    &lt;div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #9c27b0;"&gt;
+                        &lt;h4 style="color: #7b1fa2; margin-bottom: 10px;"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; EJERCICIO 4: Estructura y Modelo de Datos&lt;/h4&gt;
+                        &lt;p&gt;&lt;strong&gt;Equipos de 3-4 estudiantes | 30 minutos&lt;/strong&gt;&lt;/p&gt;
+                        &lt;p&gt;&lt;strong&gt;Descripción:&lt;/strong&gt; Crear la estructura base del proyecto y definir el modelo de datos.&lt;/p&gt;
+                        &lt;p&gt;&lt;strong&gt;Requisitos:&lt;/strong&gt;&lt;/p&gt;
+                        &lt;ul style="margin-left: 20px;"&gt;
+                            &lt;li&gt;Crear estructura de carpetas: app.py, templates/, static/&lt;/li&gt;
+                            &lt;li&gt;Definir una lista de al menos 6 estudiantes con la estructura:
+                                &lt;pre style="background: white; padding: 8px; border-radius: 4px; margin: 5px 0;"&gt;
+estudiantes = [
+    {
+        "id": 1,
+        "nombre": "...",
+        "grado": "...",
+        "promedio": 85,
+        "ausentismo": 3,
+        "nivel_riesgo": "BAJO"  # Calculado automáticamente
+    },
+    # ... más estudiantes
+]&lt;/pre&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;Crear función calcular_riesgo(promedio, ausentismo) que retorne: "ALTO", "MEDIO" o "BAJO"&lt;/li&gt;
+                            &lt;li&gt;Aplicar la función a todos los estudiantes&lt;/li&gt;
+                        &lt;/ul&gt;
+                        &lt;p style="color: #7b1fa2; font-weight: bold;"&gt;&lt;i class="fas fa-trophy"&gt;&lt;/i&gt; Puntaje: 12 puntos&lt;/p&gt;
+                        
+                        &lt;h4 style="color: #4527a0; margin-top: 20px; margin-bottom: 10px;"&gt;&lt;i class="fas fa-code"&gt;&lt;/i&gt; Código de solución ejemplo:&lt;/h4&gt;
+                        &lt;div class="code-demo"&gt;
+# ejercicio4_modelo_datos.py
+# Estructura base del proyecto con modelo de datos
+
+def calcular_riesgo(promedio, ausentismo):
+    """
+    Calcula el nivel de riesgo educativo de un estudiante
+    
+    Args:
+        promedio (float): Promedio de notas del estudiante
+        ausentismo (int): Días de ausentismo
+    
+    Returns:
+        str: Nivel de riesgo ("ALTO", "MEDIO", "BAJO")
+    """
+    if promedio &lt; 60 or ausentismo &gt; 10:
+        return "ALTO"
+    elif promedio &lt; 75 or ausentismo &gt; 5:
+        return "MEDIO"
+    else:
+        return "BAJO"
+
+# Base de datos de estudiantes (datos guatemaltecos realistas)
+estudiantes = [
+    {
+        "id": 1,
+        "nombre": "María José García López",
+        "grado": "5to Primaria",
+        "promedio": 85,
+        "ausentismo": 3,
+        "nivel_riesgo": ""
+    },
+    {
+        "id": 2,
+        "nombre": "Carlos Andrés Pérez Hernández",
+        "grado": "6to Primaria",
+        "promedio": 55,
+        "ausentismo": 12,
+        "nivel_riesgo": ""
+    },
+    {
+        "id": 3,
+        "nombre": "Ana Lucía Martínez Rodríguez",
+        "grado": "4to Primaria",
+        "promedio": 92,
+        "ausentismo": 1,
+        "nivel_riesgo": ""
+    },
+    {
+        "id": 4,
+        "nombre": "José Luis Ramírez Santos",
+        "grado": "5to Primaria",
+        "promedio": 68,
+        "ausentismo": 8,
+        "nivel_riesgo": ""
+    },
+    {
+        "id": 5,
+        "nombre": "Sofía Isabel González Morales",
+        "grado": "6to Primaria",
+        "promedio": 78,
+        "ausentismo": 4,
+        "nivel_riesgo": ""
+    },
+    {
+        "id": 6,
+        "nombre": "Diego Fernando López Castro",
+        "grado": "4to Primaria",
+        "promedio": 58,
+        "ausentismo": 6,
+        "nivel_riesgo": ""
+    }
+]
+
+# Aplicar cálculo de riesgo a todos los estudiantes
+for estudiante in estudiantes:
+    estudiante["nivel_riesgo"] = calcular_riesgo(
+        estudiante["promedio"], 
+        estudiante["ausentismo"]
+    )
+
+# Mostrar resultado
+print("Estudiantes registrados con nivel de riesgo calculado:")
+for est in estudiantes:
+    print(f"{est['id']}. {est['nombre']} - Riesgo: {est['nivel_riesgo']}")
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #9c27b0;"&gt;
+                        &lt;h4 style="color: #7b1fa2; margin-bottom: 10px;"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; EJERCICIO 5: Rutas y Visualización Flask&lt;/h4&gt;
+                        &lt;p&gt;&lt;strong&gt;Mismos equipos | 35 minutos&lt;/strong&gt;&lt;/p&gt;
+                        &lt;p&gt;&lt;strong&gt;Descripción:&lt;/strong&gt; Implementar la aplicación Flask con rutas funcionales.&lt;/p&gt;
+                        &lt;p&gt;&lt;strong&gt;Requisitos:&lt;/strong&gt;&lt;/p&gt;
+                        &lt;ul style="margin-left: 20px;"&gt;
+                            &lt;li&gt;Ruta &lt;code&gt;/&lt;/code&gt;: Página de inicio con información del sistema&lt;/li&gt;
+                            &lt;li&gt;Ruta &lt;code&gt;/estudiantes&lt;/code&gt;: Lista de todos los estudiantes mostrando nombre, grado, promedio, ausentismo y nivel de riesgo (con colores o emojis: 🔴🟡🟢)&lt;/li&gt;
+                            &lt;li&gt;Ruta &lt;code&gt;/estudiante/&lt;id&gt;&lt;/code&gt;: Detalle completo de un estudiante específico&lt;/li&gt;
+                            &lt;li&gt;Ruta &lt;code&gt;/estadisticas&lt;/code&gt;: Mostrar:
+                                &lt;ul&gt;
+                                    &lt;li&gt;Total de estudiantes&lt;/li&gt;
+                                    &lt;li&gt;Cantidad en cada nivel de riesgo&lt;/li&gt;
+                                    &lt;li&gt;Promedio general del grupo&lt;/li&gt;
+                                &lt;/ul&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;La aplicación debe ejecutar sin errores&lt;/li&gt;
+                            &lt;li&gt;Todas las rutas deben funcionar correctamente&lt;/li&gt;
+                        &lt;/ul&gt;
+                        &lt;p style="color: #7b1fa2; font-weight: bold;"&gt;&lt;i class="fas fa-trophy"&gt;&lt;/i&gt; Puntaje: 12 puntos&lt;/p&gt;
+                        
+                        &lt;h4 style="color: #4527a0; margin-top: 20px; margin-bottom: 10px;"&gt;&lt;i class="fas fa-code"&gt;&lt;/i&gt; Código completo de la aplicación Flask:&lt;/h4&gt;
+                        &lt;div class="code-demo"&gt;
+# app.py - Aplicación Flask completa
+# Sistema de Seguimiento de Estudiantes en Riesgo
+
+from flask import Flask
+
+app = Flask(__name__)
+
+# Función para calcular nivel de riesgo
+def calcular_riesgo(promedio, ausentismo):
+    if promedio &lt; 60 or ausentismo &gt; 10:
+        return "ALTO"
+    elif promedio &lt; 75 or ausentismo &gt; 5:
+        return "MEDIO"
+    else:
+        return "BAJO"
+
+# Base de datos de estudiantes
+estudiantes = [
+    {"id": 1, "nombre": "María José García López", "grado": "5to Primaria", 
+     "promedio": 85, "ausentismo": 3},
+    {"id": 2, "nombre": "Carlos Andrés Pérez Hernández", "grado": "6to Primaria", 
+     "promedio": 55, "ausentismo": 12},
+    {"id": 3, "nombre": "Ana Lucía Martínez Rodríguez", "grado": "4to Primaria", 
+     "promedio": 92, "ausentismo": 1},
+    {"id": 4, "nombre": "José Luis Ramírez Santos", "grado": "5to Primaria", 
+     "promedio": 68, "ausentismo": 8},
+    {"id": 5, "nombre": "Sofía Isabel González Morales", "grado": "6to Primaria", 
+     "promedio": 78, "ausentismo": 4},
+    {"id": 6, "nombre": "Diego Fernando López Castro", "grado": "4to Primaria", 
+     "promedio": 58, "ausentismo": 6}
+]
+
+# Calcular nivel de riesgo para cada estudiante
+for est in estudiantes:
+    est['nivel_riesgo'] = calcular_riesgo(est['promedio'], est['ausentismo'])
+
+@app.route('/')
+def inicio():
+    html = """
+    &lt;!DOCTYPE html&gt;
+    &lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Sistema de Estudiantes en Riesgo&lt;/title&gt;
+        &lt;style&gt;
+            body { font-family: Arial; margin: 40px; background: #f5f5f5; }
+            .container { background: white; padding: 30px; border-radius: 10px; }
+            h1 { color: #1a237e; }
+            .menu { margin: 20px 0; }
+            .menu a { 
+                display: inline-block; 
+                padding: 10px 20px; 
+                margin: 5px; 
+                background: #1976d2; 
+                color: white; 
+                text-decoration: none; 
+                border-radius: 5px; 
+            }
+            .menu a:hover { background: #1565c0; }
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="container"&gt;
+            &lt;h1&gt;🏫 Sistema de Seguimiento de Estudiantes en Riesgo&lt;/h1&gt;
+            &lt;p&gt;Bienvenido al sistema de gestión y seguimiento de estudiantes.&lt;/p&gt;
+            &lt;p&gt;Este sistema permite identificar estudiantes en riesgo educativo 
+               basándose en su promedio académico y ausentismo.&lt;/p&gt;
+            
+            &lt;div class="menu"&gt;
+                &lt;h3&gt;Navegación:&lt;/h3&gt;
+                &lt;a href="/estudiantes"&gt;📋 Ver Todos los Estudiantes&lt;/a&gt;
+                &lt;a href="/estadisticas"&gt;📊 Ver Estadísticas&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+    """
+    return html
+
+@app.route('/estudiantes')
+def lista_estudiantes():
+    # Crear tabla HTML
+    filas = ""
+    for est in estudiantes:
+        # Color según nivel de riesgo
+        if est['nivel_riesgo'] == 'ALTO':
+            color = "background: #ffebee; color: #c62828;"
+            emoji = "🔴"
+        elif est['nivel_riesgo'] == 'MEDIO':
+            color = "background: #fff3e0; color: #e65100;"
+            emoji = "🟡"
+        else:
+            color = "background: #e8f5e9; color: #2e7d32;"
+            emoji = "🟢"
+        
+        filas += f"""
+        &lt;tr style="{color}"&gt;
+            &lt;td&gt;{est['id']}&lt;/td&gt;
+            &lt;td&gt;&lt;a href="/estudiante/{est['id']}"&gt;{est['nombre']}&lt;/a&gt;&lt;/td&gt;
+            &lt;td&gt;{est['grado']}&lt;/td&gt;
+            &lt;td&gt;{est['promedio']}&lt;/td&gt;
+            &lt;td&gt;{est['ausentismo']}&lt;/td&gt;
+            &lt;td&gt;{emoji} {est['nivel_riesgo']}&lt;/td&gt;
+        &lt;/tr&gt;
+        """
+    
+    html = f"""
+    &lt;!DOCTYPE html&gt;
+    &lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Lista de Estudiantes&lt;/title&gt;
+        &lt;style&gt;
+            body {{ font-family: Arial; margin: 40px; background: #f5f5f5; }}
+            .container {{ background: white; padding: 30px; border-radius: 10px; }}
+            h1 {{ color: #1a237e; }}
+            table {{ width: 100%; border-collapse: collapse; margin: 20px 0; }}
+            th {{ background: #1976d2; color: white; padding: 12px; text-align: left; }}
+            td {{ padding: 10px; border-bottom: 1px solid #ddd; }}
+            a {{ color: #1976d2; text-decoration: none; }}
+            a:hover {{ text-decoration: underline; }}
+            .btn {{ 
+                display: inline-block; 
+                padding: 10px 20px; 
+                margin: 10px 5px; 
+                background: #1976d2; 
+                color: white; 
+                text-decoration: none; 
+                border-radius: 5px; 
+            }}
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="container"&gt;
+            &lt;h1&gt;📋 Lista Completa de Estudiantes&lt;/h1&gt;
+            &lt;a href="/" class="btn"&gt;🏠 Inicio&lt;/a&gt;
+            &lt;a href="/estadisticas" class="btn"&gt;📊 Estadísticas&lt;/a&gt;
+            
+            &lt;table&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;ID&lt;/th&gt;
+                    &lt;th&gt;Nombre&lt;/th&gt;
+                    &lt;th&gt;Grado&lt;/th&gt;
+                    &lt;th&gt;Promedio&lt;/th&gt;
+                    &lt;th&gt;Ausentismo&lt;/th&gt;
+                    &lt;th&gt;Nivel de Riesgo&lt;/th&gt;
+                &lt;/tr&gt;
+                {filas}
+            &lt;/table&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+    """
+    return html
+
+@app.route('/estudiante/&lt;int:id&gt;')
+def detalle(id):
+    # Buscar estudiante por ID
+    estudiante = next((e for e in estudiantes if e['id'] == id), None)
+    
+    if not estudiante:
+        return "&lt;h1&gt;Estudiante no encontrado&lt;/h1&gt;", 404
+    
+    # Determinar color y emoji según riesgo
+    if estudiante['nivel_riesgo'] == 'ALTO':
+        color = "#c62828"
+        emoji = "🔴"
+    elif estudiante['nivel_riesgo'] == 'MEDIO':
+        color = "#e65100"
+        emoji = "🟡"
+    else:
+        color = "#2e7d32"
+        emoji = "🟢"
+    
+    html = f"""
+    &lt;!DOCTYPE html&gt;
+    &lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Detalle de {estudiante['nombre']}&lt;/title&gt;
+        &lt;style&gt;
+            body {{ font-family: Arial; margin: 40px; background: #f5f5f5; }}
+            .container {{ background: white; padding: 30px; border-radius: 10px; }}
+            h1 {{ color: #1a237e; }}
+            .info {{ margin: 20px 0; padding: 15px; background: #f8f9fa; 
+                    border-left: 4px solid #1976d2; }}
+            .riesgo {{ font-size: 24px; color: {color}; margin: 20px 0; }}
+            .btn {{ 
+                display: inline-block; 
+                padding: 10px 20px; 
+                margin: 10px 5px; 
+                background: #1976d2; 
+                color: white; 
+                text-decoration: none; 
+                border-radius: 5px; 
+            }}
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="container"&gt;
+            &lt;h1&gt;👤 Perfil del Estudiante&lt;/h1&gt;
+            &lt;a href="/" class="btn"&gt;🏠 Inicio&lt;/a&gt;
+            &lt;a href="/estudiantes" class="btn"&gt;📋 Lista&lt;/a&gt;
+            
+            &lt;div class="info"&gt;
+                &lt;h2&gt;{estudiante['nombre']}&lt;/h2&gt;
+                &lt;p&gt;&lt;strong&gt;ID:&lt;/strong&gt; {estudiante['id']}&lt;/p&gt;
+                &lt;p&gt;&lt;strong&gt;Grado:&lt;/strong&gt; {estudiante['grado']}&lt;/p&gt;
+                &lt;p&gt;&lt;strong&gt;Promedio:&lt;/strong&gt; {estudiante['promedio']}&lt;/p&gt;
+                &lt;p&gt;&lt;strong&gt;Días de ausentismo:&lt;/strong&gt; {estudiante['ausentismo']}&lt;/p&gt;
+            &lt;/div&gt;
+            
+            &lt;div class="riesgo"&gt;
+                &lt;strong&gt;Nivel de Riesgo:&lt;/strong&gt; {emoji} {estudiante['nivel_riesgo']}
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+    """
+    return html
+
+@app.route('/estadisticas')
+def estadisticas():
+    # Calcular estadísticas
+    total = len(estudiantes)
+    promedio_general = sum(e['promedio'] for e in estudiantes) / total
+    
+    riesgo_alto = sum(1 for e in estudiantes if e['nivel_riesgo'] == 'ALTO')
+    riesgo_medio = sum(1 for e in estudiantes if e['nivel_riesgo'] == 'MEDIO')
+    riesgo_bajo = sum(1 for e in estudiantes if e['nivel_riesgo'] == 'BAJO')
+    
+    html = f"""
+    &lt;!DOCTYPE html&gt;
+    &lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Estadísticas del Sistema&lt;/title&gt;
+        &lt;style&gt;
+            body {{ font-family: Arial; margin: 40px; background: #f5f5f5; }}
+            .container {{ background: white; padding: 30px; border-radius: 10px; }}
+            h1 {{ color: #1a237e; }}
+            .stat-box {{ 
+                display: inline-block; 
+                padding: 20px; 
+                margin: 10px; 
+                border-radius: 8px; 
+                text-align: center; 
+                min-width: 200px; 
+            }}
+            .box-alto {{ background: #ffebee; color: #c62828; }}
+            .box-medio {{ background: #fff3e0; color: #e65100; }}
+            .box-bajo {{ background: #e8f5e9; color: #2e7d32; }}
+            .box-general {{ background: #e3f2fd; color: #1565c0; }}
+            .number {{ font-size: 48px; font-weight: bold; }}
+            .label {{ font-size: 14px; margin-top: 10px; }}
+            .btn {{ 
+                display: inline-block; 
+                padding: 10px 20px; 
+                margin: 10px 5px; 
+                background: #1976d2; 
+                color: white; 
+                text-decoration: none; 
+                border-radius: 5px; 
+            }}
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="container"&gt;
+            &lt;h1&gt;📊 Estadísticas del Sistema&lt;/h1&gt;
+            &lt;a href="/" class="btn"&gt;🏠 Inicio&lt;/a&gt;
+            &lt;a href="/estudiantes" class="btn"&gt;📋 Lista&lt;/a&gt;
+            
+            &lt;h2&gt;Resumen General&lt;/h2&gt;
+            &lt;div class="stat-box box-general"&gt;
+                &lt;div class="number"&gt;{total}&lt;/div&gt;
+                &lt;div class="label"&gt;Total de Estudiantes&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="stat-box box-general"&gt;
+                &lt;div class="number"&gt;{promedio_general:.1f}&lt;/div&gt;
+                &lt;div class="label"&gt;Promedio General&lt;/div&gt;
+            &lt;/div&gt;
+            
+            &lt;h2&gt;Distribución por Nivel de Riesgo&lt;/h2&gt;
+            &lt;div class="stat-box box-alto"&gt;
+                &lt;div class="number"&gt;🔴 {riesgo_alto}&lt;/div&gt;
+                &lt;div class="label"&gt;Riesgo ALTO&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="stat-box box-medio"&gt;
+                &lt;div class="number"&gt;🟡 {riesgo_medio}&lt;/div&gt;
+                &lt;div class="label"&gt;Riesgo MEDIO&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="stat-box box-bajo"&gt;
+                &lt;div class="number"&gt;🟢 {riesgo_bajo}&lt;/div&gt;
+                &lt;div class="label"&gt;Riesgo BAJO&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+    """
+    return html
+
+if __name__ == '__main__':
+    print("🚀 Iniciando servidor Flask...")
+    print("📱 Abre tu navegador en: http://127.0.0.1:5000")
+    app.run(debug=True)
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;p style="margin-top: 15px;"&gt;&lt;strong&gt;Entregable final:&lt;/strong&gt; Carpeta comprimida (.zip) con toda la estructura del proyecto + documento con capturas de pantalla mostrando cada ruta funcionando + URL del repositorio GitHub (si lo usan)&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-clock"&gt;&lt;/i&gt; Tiempo estimado:&lt;/label&gt;
+                &lt;div&gt;&lt;span class="time-badge"&gt;&lt;i class="fas fa-hourglass-half"&gt;&lt;/i&gt; 65 minutos total&lt;/span&gt;&lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-toolbox"&gt;&lt;/i&gt; Recursos:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    - Breakout rooms para trabajo en proyecto&lt;br&gt;
+                    - Plantilla de estructura de proyecto&lt;br&gt;
+                    - Ejemplos de código de referencia&lt;br&gt;
+                    - El docente proporciona apoyo constante rotando por las salas&lt;br&gt;
+                    - Carpeta compartida para entrega
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-user-graduate"&gt;&lt;/i&gt; Actividad que realizará el estudiante:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    Trabajarán en equipos para desarrollar el proyecto. Dividirán tareas: uno crea el modelo de datos, otro las rutas, otro prueba. Coordinarán para integrar todo y asegurar que funcione. Entregarán al final de la sesión.
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-chart-line"&gt;&lt;/i&gt; Evaluación:&lt;/label&gt;
+                &lt;div class="evaluation-box"&gt;
+                    &lt;strong&gt;Tipo:&lt;/strong&gt; Sumativa&lt;br&gt;
+                    &lt;strong&gt;Instrumento:&lt;/strong&gt; Rúbrica de proyecto&lt;br&gt;
+                    &lt;strong&gt;Criterios Ejercicio 4:&lt;/strong&gt; Estructura correcta (4 pts), Modelo de datos (4 pts), Función de riesgo (4 pts)&lt;br&gt;
+                    &lt;strong&gt;Criterios Ejercicio 5:&lt;/strong&gt; Rutas funcionando (6 pts), Visualización correcta (4 pts), Estadísticas precisas (2 pts)
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- 6. Reflexión metacognitiva --&gt;
+        &lt;div class="step-indicator"&gt;
+            &lt;div class="step-number"&gt;6&lt;/div&gt;
+            &lt;div class="step-title"&gt;&lt;i class="fas fa-mirror"&gt;&lt;/i&gt; Reflexión sobre el proceso de aprendizaje&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="activity-block"&gt;
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-tasks"&gt;&lt;/i&gt; Actividad:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    &lt;strong&gt;Reflexión individual (escrita):&lt;/strong&gt; En el chat o en un documento personal, responder:&lt;br&gt;
+                    - ¿Qué fue lo más difícil de la sesión?&lt;br&gt;
+                    - ¿Qué estrategia te ayudó a superar dificultades?&lt;br&gt;
+                    - ¿Cómo te sientes ahora respecto a la programación?&lt;br&gt;
+                    - ¿Qué necesitas reforzar esta semana?&lt;br&gt;&lt;br&gt;
+                    &lt;strong&gt;Compartir en plenaria:&lt;/strong&gt; 3-4 estudiantes voluntarios comparten sus reflexiones.
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-clock"&gt;&lt;/i&gt; Tiempo estimado:&lt;/label&gt;
+                &lt;div&gt;&lt;span class="time-badge"&gt;&lt;i class="fas fa-hourglass-half"&gt;&lt;/i&gt; 10 minutos&lt;/span&gt;&lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-toolbox"&gt;&lt;/i&gt; Recursos:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    - Chat de Zoom para reflexiones escritas&lt;br&gt;
+                    - Plantilla de reflexión metacognitiva
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-user-graduate"&gt;&lt;/i&gt; Actividad que realizará el estudiante:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    Reflexionarán sobre su proceso de aprendizaje, identificarán fortalezas y áreas de mejora, compartirán experiencias con sus compañeros.
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- 7. Introducción a la Guía de Aprendizaje --&gt;
+        &lt;div class="step-indicator"&gt;
+            &lt;div class="step-number"&gt;7&lt;/div&gt;
+            &lt;div class="step-title"&gt;&lt;i class="fas fa-map"&gt;&lt;/i&gt; Introducción a trabajo autónomo de la semana&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="activity-block"&gt;
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-tasks"&gt;&lt;/i&gt; Actividad:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    &lt;strong&gt;Revisión de la Guía de Aprendizaje Semana 2:&lt;/strong&gt; El docente explica brevemente las actividades de la próxima semana:&lt;br&gt;
+                    - Estudio de funciones, listas avanzadas y diccionarios&lt;br&gt;
+                    - Templates HTML en Flask&lt;br&gt;
+                    - Continuación del proyecto (Fase 2)&lt;br&gt;&lt;br&gt;
+                    &lt;strong&gt;Aclaración de dudas rápidas.&lt;/strong&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-clock"&gt;&lt;/i&gt; Tiempo estimado:&lt;/label&gt;
+                &lt;div&gt;&lt;span class="time-badge"&gt;&lt;i class="fas fa-hourglass-half"&gt;&lt;/i&gt; 10 minutos&lt;/span&gt;&lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-toolbox"&gt;&lt;/i&gt; Recursos:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    - Guía de Aprendizaje Semana 1 (PDF)&lt;br&gt;
+                    - Calendario de entregas&lt;br&gt;
+                    - Rúbrica de evaluación del proyecto Fase 1
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-user-graduate"&gt;&lt;/i&gt; Actividad que realizará el estudiante:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    Tomarán nota de las actividades de la semana, harán preguntas sobre dudas específicas, planificarán su tiempo de trabajo autónomo.
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- 8. Cierre y despedida --&gt;
+        &lt;div class="step-indicator"&gt;
+            &lt;div class="step-number"&gt;8&lt;/div&gt;
+            &lt;div class="step-title"&gt;&lt;i class="fas fa-flag-checkered"&gt;&lt;/i&gt; Cierre y despedida&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="activity-block"&gt;
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-tasks"&gt;&lt;/i&gt; Actividad:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    &lt;strong&gt;Síntesis de la sesión:&lt;/strong&gt; Repaso rápido de los conceptos clave aprendidos hoy (pensamiento computacional, variables, condicionales, ciclos, Flask básico).&lt;br&gt;&lt;br&gt;
+                    &lt;strong&gt;Recordatorios importantes:&lt;/strong&gt;&lt;br&gt;
+                    - Trabajar en la Guía de Aprendizaje durante la semana&lt;br&gt;
+                    - Consultar dudas en el foro del curso&lt;br&gt;
+                    - Comenzar el proyecto Fase 1&lt;br&gt;
+                    - Próxima sesión: Manejo de datos y almacenamiento&lt;br&gt;&lt;br&gt;
+                    &lt;strong&gt;Mensaje motivacional:&lt;/strong&gt; "Han dado el primer paso en un viaje fascinante. La programación es una habilidad que se construye con práctica constante. ¡Cada error es una oportunidad de aprender!"
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-clock"&gt;&lt;/i&gt; Tiempo estimado:&lt;/label&gt;
+                &lt;div&gt;&lt;span class="time-badge"&gt;&lt;i class="fas fa-hourglass-half"&gt;&lt;/i&gt; 5 minutos&lt;/span&gt;&lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-toolbox"&gt;&lt;/i&gt; Recursos:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    - Resumen visual de la sesión&lt;br&gt;
+                    - Contactos y recursos adicionales&lt;br&gt;
+                    - Calendario de próxima sesión
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="field"&gt;
+                &lt;label&gt;&lt;i class="fas fa-user-graduate"&gt;&lt;/i&gt; Actividad que realizará el estudiante:&lt;/label&gt;
+                &lt;div class="field-content"&gt;
+                    Escucharán el resumen, tomarán nota de recordatorios, compartirán una palabra clave de lo aprendido en el chat como cierre simbólico.
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- RESUMEN DE TIEMPOS --&gt;
+        &lt;div style="background: #e8f5e9; padding: 20px; border-radius: 8px; margin-top: 40px; border-left: 4px solid #4caf50;"&gt;
+            &lt;h3 style="color: #2e7d32; margin-bottom: 15px;"&gt;
+                &lt;i class="fas fa-clock"&gt;&lt;/i&gt; Resumen de tiempos de la sesión
+            &lt;/h3&gt;
+            &lt;table style="width: 100%; border-collapse: collapse;"&gt;
+                &lt;tr style="background: white;"&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd;"&gt;1. Bienvenida y activación&lt;/td&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd; text-align: right;"&gt;20 min&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd;"&gt;2. Pensamiento computacional&lt;/td&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd; text-align: right;"&gt;25 min&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr style="background: #fff9c4;"&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd;"&gt;&lt;strong&gt;3. Configuración entorno VSCode + extensiones + formatter&lt;/strong&gt;&lt;/td&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd; text-align: right;"&gt;&lt;strong&gt;55 min&lt;/strong&gt; ⚙️&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr style="background: white;"&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd;"&gt;4. Python Parte 1: Variables + &lt;strong&gt;EJERCICIO 1&lt;/strong&gt; 🏆&lt;/td&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd; text-align: right;"&gt;40 min&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd;"&gt;&lt;strong&gt;RECESO&lt;/strong&gt;&lt;/td&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd; text-align: right;"&gt;&lt;strong&gt;15 min&lt;/strong&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr style="background: white;"&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd;"&gt;5. Condicionales + &lt;strong&gt;EJERCICIO 2&lt;/strong&gt; 🏆&lt;/td&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd; text-align: right;"&gt;50 min&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd;"&gt;6. Ciclos + &lt;strong&gt;EJERCICIO 3&lt;/strong&gt; 🏆&lt;/td&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd; text-align: right;"&gt;50 min&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr style="background: white;"&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd;"&gt;7. Flask repaso + &lt;strong&gt;EJERCICIOS 4 y 5 (PROYECTO)&lt;/strong&gt; 🏆🏆&lt;/td&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd; text-align: right;"&gt;65 min&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd;"&gt;8. Reflexión metacognitiva&lt;/td&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd; text-align: right;"&gt;10 min&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr style="background: white;"&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd;"&gt;9. Introducción a trabajo autónomo Semana 2&lt;/td&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd; text-align: right;"&gt;10 min&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd;"&gt;10. Cierre y despedida&lt;/td&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #ddd; text-align: right;"&gt;5 min&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr style="background: #4caf50; color: white; font-weight: bold;"&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #2e7d32;"&gt;TOTAL&lt;/td&gt;
+                    &lt;td style="padding: 8px; border: 1px solid #2e7d32; text-align: right;"&gt;345 min (5h 45min)&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/table&gt;
+            &lt;p style="color: #2e7d32; margin-top: 15px; font-size: 14px;"&gt;
+                &lt;i class="fas fa-info-circle"&gt;&lt;/i&gt; &lt;strong&gt;Nota:&lt;/strong&gt; Los tiempos incluyen un margen de flexibilidad. La configuración del entorno VSCode es crucial en la primera semana - estudiantes con configuración previa pueden avanzar mientras otros reciben apoyo. Total de sesión: 5h 45min (345 minutos).
+            &lt;/p&gt;
+            &lt;p style="color: #2e7d32; margin-top: 10px; font-size: 14px; background: white; padding: 10px; border-radius: 5px;"&gt;
+                &lt;i class="fas fa-star"&gt;&lt;/i&gt; &lt;strong&gt;5 Ejercicios evaluables en Salas de Teams:&lt;/strong&gt;&lt;br&gt;
+                • Ejercicio 1: Calculadora de promedio (12 pts)&lt;br&gt;
+                • Ejercicio 2: Categorización de estudiantes (12 pts)&lt;br&gt;
+                • Ejercicio 3: Registro múltiple con estadísticas (12 pts)&lt;br&gt;
+                • Ejercicio 4: Estructura y modelo de datos del proyecto (12 pts)&lt;br&gt;
+                • Ejercicio 5: Rutas y visualización Flask (12 pts)&lt;br&gt;
+                &lt;strong&gt;TOTAL: 60 puntos (60% de la nota de la semana)&lt;/strong&gt;
+            &lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;!-- MATERIALES Y RECURSOS --&gt;
+        &lt;div style="background: #fff3e0; padding: 20px; border-radius: 8px; margin-top: 30px; border-left: 4px solid #ff9800;"&gt;
+            &lt;h3 style="color: #e65100; margin-bottom: 15px;"&gt;
+                &lt;i class="fas fa-box"&gt;&lt;/i&gt; Materiales y recursos necesarios para la sesión
+            &lt;/h3&gt;
+            &lt;div style="color: #bf360c;"&gt;
+                &lt;strong&gt;Para el docente:&lt;/strong&gt;
+                &lt;ul style="margin-left: 20px; margin-top: 10px;"&gt;
+                    &lt;li&gt;Presentaciones PowerPoint de todos los temas&lt;/li&gt;
+                    &lt;li&gt;Código de ejemplos preparado (disponible en repositorio GitHub)&lt;/li&gt;
+                    &lt;li&gt;Guía de instalación de Python y Flask (PDF)&lt;/li&gt;
+                    &lt;li&gt;Ejercicios prácticos en diferentes niveles&lt;/li&gt;
+                    &lt;li&gt;Rúbricas de evaluación&lt;/li&gt;
+                    &lt;li&gt;Acceso a pizarra digital (Jamboard, Miro o similar)&lt;/li&gt;
+                &lt;/ul&gt;
+                &lt;strong style="margin-top: 15px; display: block;"&gt;Para los estudiantes:&lt;/strong&gt;
+                &lt;ul style="margin-left: 20px; margin-top: 10px;"&gt;
+                    &lt;li&gt;Computadora con Windows, Mac o Linux&lt;/li&gt;
+                    &lt;li&gt;Conexión a internet estable&lt;/li&gt;
+                    &lt;li&gt;Espacio en disco: mínimo 1 GB libre&lt;/li&gt;
+                    &lt;li&gt;Permisos de administrador para instalar software&lt;/li&gt;
+                    &lt;li&gt;Navegador web actualizado&lt;/li&gt;
+                    &lt;li&gt;Libreta y lápiz para tomar notas&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- NOTA FINAL --&gt;
+        &lt;div style="background: #e3f2fd; padding: 20px; border-radius: 8px; margin-top: 30px; border-left: 4px solid #2196f3;"&gt;
+            &lt;h3 style="color: #1565c0; margin-bottom: 10px;"&gt;
+                &lt;i class="fas fa-lightbulb"&gt;&lt;/i&gt; Notas pedagógicas sobre aprendizaje invertido
+            &lt;/h3&gt;
+            &lt;div style="color: #0d47a1; font-size: 14px;"&gt;
+                &lt;p&gt;&lt;strong&gt;Metodología aplicada:&lt;/strong&gt; Esta sesión utiliza &lt;strong&gt;aprendizaje invertido&lt;/strong&gt;. Los estudiantes llegan habiendo estudiado los conceptos básicos en casa (máximo 10 horas), lo que permite dedicar el tiempo de clase a:&lt;/p&gt;
+                &lt;ul style="margin-left: 20px; margin-top: 10px;"&gt;
+                    &lt;li&gt;Resolver dudas específicas sobre conceptos estudiados&lt;/li&gt;
+                    &lt;li&gt;Práctica intensiva con ejercicios contextualizados&lt;/li&gt;
+                    &lt;li&gt;Trabajo colaborativo en equipos (Salas de Teams)&lt;/li&gt;
+                    &lt;li&gt;Retroalimentación inmediata del docente&lt;/li&gt;
+                    &lt;li&gt;Desarrollo del proyecto integrador con apoyo directo&lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;p style="margin-top: 15px;"&gt;&lt;strong&gt;⚙️ Configuración del entorno profesional:&lt;/strong&gt; La Actividad 3 (55 min) está diseñada para:&lt;/p&gt;
+                &lt;ul style="margin-left: 20px;"&gt;
+                    &lt;li&gt;&lt;strong&gt;Verificar instalaciones básicas&lt;/strong&gt; (15 min): Python, VSCode, Flask funcionando&lt;/li&gt;
+                    &lt;li&gt;&lt;strong&gt;Instalar extensiones profesionales&lt;/strong&gt; (20 min): Python, Pylance, Black Formatter, Error Lens, Python Indent&lt;/li&gt;
+                    &lt;li&gt;&lt;strong&gt;Configurar formateador automático&lt;/strong&gt; (10 min): Black formatter con formato al guardar&lt;/li&gt;
+                    &lt;li&gt;&lt;strong&gt;Configurar preferencias de editor&lt;/strong&gt; (5 min): Tab size 4, espacios en vez de Tab, Python interpreter&lt;/li&gt;
+                    &lt;li&gt;&lt;strong&gt;Repaso conceptual rápido&lt;/strong&gt; (10 min): Variables, tipos de datos, operadores&lt;/li&gt;
+                &lt;/ul&gt;
+                &lt;p style="margin-left: 20px; margin-top: 5px; font-style: italic;"&gt;
+                    🎯 Objetivo: Los estudiantes deben salir con un entorno de desarrollo profesional configurado, no solo Python instalado. Esto incluye autocompletado inteligente (Pylance), formato automático (Black), y detección de errores en línea (Error Lens). Esta inversión de tiempo en la primera semana ahorra frustración el resto del curso.
+                &lt;/p&gt;
+                
+                &lt;p style="margin-top: 15px;"&gt;&lt;strong&gt;Adaptaciones:&lt;/strong&gt; Si algunos estudiantes no completaron el estudio previo, el docente puede:&lt;/p&gt;
+                &lt;ul style="margin-left: 20px;"&gt;
+                    &lt;li&gt;Proporcionar recursos de apoyo durante los ejercicios en salas&lt;/li&gt;
+                    &lt;li&gt;Formar equipos mixtos (estudiantes preparados con menos preparados)&lt;/li&gt;
+                    &lt;li&gt;Ofrecer breakout rooms adicionales para repaso express&lt;/li&gt;
+                &lt;/ul&gt;
+                
+                &lt;p style="margin-top: 15px;"&gt;&lt;strong&gt;Evaluación en Salas de Teams:&lt;/strong&gt; Los 5 ejercicios prácticos son trabajo colaborativo pero cada equipo entrega un producto único. El docente debe:&lt;/p&gt;
+                &lt;ul style="margin-left: 20px;"&gt;
+                    &lt;li&gt;Visitar cada sala al menos 2 veces durante el ejercicio&lt;/li&gt;
+                    &lt;li&gt;Verificar que todos los miembros están participando&lt;/li&gt;
+                    &lt;li&gt;Dar pistas cuando los equipos están bloqueados, sin dar la solución completa&lt;/li&gt;
+                    &lt;li&gt;Recoger entregas antes de que los equipos salgan de las salas&lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;p style="margin-top: 15px;"&gt;&lt;strong&gt;Contexto guatemalteco:&lt;/strong&gt; Todos los ejercicios están contextualizados a la realidad educativa guatemalteca (estudiantes en riesgo, ausentismo, categorización académica). Animar a los estudiantes a pensar cómo aplicarían esto en sus futuras aulas.&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- DISTRIBUCIÓN DE NOTAS --&gt;
+        &lt;div style="background: #fff3e0; padding: 20px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #ff9800;"&gt;
+            &lt;h3 style="color: #e65100; margin-bottom: 15px;"&gt;
+                &lt;i class="fas fa-calculator"&gt;&lt;/i&gt; Distribución de la evaluación - Semana 1
+            &lt;/h3&gt;
+            &lt;table style="width: 100%; border-collapse: collapse; font-size: 14px;"&gt;
+                &lt;tr style="background: white;"&gt;
+                    &lt;td style="padding: 10px; border: 1px solid #ddd;"&gt;&lt;strong&gt;Ejercicios en Salas de Teams (5 ejercicios)&lt;/strong&gt;&lt;/td&gt;
+                    &lt;td style="padding: 10px; border: 1px solid #ddd; text-align: right;"&gt;&lt;strong&gt;60 puntos (60%)&lt;/strong&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td style="padding: 10px; border: 1px solid #ddd;"&gt;• Ejercicio 1: Calculadora de promedio&lt;/td&gt;
+                    &lt;td style="padding: 10px; border: 1px solid #ddd; text-align: right;"&gt;12 pts&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr style="background: white;"&gt;
+                    &lt;td style="padding: 10px; border: 1px solid #ddd;"&gt;• Ejercicio 2: Categorización de estudiantes&lt;/td&gt;
+                    &lt;td style="padding: 10px; border: 1px solid #ddd; text-align: right;"&gt;12 pts&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td style="padding: 10px; border: 1px solid #ddd;"&gt;• Ejercicio 3: Registro múltiple&lt;/td&gt;
+                    &lt;td style="padding: 10px; border: 1px solid #ddd; text-align: right;"&gt;12 pts&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr style="background: white;"&gt;
+                    &lt;td style="padding: 10px; border: 1px solid #ddd;"&gt;• Ejercicio 4: Estructura y modelo de datos (Proyecto)&lt;/td&gt;
+                    &lt;td style="padding: 10px; border: 1px solid #ddd; text-align: right;"&gt;12 pts&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td style="padding: 10px; border: 1px solid #ddd;"&gt;• Ejercicio 5: Rutas y visualización Flask (Proyecto)&lt;/td&gt;
+                    &lt;td style="padding: 10px; border: 1px solid #ddd; text-align: right;"&gt;12 pts&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr style="background: white;"&gt;
+                    &lt;td style="padding: 10px; border: 1px solid #ddd;"&gt;&lt;strong&gt;Proyecto Integrador - Fase 1 completa&lt;/strong&gt;&lt;/td&gt;
+                    &lt;td style="padding: 10px; border: 1px solid #ddd; text-align: right;"&gt;&lt;strong&gt;30 puntos (30%)&lt;/strong&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td style="padding: 10px; border: 1px solid #ddd; font-size: 12px;"&gt;(Entrega: Carpeta .zip con proyecto completo funcionando + capturas de pantalla + documentación)&lt;/td&gt;
+                    &lt;td style="padding: 10px; border: 1px solid #ddd; text-align: right;"&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr style="background: white;"&gt;
+                    &lt;td style="padding: 10px; border: 1px solid #ddd;"&gt;&lt;strong&gt;Reflexión Pedagógica&lt;/strong&gt;&lt;/td&gt;
+                    &lt;td style="padding: 10px; border: 1px solid #ddd; text-align: right;"&gt;&lt;strong&gt;10 puntos (10%)&lt;/strong&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td style="padding: 10px; border: 1px solid #ddd; font-size: 12px;"&gt;(Entrega: Texto 300-400 palabras sobre enseñanza de programación en contexto rural)&lt;/td&gt;
+                    &lt;td style="padding: 10px; border: 1px solid #ddd; text-align: right;"&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr style="background: #ff9800; color: white; font-weight: bold; font-size: 16px;"&gt;
+                    &lt;td style="padding: 12px; border: 1px solid #e65100;"&gt;TOTAL SEMANA 1&lt;/td&gt;
+                    &lt;td style="padding: 12px; border: 1px solid #e65100; text-align: right;"&gt;100 puntos&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/table&gt;
+            &lt;p style="color: #e65100; margin-top: 15px; font-size: 13px;"&gt;
+                &lt;i class="fas fa-exclamation-circle"&gt;&lt;/i&gt; &lt;strong&gt;Importante:&lt;/strong&gt; Los ejercicios en Salas deben entregarse DURANTE la sesión (antes de salir de las salas). El proyecto completo y la reflexión tienen fecha límite: [especificar fecha antes de Semana 2].
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Prism.js Scripts --&gt;
+    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"&gt;&lt;/script&gt;
+    &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css"&gt;
+&lt;/body&gt;
+&lt;/html&gt;

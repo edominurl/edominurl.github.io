@@ -98,10 +98,125 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.08);
         }
+
+        /* Estilos para navegación entre semanas */
+        .course-nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 20px;
+            margin: 40px -40px 30px -40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .course-nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: white;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            margin-top: 0px;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+
+        .dropdown-content a:hover {
+            background: #f8f9fa;
+        }
+
+        .dropdown-content a.active-link {
+            background: #e3f2fd;
+            color: #1976d2;
+            font-weight: bold;
+        }
+
+        .nav-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .nav-home-btn {
+            background: rgba(255,255,255,0.9);
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .course-nav-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .nav-links {
+                flex-direction: column;
+            }
+            .nav-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-gray-50 to-gray-100">
-
     <div class="min-h-screen">
         <!-- Header Principal -->
         <header style="background: linear-gradient(135deg, #150F5D 0%, #1a1566 50%, #150F5D 100%);" class="text-white py-16 shadow-2xl">
@@ -142,6 +257,78 @@
                 </div>
             </div>
         </header>
+
+            <div class="container mx-auto">
+                <!-- Navegación del curso -->
+        <nav class="course-nav">
+            <div class="course-nav-container">
+                <a href="index.html" class="nav-btn nav-home-btn">
+                    <i class="fas fa-home"></i> Inicio del Curso
+                </a>
+                <div class="nav-links">
+                    <!-- Dropdown Semana 1 -->
+                    <div class="nav-dropdown">
+                        <button class="nav-btn active">
+                            <i class="fas fa-book"></i> Semana 1 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="guia-aprendizaje-semana-1.html" class="active-link">
+                                <i class="fas fa-book-reader"></i> Guía de Aprendizaje 1
+                            </a>
+                            <a href="sesion-clase-semana-1.html">
+                                <i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 1
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown Semana 2 -->
+                    <div class="nav-dropdown">
+                        <button class="nav-btn">
+                            <i class="fas fa-book"></i> Semana 2 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="guia-aprendizaje-semana-2.html">
+                                <i class="fas fa-book-reader"></i> Guía de Aprendizaje 2
+                            </a>
+                            <a href="sesion-clase-semana-2.html">
+                                <i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 2
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown Semana 3 -->
+                    <div class="nav-dropdown">
+                        <button class="nav-btn">
+                            <i class="fas fa-book"></i> Semana 3 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="guia-aprendizaje-semana-3.html">
+                                <i class="fas fa-book-reader"></i> Guía de Aprendizaje 3
+                            </a>
+                            <a href="sesion-clase-semana-3.html">
+                                <i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 3
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown Semana 4 -->
+                    <div class="nav-dropdown">
+                        <button class="nav-btn">
+                            <i class="fas fa-book"></i> Semana 4 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="guia-aprendizaje-semana-4.html">
+                                <i class="fas fa-book-reader"></i> Guía de Aprendizaje 4
+                            </a>
+                            <a href="sesion-clase-semana-4.html">
+                                <i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 4
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="lg:grid lg:grid-cols-4 lg:gap-8">
@@ -1298,7 +1485,7 @@
                                     <i class="fas fa-calendar-day mr-2"></i>SEMANA 1: Sábado [Fecha según calendario académico URL - Enero 2025]
                                 </h3>
                                 <div class="space-y-2 text-sm" style="color: #1a1566;">
-                                    <p><strong style="color: #150F5D;">��� SESIÓN SINCRÓNICA (07:00 - 12:45):</strong></p>
+                                    <p><strong style="color: #150F5D;">��� SESIÓN SINCRÓNICA (07:00 - 12:45):</strong></p>
                                     <ul class="ml-6 space-y-1" style="color: #374151;">
                                         <li>• <strong>07:00-07:20:</strong> Bienvenida oficial, presentación de docente y estudiantes, revisión del programa, configuración de herramientas (Python, VS Code, Git)</li>
                                         <li>• <strong>07:20-08:45:</strong> Fundamentos de programación: Pensamiento computacional, tipos de datos, variables, operadores, condicionales (if-elif-else)</li>
@@ -1306,14 +1493,14 @@
                                         <li>• <strong>09:00-10:45:</strong> Estructuras de control: Ciclos (for, while), ejercicios prácticos de lógica, resolución de problemas algorítmicos</li>
                                         <li>• <strong>10:45-11:00:</strong> <span class="font-bold" style="color: #ffd971;">☕ RECESO</span></li>
                                         <li>• <strong>11:00-12:30:</strong> Instalación de Flask, creación de entorno virtual, primera aplicación "Hola Mundo", rutas básicas, parámetros en URLs</li>
-                                        <li>• <strong>12:30-12:45:</strong> <span class="font-bold" style="color: #92400e;">��� Actividad evaluada sesión 1 (5 pts)</span> - Script Python con rutas dinámicas, cierre y asignación de Guía 1</li>
+                                        <li>• <strong>12:30-12:45:</strong> <span class="font-bold" style="color: #92400e;">��� Actividad evaluada sesión 1 (5 pts)</span> - Script Python con rutas dinámicas, cierre y asignación de Guía 1</li>
                                     </ul>
-                                    <p class="mt-3"><strong style="color: #150F5D;">��� TRABAJO AUTÓNOMO (8-10 horas):</strong></p>
+                                    <p class="mt-3"><strong style="color: #150F5D;">��� TRABAJO AUTÓNOMO (8-10 horas):</strong></p>
                                     <ul class="ml-6 space-y-1" style="color: #374151;">
                                         <li>• <strong>Guía de Aprendizaje 1:</strong> Funciones modulares, listas y diccionarios, templates Jinja2, integración Flask-HTML</li>
                                         <li>• <strong>Reflexión Pedagógica 1:</strong> Estrategias didácticas para enseñar programación en contextos rurales (300-400 palabras)</li>
                                     </ul>
-                                    <p class="font-semibold mt-2" style="color: #150F5D;"><i class="fas fa-clock mr-1"></i>��� ENTREGAS: Guía 1 (Viernes 11:59 PM) | Reflexión 1 (Domingo 11:59 PM)</p>
+                                    <p class="font-semibold mt-2" style="color: #150F5D;"><i class="fas fa-clock mr-1"></i>��� ENTREGAS: Guía 1 (Viernes 11:59 PM) | Reflexión 1 (Domingo 11:59 PM)</p>
                                 </div>
                             </div>
 
@@ -1323,7 +1510,7 @@
                                     <i class="fas fa-calendar-day mr-2"></i>SEMANA 2: Sábado [Una semana después] - Manejo de Datos
                                 </h3>
                                 <div class="space-y-2 text-sm" style="color: #78350f;">
-                                    <p><strong style="color: #92400e;">��� SESIÓN SINCRÓNICA (07:00 - 12:45):</strong></p>
+                                    <p><strong style="color: #92400e;">��� SESIÓN SINCRÓNICA (07:00 - 12:45):</strong></p>
                                     <ul class="ml-6 space-y-1" style="color: #374151;">
                                         <li>• <strong>07:00-07:30:</strong> Retroalimentación Guía 1, dudas técnicas, mejores prácticas identificadas</li>
                                         <li>• <strong>07:30-08:45:</strong> Persistencia de datos: Archivos JSON (lectura/escritura), módulo json en Python, estructuración de datos</li>
@@ -1331,14 +1518,14 @@
                                         <li>• <strong>09:00-10:45:</strong> Introducción a bases de datos: SQLite sin servidor, SQL básico (CREATE TABLE, INSERT, SELECT), módulo sqlite3</li>
                                         <li>• <strong>10:45-11:00:</strong> <span class="font-bold" style="color: #ffd971;">☕ RECESO</span></li>
                                         <li>• <strong>11:00-12:30:</strong> Integración Python-SQLite, operaciones CRUD (CREATE y READ), migración de datos JSON a SQLite</li>
-                                        <li>• <strong>12:30-12:45:</strong> <span class="font-bold" style="color: #92400e;">��� Actividad evaluada sesión 2 (5 pts)</span> - Funciones CRUD con SQLite, asignación de Guía 2</li>
+                                        <li>• <strong>12:30-12:45:</strong> <span class="font-bold" style="color: #92400e;">��� Actividad evaluada sesión 2 (5 pts)</span> - Funciones CRUD con SQLite, asignación de Guía 2</li>
                                     </ul>
-                                    <p class="mt-3"><strong style="color: #92400e;">��� TRABAJO AUTÓNOMO (10-12 horas):</strong></p>
+                                    <p class="mt-3"><strong style="color: #92400e;">��� TRABAJO AUTÓNOMO (10-12 horas):</strong></p>
                                     <ul class="ml-6 space-y-1" style="color: #374151;">
                                         <li>• <strong>Guía de Aprendizaje 2:</strong> Funciones CRUD modulares, sistema de categorización por riesgo (verde/amarillo/rojo), integración completa con proyecto</li>
                                         <li>• <strong>Reflexión Pedagógica 2:</strong> Ética en el manejo de datos de estudiantes, código de conducta (300-400 palabras)</li>
                                     </ul>
-                                    <p class="font-semibold mt-2" style="color: #92400e;"><i class="fas fa-clock mr-1"></i>��� ENTREGAS: Guía 2 (Viernes 11:59 PM) | Reflexión 2 (Domingo 11:59 PM)</p>
+                                    <p class="font-semibold mt-2" style="color: #92400e;"><i class="fas fa-clock mr-1"></i>��� ENTREGAS: Guía 2 (Viernes 11:59 PM) | Reflexión 2 (Domingo 11:59 PM)</p>
                                 </div>
                             </div>
 
@@ -1348,7 +1535,7 @@
                                     <i class="fas fa-calendar-day mr-2"></i>SEMANA 3: Sábado [Dos semanas después] - Interactividad y Visualización
                                 </h3>
                                 <div class="space-y-2 text-sm" style="color: #1a1566;">
-                                    <p><strong style="color: #150F5D;">��� SESIÓN SINCRÓNICA (07:00 - 12:45):</strong></p>
+                                    <p><strong style="color: #150F5D;">��� SESIÓN SINCRÓNICA (07:00 - 12:45):</strong></p>
                                     <ul class="ml-6 space-y-1" style="color: #374151;">
                                         <li>• <strong>07:00-07:30:</strong> Retroalimentación Guía 2, showcase de mejores proyectos, solución de problemas comunes</li>
                                         <li>• <strong>07:30-08:45:</strong> Formularios HTML: elementos (input, textarea, select), métodos HTTP (GET vs POST), validación HTML5</li>
@@ -1356,14 +1543,14 @@
                                         <li>• <strong>09:00-10:45:</strong> Bootstrap framework: grid system, componentes (cards, tables, modals), diseño responsive, operaciones UPDATE y DELETE</li>
                                         <li>• <strong>10:45-11:00:</strong> <span class="font-bold" style="color: #ffd971;">☕ RECESO</span></li>
                                         <li>• <strong>11:00-12:30:</strong> Visualización de datos: Chart.js o alternativas, creación de dashboard, gráficas de barras/pastel, estadísticas visuales</li>
-                                        <li>• <strong>12:30-12:45:</strong> <span class="font-bold" style="color: #92400e;">��� Actividad evaluada sesión 3 (5 pts)</span> - Formulario con validación + DELETE, asignación de Guía 3</li>
+                                        <li>• <strong>12:30-12:45:</strong> <span class="font-bold" style="color: #92400e;">��� Actividad evaluada sesión 3 (5 pts)</span> - Formulario con validación + DELETE, asignación de Guía 3</li>
                                     </ul>
-                                    <p class="mt-3"><strong style="color: #150F5D;">��� TRABAJO AUTÓNOMO (12-15 horas):</strong></p>
+                                    <p class="mt-3"><strong style="color: #150F5D;">��� TRABAJO AUTÓNOMO (12-15 horas):</strong></p>
                                     <ul class="ml-6 space-y-1" style="color: #374151;">
                                         <li>• <strong>Guía de Aprendizaje 3:</strong> CRUD completo funcionando, formularios con validación robusta, dashboard con 3 visualizaciones, interfaz responsive</li>
                                         <li>• <strong>Reflexión Pedagógica 3:</strong> Visualización de datos para decisiones pedagógicas, competencias digitales docentes (300-400 palabras)</li>
                                     </ul>
-                                    <p class="font-semibold mt-2" style="color: #150F5D;"><i class="fas fa-clock mr-1"></i>��� ENTREGAS: Guía 3 (Viernes 11:59 PM) | Reflexión 3 (Domingo 11:59 PM)</p>
+                                    <p class="font-semibold mt-2" style="color: #150F5D;"><i class="fas fa-clock mr-1"></i>��� ENTREGAS: Guía 3 (Viernes 11:59 PM) | Reflexión 3 (Domingo 11:59 PM)</p>
                                 </div>
                             </div>
 
@@ -1373,34 +1560,34 @@
                                     <i class="fas fa-calendar-day mr-2"></i>SEMANA 4: Sábado [Tres semanas después] - Cierre y Presentaciones
                                 </h3>
                                 <div class="space-y-2 text-sm" style="color: #78350f;">
-                                    <p><strong style="color: #92400e;">��� SESIÓN SINCRÓNICA (07:00 - 12:45):</strong></p>
+                                    <p><strong style="color: #92400e;">��� SESIÓN SINCRÓNICA (07:00 - 12:45):</strong></p>
                                     <ul class="ml-6 space-y-1" style="color: #374151;">
                                         <li>• <strong>07:00-07:20:</strong> Retroalimentación final de Guía 3, resolución de dudas técnicas de último momento</li>
                                         <li>• <strong>07:20-08:45:</strong> Manejo de errores: try-except-finally, tipos de excepciones, logging, mensajes amigables para usuarios</li>
                                         <li>• <strong>08:45-09:00:</strong> <span class="font-bold" style="color: #ffd971;">☕ RECESO</span></li>
                                         <li>• <strong>09:00-10:45:</strong> Documentación profesional: README.md efectivo, docstrings, comentarios de código, requirements.txt, guía de instalación</li>
                                         <li>• <strong>10:45-11:00:</strong> <span class="font-bold" style="color: #ffd971;">☕ RECESO y preparación para presentaciones</span></li>
-                                        <li>• <strong>11:00-12:45:</strong> <span class="font-bold text-lg" style="color: #150F5D;">��� PRESENTACIONES FINALES (10-12 min c/u)</span></li>
+                                        <li>• <strong>11:00-12:45:</strong> <span class="font-bold text-lg" style="color: #150F5D;">��� PRESENTACIONES FINALES (10-12 min c/u)</span></li>
                                         <li class="ml-4">→ Demostración en vivo del proyecto completo</li>
                                         <li class="ml-4">→ Reflexión técnica y pedagógica</li>
                                         <li class="ml-4">→ Propuesta didáctica para enseñanza</li>
                                         <li class="ml-4">→ Retroalimentación entre pares</li>
                                     </ul>
-                                    <p class="mt-3"><strong style="color: #92400e;">��� TRABAJO AUTÓNOMO (10-12 horas - ANTES del sábado):</strong></p>
+                                    <p class="mt-3"><strong style="color: #92400e;">��� TRABAJO AUTÓNOMO (10-12 horas - ANTES del sábado):</strong></p>
                                     <ul class="ml-6 space-y-1" style="color: #374151;">
                                         <li>• <strong>Guía de Aprendizaje 4:</strong> Manejo de errores implementado, README completo, video demostrativo 5 min, sistema instalable</li>
                                         <li>• <strong>Reflexión Pedagógica 4:</strong> Transformación personal como futuro docente tecnológico (500-600 palabras)</li>
                                         <li>• <strong>Autoevaluación y Coevaluación:</strong> Rúbricas completadas, feedback constructivo a 2 compañeros</li>
                                         <li>• <strong>Proyecto Final Completo:</strong> Todo el material listo para presentación</li>
                                     </ul>
-                                    <p class="font-semibold mt-2" style="color: #92400e;"><i class="fas fa-exclamation-triangle mr-1"></i>��� ENTREGA FINAL: Viernes 11:59 PM (SIN EXTENSIÓN) - Todo el material debe estar subido antes de la presentación</p>
+                                    <p class="font-semibold mt-2" style="color: #92400e;"><i class="fas fa-exclamation-triangle mr-1"></i>��� ENTREGA FINAL: Viernes 11:59 PM (SIN EXTENSIÓN) - Todo el material debe estar subido antes de la presentación</p>
                                 </div>
                             </div>
 
                             <!-- Resumen de fechas importantes -->
                             <div class="p-6 rounded-lg border-2" style="border-color: #150F5D; background-color: #f9fafb;">
                                 <h3 class="font-bold mb-4 text-lg" style="color: #150F5D;">
-                                    <i class="fas fa-exclamation-circle mr-2"></i>��� RESUMEN DE FECHAS IMPORTANTES
+                                    <i class="fas fa-exclamation-circle mr-2"></i>��� RESUMEN DE FECHAS IMPORTANTES
                                 </h3>
                                 <div class="grid md:grid-cols-2 gap-4 text-sm">
                                     <div>

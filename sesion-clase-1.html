@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión de Clase</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #1a237e;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #1a237e;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .header-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        .header-info div {
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-left: 3px solid #1a237e;
+            font-size: 14px;
+        }
+        
+        .session-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .info-card {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #1976d2;
+        }
+        
+        .info-card.skills {
+            background: #f3e5f5;
+            border-left-color: #7b1fa2;
+        }
+        
+        .info-card.values {
+            background: #e8f5e9;
+            border-left-color: #388e3c;
+        }
+        
+        .info-card.products {
+            background: #fff3e0;
+            border-left-color: #f57c00;
+        }
+        
+        .info-card h3 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #1a237e;
+        }
+        
+        .section-title {
+            background: #1a237e;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin: 40px 0 25px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+        }
+        
+        .activity-block {
+            background: #f8f9fa;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 2px solid #dee2e6;
+            position: relative;
+        }
+        
+        .activity-block::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px 0 0 8px;
+        }
+        
+        .activity-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .field {
+            margin: 15px 0;
+            padding-left: 15px;
+        }
+        
+        .field label {
+            font-weight: 600;
+            color: #495057;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .field-content {
+            background: white;
+            padding: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            min-height: 50px;
+        }
+        
+        .time-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #ffc107;
+            color: #000;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .evaluation-box {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+        
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 30px 0 20px 0;
+            padding: 15px;
+            background: linear-gradient(90deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 8px;
+            border-left: 4px solid #1a237e;
+        }
+        
+        .step-number {
+            background: #1a237e;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .step-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a237e;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Universidad Rafael Landívar</h1>
+            <p>Facultad de Humanidades</p>
+            <p>Departamento de Educación</p>
+            <h2 style="margin-top: 20px; color: #1a237e;">Secuencia de aprendizaje</h2>
+            
+            <div class="header-info">
+                <div><strong>Profesorado:</strong> [Profesorados con Especialidad]</div>
+                <div><strong>Curso:</strong> [Nombre del curso]</div>
+                <div><strong>Créditos:</strong> [Número de créditos]</div>
+                <div><strong>Ciclo:</strong> [Ciclo y módulo]</div>
+                <div style="grid-column: span 2;"><strong>Fecha:</strong> [DD/MM/AAAA]</div>
+            </div>
+        </div>
+
+        <div class="session-number">
+            <i class="fas fa-chalkboard-teacher"></i>
+            Sesión presencial/sincrónica #[X]
+        </div>
+
+        <!-- Información importante -->
+        <h2 class="section-title">
+            <i class="fas fa-info-circle"></i>
+            Información importante
+        </h2>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h3><i class="fas fa-bullseye"></i> Aprendizajes esperados</h3>
+                <div class="field-content">
+                    <ul>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Consectetur adipiscing elit</li>
+                        <li>Sed do eiusmod tempor incididunt</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3><i class="fas fa-book"></i> Contenidos temáticos</h3>
+                <div class="field-content">
+                    <ul>
+                        <li>Tema 1: Lorem ipsum</li>
+                        <li>Tema 2: Consectetur adipiscing</li>
+                        <li>Tema 3: Sed do eiusmod</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-card skills">
+                <h3><i class="fas fa-brain"></i> Habilidades y destrezas</h3>
+                <div class="field-content">
+                    <ul>
+                        <li>Habilidad 1: Lorem ipsum dolor</li>
+                        <li>Habilidad 2: Consectetur adipiscing</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-card values">
+                <h3><i class="fas fa-heart"></i> Valores y actitudes</h3>
+                <div class="field-content">
+                    <ul>
+                        <li>Valor 1: Respeto</li>
+                        <li>Valor 2: Responsabilidad</li>
+                        <li>Actitud: Lorem ipsum</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-card products" style="grid-column: span 2;">
+                <h3><i class="fas fa-clipboard-check"></i> Productos que evidencian el aprendizaje</h3>
+                <div class="field-content">
+                    <ul>
+                        <li>Producto 1: Lorem ipsum dolor sit amet</li>
+                        <li>Producto 2: Consectetur adipiscing elit sed do</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desarrollo de la secuencia -->
+        <h2 class="section-title">
+            <i class="fas fa-list-ol"></i>
+            Desarrollo de la secuencia
+        </h2>
+
+        <!-- 1. Activación de presaberes -->
+        <div class="step-indicator">
+            <div class="step-number">1</div>
+            <div class="step-title"><i class="fas fa-lightbulb"></i> Activación de presaberes</div>
+        </div>
+
+        <div class="activity-block">
+            <div class="field">
+                <label><i class="fas fa-tasks"></i> Actividad:</label>
+                <div class="field-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+                <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> [XX] minutos</span></div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-toolbox"></i> Recursos:</label>
+                <div class="field-content">
+                    - Recurso 1: Lorem ipsum<br>
+                    - Recurso 2: Consectetur adipiscing
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-user-graduate"></i> Actividad que realizará el estudiante:</label>
+                <div class="field-content">
+                    Lorem ipsum dolor sit amet, participación activa en la retroalimentación y ajuste de conceptos previos.
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Construcción del conocimiento -->
+        <div class="step-indicator">
+            <div class="step-number">3</div>
+            <div class="step-title"><i class="fas fa-hammer"></i> Construcción del conocimiento</div>
+        </div>
+
+        <!-- Actividad 1 -->
+        <div class="activity-block">
+            <span class="activity-number">Actividad 1</span>
+
+            <div class="field">
+                <label><i class="fas fa-tasks"></i> Actividad:</label>
+                <div class="field-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Presentación del nuevo contenido mediante sed do eiusmod tempor incididunt.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+                <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> [XX] minutos</span></div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-toolbox"></i> Recursos:</label>
+                <div class="field-content">
+                    - Presentación PowerPoint<br>
+                    - Video explicativo<br>
+                    - Material de lectura
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-user-graduate"></i> Actividad que realizará el estudiante:</label>
+                <div class="field-content">
+                    Los estudiantes observarán, tomarán notas y participarán activamente en la construcción del conocimiento mediante preguntas y aportes.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-chart-line"></i> Evaluación:</label>
+                <div class="evaluation-box">
+                    <strong>Tipo:</strong> [Formativa/Sumativa]<br>
+                    <strong>Instrumento:</strong> Lorem ipsum dolor sit<br>
+                    <strong>Criterios:</strong> Consectetur adipiscing elit
+                </div>
+            </div>
+        </div>
+
+        <!-- Actividad 2 -->
+        <div class="activity-block">
+            <span class="activity-number">Actividad 2</span>
+
+            <div class="field">
+                <label><i class="fas fa-tasks"></i> Actividad:</label>
+                <div class="field-content">
+                    Trabajo colaborativo para profundizar en los conceptos. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+                <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> [XX] minutos</span></div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-toolbox"></i> Recursos:</label>
+                <div class="field-content">
+                    - Guía de trabajo en grupo<br>
+                    - Material complementario<br>
+                    - Fichas de trabajo
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-user-graduate"></i> Actividad que realizará el estudiante:</label>
+                <div class="field-content">
+                    Trabajarán en equipos para analizar, discutir y construir conocimiento de manera colaborativa sobre el tema asignado.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-chart-line"></i> Evaluación:</label>
+                <div class="evaluation-box">
+                    <strong>Tipo:</strong> [Formativa/Sumativa]<br>
+                    <strong>Instrumento:</strong> Rúbrica de trabajo colaborativo<br>
+                    <strong>Criterios:</strong> Participación, colaboración, profundidad de análisis
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Aplicación del conocimiento -->
+        <div class="step-indicator">
+            <div class="step-number">4</div>
+            <div class="step-title"><i class="fas fa-rocket"></i> Aplicación del conocimiento</div>
+        </div>
+
+        <!-- Actividad 1 -->
+        <div class="activity-block">
+            <span class="activity-number">Actividad 1</span>
+
+            <div class="field">
+                <label><i class="fas fa-tasks"></i> Actividad:</label>
+                <div class="field-content">
+                    Ejercicio práctico de aplicación. Lorem ipsum dolor sit amet, los estudiantes aplicarán los conceptos aprendidos en un caso real o simulado.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+                <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> [XX] minutos</span></div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-toolbox"></i> Recursos:</label>
+                <div class="field-content">
+                    - Casos de estudio<br>
+                    - Plantillas de trabajo<br>
+                    - Herramientas digitales
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-user-graduate"></i> Actividad que realizará el estudiante:</label>
+                <div class="field-content">
+                    Aplicarán los conceptos teóricos en ejercicios prácticos, resolviendo problemas o creando productos que demuestren la comprensión del tema.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-chart-line"></i> Evaluación:</label>
+                <div class="evaluation-box">
+                    <strong>Tipo:</strong> [Formativa/Sumativa]<br>
+                    <strong>Instrumento:</strong> Lista de cotejo<br>
+                    <strong>Criterios:</strong> Aplicación correcta, creatividad, funcionalidad
+                </div>
+            </div>
+        </div>
+
+        <!-- Actividad 2 -->
+        <div class="activity-block">
+            <span class="activity-number">Actividad 2</span>
+
+            <div class="field">
+                <label><i class="fas fa-tasks"></i> Actividad:</label>
+                <div class="field-content">
+                    Presentación y socialización de resultados. Los estudiantes compartirán sus aplicaciones prácticas con el grupo.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+                <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> [XX] minutos</span></div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-toolbox"></i> Recursos:</label>
+                <div class="field-content">
+                    - Proyector/pantalla<br>
+                    - Espacio para presentaciones<br>
+                    - Rúbrica de presentación
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-user-graduate"></i> Actividad que realizará el estudiante:</label>
+                <div class="field-content">
+                    Presentarán sus trabajos al grupo, explicando el proceso y los resultados obtenidos. Recibirán y darán retroalimentación constructiva.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-chart-line"></i> Evaluación:</label>
+                <div class="evaluation-box">
+                    <strong>Tipo:</strong> [Formativa/Sumativa]<br>
+                    <strong>Instrumento:</strong> Rúbrica de presentación<br>
+                    <strong>Criterios:</strong> Claridad, dominio del tema, comunicación efectiva
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Reflexión sobre mi proceso de aprendizaje -->
+        <div class="step-indicator">
+            <div class="step-number">5</div>
+            <div class="step-title"><i class="fas fa-mirror"></i> Reflexión sobre mi proceso de aprendizaje</div>
+        </div>
+
+        <div class="activity-block">
+            <div class="field">
+                <label><i class="fas fa-tasks"></i> Actividad:</label>
+                <div class="field-content">
+                    Metacognición y autoevaluación. Los estudiantes reflexionarán sobre qué aprendieron, cómo lo aprendieron y qué dificultades encontraron.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+                <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> [XX] minutos</span></div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-toolbox"></i> Recursos:</label>
+                <div class="field-content">
+                    - Diario reflexivo<br>
+                    - Cuestionario de autoevaluación<br>
+                    - Guía de reflexión metacognitiva
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-user-graduate"></i> Actividad que realizará el estudiante:</label>
+                <div class="field-content">
+                    Completarán un ejercicio de reflexión personal sobre su proceso de aprendizaje, identificando fortalezas, áreas de mejora y estrategias efectivas.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-chart-line"></i> Evaluación:</label>
+                <div class="evaluation-box">
+                    <strong>Tipo:</strong> Formativa<br>
+                    <strong>Instrumento:</strong> Autoevaluación reflexiva<br>
+                    <strong>Criterios:</strong> Honestidad, profundidad de análisis, identificación de aprendizajes
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Introducción al siguiente tema -->
+        <div class="step-indicator">
+            <div class="step-number">6</div>
+            <div class="step-title"><i class="fas fa-forward"></i> Introducción al siguiente tema</div>
+        </div>
+
+        <div class="activity-block">
+            <div class="field">
+                <label><i class="fas fa-tasks"></i> Actividad:</label>
+                <div class="field-content">
+                    Presentación breve del próximo tema y conexión con lo aprendido hoy. Lorem ipsum dolor sit amet, creando expectativa y curiosidad.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+                <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> [XX] minutos</span></div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-toolbox"></i> Recursos:</label>
+                <div class="field-content">
+                    - Adelanto del tema siguiente<br>
+                    - Material introductorio<br>
+                    - Pregunta detonadora
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-user-graduate"></i> Actividad que realizará el estudiante:</label>
+                <div class="field-content">
+                    Escucharán la introducción del próximo tema, harán preguntas iniciales y recibirán orientaciones sobre lecturas o tareas preparatorias.
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Actividad de cierre y despedida -->
+        <div class="step-indicator">
+            <div class="step-number">7</div>
+            <div class="step-title"><i class="fas fa-flag-checkered"></i> Actividad de cierre y despedida</div>
+        </div>
+
+        <div class="activity-block">
+            <div class="field">
+                <label><i class="fas fa-tasks"></i> Actividad:</label>
+                <div class="field-content">
+                    Síntesis final de la sesión, aclaración de dudas finales y mensajes de cierre. Lorem ipsum dolor sit amet, agradecimiento por la participación.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+                <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> [XX] minutos</span></div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-toolbox"></i> Recursos:</label>
+                <div class="field-content">
+                    - Resumen visual de la sesión<br>
+                    - Recordatorios de tareas<br>
+                    - Calendario de próxima sesión
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-user-graduate"></i> Actividad que realizará el estudiante:</label>
+                <div class="field-content">
+                    Participarán en el cierre compartiendo una palabra clave de lo aprendido, harán preguntas finales y tomarán nota de las tareas asignadas.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

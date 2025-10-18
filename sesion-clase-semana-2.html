@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión de Clase Semana 2 - Programación 1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Prism.js para syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #1a237e;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #1a237e;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .header-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        .header-info div {
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-left: 3px solid #1a237e;
+            font-size: 14px;
+        }
+        
+        .session-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .info-card {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #1976d2;
+        }
+        
+        .info-card.skills {
+            background: #f3e5f5;
+            border-left-color: #7b1fa2;
+        }
+        
+        .info-card.values {
+            background: #e8f5e9;
+            border-left-color: #388e3c;
+        }
+        
+        .info-card.products {
+            background: #fff3e0;
+            border-left-color: #f57c00;
+        }
+        
+        .info-card h3 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .info-card ul {
+            margin-left: 20px;
+        }
+        
+        .info-card li {
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            color: #1a237e;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .activity-block {
+            background: #f8f9fa;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #1a237e;
+        }
+        
+        .activity-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .field {
+            margin: 20px 0;
+        }
+        
+        .field label {
+            font-weight: bold;
+            color: #1a237e;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+        
+        .field-content {
+            color: #555;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+        
+        .field-content ul {
+            margin: 10px 0 10px 20px;
+        }
+        
+        .field-content li {
+            margin: 8px 0;
+        }
+        
+        .time-badge {
+            background: #4caf50;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .evaluation-box {
+            background: #fff3e0;
+            border: 2px solid #ff9800;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 30px 0 20px 0;
+            padding: 15px;
+            background: linear-gradient(90deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 8px;
+            border-left: 4px solid #1a237e;
+        }
+        
+        .step-number {
+            background: #1a237e;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .step-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a237e;
+        }
+
+        .code-demo {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        /* Estilos para navegación entre semanas */
+        .course-nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 20px;
+            margin: -40px -40px 30px -40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .course-nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: white;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+
+        .dropdown-content a:hover {
+            background: #f8f9fa;
+        }
+
+        .dropdown-content a.active-link {
+            background: #e3f2fd;
+            color: #1976d2;
+            font-weight: bold;
+        }
+
+        .nav-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .nav-home-btn {
+            background: rgba(255,255,255,0.9);
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-info {
+                grid-template-columns: 1fr;
+            }
+            .course-nav-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .nav-links {
+                flex-direction: column;
+            }
+            .nav-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navegación del curso -->
+        <nav class="course-nav">
+            <div class="course-nav-container">
+                <a href="index.html" class="nav-btn nav-home-btn">
+                    <i class="fas fa-home"></i> Inicio del Curso
+                </a>
+                <div class="nav-links">
+                    <!-- Dropdown Semana 1 -->
+                    <div class="nav-dropdown">
+                        <button class="nav-btn">
+                            <i class="fas fa-book"></i> Semana 1 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="guia-aprendizaje-semana-1.html">
+                                <i class="fas fa-book-reader"></i> Guía de Aprendizaje 1
+                            </a>
+                            <a href="sesion-clase-semana-1.html">
+                                <i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 1
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown Semana 2 -->
+                    <div class="nav-dropdown">
+                        <button class="nav-btn active">
+                            <i class="fas fa-book"></i> Semana 2 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="guia-aprendizaje-semana-2.html">
+                                <i class="fas fa-book-reader"></i> Guía de Aprendizaje 2
+                            </a>
+                            <a href="sesion-clase-semana-2.html" class="active-link">
+                                <i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 2
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown Semana 3 -->
+                    <div class="nav-dropdown">
+                        <button class="nav-btn">
+                            <i class="fas fa-book"></i> Semana 3 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="guia-aprendizaje-semana-3.html">
+                                <i class="fas fa-book-reader"></i> Guía de Aprendizaje 3
+                            </a>
+                            <a href="sesion-clase-semana-3.html">
+                                <i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 3
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown Semana 4 -->
+                    <div class="nav-dropdown">
+                        <button class="nav-btn">
+                            <i class="fas fa-book"></i> Semana 4 <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="guia-aprendizaje-semana-4.html">
+                                <i class="fas fa-book-reader"></i> Guía de Aprendizaje 4
+                            </a>
+                            <a href="sesion-clase-semana-4.html">
+                                <i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 4
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="header">
+            <h1>Universidad Rafael Landívar</h1>
+            <p>Facultad de Humanidades</p>
+            <p>Departamento de Educación</p>
+            <h2 style="margin-top: 20px; color: #1a237e;">Secuencia de aprendizaje</h2>
+            
+            <div class="header-info">
+                <div><strong>Profesorado:</strong> Profesorados con Especialidad</div>
+                <div><strong>Curso:</strong> Programación 1 - Python + Flask</div>
+                <div><strong>Créditos:</strong> 4</div>
+                <div><strong>Ciclo:</strong> I, Módulo I - 2025</div>
+                <div><strong>Duración:</strong> 5h 45min</div>
+                <div><strong>Modalidad:</strong> Sincrónica (Zoom)</div>
+            </div>
+        </div>
+
+        <div class="session-number">
+            <i class="fas fa-chalkboard-teacher"></i>
+            Sesión presencial/sincrónica #2
+            <div style="font-size: 16px; margin-top: 10px; font-weight: normal;">
+                SEMANA 2: Manejo de Datos y Almacenamiento
+            </div>
+        </div>
+
+        <!-- Información importante -->
+        <h2 class="section-title">
+            <i class="fas fa-info-circle"></i>
+            Información importante
+        </h2>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h3><i class="fas fa-bullseye"></i> Aprendizajes esperados</h3>
+                <div class="field-content">
+                    <ul>
+                        <li>Gestionar datos de manera estructurada utilizando archivos JSON</li>
+                        <li>Implementar operaciones básicas con bases de datos SQLite</li>
+                        <li>Crear y consultar tablas con SQL (CREATE, INSERT, SELECT)</li>
+                        <li>Integrar datos dinámicos en templates HTML con Jinja2</li>
+                        <li>Comprender la importancia ética del manejo de datos sensibles</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3><i class="fas fa-book"></i> Contenidos temáticos</h3>
+                <div class="field-content">
+                    <ul>
+                        <li>Persistencia de datos: conceptos básicos</li>
+                        <li>Archivos JSON: lectura y escritura con Python</li>
+                        <li>SQLite: base de datos local sin servidor</li>
+                        <li>SQL básico: CREATE TABLE, INSERT, SELECT</li>
+                        <li>Módulo sqlite3 en Python</li>
+                        <li>Templates dinámicos con Jinja2</li>
+                        <li>Iteración y condicionales en templates</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-card skills">
+                <h3><i class="fas fa-brain"></i> Habilidades y destrezas</h3>
+                <div class="field-content">
+                    <ul>
+                        <li>Diseño de estructuras de datos</li>
+                        <li>Manipulación de archivos JSON</li>
+                        <li>Consultas SQL básicas</li>
+                        <li>Integración Python-SQLite</li>
+                        <li>Desarrollo de templates dinámicos</li>
+                        <li>Depuración de operaciones de base de datos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-card values">
+                <h3><i class="fas fa-heart"></i> Valores y actitudes</h3>
+                <div class="field-content">
+                    <ul>
+                        <li>Responsabilidad en manejo de información sensible</li>
+                        <li>Respeto por la privacidad de datos</li>
+                        <li>Pensamiento organizado y estructurado</li>
+                        <li>Colaboración efectiva en resolución de problemas</li>
+                        <li>Compromiso con calidad y limpieza del código</li>
+                        <li>Ética profesional en el manejo de datos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-card products" style="grid-column: span 2;">
+                <h3><i class="fas fa-clipboard-check"></i> Productos que evidencian el aprendizaje (Para entregar)</h3>
+                <div class="field-content">
+                    <ul>
+                        <li><strong>Ejercicios en Salas de Teams (60%):</strong> 5 ejercicios prácticos resueltos en equipos durante la sesión</li>
+                        <li><strong>Proyecto Fase 2 (30%):</strong> Sistema con persistencia de datos funcionando (JSON o SQLite)</li>
+                        <li><strong>Reflexión pedagógica (10%):</strong> Texto sobre ética en manejo de datos (300-400 palabras)</li>
+                    </ul>
+                    <p style="margin-top: 10px; color: #e65100; font-weight: bold;">
+                        <i class="fas fa-exclamation-circle"></i> Los ejercicios de las Salas de Teams deben entregarse antes de finalizar la sesión
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desarrollo de la secuencia -->
+        <h2 class="section-title">
+            <i class="fas fa-list-ol"></i>
+            Desarrollo de la secuencia
+        </h2>
+
+        <!-- 1. Bienvenida y repaso Semana 1 -->
+        <div class="step-indicator">
+            <div class="step-number">1</div>
+            <div class="step-title"><i class="fas fa-door-open"></i> Bienvenida y repaso Semana 1</div>
+        </div>
+
+        <div class="activity-block">
+            <div class="field">
+                <label><i class="fas fa-tasks"></i> Actividad:</label>
+                <div class="field-content">
+                    <strong>Bienvenida y conexión con Semana 1:</strong> El docente da la bienvenida y pregunta sobre los aprendizajes de la semana anterior. Breve repaso de conceptos clave: variables, condicionales, ciclos, Flask básico.<br><br>
+                    <strong>Introducción a la Semana 2:</strong> Presentación de la problemática: "¿Qué pasa con los datos de nuestro sistema cuando cerramos el programa? Necesitamos persistencia." Discusión sobre la importancia de guardar información.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+                <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> 15 minutos</span></div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-toolbox"></i> Recursos:</label>
+                <div class="field-content">
+                    - Presentación con preguntas detonadoras<br>
+                    - Ejemplos de sistemas que pierden datos vs. sistemas que los guardan<br>
+                    - Kahoot o Mentimeter para repaso rápido
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-user-graduate"></i> Actividad que realizará el estudiante:</label>
+                <div class="field-content">
+                    Participarán en el repaso, compartirán experiencias de la semana anterior, responderán preguntas sobre persistencia de datos.
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Verificación de entorno -->
+        <div class="step-indicator">
+            <div class="step-number">2</div>
+            <div class="step-title"><i class="fas fa-check-circle"></i> Verificación de entorno y conceptos</div>
+        </div>
+
+        <div class="activity-block">
+            <div class="field">
+                <label><i class="fas fa-tasks"></i> Actividad:</label>
+                <div class="field-content">
+                    <strong>Verificación rápida:</strong> El docente verifica que todos tengan su entorno funcionando. Guía rápida para crear un archivo JSON de prueba y verificar que SQLite está disponible.<br><br>
+                    <strong>Repaso conceptual express (10 min):</strong> Revisión de los conceptos estudiados en casa: ¿Qué es JSON? ¿Qué es una base de datos? ¿Para qué sirve SQL? Resolución de dudas específicas.
+                    
+                    <div class="code-demo" style="margin-top: 10px;">
+# Verificación rápida de entorno
+import json
+import sqlite3
+
+# Test JSON
+datos = {"nombre": "Prueba", "valor": 123}
+print("✓ Módulo json disponible")
+
+# Test SQLite
+conexion = sqlite3.connect(':memory:')
+print("✓ SQLite3 disponible")
+conexion.close()
+
+print("¡Todo listo para comenzar!")
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+                <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> 15 minutos</span></div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-toolbox"></i> Recursos:</label>
+                <div class="field-content">
+                    - Script de verificación compartido<br>
+                    - Breakout room para apoyo técnico si es necesario<br>
+                    - Guía rápida de troubleshooting
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-user-graduate"></i> Actividad que realizará el estudiante:</label>
+                <div class="field-content">
+                    Ejecutarán el script de verificación. Harán preguntas sobre conceptos que no quedaron claros durante el estudio autónomo. Confirmarán que pueden crear archivos JSON básicos.
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Demostración y Ejercicio 1: JSON -->
+        <div class="step-indicator">
+            <div class="step-number">3</div>
+            <div class="step-title"><i class="fas fa-code"></i> Persistencia con JSON - Demostración y Ejercicio 1</div>
+        </div>
+
+        <div class="activity-block">
+            <span class="activity-number">Actividad 1: Demostración en vivo + EJERCICIO 1 en Teams</span>
+
+            <div class="field">
+                <label><i class="fas fa-tasks"></i> Actividad:</label>
+                <div class="field-content">
+                    <strong>Demostración en vivo (15 min):</strong> El docente muestra cómo crear un sistema simple de registro que guarda datos en JSON.
+                    
+                    <div class="code-demo" style="margin-top: 10px;">
+# demo_json.py - Sistema de registro con JSON
+import json
+from datetime import datetime
+
+def guardar_estudiante(nombre, grado, promedio):
+    """Guarda un estudiante en el archivo JSON"""
+    # Cargar datos existentes
+    try:
+        with open('estudiantes.json', 'r', encoding='utf-8') as f:
+            estudiantes = json.load(f)
+    except FileNotFoundError:
+        estudiantes = []
+    
+    # Agregar nuevo estudiante
+    nuevo = {
+        "id": len(estudiantes) + 1,
+        "nombre": nombre,
+        "grado": grado,
+        "promedio": promedio,
+        "fecha_registro": datetime.now().strftime("%Y-%m-%d"),
+        "ausentismo": 0
+    }
+    estudiantes.append(nuevo)
+    
+    # Guardar archivo
+    with open('estudiantes.json', 'w', encoding='utf-8') as f:
+        json.dump(estudiantes, f, indent=4, ensure_ascii=False)
+    
+    print(f"✓ Estudiante {nombre} guardado exitosamente")
+
+def mostrar_estudiantes():
+    """Muestra todos los estudiantes registrados"""
+    try:
+        with open('estudiantes.json', 'r', encoding='utf-8') as f:
+            estudiantes = json.load(f)
+        
+        print(f"\n{'='*50}")
+        print(f"Total de estudiantes: {len(estudiantes)}")
+        print(f"{'='*50}")
+        
+        for est in estudiantes:
+            print(f"ID: {est['id']} | {est['nombre']} | Promedio: {est['promedio']}")
+    
+    except FileNotFoundError:
+        print("No hay estudiantes registrados aún")
+
+# Prueba del sistema
+if __name__ == "__main__":
+    guardar_estudiante("María López", "5to Primaria", 85.5)
+    guardar_estudiante("Carlos Pérez", "6to Primaria", 78.0)
+    mostrar_estudiantes()
+                    </div>
+
+                    <strong>EJERCICIO 1 EN SALAS DE TEAMS (35 min):</strong><br>
+                    <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #9c27b0;">
+                        <h4 style="color: #7b1fa2; margin-bottom: 10px;"><i class="fas fa-users"></i> EJERCICIO 1: Sistema de Registro con JSON</h4>
+                        <p><strong>Equipos de 3-4 estudiantes | 35 minutos</strong></p>
+                        <p><strong>Descripción:</strong> Crear un sistema completo de registro de estudiantes que guarde datos en JSON con funcionalidades de agregar, listar y buscar.</p>
+                        <p><strong>Requisitos:</strong></p>
+                        <ul style="margin-left: 20px;">
+                            <li>Crear funciones:
+                                <ul style="margin-left: 20px;">
+                                    <li><code>guardar_estudiante(nombre, grado, promedio, ausentismo)</code></li>
+                                    <li><code>cargar_estudiantes()</code> - retorna lista de diccionarios</li>
+                                    <li><code>buscar_por_nombre(nombre)</code> - busca coincidencias parciales</li>
+                                    <li><code>estudiantes_en_riesgo()</code> - promedio < 60 o ausentismo > 5</li>
+                                </ul>
+                            </li>
+                            <li>El archivo debe llamarse <code>estudiantes_equipoX.json</code></li>
+                            <li>Agregar al menos 8 estudiantes de prueba con datos del contexto guatemalteco</li>
+                            <li>Mostrar estadísticas: total, promedio general, cantidad en riesgo</li>
+                            <li>Manejo de errores: archivo no existe, JSON corrupto</li>
+                        </ul>
+                        <p style="margin-top: 10px;"><strong>Entregable:</strong> Archivo .py funcionando + archivo .json con datos + captura mostrando las 4 funciones ejecutándose</p>
+                        <p style="color: #7b1fa2; font-weight: bold;"><i class="fas fa-trophy"></i> Puntaje: 12 puntos</p>
+                        <p style="font-size: 13px; margin-top: 10px;"><strong>Criterios:</strong> Funciones correctas (4pts), Manejo de errores (3pts), Datos contextualizados (2pts), Estadísticas correctas (3pts)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+                <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> 50 minutos total</span> (15 min demo + 35 min ejercicio)</div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-toolbox"></i> Recursos:</label>
+                <div class="field-content">
+                    - Código de demostración compartido<br>
+                    - Breakout rooms en Teams<br>
+                    - Template de funciones (opcional para equipos que lo necesiten)<br>
+                    - Lista de nombres guatemaltecos para datos de prueba<br>
+                    - Carpeta compartida para entregas
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-user-graduate"></i> Actividad que realizará el estudiante:</label>
+                <div class="field-content">
+                    Trabajarán en equipos en breakout rooms. Dividirán tareas: unos crean las funciones, otros preparan los datos de prueba, otros prueban y documentan. Entregarán antes de salir de la sala.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-chart-line"></i> Evaluación:</label>
+                <div class="evaluation-box">
+                    <strong>Tipo:</strong> Sumativa - Trabajo en equipo<br>
+                    <strong>Instrumento:</strong> Rúbrica de ejercicio práctico<br>
+                    <strong>Ponderación:</strong> 12 puntos (12% de la nota semanal)
+                </div>
+            </div>
+        </div>
+
+        <!-- RECESO -->
+        <div class="step-indicator">
+            <div class="step-number">⏸️</div>
+            <div class="step-title"><i class="fas fa-coffee"></i> RECESO</div>
+        </div>
+
+        <div class="activity-block" style="background: #fff3e0; border-left-color: #ff9800;">
+            <div class="field">
+                <label><i class="fas fa-info-circle"></i> Nota:</label>
+                <div class="field-content">
+                    Tiempo para descanso, café, ir al baño. Los estudiantes pueden seguir trabajando en el ejercicio si lo necesitan o simplemente descansar.
+                </div>
+            </div>
+            <div class="field">
+                <label><i class="fas fa-clock"></i> Tiempo:</label>
+                <div><span class="time-badge" style="background: #ff9800;"><i class="fas fa-hourglass-half"></i> 15 minutos</span></div>
+            </div>
+        </div>
+
+        <!-- 4. SQLite - Migración y Ejercicio 2 -->
+        <div class="step-indicator">
+            <div class="step-number">4</div>
+            <div class="step-title"><i class="fas fa-database"></i> Introducción a SQLite y Ejercicio 2</div>
+        </div>
+
+        <div class="activity-block">
+            <span class="activity-number">Actividad 2: Demostración SQLite + EJERCICIO 2 en Teams</span>
+
+            <div class="field">
+                <label><i class="fas fa-tasks"></i> Actividad:</label>
+                <div class="field-content">
+                    <strong>Demostración en vivo (15 min):</strong> El docente muestra cómo crear una base de datos SQLite y migrar datos desde JSON.
+                    
+                    <div class="code-demo" style="margin-top: 10px;">
+# demo_sqlite.py - Migración de JSON a SQLite
+import sqlite3
+import json
+
+def crear_base_datos():
+    """Crea la tabla de estudiantes en SQLite"""
+    conexion = sqlite3.connect('escuela.db')
+    cursor = conexion.cursor()
+    
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS estudiantes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nombre TEXT NOT NULL,
+            grado TEXT,
+            promedio REAL,
+            ausentismo INTEGER,
+            fecha_registro DATE,
+            estado TEXT
+        )
+    ''')
+    
+    conexion.commit()
+    conexion.close()
+    print("✓ Base de datos creada exitosamente")
+
+def migrar_json_a_sqlite():
+    """Migra datos desde JSON a SQLite"""
+    # Leer datos de JSON
+    with open('estudiantes.json', 'r', encoding='utf-8') as f:
+        estudiantes = json.load(f)
+    
+    # Conectar a SQLite
+    conexion = sqlite3.connect('escuela.db')
+    cursor = conexion.cursor()
+    
+    # Insertar cada estudiante
+    for est in estudiantes:
+        # Determinar estado según promedio
+        if est['promedio'] < 60:
+            estado = "En Riesgo"
+        elif est['promedio'] < 75:
+            estado = "Alerta"
+        else:
+            estado = "Normal"
+        
+        cursor.execute('''
+            INSERT INTO estudiantes (nombre, grado, promedio, ausentismo, fecha_registro, estado)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ''', (est['nombre'], est['grado'], est['promedio'], 
+              est.get('ausentismo', 0), est.get('fecha_registro', '2025-01-01'), estado))
+    
+    conexion.commit()
+    print(f"✓ {len(estudiantes)} estudiantes migrados exitosamente")
+    
+    # Verificar
+    cursor.execute('SELECT COUNT(*) FROM estudiantes')
+    total = cursor.fetchone()[0]
+    print(f"Total en base de datos: {total}")
+    
+    conexion.close()
+
+# Ejecutar migración
+if __name__ == "__main__":
+    crear_base_datos()
+    migrar_json_a_sqlite()
+                    </div>
+
+                    <strong>EJERCICIO 2 EN SALAS DE TEAMS (40 min):</strong><br>
+                    <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #9c27b0;">
+                        <h4 style="color: #7b1fa2; margin-bottom: 10px;"><i class="fas fa-users"></i> EJERCICIO 2: Migración y Consultas en SQLite</h4>
+                        <p><strong>Equipos de 3-4 estudiantes | 40 minutos</strong></p>
+                        <p><strong>Descripción:</strong> Crear una base de datos SQLite completa, migrar datos desde el JSON del ejercicio anterior y realizar consultas SQL.</p>
+                        <p><strong>Requisitos - Parte A: Creación y Migración (20 min):</strong></p>
+                        <ul style="margin-left: 20px;">
+                            <li>Crear base de datos <code>escuela_equipoX.db</code></li>
+                            <li>Crear tabla <code>estudiantes</code> con campos:
+                                <ul style="margin-left: 20px;">
+                                    <li>id (INTEGER PRIMARY KEY AUTOINCREMENT)</li>
+                                    <li>nombre (TEXT NOT NULL)</li>
+                                    <li>grado (TEXT)</li>
+                                    <li>promedio (REAL)</li>
+                                    <li>ausentismo (INTEGER)</li>
+                                    <li>fecha_registro (DATE)</li>
+                                    <li>municipio (TEXT) - agregar este nuevo campo</li>
+                                    <li>nivel_riesgo (TEXT) - calculado: "Bajo", "Medio", "Alto"</li>
+                                </ul>
+                            </li>
+                            <li>Migrar los datos del JSON del Ejercicio 1 a SQLite</li>
+                            <li>Agregar municipio a cada estudiante (contexto guatemalteco)</li>
+                            <li>Calcular nivel_riesgo basado en promedio y ausentismo</li>
+                        </ul>
+                        <p><strong>Requisitos - Parte B: Consultas SQL (20 min):</strong></p>
+                        <ul style="margin-left: 20px;">
+                            <li>Consulta 1: Seleccionar todos los estudiantes ordenados por promedio (descendente)</li>
+                            <li>Consulta 2: Estudiantes con nivel_riesgo = "Alto"</li>
+                            <li>Consulta 3: Promedio de notas por grado</li>
+                            <li>Consulta 4: Top 3 estudiantes con mejor promedio</li>
+                            <li>Consulta 5: Estudiantes de un municipio específico con ausentismo > 3</li>
+                            <li>Mostrar resultados de forma clara en pantalla</li>
+                        </ul>
+                        <p style="margin-top: 10px;"><strong>Entregable:</strong> Archivo .py con funciones de migración y consultas + archivo .db + capturas de pantalla de cada consulta ejecutándose</p>
+                        <p style="color: #7b1fa2; font-weight: bold;"><i class="fas fa-trophy"></i> Puntaje: 12 puntos</p>
+                        <p style="font-size: 13px; margin-top: 10px;"><strong>Criterios:</strong> Tabla creada correctamente (3pts), Migración exitosa (3pts), 5 consultas funcionando (4pts), Cálculo de riesgo correcto (2pts)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+                <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> 55 minutos total</span> (15 min demo + 40 min ejercicio)</div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-toolbox"></i> Recursos:</label>
+                <div class="field-content">
+                    - Código de demostración compartido<br>
+                    - Breakout rooms en Teams<br>
+                    - Cheat sheet de SQL básico (CREATE, INSERT, SELECT)<br>
+                    - Lista de municipios de Guatemala<br>
+                    - DB Browser for SQLite (para visualizar la BD - opcional)<br>
+                    - Carpeta compartida para entregas
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-user-graduate"></i> Actividad que realizará el estudiante:</label>
+                <div class="field-content">
+                    Trabajarán en equipos. Primero crearán la estructura de la base de datos, luego migrarán datos y finalmente ejecutarán las consultas SQL. Documentarán cada paso con capturas.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-chart-line"></i> Evaluación:</label>
+                <div class="evaluation-box">
+                    <strong>Tipo:</strong> Sumativa - Trabajo en equipo<br>
+                    <strong>Instrumento:</strong> Rúbrica de ejercicio práctico<br>
+                    <strong>Ponderación:</strong> 12 puntos (12% de la nota semanal)
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Operaciones CRUD y Ejercicio 3 -->
+        <div class="step-indicator">
+            <div class="step-number">5</div>
+            <div class="step-title"><i class="fas fa-edit"></i> Operaciones CRUD Completas y Ejercicio 3</div>
+        </div>
+
+        <div class="activity-block">
+            <span class="activity-number">Actividad 3: CRUD Básico + EJERCICIO 3 en Teams</span>
+
+            <div class="field">
+                <label><i class="fas fa-tasks"></i> Actividad:</label>
+                <div class="field-content">
+                    <strong>Demostración en vivo (10 min):</strong> El docente muestra cómo crear funciones reutilizables para operaciones CRUD (Create, Read).
+                    
+                    <div class="code-demo" style="margin-top: 10px;">
+# crud_estudiantes.py - Funciones CRUD para SQLite
+import sqlite3
+
+class EstudiantesDB:
+    def __init__(self, nombre_db='escuela.db'):
+        self.nombre_db = nombre_db
+    
+    def agregar_estudiante(self, nombre, grado, promedio, ausentismo, municipio):
+        """CREATE - Agrega un nuevo estudiante"""
+        conexion = sqlite3.connect(self.nombre_db)
+        cursor = conexion.cursor()
+        
+        # Calcular nivel de riesgo
+        if promedio < 60 or ausentismo > 10:
+            nivel_riesgo = "Alto"
+        elif promedio < 75 or ausentismo > 5:
+            nivel_riesgo = "Medio"
+        else:
+            nivel_riesgo = "Bajo"
+        
+        cursor.execute('''
+            INSERT INTO estudiantes (nombre, grado, promedio, ausentismo, municipio, nivel_riesgo, fecha_registro)
+            VALUES (?, ?, ?, ?, ?, ?, DATE('now'))
+        ''', (nombre, grado, promedio, ausentismo, municipio, nivel_riesgo))
+        
+        conexion.commit()
+        estudiante_id = cursor.lastrowid
+        conexion.close()
+        
+        return estudiante_id
+    
+    def obtener_todos(self):
+        """READ - Obtiene todos los estudiantes"""
+        conexion = sqlite3.connect(self.nombre_db)
+        cursor = conexion.cursor()
+        
+        cursor.execute('SELECT * FROM estudiantes ORDER BY id')
+        estudiantes = cursor.fetchall()
+        
+        conexion.close()
+        return estudiantes
+    
+    def buscar_por_criterio(self, campo, valor):
+        """READ - Busca estudiantes por un criterio específico"""
+        conexion = sqlite3.connect(self.nombre_db)
+        cursor = conexion.cursor()
+        
+        query = f'SELECT * FROM estudiantes WHERE {campo} LIKE ?'
+        cursor.execute(query, (f'%{valor}%',))
+        
+        resultados = cursor.fetchall()
+        conexion.close()
+        
+        return resultados
+    
+    def obtener_estadisticas(self):
+        """READ - Obtiene estadísticas generales"""
+        conexion = sqlite3.connect(self.nombre_db)
+        cursor = conexion.cursor()
+        
+        # Total de estudiantes
+        cursor.execute('SELECT COUNT(*) FROM estudiantes')
+        total = cursor.fetchone()[0]
+        
+        # Promedio general
+        cursor.execute('SELECT AVG(promedio) FROM estudiantes')
+        promedio_general = cursor.fetchone()[0]
+        
+        # Por nivel de riesgo
+        cursor.execute('SELECT nivel_riesgo, COUNT(*) FROM estudiantes GROUP BY nivel_riesgo')
+        por_riesgo = cursor.fetchall()
+        
+        conexion.close()
+        
+        return {
+            'total': total,
+            'promedio_general': round(promedio_general, 2),
+            'por_riesgo': dict(por_riesgo)
+        }
+
+# Ejemplo de uso
+if __name__ == "__main__":
+    db = EstudiantesDB()
+    
+    # Agregar estudiante
+    nuevo_id = db.agregar_estudiante("Ana Martínez", "5to Primaria", 88.5, 2, "Quetzaltenango")
+    print(f"Estudiante agregado con ID: {nuevo_id}")
+    
+    # Obtener todos
+    todos = db.obtener_todos()
+    print(f"\nTotal de estudiantes: {len(todos)}")
+    
+    # Estadísticas
+    stats = db.obtener_estadisticas()
+    print(f"\nEstadísticas: {stats}")
+                    </div>
+
+                    <strong>EJERCICIO 3 EN SALAS DE TEAMS (40 min):</strong><br>
+                    <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #9c27b0;">
+                        <h4 style="color: #7b1fa2; margin-bottom: 10px;"><i class="fas fa-users"></i> EJERCICIO 3: Sistema CRUD Completo</h4>
+                        <p><strong>Equipos de 3-4 estudiantes | 40 minutos</strong></p>
+                        <p><strong>Descripción:</strong> Crear una clase completa con métodos CRUD y un menú interactivo para gestionar estudiantes.</p>
+                        <p><strong>Requisitos:</strong></p>
+                        <ul style="margin-left: 20px;">
+                            <li>Crear clase <code>SistemaEstudiantes</code> con métodos:
+                                <ul style="margin-left: 20px;">
+                                    <li><code>agregar_estudiante(datos)</code> - CREATE</li>
+                                    <li><code>obtener_todos()</code> - READ all</li>
+                                    <li><code>buscar_por_id(id)</code> - READ one</li>
+                                    <li><code>buscar_por_nombre(nombre)</code> - READ filtered</li>
+                                    <li><code>obtener_en_riesgo()</code> - READ filtered (nivel Alto o Medio)</li>
+                                    <li><code>obtener_estadisticas_municipio(municipio)</code> - Agregación</li>
+                                    <li><code>generar_reporte_completo()</code> - Reporte con todas las estadísticas</li>
+                                </ul>
+                            </li>
+                            <li>Crear un menú interactivo de consola con opciones:
+                                <ol style="margin-left: 20px;">
+                                    <li>Agregar estudiante</li>
+                                    <li>Ver todos los estudiantes</li>
+                                    <li>Buscar por nombre</li>
+                                    <li>Ver estudiantes en riesgo</li>
+                                    <li>Estadísticas por municipio</li>
+                                    <li>Generar reporte completo</li>
+                                    <li>Salir</li>
+                                </ol>
+                            </li>
+                            <li>Validaciones:
+                                <ul style="margin-left: 20px;">
+                                    <li>Promedio entre 0 y 100</li>
+                                    <li>Ausentismo >= 0</li>
+                                    <li>Nombre no vacío</li>
+                                </ul>
+                            </li>
+                            <li>Formatear salidas de forma clara y profesional</li>
+                        </ul>
+                        <p style="margin-top: 10px;"><strong>Entregable:</strong> Archivo .py con la clase completa y menú funcionando + video corto (max 2 min) mostrando todas las opciones del menú</p>
+                        <p style="color: #7b1fa2; font-weight: bold;"><i class="fas fa-trophy"></i> Puntaje: 12 puntos</p>
+                        <p style="font-size: 13px; margin-top: 10px;"><strong>Criterios:</strong> Clase bien estructurada (3pts), 7 métodos funcionando (4pts), Menú interactivo (2pts), Validaciones (2pts), Formato profesional (1pt)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+                <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> 50 minutos total</span> (10 min demo + 40 min ejercicio)</div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-toolbox"></i> Recursos:</label>
+                <div class="field-content">
+                    - Código de demostración de clase CRUD<br>
+                    - Breakout rooms en Teams<br>
+                    - Template de menú interactivo (opcional)<br>
+                    - Guía de validaciones en Python<br>
+                    - Carpeta compartida para entregas
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-user-graduate"></i> Actividad que realizará el estudiante:</label>
+                <div class="field-content">
+                    Trabajarán en equipos para crear la clase completa. Un integrante se enfoca en los métodos CREATE/READ, otro en las búsquedas y filtros, otro en el menú y validaciones. Probarán exhaustivamente antes de entregar.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-chart-line"></i> Evaluación:</label>
+                <div class="evaluation-box">
+                    <strong>Tipo:</strong> Sumativa - Trabajo en equipo<br>
+                    <strong>Instrumento:</strong> Rúbrica de ejercicio práctico + video demostrativo<br>
+                    <strong>Ponderación:</strong> 12 puntos (12% de la nota semanal)
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Templates dinámicos y Ejercicio 4 -->
+        <div class="step-indicator">
+            <div class="step-number">6</div>
+            <div class="step-title"><i class="fas fa-file-code"></i> Templates Dinámicos con Jinja2 y Ejercicio 4</div>
+        </div>
+
+        <div class="activity-block">
+            <span class="activity-number">Actividad 4: Demostración Templates + EJERCICIO 4 en Teams</span>
+
+            <div class="field">
+                <label><i class="fas fa-tasks"></i> Actividad:</label>
+                <div class="field-content">
+                    <strong>Demostración en vivo (15 min):</strong> El docente muestra cómo integrar SQLite con Flask y renderizar datos en templates dinámicos.
+                    
+                    <div class="code-demo" style="margin-top: 10px;">
+# app.py - Flask con SQLite y Templates
+from flask import Flask, render_template
+import sqlite3
+
+app = Flask(__name__)
+
+def obtener_estudiantes():
+    """Obtiene todos los estudiantes de la BD"""
+    conexion = sqlite3.connect('escuela.db')
+    cursor = conexion.cursor()
+    cursor.execute('SELECT * FROM estudiantes ORDER BY promedio DESC')
+    estudiantes = cursor.fetchall()
+    conexion.close()
+    return estudiantes
+
+def obtener_estadisticas():
+    """Calcula estadísticas generales"""
+    conexion = sqlite3.connect('escuela.db')
+    cursor = conexion.cursor()
+    
+    cursor.execute('SELECT COUNT(*) FROM estudiantes')
+    total = cursor.fetchone()[0]
+    
+    cursor.execute('SELECT AVG(promedio) FROM estudiantes')
+    promedio_general = cursor.fetchone()[0]
+    
+    cursor.execute('SELECT COUNT(*) FROM estudiantes WHERE nivel_riesgo = "Alto"')
+    en_riesgo_alto = cursor.fetchone()[0]
+    
+    conexion.close()
+    
+    return {
+        'total': total,
+        'promedio': round(promedio_general, 2),
+        'riesgo_alto': en_riesgo_alto
+    }
+
+@app.route('/')
+def inicio():
+    estudiantes = obtener_estudiantes()
+    stats = obtener_estadisticas()
+    return render_template('inicio.html', 
+                         estudiantes=estudiantes,
+                         estadisticas=stats)
+
+@app.route('/riesgo')
+def estudiantes_riesgo():
+    conexion = sqlite3.connect('escuela.db')
+    cursor = conexion.cursor()
+    cursor.execute('SELECT * FROM estudiantes WHERE nivel_riesgo IN ("Alto", "Medio") ORDER BY promedio')
+    estudiantes = cursor.fetchall()
+    conexion.close()
+    return render_template('riesgo.html', estudiantes=estudiantes)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+                    </div>
+
+                    <strong>Template ejemplo (templates/inicio.html):</strong>
+                    <div class="code-demo" style="margin-top: 10px;">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Sistema de Estudiantes&lt;/title&gt;
+    &lt;style&gt;
+        .riesgo-alto { background-color: #ffebee; color: #c62828; }
+        .riesgo-medio { background-color: #fff3e0; color: #e65100; }
+        .riesgo-bajo { background-color: #e8f5e9; color: #2e7d32; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Sistema de Seguimiento de Estudiantes&lt;/h1&gt;
+    
+    &lt;div class="estadisticas"&gt;
+        &lt;h2&gt;Estadísticas Generales&lt;/h2&gt;
+        &lt;p&gt;Total de estudiantes: {{ estadisticas.total }}&lt;/p&gt;
+        &lt;p&gt;Promedio general: {{ estadisticas.promedio }}&lt;/p&gt;
+        &lt;p&gt;En riesgo alto: {{ estadisticas.riesgo_alto }}&lt;/p&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Lista de Estudiantes&lt;/h2&gt;
+    &lt;table&gt;
+        &lt;tr&gt;
+            &lt;th&gt;ID&lt;/th&gt;
+            &lt;th&gt;Nombre&lt;/th&gt;
+            &lt;th&gt;Grado&lt;/th&gt;
+            &lt;th&gt;Promedio&lt;/th&gt;
+            &lt;th&gt;Ausentismo&lt;/th&gt;
+            &lt;th&gt;Nivel de Riesgo&lt;/th&gt;
+        &lt;/tr&gt;
+        {% for est in estudiantes %}
+        &lt;tr class="riesgo-{{ est[7]|lower }}"&gt;
+            &lt;td&gt;{{ est[0] }}&lt;/td&gt;
+            &lt;td&gt;{{ est[1] }}&lt;/td&gt;
+            &lt;td&gt;{{ est[2] }}&lt;/td&gt;
+            &lt;td&gt;{{ est[3] }}&lt;/td&gt;
+            &lt;td&gt;{{ est[4] }}&lt;/td&gt;
+            &lt;td&gt;
+                {% if est[7] == 'Alto' %}
+                    ��� {{ est[7] }}
+                {% elif est[7] == 'Medio' %}
+                    ��� {{ est[7] }}
+                {% else %}
+                    ��� {{ est[7] }}
+                {% endif %}
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        {% endfor %}
+    &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                    </div>
+
+                    <strong>EJERCICIO 4 EN SALAS DE TEAMS (45 min):</strong><br>
+                    <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #9c27b0;">
+                        <h4 style="color: #7b1fa2; margin-bottom: 10px;"><i class="fas fa-users"></i> EJERCICIO 4: Sistema Web con Templates Dinámicos</h4>
+                        <p><strong>Equipos de 3-4 estudiantes | 45 minutos</strong></p>
+                        <p><strong>Descripción:</strong> Crear una aplicación Flask completa que muestre datos de la base de datos en múltiples páginas con templates dinámicos.</p>
+                        <p><strong>Requisitos:</strong></p>
+                        <ul style="margin-left: 20px;">
+                            <li>Estructura de carpetas:
+                                <pre style="background: white; padding: 8px; margin: 5px 0; border-radius: 4px;">
+proyecto_equipo_X/
+├── app.py
+├── escuela.db
+├── templates/
+│   ├── base.html (template padre)
+│   ├── inicio.html
+│   ├── estudiantes.html
+│   ├── riesgo.html
+│   └── municipio.html
+└── static/
+    └── style.css
+                                </pre>
+                            </li>
+                            <li>Rutas Flask a crear:
+                                <ul style="margin-left: 20px;">
+                                    <li><code>/</code> - Página de inicio con estadísticas y gráfico simple</li>
+                                    <li><code>/estudiantes</code> - Lista completa de estudiantes con filtros</li>
+                                    <li><code>/riesgo</code> - Estudiantes en riesgo (Alto y Medio)</li>
+                                    <li><code>/municipio/&lt;nombre&gt;</code> - Estudiantes por municipio</li>
+                                    <li><code>/estudiante/&lt;id&gt;</code> - Detalle de un estudiante</li>
+                                </ul>
+                            </li>
+                            <li>Características de templates:
+                                <ul style="margin-left: 20px;">
+                                    <li>Usar template base ({% extends "base.html" %})</li>
+                                    <li>Navegación entre páginas</li>
+                                    <li>Colores según nivel de riesgo</li>
+                                    <li>Loops con {% for %}</li>
+                                    <li>Condicionales con {% if %}</li>
+                                    <li>Filtros Jinja2 (|upper, |length, |round)</li>
+                                </ul>
+                            </li>
+                            <li>CSS básico para hacer el sitio profesional</li>
+                        </ul>
+                        <p style="margin-top: 10px;"><strong>Entregable:</strong> Carpeta completa del proyecto + video (max 3 min) navegando por todas las rutas + capturas de cada página</p>
+                        <p style="color: #7b1fa2; font-weight: bold;"><i class="fas fa-trophy"></i> Puntaje: 12 puntos</p>
+                        <p style="font-size: 13px; margin-top: 10px;"><strong>Criterios:</strong> 5 rutas funcionando (5pts), Templates con herencia (2pts), Diseño y CSS (2pts), Datos dinámicos correctos (2pts), Navegación funcional (1pt)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+                <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> 60 minutos total</span> (15 min demo + 45 min ejercicio)</div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-toolbox"></i> Recursos:</label>
+                <div class="field-content">
+                    - Código de demostración completo<br>
+                    - Breakout rooms en Teams<br>
+                    - Template base.html starter<br>
+                    - Archivo CSS básico starter<br>
+                    - Guía rápida de Jinja2 syntax<br>
+                    - Carpeta compartida para entregas
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-user-graduate"></i> Actividad que realizará el estudiante:</label>
+                <div class="field-content">
+                    Trabajarán en equipos. Dividirán rutas: cada integrante crea 1-2 rutas con sus templates correspondientes. Uno se enfoca en el CSS y diseño general. Integrarán todo al final y probarán la navegación completa.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-chart-line"></i> Evaluación:</label>
+                <div class="evaluation-box">
+                    <strong>Tipo:</strong> Sumativa - Trabajo en equipo<br>
+                    <strong>Instrumento:</strong> Rúbrica de proyecto web + video demostrativo<br>
+                    <strong>Ponderación:</strong> 12 puntos (12% de la nota semanal)
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Proyecto Integrador Fase 2 y Ejercicio 5 -->
+        <div class="step-indicator">
+            <div class="step-number">7</div>
+            <div class="step-title"><i class="fas fa-project-diagram"></i> PROYECTO INTEGRADOR - Fase 2</div>
+        </div>
+
+        <div class="activity-block">
+            <span class="activity-number">Actividad 5: PROYECTO FASE 2 - Sistema Completo con Persistencia</span>
+
+            <div class="field">
+                <label><i class="fas fa-tasks"></i> Actividad:</label>
+                <div class="field-content">
+                    <strong>Integración final (10 min):</strong> El docente explica cómo todo lo aprendido se integra en el proyecto final. Muestra el sistema completo funcionando.<br><br>
+                    
+                    <strong>EJERCICIO 5 - PROYECTO EN SALAS DE TEAMS (50 min):</strong><br>
+                    <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #9c27b0;">
+                        <h4 style="color: #7b1fa2; margin-bottom: 10px;"><i class="fas fa-users"></i> EJERCICIO 5: Sistema de Seguimiento de Estudiantes en Riesgo - FASE 2</h4>
+                        <p><strong>Equipos de 3-4 estudiantes | 50 minutos</strong></p>
+                        <p><strong>Descripción:</strong> Integrar todo lo aprendido en la Semana 2 al proyecto. El sistema debe tener persistencia completa con SQLite y visualización web profesional.</p>
+                        
+                        <p><strong>Requisitos Fase 2:</strong></p>
+                        <ul style="margin-left: 20px;">
+                            <li><strong>Base de datos SQLite:</strong>
+                                <ul style="margin-left: 20px;">
+                                    <li>Tabla <code>estudiantes</code> con todos los campos necesarios</li>
+                                    <li>Al menos 20 estudiantes de prueba (datos guatemaltecos realistas)</li>
+                                    <li>Cálculo automático de nivel_riesgo</li>
+                                    <li>Datos variados: diferentes municipios, grados, promedios</li>
+                                </ul>
+                            </li>
+                            <li><strong>Backend Flask con funcionalidades:</strong>
+                                <ul style="margin-left: 20px;">
+                                    <li>Módulo <code>database.py</code> con clase de gestión de BD</li>
+                                    <li>Funciones CRUD completas</li>
+                                    <li>Función de cálculo de estadísticas</li>
+                                    <li>Función de generación de alertas</li>
+                                </ul>
+                            </li>
+                            <li><strong>Frontend - Páginas web mínimas:</strong>
+                                <ol style="margin-left: 20px;">
+                                    <li><strong>Dashboard</strong> (/) - Estadísticas generales:
+                                        <ul style="margin-left: 20px;">
+                                            <li>Total de estudiantes</li>
+                                            <li>Promedio general</li>
+                                            <li>Distribución por nivel de riesgo (gráfico o lista)</li>
+                                            <li>Top 5 con mejores promedios</li>
+                                            <li>Top 5 en mayor riesgo</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Lista Completa</strong> (/estudiantes) - Tabla con:
+                                        <ul style="margin-left: 20px;">
+                                            <li>Todos los estudiantes</li>
+                                            <li>Colores según nivel de riesgo</li>
+                                            <li>Ordenamiento por diferentes campos</li>
+                                            <li>Link a detalle de cada estudiante</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Alertas</strong> (/alertas) - Estudiantes que requieren atención:
+                                        <ul style="margin-left: 20px;">
+                                            <li>Riesgo Alto (promedio < 60 o ausentismo > 10)</li>
+                                            <li>Riesgo Medio (promedio < 75 o ausentismo > 5)</li>
+                                            <li>Recomendaciones automáticas por estudiante</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Por Municipio</strong> (/municipio/&lt;nombre&gt;):
+                                        <ul style="margin-left: 20px;">
+                                            <li>Estadísticas del municipio</li>
+                                            <li>Lista de estudiantes del municipio</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li><strong>Diseño profesional:</strong>
+                                <ul style="margin-left: 20px;">
+                                    <li>CSS organizado en archivo separado</li>
+                                    <li>Navegación clara entre páginas</li>
+                                    <li>Responsive básico</li>
+                                    <li>Paleta de colores coherente</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <p style="margin-top: 15px;"><strong>Entregables de la Fase 2:</strong></p>
+                        <ol style="margin-left: 20px;">
+                            <li>Carpeta completa del proyecto (código fuente)</li>
+                            <li>Base de datos <code>.db</code> con 20+ estudiantes</li>
+                            <li>Documento README con:
+                                <ul style="margin-left: 20px;">
+                                    <li>Instrucciones de instalación</li>
+                                    <li>Descripción de funcionalidades</li>
+                                    <li>Capturas de pantalla de cada página</li>
+                                </ul>
+                            </li>
+                            <li>Video demostrativo (3-5 min) mostrando:
+                                <ul style="margin-left: 20px;">
+                                    <li>Navegación por todas las páginas</li>
+                                    <li>Consulta de base de datos funcionando</li>
+                                    <li>Sistema de alertas operando</li>
+                                </ul>
+                            </li>
+                        </ol>
+
+                        <p style="color: #7b1fa2; font-weight: bold; margin-top: 15px;"><i class="fas fa-trophy"></i> Puntaje: 12 puntos (Ejercicio 5)</p>
+                        <p style="font-size: 13px;"><strong>Criterios:</strong> BD con 20+ registros (2pts), 4 páginas funcionando (4pts), CRUD operativo (2pts), Diseño profesional (2pts), Estadísticas correctas (2pts)</p>
+                        
+                        <p style="background: #fff3e0; padding: 10px; border-radius: 5px; margin-top: 15px; border-left: 3px solid #ff9800;">
+                            <strong style="color: #e65100;">��� Nota sobre el Proyecto Completo (30%):</strong><br>
+                            <span style="color: #e65100; font-size: 13px;">
+                                Este ejercicio forma parte del Proyecto Fase 2 que vale 30% adicional de la nota semanal. El proyecto completo se evaluará con una rúbrica más extensa que incluye: funcionalidad, diseño, código limpio, documentación y creatividad.
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+                <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> 60 minutos total</span> (10 min explicación + 50 min proyecto)</div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-toolbox"></i> Recursos:</label>
+                <div class="field-content">
+                    - Proyecto ejemplo completo (de referencia)<br>
+                    - Breakout rooms en Teams<br>
+                    - Plantilla de estructura de proyecto<br>
+                    - Datos de prueba guatemaltecos (CSV)<br>
+                    - Rúbrica detallada del proyecto<br>
+                    - Template de README<br>
+                    - El docente rota por las salas dando apoyo continuo
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-user-graduate"></i> Actividad que realizará el estudiante:</label>
+                <div class="field-content">
+                    Trabajarán intensivamente en el proyecto integrador. Combinarán todo lo aprendido en Semanas 1 y 2. Distribuirán tareas: backend, frontend, datos, testing. Entregarán versión funcional antes de finalizar la sesión.
+                </div>
+            </div>
+
+            <div class="field">
+                <label><i class="fas fa-chart-line"></i> Evaluación:</label>
+                <div class="evaluation-box">
+                    <strong>Tipo:</strong> Sumativa - Proyecto integrador<br>
+                    <strong>Instrumento:</strong> Rúbrica completa de proyecto + video demostrativo<br>
+                    <strong>Ponderación:</strong> 12 puntos (Ejercicio 5) + 30 puntos (Proyecto Fase 2 completo) = 42% de la nota semanal
+                </div>
+            </div>
+        </div>
+
+<!-- 8. Receso 2 -->
+<div class="step-indicator">
+    <div class="step-number">8</div>
+    <div class="step-title"><i class="fas fa-coffee"></i> RECESO 2</div>
+</div>
+<div class="activity-block">
+    <span class="activity-number">Receso 2</span>
+    <div class="field">
+        <label><i class="fas fa-pause-circle"></i> Descripción:</label>
+        <div class="field-content">
+            Segundo descanso del día. Los estudiantes pueden desconectarse brevemente, tomar café, revisar avances con otros equipos.
+        </div>
+    </div>
+    <div class="field">
+        <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+        <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> 15 minutos</span></div>
+    </div>
+</div>
+
+<!-- 9. Reflexión Metacognitiva -->
+<div class="step-indicator">
+    <div class="step-number">9</div>
+    <div class="step-title"><i class="fas fa-brain"></i> Reflexión Metacognitiva sobre el Aprendizaje</div>
+</div>
+<div class="activity-block">
+    <span class="activity-number">Actividad de Cierre: Reflexión Individual</span>
+    <div class="field">
+        <label><i class="fas fa-tasks"></i> Actividad:</label>
+        <div class="field-content">
+            <strong>Reflexión guiada (10 min):</strong> Los estudiantes responden en el chat o en un formulario Forms las siguientes preguntas:<br><br>
+            <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #1976d2;">
+                <h4 style="color: #0d47a1; margin-bottom: 10px;">Preguntas de Reflexión:</h4>
+                <ol style="margin-left: 20px; color: #1565c0;">
+                    <li>¿Cuál fue el concepto más difícil de entender hoy? ¿Cómo lo superaste?</li>
+                    <li>¿Qué diferencias encontraste entre trabajar con JSON y trabajar con SQLite?</li>
+                    <li>¿Cómo te ayudó tu equipo a resolver los ejercicios? Menciona un aporte específico de un compañero.</li>
+                    <li>¿Qué parte del proyecto te parece más retadora? ¿Qué estrategia usarás para completarla?</li>
+                    <li>En una escala del 1-10, ¿qué tan preparado te sientes para implementar persistencia de datos en tu proyecto? ¿Qué te falta?</li>
+                </ol>
+            </div>
+            <p style="margin-top: 10px;"><strong>Compartir voluntario:</strong> 2-3 estudiantes comparten sus reflexiones brevemente.</p>
+        </div>
+    </div>
+    <div class="field">
+        <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+        <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> 10 minutos</span></div>
+    </div>
+    <div class="field">
+        <label><i class="fas fa-chart-line"></i> Evaluación:</label>
+        <div class="evaluation-box">
+            <strong>Tipo:</strong> Formativa - Autoevaluación<br>
+            <strong>Instrumento:</strong> Formulario de reflexión metacognitiva<br>
+            <strong>Ponderación:</strong> 10 puntos (10% de la nota semanal - Reflexión pedagógica)
+        </div>
+    </div>
+</div>
+
+<!-- 10. Introducción a la Semana 3 -->
+<div class="step-indicator">
+    <div class="step-number">10</div>
+    <div class="step-title"><i class="fas fa-forward"></i> Introducción al Trabajo Autónomo de la Semana 3</div>
+</div>
+<div class="activity-block">
+    <span class="activity-number">Preparación para la Semana 3</span>
+    <div class="field">
+        <label><i class="fas fa-tasks"></i> Actividad:</label>
+        <div class="field-content">
+            <strong>Vista previa de Semana 3 (10 min):</strong> El docente presenta los temas de la próxima semana:<br><br>
+            <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #f57c00;">
+                <h4 style="color: #e65100; margin-bottom: 10px;"><i class="fas fa-calendar-week"></i> Semana 3: CRUD Completo y Validaciones</h4>
+                <p><strong>Temas principales:</strong></p>
+                <ul style="margin-left: 20px; color: #ef6c00;">
+                    <li><strong>UPDATE y DELETE:</strong> Completar las operaciones CRUD faltantes</li>
+                    <li><strong>Validación de datos:</strong> Formularios seguros, validación en frontend y backend</li>
+                    <li><strong>Manejo de errores:</strong> Try-except, mensajes de error amigables</li>
+                    <li><strong>Relaciones entre tablas:</strong> Foreign keys, JOINs básicos en SQLite</li>
+                    <li><strong>Búsqueda y filtros:</strong> Consultas complejas con WHERE, LIKE, ORDER BY</li>
+                </ul>
+                <p style="margin-top: 10px;"><strong>Trabajo autónomo (10 horas):</strong></p>
+                <ul style="margin-left: 20px; color: #ef6c00;">
+                    <li>Guía de Aprendizaje Semana 3 (disponible en el sitio web)</li>
+                    <li>Videos tutoriales sobre validación y manejo de errores</li>
+                    <li>Práctica: Agregar UPDATE y DELETE al proyecto</li>
+                    <li>Práctica: Implementar formularios con validación</li>
+                    <li>Lectura: Ética en el manejo de datos personales</li>
+                </ul>
+                <p style="background: #ffccbc; padding: 8px; border-radius: 4px; margin-top: 10px; color: #bf360c;">
+                    <strong>� Entregable Semana 3:</strong> Sistema CRUD completo con validación de datos, manejo de errores y búsqueda por filtros. Proyecto debe tener funcionalidades de edición y eliminación operativas.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+        <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> 10 minutos</span></div>
+    </div>
+</div>
+
+<!-- 11. Cierre -->
+<div class="step-indicator">
+    <div class="step-number">11</div>
+    <div class="step-title"><i class="fas fa-flag-checkered"></i> Cierre de la Sesión</div>
+</div>
+<div class="activity-block">
+    <span class="activity-number">Conclusiones y Despedida</span>
+    <div class="field">
+        <label><i class="fas fa-tasks"></i> Actividad:</label>
+        <div class="field-content">
+            <strong>Recapitulación (5 min):</strong> El docente hace un resumen de lo aprendido hoy:<br><br>
+            <ul style="margin-left: 20px;">
+                <li>✅ Persistencia de datos con JSON (lectura/escritura)</li>
+                <li>✅ Migración de datos de JSON a SQLite</li>
+                <li>✅ Operaciones CRUD básicas (CREATE, READ)</li>
+                <li>✅ Templates dinámicos con Jinja2 y Flask</li>
+                <li>✅ Integración completa en el proyecto (Fase 2)</li>
+            </ul>
+            <p style="margin-top: 15px;"><strong>Recordatorios:</strong></p>
+            <ul style="margin-left: 20px;">
+                <li>��� Completar la Guía de Aprendizaje Semana 3 antes de la próxima clase</li>
+                <li>��� Continuar trabajando en el Proyecto Fase 2 (si no terminaron en clase)</li>
+                <li>��� Entregar Reflexión Metacognitiva en Forms (10 puntos)</li>
+                <li>��� Mantener comunicación con el equipo durante la semana</li>
+            </ul>
+            <p style="margin-top: 15px; background: #e8f5e9; padding: 10px; border-radius: 5px; border-left: 3px solid #4caf50;">
+                <strong style="color: #2e7d32;">��� Consejo del día:</strong><br>
+                <span style="color: #388e3c;">"La persistencia de datos es el corazón de cualquier aplicación. Dominar SQLite y Flask te abre las puertas a proyectos mucho más complejos y útiles. ¡Sigan practicando!"</span>
+            </p>
+        </div>
+    </div>
+    <div class="field">
+        <label><i class="fas fa-clock"></i> Tiempo estimado:</label>
+        <div><span class="time-badge"><i class="fas fa-hourglass-half"></i> 5 minutos</span></div>
+    </div>
+</div>
+
+</div> <!-- Fin del container principal -->
+
+<!-- Tabla de Resumen de Tiempos -->
+<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; margin: 40px 0; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <h2 style="color: white; text-align: center; margin-bottom: 20px; font-size: 28px;">
+        <i class="fas fa-clock"></i> Resumen de Tiempos - Sesión Semana 2
+    </h2>
+    <table style="width: 100%; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+        <thead>
+            <tr style="background: #5e35b1; color: white;">
+                <th style="padding: 15px; text-align: left; font-size: 16px;">#</th>
+                <th style="padding: 15px; text-align: left; font-size: 16px;">Actividad</th>
+                <th style="padding: 15px; text-align: center; font-size: 16px;">Tiempo (min)</th>
+                <th style="padding: 15px; text-align: center; font-size: 16px;">Acumulado (min)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background: #f5f5f5;">
+                <td style="padding: 12px; font-weight: bold;">1</td>
+                <td style="padding: 12px;">Bienvenida y Objetivos</td>
+                <td style="padding: 12px; text-align: center;">5</td>
+                <td style="padding: 12px; text-align: center;">5</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px; font-weight: bold;">2</td>
+                <td style="padding: 12px;">Presentación de Contenidos Semana 2</td>
+                <td style="padding: 12px; text-align: center;">10</td>
+                <td style="padding: 12px; text-align: center;">15</td>
+            </tr>
+            <tr style="background: #f5f5f5;">
+                <td style="padding: 12px; font-weight: bold;">3</td>
+                <td style="padding: 12px;">Demostración JSON + Ejercicio 1</td>
+                <td style="padding: 12px; text-align: center;">60</td>
+                <td style="padding: 12px; text-align: center;">75</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px; font-weight: bold;">4</td>
+                <td style="padding: 12px;">RECESO 1</td>
+                <td style="padding: 12px; text-align: center; background: #fff3e0;">15</td>
+                <td style="padding: 12px; text-align: center;">90</td>
+            </tr>
+            <tr style="background: #f5f5f5;">
+                <td style="padding: 12px; font-weight: bold;">5</td>
+                <td style="padding: 12px;">Migración a SQLite + Ejercicio 2</td>
+                <td style="padding: 12px; text-align: center;">60</td>
+                <td style="padding: 12px; text-align: center;">150</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px; font-weight: bold;">6</td>
+                <td style="padding: 12px;">CRUD Operaciones + Ejercicio 3</td>
+                <td style="padding: 12px; text-align: center;">60</td>
+                <td style="padding: 12px; text-align: center;">210</td>
+            </tr>
+            <tr style="background: #f5f5f5;">
+                <td style="padding: 12px; font-weight: bold;">7</td>
+                <td style="padding: 12px;">Templates Dinámicos + Ejercicio 4</td>
+                <td style="padding: 12px; text-align: center;">60</td>
+                <td style="padding: 12px; text-align: center;">270</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px; font-weight: bold;">8</td>
+                <td style="padding: 12px;">Proyecto Fase 2 + Ejercicio 5</td>
+                <td style="padding: 12px; text-align: center;">60</td>
+                <td style="padding: 12px; text-align: center;">330</td>
+            </tr>
+            <tr style="background: #f5f5f5;">
+                <td style="padding: 12px; font-weight: bold;">9</td>
+                <td style="padding: 12px;">RECESO 2</td>
+                <td style="padding: 12px; text-align: center; background: #fff3e0;">15</td>
+                <td style="padding: 12px; text-align: center;">345</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px; font-weight: bold;">10</td>
+                <td style="padding: 12px;">Reflexión Metacognitiva</td>
+                <td style="padding: 12px; text-align: center;">10</td>
+                <td style="padding: 12px; text-align: center;">355</td>
+            </tr>
+            <tr style="background: #f5f5f5;">
+                <td style="padding: 12px; font-weight: bold;">11</td>
+                <td style="padding: 12px;">Introducción a Semana 3</td>
+                <td style="padding: 12px; text-align: center;">10</td>
+                <td style="padding: 12px; text-align: center;">365</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px; font-weight: bold;">12</td>
+                <td style="padding: 12px;">Cierre de la Sesión</td>
+                <td style="padding: 12px; text-align: center;">5</td>
+                <td style="padding: 12px; text-align: center;">370</td>
+            </tr>
+            <tr style="background: #5e35b1; color: white; font-weight: bold; font-size: 18px;">
+                <td colspan="2" style="padding: 15px; text-align: right;">TIEMPO TOTAL:</td>
+                <td style="padding: 15px; text-align: center;">370 min</td>
+                <td style="padding: 15px; text-align: center;">6h 10min</td>
+            </tr>
+        </tbody>
+    </table>
+    <p style="color: white; text-align: center; margin-top: 20px; font-size: 14px;">
+        <i class="fas fa-info-circle"></i> Nota: El tiempo programado es de 345 min (5h 45min). Los 25 minutos adicionales son flexibilidad para preguntas y apoyo personalizado.
+    </p>
+</div>
+
+<!-- Tabla de Distribución de Evaluación -->
+<div style="background: #f5f5f5; padding: 30px; margin: 40px 0; border-radius: 12px; border: 2px solid #9c27b0;">
+    <h2 style="color: #7b1fa2; text-align: center; margin-bottom: 20px; font-size: 26px;">
+        <i class="fas fa-chart-pie"></i> Distribución de Evaluación - Semana 2
+    </h2>
+    <table style="width: 100%; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+        <thead>
+            <tr style="background: #9c27b0; color: white;">
+                <th style="padding: 15px; text-align: left; font-size: 16px;">Instrumento de Evaluación</th>
+                <th style="padding: 15px; text-align: center; font-size: 16px;">Puntos</th>
+                <th style="padding: 15px; text-align: center; font-size: 16px;">Porcentaje</th>
+                <th style="padding: 15px; text-align: left; font-size: 16px;">Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background: #f3e5f5;">
+                <td style="padding: 12px;">Ejercicio 1: Sistema JSON</td>
+                <td style="padding: 12px; text-align: center; font-weight: bold;">12</td>
+                <td style="padding: 12px; text-align: center;">12%</td>
+                <td style="padding: 12px;">Sumativa - Equipo</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px;">Ejercicio 2: Migración a SQLite</td>
+                <td style="padding: 12px; text-align: center; font-weight: bold;">12</td>
+                <td style="padding: 12px; text-align: center;">12%</td>
+                <td style="padding: 12px;">Sumativa - Equipo</td>
+            </tr>
+            <tr style="background: #f3e5f5;">
+                <td style="padding: 12px;">Ejercicio 3: CRUD Operations</td>
+                <td style="padding: 12px; text-align: center; font-weight: bold;">12</td>
+                <td style="padding: 12px; text-align: center;">12%</td>
+                <td style="padding: 12px;">Sumativa - Equipo</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px;">Ejercicio 4: Templates Dinámicos</td>
+                <td style="padding: 12px; text-align: center; font-weight: bold;">12</td>
+                <td style="padding: 12px; text-align: center;">12%</td>
+                <td style="padding: 12px;">Sumativa - Equipo</td>
+            </tr>
+            <tr style="background: #f3e5f5;">
+                <td style="padding: 12px;">Ejercicio 5: Proyecto Fase 2 (en clase)</td>
+                <td style="padding: 12px; text-align: center; font-weight: bold;">12</td>
+                <td style="padding: 12px; text-align: center;">12%</td>
+                <td style="padding: 12px;">Sumativa - Equipo</td>
+            </tr>
+            <tr style="background: #fff3e0;">
+                <td style="padding: 12px; font-weight: bold;">SUBTOTAL EJERCICIOS:</td>
+                <td style="padding: 12px; text-align: center; font-weight: bold; color: #f57c00;">60</td>
+                <td style="padding: 12px; text-align: center; font-weight: bold; color: #f57c00;">60%</td>
+                <td style="padding: 12px;">-</td>
+            </tr>
+            <tr style="background: #e8f5e9;">
+                <td style="padding: 12px; font-weight: bold;">Proyecto Completo Fase 2 (entrega final)</td>
+                <td style="padding: 12px; text-align: center; font-weight: bold; color: #2e7d32;">30</td>
+                <td style="padding: 12px; text-align: center; font-weight: bold; color: #2e7d32;">30%</td>
+                <td style="padding: 12px;">Sumativa - Equipo</td>
+            </tr>
+            <tr style="background: #e3f2fd;">
+                <td style="padding: 12px; font-weight: bold;">Reflexión Metacognitiva</td>
+                <td style="padding: 12px; text-align: center; font-weight: bold; color: #1565c0;">10</td>
+                <td style="padding: 12px; text-align: center; font-weight: bold; color: #1565c0;">10%</td>
+                <td style="padding: 12px;">Formativa - Individual</td>
+            </tr>
+            <tr style="background: #7b1fa2; color: white; font-weight: bold; font-size: 18px;">
+                <td style="padding: 15px;">TOTAL SEMANA 2:</td>
+                <td style="padding: 15px; text-align: center;">100</td>
+                <td style="padding: 15px; text-align: center;">100%</td>
+                <td style="padding: 15px;">-</td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #ff9800;">
+        <p style="color: #e65100; font-weight: bold; margin-bottom: 10px;">
+            <i class="fas fa-exclamation-triangle"></i> Notas Importantes sobre la Evaluación:
+        </p>
+        <ul style="color: #ef6c00; margin-left: 20px;">
+            <li>Los 5 ejercicios de clase (60 puntos) se evalúan inmediatamente con rúbricas</li>
+            <li>El Proyecto Fase 2 completo (30 puntos) se entrega al final de la semana con rúbrica extendida</li>
+            <li>La Reflexión Metacognitiva (10 puntos) es individual y se entrega vía Forms</li>
+            <li>Todos los ejercicios se trabajan en equipos de 3-4 estudiantes en salas de Teams</li>
+            <li>El docente rota por las salas dando retroalimentación continua</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Notas Pedagógicas para el Docente -->
+<div style="background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); padding: 30px; margin: 40px 0; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <h2 style="color: white; text-align: center; margin-bottom: 20px; font-size: 26px;">
+        <i class="fas fa-chalkboard-teacher"></i> Notas Pedagógicas para el Docente
+    </h2>
+    <div style="background: white; padding: 20px; border-radius: 8px;">
+        <h3 style="color: #1565c0; margin-bottom: 15px;"><i class="fas fa-lightbulb"></i> Estrategias de Enseñanza:</h3>
+        <ul style="color: #333; margin-left: 20px; line-height: 1.8;">
+            <li><strong>Flipped Learning:</strong> Los estudiantes ya estudiaron la guía autónoma (10 horas). La clase es 100% práctica.</li>
+            <li><strong>Aprendizaje Basado en Equipos:</strong> Todos los ejercicios se resuelven en equipos de 3-4 personas.</li>
+            <li><strong>Breakout Rooms:</strong> Usar salas de Teams. El docente rota cada 10-15 minutos entre salas.</li>
+            <li><strong>Live Coding:</strong> Cada demostración debe hacerse en vivo, cometiendo errores intencionales y corrigiéndolos.</li>
+            <li><strong>Retroalimentación Inmediata:</strong> Evaluar ejercicios mientras los estudiantes trabajan, no al final.</li>
+            <li><strong>Scaffolding:</strong> Los ejercicios aumentan progresivamente en complejidad (JSON → SQLite → CRUD → Templates → Proyecto).</li>
+        </ul>
+
+        <h3 style="color: #1565c0; margin-top: 20px; margin-bottom: 15px;"><i class="fas fa-clipboard-check"></i> Gestión del Tiempo:</h3>
+        <ul style="color: #333; margin-left: 20px; line-height: 1.8;">
+            <li><strong>Usar cronómetro visible:</strong> Mostrar el tiempo restante en pantalla para cada ejercicio.</li>
+            <li><strong>Avisar 10 min antes:</strong> "Quedan 10 minutos, enfóquense en el mínimo viable".</li>
+            <li><strong>Flexibilidad:</strong> Si un equipo termina antes, asignar desafío extra (+2 puntos bonus).</li>
+            <li><strong>No extender mucho:</strong> Es mejor que terminen ejercicios más simples completos que complejos incompletos.</li>
+        </ul>
+
+        <h3 style="color: #1565c0; margin-top: 20px; margin-bottom: 15px;"><i class="fas fa-exclamation-circle"></i> Puntos Críticos:</h3>
+        <ul style="color: #333; margin-left: 20px; line-height: 1.8;">
+            <li><strong>Ejercicio 2 (SQLite):</strong> Muchos tendrán errores con rutas de archivos .db. Tener solución preparada.</li>
+            <li><strong>Ejercicio 3 (CRUD):</strong> El READ con sqlite3 devuelve tuplas, no diccionarios. Aclarar esto.</li>
+            <li><strong>Ejercicio 4 (Templates):</strong> La sintaxis de Jinja2 {% %} vs {{ }} confunde. Hacer énfasis.</li>
+            <li><strong>Proyecto Fase 2:</strong> Algunos equipos no terminarán. Asegurar que tengan lo mínimo viable para continuar en casa.</li>
+        </ul>
+
+        <h3 style="color: #1565c0; margin-top: 20px; margin-bottom: 15px;"><i class="fas fa-users"></i> Manejo de Equipos:</h3>
+        <ul style="color: #333; margin-left: 20px; line-height: 1.8;">
+            <li><strong>Roles rotativos:</strong> En cada ejercicio, cambiar quién comparte pantalla y quién escribe código.</li>
+            <li><strong>Equipo rezagado:</strong> Si un equipo va muy atrasado, asignar a un estudiante avanzado como "tutor temporal".</li>
+            <li><strong>Equipo muy avanzado:</strong> Darles desafíos extra (agregar gráficos, exportar a CSV, etc.).</li>
+            <li><strong>Conflictos:</strong> Si hay tensión en un equipo, intervenir rápido y redistribuir tareas.</li>
+        </ul>
+
+        <h3 style="color: #1565c0; margin-top: 20px; margin-bottom: 15px;"><i class="fas fa-heart"></i> Motivación y Clima:</h3>
+        <ul style="color: #333; margin-left: 20px; line-height: 1.8;">
+            <li><strong>Celebrar logros:</strong> Cuando un equipo completa un ejercicio, felicitarlos públicamente.</li>
+            <li><strong>Normalizar errores:</strong> "Los errores son oportunidades de aprendizaje. Yo también los cometo constantemente".</li>
+            <li><strong>Conectar con lo real:</strong> "Este código que están escribiendo es lo que usan empresas como [ejemplo guatemalteco]".</li>
+            <li><strong>Energía alta:</strong> Mantener un tono entusiasta, especialmente después de los recesos.</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Recursos Adicionales -->
+<div style="background: #f5f5f5; padding: 30px; margin: 40px 0 60px 0; border-radius: 12px; border: 2px solid #00897b;">
+    <h2 style="color: #00695c; text-align: center; margin-bottom: 20px; font-size: 26px;">
+        <i class="fas fa-folder-open"></i> Recursos y Materiales de Apoyo
+    </h2>
+    <div style="background: white; padding: 20px; border-radius: 8px;">
+        <h3 style="color: #00897b; margin-bottom: 15px;"><i class="fas fa-link"></i> Enlaces Útiles:</h3>
+        <ul style="color: #333; margin-left: 20px; line-height: 1.8;">
+            <li><a href="https://flask.palletsprojects.com/" target="_blank" style="color: #00897b;">Documentación oficial de Flask</a></li>
+            <li><a href="https://docs.python.org/3/library/sqlite3.html" target="_blank" style="color: #00897b;">Documentación de sqlite3 en Python</a></li>
+            <li><a href="https://jinja.palletsprojects.com/" target="_blank" style="color: #00897b;">Documentación de Jinja2 Templates</a></li>
+            <li><a href="https://www.sqlitetutorial.net/" target="_blank" style="color: #00897b;">SQLite Tutorial (en inglés)</a></li>
+        </ul>
+
+        <h3 style="color: #00897b; margin-top: 20px; margin-bottom: 15px;"><i class="fas fa-download"></i> Archivos Descargables:</h3>
+        <ul style="color: #333; margin-left: 20px; line-height: 1.8;">
+            <li><strong>datos_estudiantes.json</strong> - Archivo JSON con 20 estudiantes de prueba</li>
+            <li><strong>plantilla_proyecto.zip</strong> - Estructura de carpetas base para el proyecto</li>
+            <li><strong>base_template.html</strong> - Template padre para herencia en Jinja2</li>
+            <li><strong>style.css</strong> - Estilos CSS base para el proyecto</li>
+            <li><strong>rubricas_semana2.pdf</strong> - Rúbricas detalladas de todos los ejercicios</li>
+        </ul>
+
+        <h3 style="color: #00897b; margin-top: 20px; margin-bottom: 15px;"><i class="fas fa-video"></i> Videos de Apoyo:</h3>
+        <ul style="color: #333; margin-left: 20px; line-height: 1.8;">
+            <li>Video 1: "JSON en Python - Lectura y Escritura" (15 min)</li>
+            <li>Video 2: "Introducción a SQLite con Python" (20 min)</li>
+            <li>Video 3: "Flask y Templates Jinja2" (25 min)</li>
+            <li>Video 4: "Cómo estructurar un proyecto Flask" (12 min)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Scripts de Prism.js para syntax highlighting -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+
+<!-- Script para activar Prism en todos los bloques de código -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Aplicar Prism a todos los elementos con clase 'code-demo'
+    document.querySelectorAll('.code-demo').forEach(function(block) {
+        // Detectar el lenguaje basado en el contenido
+        const content = block.textContent;
+        let language = 'python'; // Por defecto
+        
+        if (content.includes('<!DOCTYPE') || content.includes('<html>')) {
+            language = 'html';
+        } else if (content.includes('SELECT') || content.includes('CREATE TABLE')) {
+            language = 'sql';
+        } else if (content.includes('{') && content.includes('"')) {
+            language = 'json';
+        } else if (content.includes('app.route') || content.includes('def ')) {
+            language = 'python';
+        }
+        
+        // Crear elemento pre > code con las clases apropiadas
+        const pre = document.createElement('pre');
+        pre.className = 'line-numbers';
+        
+        const code = document.createElement('code');
+        code.className = 'language-' + language;
+        code.textContent = content;
+        
+        pre.appendChild(code);
+        
+        // Reemplazar el contenido
+        block.innerHTML = '';
+        block.appendChild(pre);
+    });
+    
+    // Activar Prism
+    Prism.highlightAll();
+});
+</script>
+
+</body>
+</html>
