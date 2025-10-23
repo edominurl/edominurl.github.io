@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Crash Course de Python — Sintaxis y conceptos clave</title>
+  <style>
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; line-height:1.6; padding:24px; max-width:900px; margin:0 auto; color:#111}
+    h1,h2,h3{color:#0b5;}
+    pre{background:#f7f7f8;border:1px solid #e1e1e6;padding:12px;border-radius:8px;overflow:auto}
+    code{font-family:SFMono-Regular,Menlo,monospace;background:rgba(0,0,0,0.03);padding:2px 6px;border-radius:4px}
+    .example{border-left:4px solid #d0f0c0;padding:10px;margin:10px 0;border-radius:4px;background:#fbfffb}
+    ul{margin-top:0}
+    .tip{background:#fff7c2;padding:10px;border-radius:6px;margin:8px 0}
+    .error{background:#ffecec;padding:10px;border-radius:6px;margin:8px 0;border-left:4px solid #ff6b6b}
+    details{margin:8px 0}
+    table{border-collapse:collapse;width:100%}
+    th,td{border:1px solid #eee;padding:8px;text-align:left}
+  </style>
+</head>
+<body>
+  <h1>Crash Course de Python — Guía rápida para estudiantes de profesorado en tecnología</h1>
+  <p>Objetivo: ofrecer una guía didáctica y lista para usar en clase con ejemplos y ejercicios. Se asume que los estudiantes conocen conceptos básicos de programación (variables, lógica).</p>
+
+  <h2>Índice</h2>
+  <ol>
+    <li>Sintaxis básica</li>
+    <li>Cómo nombrar variables y funciones</li>
+    <li>Tipos de datos</li>
+    <li>Operadores</li>
+    <li>Condicionales y control de flujo</li>
+    <li>Funciones y parámetros</li>
+    <li>Imprimir información</li>
+    <li>Palabras reservadas</li>
+    <li>Errores comunes y cómo arreglarlos</li>
+    <li>Ejercicios (con respuestas ocultas)</li>
+    <li>Resumen rápido</li>
+  </ol>
+
+  <h2>1. Sintaxis básica</h2>
+  <p>Python es sensible a la <strong>indentación</strong> (espacios o tabuladores). Un bloque se define por la indentación.</p>
+  <div class="example">
+    <pre><code># Bloque con indentación consistente
+if True:
+    print("Hola")
+    x = 5
+    if x &gt; 2:
+        print("x es mayor que 2")
+</code></pre>
+  </div>
+  <p class="tip">Consejo: usa 4 espacios por nivel (PEP8 estándar). No mezcles tabs y espacios.</p>
+
+  <h2>2. Cómo nombrar variables y funciones</h2>
+  <ul>
+    <li>Usar nombres descriptivos: <code>contador</code>, <code>nombre_alumno</code></li>
+    <li>No empezar con número: <code>3d</code> es inválido</li>
+    <li>No usar caracteres especiales (excepto <code>_</code>)</li>
+    <li>Convención: <em>snake_case</em> para variables y funciones (<code>mi_funcion</code>); <em>CapWords</em> para clases (<code>MiClase</code>).</li>
+    <li>No usar palabras reservadas (ver sección 8).</li>
+  </ul>
+  <pre><code># Correcto
+nombre_alumno = "Emilio"
+# Incorrecto
+# 2nombre = 10
+</code></pre>
+
+  <h2>3. Tipos de datos</h2>
+  <table>
+    <thead><tr><th>Tipo</th><th>Ejemplo</th><th>Descripción</th></tr></thead>
+    <tbody>
+      <tr><td><code>int</code></td><td><code>42</code></td><td>Enteros</td></tr>
+      <tr><td><code>float</code></td><td><code>3.14</code></td><td>Números con punto decimal</td></tr>
+      <tr><td><code>str</code></td><td><code>'hola'</code></td><td>Cadenas de texto</td></tr>
+      <tr><td><code>bool</code></td><td><code>True</code> / <code>False</code></td><td>Booleanos</td></tr>
+      <tr><td><code>list</code></td><td><code>[1, 2, 3]</code></td><td>Listas mutables</td></tr>
+      <tr><td><code>tuple</code></td><td><code>(1, 2)</code></td><td>Tuplas inmutables</td></tr>
+      <tr><td><code>dict</code></td><td><code>{'a':1}</code></td><td>Mapas clave-valor</td></tr>
+      <tr><td><code>set</code></td><td><code>{1,2}</code></td><td>Conjuntos (sin duplicados)</td></tr>
+      <tr><td><code>None</code></td><td><code>None</code></td><td>Valor nulo</td></tr>
+    </tbody>
+  </table>
+
+  <h2>4. Operadores</h2>
+  <h3>Aritméticos</h3>
+  <pre><code>+   suma
+-   resta
+*   multiplicación
+/   división (siempre float)
+//  división entera
+%   resto
+**  potencia
+</code></pre>
+  <h3>Comparación</h3>
+  <pre><code>==  igual
+!=  distinto
+&gt; &lt; &gt;= &lt;=  comparaciones habituales
+</code></pre>
+  <h3>Lógicos</h3>
+  <pre><code>and  (y)
+or   (o)
+not  (negación)
+</code></pre>
+  <h3>Operadores de pertenencia y identidad</h3>
+  <pre><code>in, not in   # pertenencia en listas/strings
+is, is not   # identidad (misma instancia)
+</code></pre>
+
+  <h2>5. Condicionales y control de flujo</h2>
+  <pre><code>if condicion:
+    ...
+elif otra_condicion:
+    ...
+else:
+    ...
+
+# Bucles
+for elemento in lista:
+    ...
+
+while condicion:
+    ...
+</code></pre>
+  <div class="example">
+    <pre><code>edad = 18
+if edad &gt;= 18:
+    print('Adulto')
+else:
+    print('Menor')
+
+for i in range(3):
+    print(i)  # 0,1,2
+</code></pre>
+  </div>
+
+  <h2>6. Funciones y parámetros</h2>
+  <p>Definición con <code>def</code>. Pueden tener parámetros posicionales, por defecto, con nombre y argumentos variables.</p>
+  <pre><code>def saludar(nombre):
+    print('Hola', nombre)
+
+# Parámetro por defecto
+def potencia(x, n=2):
+    return x ** n
+
+# Args / Kwargs
+def ejemplo(*args, **kwargs):
+    print(args, kwargs)
+</code></pre>
+  <div class="example">
+    <pre><code>def sumar(a, b=0):
+    return a + b
+
+print(sumar(3))    # 3
+print(sumar(3,4))  # 7
+</code></pre>
+  </div>
+
+  <h2>7. Imprimir información</h2>
+  <p>Usar <code>print()</code>. F-strings (Python 3.6+) son recomendadas para legibilidad.</p>
+  <pre><code>nombre = 'Ana'
+edad = 30
+print('Nombre:', nombre, 'Edad:', edad)
+print(f"{nombre} tiene {edad} años")
+</code></pre>
+
+  <h2>8. Palabras reservadas (ejemplos principales)</h2>
+  <p>Python tiene muchas; aquí una lista de las más importantes — no las uses como nombres de variables:</p>
+  <pre><code>False, None, True, and, as, assert, break, class, continue, def, del, elif,
+else, except, finally, for, from, global, if, import, in, is, lambda, nonlocal,
+not, or, pass, raise, return, try, while, with, yield
+</code></pre>
+
+  <h2>9. Errores comunes y cómo arreglarlos</h2>
+  <div class="error">
+    <strong>IndentationError</strong>
+    <pre><code>  File "prog.py", line 3
+    print('hola')
+IndentationError: unexpected indent
+</code></pre>
+    <p>Solución: mantener indentación consistente (4 espacios).</p>
+  </div>
+
+  <div class="error">
+    <strong>SyntaxError</strong>
+    <pre><code>  File "prog.py", line 1
+    print('hola'
+                ^
+SyntaxError: unexpected EOF while parsing
+</code></pre>
+    <p>Solución: faltó un paréntesis, comillas o dos puntos. Revisa la sintaxis alrededor de la línea indicada.</p>
+  </div>
+
+  <div class="error">
+    <strong>NameError</strong>
+    <pre><code>NameError: name 'x' is not defined
+</code></pre>
+    <p>Solución: la variable no existe en ese scope. Define antes o revisa el nombre.</p>
+  </div>
+
+  <div class="error">
+    <strong>TypeError</strong>
+    <pre><code>TypeError: can only concatenate str (not "int") to str
+</code></pre>
+    <p>Solución: convertir tipos (ej. <code>str()</code> o usar f-strings) o validar tipos.</p>
+  </div>
+
+  <div class="error">
+    <strong>IndexError / KeyError</strong>
+    <pre><code>IndexError: list index out of range
+KeyError: 'id'
+</code></pre>
+    <p>Solución: comprobar índices y claves antes de acceder (condicionales, <code>in</code>, <code>dict.get()</code>).</p>
+  </div>
+
+  <h3>Errores de novato y buenas prácticas</h3>
+  <ul>
+    <li>No usar <code>==</code> cuando quieres asignar (en Python la asignación es <code>=</code>, no hay confusion con ==). En otros lenguajes sí hay confusión; revisen siempre el operador.</li>
+    <li>No mezclar tabs y espacios.</li>
+    <li>No modificar listas mientras se itera sobre ellas (puede dar resultados inesperados).</li>
+    <li>Evitar usar variables globales salvo necesario.</li>
+  </ul>
+
+  <h2>10. Ejercicios (con respuestas ocultas)</h2>
+  <ol>
+    <li>Escribir una función <code>par_o_impar(n)</code> que devuelva "par" o "impar".</li>
+    <li>Dada una lista de números, devolver la suma de los pares.</li>
+    <li>Crear una función que reciba <code>**kwargs</code> y muestre las claves y valores en líneas nuevas.</li>
+  </ol>
+
+  <details>
+    <summary>Soluciones (haz clic para ver)</summary>
+    <pre><code># 1
+def par_o_impar(n):
+    return 'par' if n % 2 == 0 else 'impar'
+
+# 2
+def suma_pares(lista):
+    return sum(x for x in lista if x % 2 == 0)
+
+# 3
+def muestra_kwargs(**kwargs):
+    for k, v in kwargs.items():
+        print(f"{k}: {v}")
+</code></pre>
+  </details>
+
+  <h2>11. Resumen rápido — cheatsheet</h2>
+  <ul>
+    <li>Comentarios: <code># comentario</code></li>
+    <li>Bloques: indentación (4 espacios)</li>
+    <li>Función: <code>def nombre(...):</code></li>
+    <li>Imprimir: <code>print()</code>, preferir f-strings</li>
+    <li>Tipos: <code>int, float, str, bool, list, tuple, dict, set, None</code></li>
+  </ul>
+
+</body>
+</html>

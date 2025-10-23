@@ -1210,7 +1210,7 @@ else:
                 </div>
                 <div class="field">
                     <label><i class="fas fa-code"></i> Código completo:</label>
-                    <divlt;div class="code-demo">
+                    <pre><code class="language-python">
 # ejemplo4_flask_basico.py
 # Primera aplicación web con Flask
 
@@ -1230,46 +1230,46 @@ estudiantes = [
 def inicio():
     """Página de inicio"""
     html = """
-    <!DOCTYPE html>lt;!DOCTYPE html<!DOCTYPE html>gt;
-    <html>lt;html<html>gt;
-    <head>lt;head<head>gt;
-        <title>lt;title<title>gt;Sistema Escolar</title>lt;/title</title>gt;
-        <style>lt;style<style>gt;
-            body { 
-                font-family: Arial; 
-                margin: 40px; 
-                background: #f5f5f5; 
+    &lt;!DOCTYPE html&gt;
+    &lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Sistema Escolar&lt;/title&gt;
+        &lt;style&gt;
+            body {
+                font-family: Arial;
+                margin: 40px;
+                background: #f5f5f5;
             }
-            .container { 
-                background: white; 
-                padding: 30px; 
-                border-radius: 10px; 
+            .container {
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
                 box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             }
             h1 { color: #1a237e; }
-            a { 
-                display: inline-block; 
-                padding: 10px 20px; 
-                margin: 5px; 
-                background: #1976d2; 
-                color: white; 
-                text-decoration: none; 
-                border-radius: 5px; 
+            a {
+                display: inline-block;
+                padding: 10px 20px;
+                margin: 5px;
+                background: #1976d2;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
             }
             a:hover { background: #1565c0; }
-        </style>lt;/style</style>gt;
-    </head>lt;/head</head>gt;
-    <body>lt;body<body>gt;
-        <divlt;div class="container">
-            <h1>lt;h1<h1>gt;🏫 Sistema de Gestión Escolar</h1>lt;/h1</h1>gt;
-            <p>lt;p<p>gt;Bienvenido al sistema de información estudiantil</p>lt;/p</p>gt;
-            <h3>lt;h3<h3>gt;Navegación:</h3>lt;/h3</h3>gt;
-            <a lt;a href="/estudiantes">Ver Todos los Estudiantes</a>lt;/a</a>gt;
-            <a lt;a href="/estadisticas">Ver Estadísticas</a>lt;/a</a>gt;
-            <a lt;a href="/acerca">Acerca del Sistema</a>lt;/a</a>gt;
-        </div>lt;/div</div>gt;
-    </body>lt;/body</body>gt;
-    </html>lt;/html</html>gt;
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="container"&gt;
+            &lt;h1&gt;🏫 Sistema de Gestión Escolar&lt;/h1&gt;
+            &lt;p&gt;Bienvenido al sistema de información estudiantil&lt;/p&gt;
+            &lt;h3&gt;Navegación:&lt;/h3&gt;
+            &lt;a href="/estudiantes"&gt;Ver Todos los Estudiantes&lt;/a&gt;
+            &lt;a href="/estadisticas"&gt;Ver Estadísticas&lt;/a&gt;
+            &lt;a href="/acerca"&gt;Acerca del Sistema&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
     """
     return html
 
@@ -1280,114 +1280,114 @@ def lista_estudiantes():
     filas_html = ""
     for est in estudiantes:
         # Color según promedio
-        if est['promedio'] >= 80:
+        if est['promedio'] &gt;= 80:
             color = "background: #e8f5e9; color: #2e7d32;"
-        elif est['promedio'] >= 60:
+        elif est['promedio'] &gt;= 60:
             color = "background: #fff3e0; color: #e65100;"
         else:
             color = "background: #ffebee; color: #c62828;"
-        
+
         filas_html += f"""
-        <tr style="{color}">
-            <td>lt;td<td>gt;{est['id']}</td>lt;/td</td>gt;
-            <td>lt;td<td>gt;<a lt;a href="/estudiante/{est['id']}" style="color: inherit;">{est['nombre']}</a>lt;/a</a>gt;</td>lt;/td</td>gt;
-            <td>lt;td<td>gt;{est['grado']}</td>lt;/td</td>gt;
-            <td>lt;td<td>gt;{est['promedio']}</td>lt;/td</td>gt;
-        </tr>lt;/tr</tr>gt;
+        &lt;tr style="{color}"&gt;
+            &lt;td&gt;{est['id']}&lt;/td&gt;
+            &lt;td&gt;&lt;a href="/estudiante/{est['id']}" style="color: inherit;"&gt;{est['nombre']}&lt;/a&gt;&lt;/td&gt;
+            &lt;td&gt;{est['grado']}&lt;/td&gt;
+            &lt;td&gt;{est['promedio']}&lt;/td&gt;
+        &lt;/tr&gt;
         """
-    
+
     html = f"""
-    <!DOCTYPE html>lt;!DOCTYPE html<!DOCTYPE html>gt;
-    <html>lt;html<html>gt;
-    <head>lt;head<head>gt;
-        <title>lt;title<title>gt;Lista de Estudiantes</title>lt;/title</title>gt;
-        <style>lt;style<style>gt;
+    &lt;!DOCTYPE html&gt;
+    &lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Lista de Estudiantes&lt;/title&gt;
+        &lt;style&gt;
             body {{ font-family: Arial; margin: 40px; background: #f5f5f5; }}
             .container {{ background: white; padding: 30px; border-radius: 10px; }}
             h1 {{ color: #1a237e; }}
             table {{ width: 100%; border-collapse: collapse; margin: 20px 0; }}
             th {{ background: #1976d2; color: white; padding: 12px; text-align: left; }}
             td {{ padding: 10px; border-bottom: 1px solid #ddd; }}
-            .btn {{ 
-                padding: 10px 20px; 
-                background: #1976d2; 
-                color: white; 
-                text-decoration: none; 
-                border-radius: 5px; 
+            .btn {{
+                padding: 10px 20px;
+                background: #1976d2;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
             }}
-        </style>lt;/style</style>gt;
-    </head>lt;/head</head>gt;
-    <body>lt;body<body>gt;
-        <divlt;div class="container">
-            <h1>lt;h1<h1>gt;📋 Lista de Estudiantes</h1>lt;/h1</h1>gt;
-            <a lt;a href="/" class="btn">🏠 Inicio</a>lt;/a</a>gt;
-            <table>lt;table<table>gt;
-                <tr>lt;tr<tr>gt;
-                    <th>lt;th<th>gt;ID</th>lt;/th</th>gt;
-                    <th>lt;th<th>gt;Nombre</th>lt;/th</th>gt;
-                    <th>lt;th<th>gt;Grado</th>lt;/th</th>gt;
-                    <th>lt;th<th>gt;Promedio</th>lt;/th</th>gt;
-                </tr>lt;/tr</tr>gt;
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="container"&gt;
+            &lt;h1&gt;📋 Lista de Estudiantes&lt;/h1&gt;
+            &lt;a href="/" class="btn"&gt;🏠 Inicio&lt;/a&gt;
+            &lt;table&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;ID&lt;/th&gt;
+                    &lt;th&gt;Nombre&lt;/th&gt;
+                    &lt;th&gt;Grado&lt;/th&gt;
+                    &lt;th&gt;Promedio&lt;/th&gt;
+                &lt;/tr&gt;
                 {filas_html}
-            </table>lt;/table</table>gt;
-        </div>lt;/div</div>gt;
-    </body>lt;/body</body>gt;
-    </html>lt;/html</html>gt;
+            &lt;/table&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
     """
     return html
 
-@app.route('/estudiante/<int:id>')
+@app.route('/estudiante/&lt;int:id&gt;')
 def detalle_estudiante(id):
     """Muestra detalle de un estudiante específico"""
     # Buscar estudiante por ID
     estudiante = next((e for e in estudiantes if e['id'] == id), None)
-    
+
     if not estudiante:
-        return "<h1>lt;h1<h1>gt;❌ Estudiante no encontrado</h1>lt;/h1</h1>gt;", 404
-    
+        return "&lt;h1&gt;❌ Estudiante no encontrado&lt;/h1&gt;", 404
+
     html = f"""
-    <!DOCTYPE html>lt;!DOCTYPE html<!DOCTYPE html>gt;
-    <html>lt;html<html>gt;
-    <head>lt;head<head>gt;
-        <title>lt;title<title>gt;Detalle - {estudiante['nombre']}</title>lt;/title</title>gt;
-        <style>lt;style<style>gt;
+    &lt;!DOCTYPE html&gt;
+    &lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Detalle - {estudiante['nombre']}&lt;/title&gt;
+        &lt;style&gt;
             body {{ font-family: Arial; margin: 40px; background: #f5f5f5; }}
             .container {{ background: white; padding: 30px; border-radius: 10px; }}
             h1 {{ color: #1a237e; }}
-            .info {{ 
-                background: #f8f9fa; 
-                padding: 15px; 
-                border-left: 4px solid #1976d2; 
-                margin: 20px 0; 
+            .info {{
+                background: #f8f9fa;
+                padding: 15px;
+                border-left: 4px solid #1976d2;
+                margin: 20px 0;
             }}
-            .btn {{ 
-                padding: 10px 20px; 
-                background: #1976d2; 
-                color: white; 
-                text-decoration: none; 
-                border-radius: 5px; 
+            .btn {{
+                padding: 10px 20px;
+                background: #1976d2;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
                 margin-right: 10px;
             }}
-        </style>lt;/style</style>gt;
-    </head>lt;/head</head>gt;
-    <body>lt;body<body>gt;
-        <divlt;div class="container">
-            <h1>lt;h1<h1>gt;👤 Perfil del Estudiante</h1>lt;/h1</h1>gt;
-            <a lt;a href="/" class="btn">🏠 Inicio</a>lt;/a</a>gt;
-            <a lt;a href="/estudiantes" class="btn">📋 Lista</a>lt;/a</a>gt;
-            
-            <divlt;div class="info">
-                <h2>lt;h2<h2>gt;{estudiante['nombre']}</h2>lt;/h2</h2>gt;
-                <p>lt;p<p>gt;<strong>ID:</strong> {estudiante['id']}</p>lt;/p</p>gt;
-                <p>lt;p<p>gt;<strong>Grado:</strong> {estudiante['grado']}</p>lt;/p</p>gt;
-                <p>lt;p<p>gt;<strong>Promedio:</strong> {estudiante['promedio']}</p>lt;/p</p>gt;
-                <p>lt;p<p>gt;<strong>Estado:</strong> 
-                   {'✓ Aprobado' if estudiante['promedio'] >= 60 else '✗ Reprobado'}
-                </p>lt;/p</p>gt;
-            </div>lt;/div</div>gt;
-        </div>lt;/div</div>gt;
-    </body>lt;/body</body>gt;
-    </html>lt;/html</html>gt;
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="container"&gt;
+            &lt;h1&gt;👤 Perfil del Estudiante&lt;/h1&gt;
+            &lt;a href="/" class="btn"&gt;🏠 Inicio&lt;/a&gt;
+            &lt;a href="/estudiantes" class="btn"&gt;📋 Lista&lt;/a&gt;
+
+            &lt;div class="info"&gt;
+                &lt;h2&gt;{estudiante['nombre']}&lt;/h2&gt;
+                &lt;p&gt;&lt;strong&gt;ID:&lt;/strong&gt; {estudiante['id']}&lt;/p&gt;
+                &lt;p&gt;&lt;strong&gt;Grado:&lt;/strong&gt; {estudiante['grado']}&lt;/p&gt;
+                &lt;p&gt;&lt;strong&gt;Promedio:&lt;/strong&gt; {estudiante['promedio']}&lt;/p&gt;
+                &lt;p&gt;&lt;strong&gt;Estado:&lt;/strong&gt;
+                   {'✓ Aprobado' if estudiante['promedio'] &gt;= 60 else '✗ Reprobado'}
+                &lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
     """
     return html
 
@@ -1396,53 +1396,53 @@ def estadisticas():
     """Muestra estadísticas del grupo"""
     total = len(estudiantes)
     promedio_general = sum(e['promedio'] for e in estudiantes) / total
-    aprobados = sum(1 for e in estudiantes if e['promedio'] >= 60)
-    
+    aprobados = sum(1 for e in estudiantes if e['promedio'] &gt;= 60)
+
     html = f"""
-    <!DOCTYPE html>lt;!DOCTYPE html<!DOCTYPE html>gt;
-    <html>lt;html<html>gt;
-    <head>lt;head<head>gt;
-        <title>lt;title<title>gt;Estadísticas</title>lt;/title</title>gt;
-        <style>lt;style<style>gt;
+    &lt;!DOCTYPE html&gt;
+    &lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Estadísticas&lt;/title&gt;
+        &lt;style&gt;
             body {{ font-family: Arial; margin: 40px; background: #f5f5f5; }}
             .container {{ background: white; padding: 30px; border-radius: 10px; }}
             h1 {{ color: #1a237e; }}
-            .stat-box {{ 
-                display: inline-block; 
-                padding: 20px; 
-                margin: 10px; 
-                background: #e3f2fd; 
-                border-radius: 8px; 
-                text-align: center; 
-                min-width: 150px; 
+            .stat-box {{
+                display: inline-block;
+                padding: 20px;
+                margin: 10px;
+                background: #e3f2fd;
+                border-radius: 8px;
+                text-align: center;
+                min-width: 150px;
             }}
             .number {{ font-size: 48px; font-weight: bold; color: #1976d2; }}
             .label {{ font-size: 14px; color: #666; }}
-        </style>lt;/style</style>gt;
-    </head>lt;/head</head>gt;
-    <body>lt;body<body>gt;
-        <divlt;div class="container">
-            <h1>lt;h1<h1>gt;📊 Estadísticas del Grupo</h1>lt;/h1</h1>gt;
-            <a lt;a href="/" style="padding: 10px 20px; background: #1976d2; color: white; 
-               text-decoration: none; border-radius: 5px;">🏠 Inicio</a>lt;/a</a>gt;
-            
-            <divlt;div style="margin-top: 30px;">
-                <divlt;div class="stat-box">
-                    <divlt;div class="number">{total}</div>lt;/div</div>gt;
-                    <divlt;div class="label">Total Estudiantes</div>lt;/div</div>gt;
-                </div>lt;/div</div>gt;
-                <divlt;div class="stat-box">
-                    <divlt;div class="number">{promedio_general:.1f}</div>lt;/div</div>gt;
-                    <divlt;div class="label">Promedio General</div>lt;/div</div>gt;
-                </div>lt;/div</div>gt;
-                <divlt;div class="stat-box">
-                    <divlt;div class="number">{aprobados}</div>lt;/div</div>gt;
-                    <divlt;div class="label">Aprobados</div>lt;/div</div>gt;
-                </div>lt;/div</div>gt;
-            </div>lt;/div</div>gt;
-        </div>lt;/div</div>gt;
-    </body>lt;/body</body>gt;
-    </html>lt;/html</html>gt;
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="container"&gt;
+            &lt;h1&gt;📊 Estadísticas del Grupo&lt;/h1&gt;
+            &lt;a href="/" style="padding: 10px 20px; background: #1976d2; color: white;
+               text-decoration: none; border-radius: 5px;"&gt;🏠 Inicio&lt;/a&gt;
+
+            &lt;div style="margin-top: 30px;"&gt;
+                &lt;div class="stat-box"&gt;
+                    &lt;div class="number"&gt;{total}&lt;/div&gt;
+                    &lt;div class="label"&gt;Total Estudiantes&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="stat-box"&gt;
+                    &lt;div class="number"&gt;{promedio_general:.1f}&lt;/div&gt;
+                    &lt;div class="label"&gt;Promedio General&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="stat-box"&gt;
+                    &lt;div class="number"&gt;{aprobados}&lt;/div&gt;
+                    &lt;div class="label"&gt;Aprobados&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
     """
     return html
 
@@ -1450,33 +1450,33 @@ def estadisticas():
 def acerca():
     """Información sobre el sistema"""
     html = """
-    <!DOCTYPE html>lt;!DOCTYPE html<!DOCTYPE html>gt;
-    <html>lt;html<html>gt;
-    <head>lt;head<head>gt;
-        <title>lt;title<title>gt;Acerca del Sistema</title>lt;/title</title>gt;
-        <style>lt;style<style>gt;
+    &lt;!DOCTYPE html&gt;
+    &lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Acerca del Sistema&lt;/title&gt;
+        &lt;style&gt;
             body { font-family: Arial; margin: 40px; background: #f5f5f5; }
             .container { background: white; padding: 30px; border-radius: 10px; }
             h1 { color: #1a237e; }
-        </style>lt;/style</style>gt;
-    </head>lt;/head</head>gt;
-    <body>lt;body<body>gt;
-        <divlt;div class="container">
-            <h1>lt;h1<h1>gt;ℹ️ Acerca del Sistema</h1>lt;/h1</h1>gt;
-            <a lt;a href="/" style="padding: 10px 20px; background: #1976d2; color: white; 
-               text-decoration: none; border-radius: 5px;">🏠 Inicio</a>lt;/a</a>gt;
-            
-            <divlt;div style="margin-top: 20px;">
-                <h3>lt;h3<h3>gt;Sistema de Gestión Escolar</h3>lt;/h3</h3>gt;
-                <p>lt;p<p>gt;<strong>Versión:</strong> 1.0</p>lt;/p</p>gt;
-                <p>lt;p<p>gt;<strong>Desarrollado con:</strong> Python + Flask</p>lt;/p</p>gt;
-                <p>lt;p<p>gt;<strong>Propósito:</strong> Gestionar información de estudiantes</p>lt;/p</p>gt;
-                <p>lt;p<p>gt;<strong>Curso:</strong> Programación 1</p>lt;/p</p>gt;
-                <p>lt;p<p>gt;<strong>Universidad:</strong> Rafael Landívar</p>lt;/p</p>gt;
-            </div>lt;/div</div>gt;
-        </div>lt;/div</div>gt;
-    </body>lt;/body</body>gt;
-    </html>lt;/html</html>gt;
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="container"&gt;
+            &lt;h1&gt;ℹ️ Acerca del Sistema&lt;/h1&gt;
+            &lt;a href="/" style="padding: 10px 20px; background: #1976d2; color: white;
+               text-decoration: none; border-radius: 5px;"&gt;🏠 Inicio&lt;/a&gt;
+
+            &lt;div style="margin-top: 20px;"&gt;
+                &lt;h3&gt;Sistema de Gestión Escolar&lt;/h3&gt;
+                &lt;p&gt;&lt;strong&gt;Versión:&lt;/strong&gt; 1.0&lt;/p&gt;
+                &lt;p&gt;&lt;strong&gt;Desarrollado con:&lt;/strong&gt; Python + Flask&lt;/p&gt;
+                &lt;p&gt;&lt;strong&gt;Propósito:&lt;/strong&gt; Gestionar información de estudiantes&lt;/p&gt;
+                &lt;p&gt;&lt;strong&gt;Curso:&lt;/strong&gt; Programación 1&lt;/p&gt;
+                &lt;p&gt;&lt;strong&gt;Universidad:&lt;/strong&gt; Rafael Landívar&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
     """
     return html
 
@@ -1486,11 +1486,11 @@ if __name__ == '__main__':
     print("⏹️  Para detener el servidor: Ctrl+C")
     print()
     app.run(debug=True)
-                    </div>lt;/div</div>gt;
-                    <divlt;div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #1976d2;">
+                    </code></pre>
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #1976d2;">
                         <p style="color: #0d47a1; font-weight: bold; margin-bottom: 10px;">
                             <i class="fas fa-play-circle"></i> ¿Cómo ejecutar este ejemplo?
-                        </p>lt;/p</p>gt;
+                        </p>
                         <ol style="color: #1565c0; margin-left: 20px;">
                             <li>Guarda el código en un archivo llamado <code>ejemplo4_flask_basico.py</code></li>
                             <li>Abre la terminal en la carpeta donde guardaste el archivo</li>
@@ -1498,11 +1498,11 @@ if __name__ == '__main__':
                             <li>Abre tu navegador y visita: <code>http://127.0.0.1:5000</code></li>
                             <li>Navega por las diferentes rutas del sistema</li>
                         </ol>
-                    </div>lt;/div</div>gt;
-                </div>lt;/div</div>gt;
-            </div>lt;/div</div>gt;
+                    </div>
+                </div>
+            </div>
 
-            <divlt;div style="background: #fff3e0; padding: 20px; border-radius: 8px; margin-top: 30px; border-left: 4px solid #f57c00;">
+            <div style="background: #fff3e0; padding: 20px; border-radius: 8px; margin-top: 30px; border-left: 4px solid #f57c00;">
                 <h4 style="color: #e65100; margin-bottom: 15px;">
                     <i class="fas fa-lightbulb"></i> Práctica Sugerida
                 </h4>
