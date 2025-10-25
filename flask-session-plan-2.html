@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Clase Flask - Semana 2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+            border-left: 4px solid #667eea;
+            padding-left: 25px;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.4em;
+            margin: 25px 0 15px 0;
+        }
+        
+        .time-badge {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.6em;
+            font-weight: normal;
+        }
+        
+        .objective {
+            background: #f0f7ff;
+            border-left: 4px solid #3498db;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .objective strong {
+            color: #3498db;
+        }
+        
+        .activity {
+            background: #fff9e6;
+            border-left: 4px solid #f39c12;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .activity strong {
+            color: #f39c12;
+        }
+        
+        .exercise-box {
+            background: #f8f9fa;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .exercise-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .exercise-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        pre {
+            margin: 15px 0 !important;
+            border-radius: 8px !important;
+        }
+        
+        pre[class*="language-"] {
+            margin: 15px 0;
+        }
+        
+        .tip {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip::before {
+            content: "💡 ";
+            font-size: 1.2em;
+        }
+        
+        .warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .warning::before {
+            content: "⚠️ ";
+            font-size: 1.2em;
+        }
+        
+        .success {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .success::before {
+            content: "✅ ";
+            font-size: 1.2em;
+        }
+        
+        ul, ol {
+            margin: 15px 0 15px 25px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .flow-step {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin: 5px;
+            font-weight: 600;
+        }
+        
+        .flow-arrow {
+            display: inline-block;
+            color: #667eea;
+            font-size: 1.5em;
+            margin: 0 10px;
+        }
+        
+        .practice-space {
+            background: white;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            min-height: 100px;
+        }
+        
+        .practice-space::before {
+            content: "📝 Espacio para práctica en clase";
+            display: block;
+            color: #999;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Sesión de Clase Flask - Semana 2</h1>
+            <p>Persistencia de Datos y Templates Dinámicos</p>
+        </header>
+        
+        <div class="content">
+            <!-- Sección 1 -->
+            <div class="section">
+                <h2>1. Bienvenida y Repaso <span class="time-badge">15 min</span></h2>
+                
+                <h3>A. Preguntas Detonadoras (5 min)</h3>
+                <div class="activity">
+                    <strong>Actividad de Apertura:</strong>
+                    <ul>
+                        <li><strong>Saludo:</strong> "¡Bienvenidos a la Semana 2! Hoy resolveremos el problema de la memoria de nuestro sistema."</li>
+                        <li><strong>Problema Central:</strong> "¿Qué pasa con los datos cuando cerramos el programa?"</li>
+                    </ul>
+                </div>
+                
+                <div class="tip">
+                    <strong>Discusión Guiada:</strong> Pida ejemplos de sistemas que pierden datos (calculadora, script Python) vs. sistemas que los guardan (WhatsApp, Moodle). Use la analogía de memoria a corto plazo (RAM) vs. memoria a largo plazo (Base de Datos).
+                </div>
+                
+                <h3>B. Repaso Rápido Semana 1 (10 min)</h3>
+                <div class="activity">
+                    <strong>Kahoot/Mentimeter:</strong> 5 preguntas sobre rutas, vistas, decorators, request y response.
+                </div>
+                <p><em>El objetivo es reforzar conceptos mediante el debate, no evaluar con nota.</em></p>
+            </div>
+
+            <!-- Sección 2 -->
+            <div class="section">
+                <h2>2. Introducción a la Persistencia <span class="time-badge">25 min</span></h2>
+                
+                <h3>A. Verificación de Entorno (5 min)</h3>
+                <div class="activity">
+                    <strong>Verificación:</strong> Ejecutar en terminal:
+                </div>
+                <pre><code class="language-bash">python -c "import sqlite3; print('SQLite3 OK')"</code></pre>
+                
+                <div class="activity">
+                    <strong>Práctica:</strong> Crear archivo <code>data.json</code> con estructura simple:
+                </div>
+                <pre><code class="language-json">[{"id": 1, "nombre": "Guatemala"}]</code></pre>
+                
+                <h3>B. Conceptos Fundamentales (20 min)</h3>
+                
+                <p><strong>JSON:</strong></p>
+                <ul>
+                    <li>Fácil de leer para humanos y máquinas</li>
+                    <li>Útil para intercambio de datos temporal o configuraciones</li>
+                    <li>No ideal para grandes volúmenes con relaciones complejas</li>
+                </ul>
+                
+                <p><strong>Bases de Datos:</strong></p>
+                <div class="objective">
+                    <strong>Definición:</strong> La memoria a largo plazo de nuestra aplicación. Un conjunto organizado de datos.
+                </div>
+                
+                <table>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Características</th>
+                        <th>Ejemplo</th>
+                    </tr>
+                    <tr>
+                        <td><strong>NoSQL</strong></td>
+                        <td>Flexible, sin estructura rígida</td>
+                        <td>MongoDB</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SQL</strong></td>
+                        <td>Estructurada, con tablas y relaciones</td>
+                        <td>SQLite, MySQL, PostgreSQL</td>
+                    </tr>
+                </table>
+                
+                <div class="tip">
+                    <strong>SQLite:</strong> Base de datos serverless. Todo en un solo archivo. Perfecta para desarrollo y aprendizaje.
+                </div>
+                
+                <p><strong>SQL (Structured Query Language):</strong> El idioma para comunicarnos con bases de datos relacionales.</p>
+            </div>
+
+            <!-- Sección 3 - EXPANDIDA -->
+            <div class="section">
+                <h2>3. SQL Básico y CRUD <span class="time-badge">60 min</span></h2>
+                
+                <div class="objective">
+                    <strong>Objetivo:</strong> Los estudiantes crearán tablas y realizarán consultas básicas (CREATE, INSERT, SELECT, UPDATE, DELETE).
+                </div>
+                
+                <h3>A. Demostración en Vivo (15 min)</h3>
+                <p>Use la shell de SQLite para demostrar cada comando en tiempo real.</p>
+                
+                <div class="activity">
+                    <strong>Abrir SQLite Shell:</strong>
+                </div>
+                <pre><code class="language-bash">sqlite3 escuela.db</code></pre>
+                
+                <table>
+                    <tr>
+                        <th>Comando</th>
+                        <th>Descripción</th>
+                        <th>Ejemplo</th>
+                    </tr>
+                    <tr>
+                        <td><strong>CREATE</strong></td>
+                        <td>Crea la estructura (Tabla)</td>
+                        <td><code>CREATE TABLE municipios (id INTEGER PRIMARY KEY, nombre TEXT, poblacion INTEGER);</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>INSERT</strong></td>
+                        <td>Agrega un nuevo registro</td>
+                        <td><code>INSERT INTO municipios (nombre, poblacion) VALUES ('Mixco', 450000);</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>SELECT</strong></td>
+                        <td>Consulta y recupera datos</td>
+                        <td><code>SELECT * FROM municipios;</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>UPDATE</strong></td>
+                        <td>Modifica registros existentes</td>
+                        <td><code>UPDATE municipios SET poblacion = 500000 WHERE id = 1;</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>DELETE</strong></td>
+                        <td>Elimina registros</td>
+                        <td><code>DELETE FROM municipios WHERE nombre = 'Mixco';</code></td>
+                    </tr>
+                </table>
+                
+                <div class="warning">
+                    <strong>Énfasis:</strong> No olvidar el punto y coma (;) al final de cada comando SQL.
+                </div>
+                
+                <h3>B. Ejercicio 1: Primera Tabla (10 min)</h3>
+                <div class="exercise-box">
+                    <h4><span class="exercise-number">1</span>Crear tabla de Estudiantes</h4>
+                    <p><strong>Instrucciones:</strong> Crea una tabla llamada <code>estudiantes</code> con los siguientes campos:</p>
+                    <ul>
+                        <li>id (número entero, llave primaria)</li>
+                        <li>nombre (texto)</li>
+                        <li>edad (número entero)</li>
+                    </ul>
+                    
+                    <div class="practice-space"></div>
+                    
+                    <details>
+                        <summary><strong>Ver solución</strong></summary>
+                        <pre><code class="language-sql">CREATE TABLE estudiantes (
+    id INTEGER PRIMARY KEY,
+    nombre TEXT,
+    edad INTEGER
+);</code></pre>
+                    </details>
+                </div>
+                
+                <h3>C. Ejercicio 2: Insertar Datos (10 min)</h3>
+                <div class="exercise-box">
+                    <h4><span class="exercise-number">2</span>Agregar estudiantes a la tabla</h4>
+                    <p><strong>Instrucciones:</strong> Inserta los siguientes estudiantes en la tabla:</p>
+                    <ul>
+                        <li>María López, 20 años</li>
+                        <li>Carlos Pérez, 22 años</li>
+                        <li>Ana García, 19 años</li>
+                    </ul>
+                    
+                    <div class="practice-space"></div>
+                    
+                    <details>
+                        <summary><strong>Ver solución</strong></summary>
+                        <pre><code class="language-sql">INSERT INTO estudiantes (nombre, edad) VALUES ('María López', 20);
+INSERT INTO estudiantes (nombre, edad) VALUES ('Carlos Pérez', 22);
+INSERT INTO estudiantes (nombre, edad) VALUES ('Ana García', 19);</code></pre>
+                    </details>
+                </div>
+                
+                <h3>D. Ejercicio 3: Consultas SELECT (10 min)</h3>
+                <div class="exercise-box">
+                    <h4><span class="exercise-number">3</span>Realizar consultas</h4>
+                    <p><strong>Instrucciones:</strong> Escribe las consultas SQL para:</p>
+                    
+                    <ol>
+                        <li>Mostrar todos los estudiantes</li>
+                        <li>Mostrar solo los nombres de los estudiantes</li>
+                        <li>Mostrar estudiantes mayores de 20 años</li>
+                        <li>Mostrar estudiantes ordenados por edad (de menor a mayor)</li>
+                    </ol>
+                    
+                    <div class="practice-space"></div>
+                    
+                    <details>
+                        <summary><strong>Ver solución</strong></summary>
+                        <pre><code class="language-sql">-- 1. Todos los estudiantes
+SELECT * FROM estudiantes;
+
+-- 2. Solo nombres
+SELECT nombre FROM estudiantes;
+
+-- 3. Mayores de 20 años
+SELECT * FROM estudiantes WHERE edad > 20;
+
+-- 4. Ordenados por edad
+SELECT * FROM estudiantes ORDER BY edad ASC;</code></pre>
+                    </details>
+                </div>
+                
+                <h3>E. Ejercicio 4: Actualizar Datos (5 min)</h3>
+                <div class="exercise-box">
+                    <h4><span class="exercise-number">4</span>Modificar registros</h4>
+                    <p><strong>Instrucciones:</strong></p>
+                    <ol>
+                        <li>Actualiza la edad de María López a 21 años</li>
+                        <li>Cambia el nombre de Carlos Pérez a "Carlos Pérez González"</li>
+                    </ol>
+                    
+                    <div class="practice-space"></div>
+                    
+                    <details>
+                        <summary><strong>Ver solución</strong></summary>
+                        <pre><code class="language-sql">-- 1. Actualizar edad de María
+UPDATE estudiantes SET edad = 21 WHERE nombre = 'María López';
+
+-- 2. Actualizar nombre de Carlos
+UPDATE estudiantes SET nombre = 'Carlos Pérez González' WHERE nombre = 'Carlos Pérez';</code></pre>
+                    </details>
+                </div>
+                
+                <h3>F. Ejercicio 5: Eliminar Datos (5 min)</h3>
+                <div class="exercise-box">
+                    <h4><span class="exercise-number">5</span>Eliminar registros</h4>
+                    <p><strong>Instrucciones:</strong></p>
+                    <ol>
+                        <li>Elimina al estudiante con id = 2</li>
+                        <li>Elimina todos los estudiantes menores de 20 años</li>
+                    </ol>
+                    
+                    <div class="practice-space"></div>
+                    
+                    <details>
+                        <summary><strong>Ver solución</strong></summary>
+                        <pre><code class="language-sql">-- 1. Eliminar por id
+DELETE FROM estudiantes WHERE id = 2;
+
+-- 2. Eliminar menores de 20
+DELETE FROM estudiantes WHERE edad < 20;</code></pre>
+                    </details>
+                    
+                    <div class="warning">
+                        <strong>IMPORTANTE:</strong> Siempre usa WHERE en UPDATE y DELETE. Sin WHERE, modificarás o eliminarás TODOS los registros.
+                    </div>
+                </div>
+                
+                <h3>G. Ejercicio Integrador (15 min)</h3>
+                <div class="exercise-box">
+                    <h4><span class="exercise-number">6</span>Base de Datos de Departamentos de Guatemala</h4>
+                    <p><strong>Instrucciones Completas:</strong></p>
+                    
+                    <ol>
+                        <li>Crear una tabla <code>departamentos</code> con campos:
+                            <ul>
+                                <li>id (entero, llave primaria autoincremental)</li>
+                                <li>nombre (texto, no nulo)</li>
+                                <li>poblacion (entero)</li>
+                                <li>area_km2 (número decimal)</li>
+                            </ul>
+                        </li>
+                        <li>Insertar estos departamentos:
+                            <ul>
+                                <li>Guatemala: 3,015,081 habitantes, 2,126 km²</li>
+                                <li>Quetzaltenango: 789,358 habitantes, 1,951 km²</li>
+                                <li>Petén: 545,600 habitantes, 35,854 km²</li>
+                                <li>Huehuetenango: 1,143,887 habitantes, 7,403 km²</li>
+                            </ul>
+                        </li>
+                        <li>Realizar las siguientes consultas:
+                            <ul>
+                                <li>Mostrar todos los departamentos</li>
+                                <li>Mostrar departamentos con más de 1 millón de habitantes</li>
+                                <li>Mostrar el departamento con mayor área</li>
+                                <li>Calcular la población total de todos los departamentos</li>
+                            </ul>
+                        </li>
+                        <li>Actualizar la población de Guatemala a 3,100,000</li>
+                        <li>Eliminar departamentos con menos de 600,000 habitantes</li>
+                    </ol>
+                    
+                    <div class="practice-space" style="min-height: 200px;"></div>
+                    
+                    <details>
+                        <summary><strong>Ver solución completa</strong></summary>
+                        <pre><code class="language-sql">-- 1. Crear tabla
+CREATE TABLE departamentos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    poblacion INTEGER,
+    area_km2 REAL
+);
+
+-- 2. Insertar datos
+INSERT INTO departamentos (nombre, poblacion, area_km2) 
+VALUES ('Guatemala', 3015081, 2126);
+
+INSERT INTO departamentos (nombre, poblacion, area_km2) 
+VALUES ('Quetzaltenango', 789358, 1951);
+
+INSERT INTO departamentos (nombre, poblacion, area_km2) 
+VALUES ('Petén', 545600, 35854);
+
+INSERT INTO departamentos (nombre, poblacion, area_km2) 
+VALUES ('Huehuetenango', 1143887, 7403);
+
+-- 3. Consultas
+-- Todos los departamentos
+SELECT * FROM departamentos;
+
+-- Más de 1 millón de habitantes
+SELECT * FROM departamentos WHERE poblacion > 1000000;
+
+-- Mayor área
+SELECT * FROM departamentos ORDER BY area_km2 DESC LIMIT 1;
+
+-- Población total
+SELECT SUM(poblacion) as poblacion_total FROM departamentos;
+
+-- 4. Actualizar
+UPDATE departamentos SET poblacion = 3100000 WHERE nombre = 'Guatemala';
+
+-- 5. Eliminar
+DELETE FROM departamentos WHERE poblacion < 600000;</code></pre>
+                    </details>
+                </div>
+                
+                <div class="tip">
+                    <strong>Comandos útiles de SQLite Shell:</strong>
+                    <ul>
+                        <li><code>.tables</code> - Mostrar todas las tablas</li>
+                        <li><code>.schema nombre_tabla</code> - Ver estructura de una tabla</li>
+                        <li><code>.headers on</code> - Mostrar nombres de columnas</li>
+                        <li><code>.mode column</code> - Formato de tabla legible</li>
+                        <li><code>.quit</code> - Salir de SQLite</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Sección 4 -->
+            <div class="section">
+                <h2>4. Templates Dinámicos con Jinja2 <span class="time-badge">45 min</span></h2>
+                
+                <div class="objective">
+                    <strong>Objetivo:</strong> Conectar la lógica de Python/Flask con HTML de manera dinámica usando Jinja2.
+                </div>
+                
+                <h3>A. Introducción a Jinja2 (15 min)</h3>
+                <p><strong>¿Qué es Jinja2?</strong> El motor de templates de Flask que permite inyectar lógica Python dentro de HTML.</p>
+                
+                <p><strong>Sintaxis Clave:</strong></p>
+                <ul>
+                    <li><code>{{ variable }}</code> - Muestra el valor de una variable</li>
+                    <li><code>{% comando %}</code> - Lógica (loops, condicionales)</li>
+                    <li><code>{% extends "base.html" %}</code> - Herencia de templates</li>
+                    <li><code>{% block nombre %}</code> - Define áreas de contenido variable</li>
+                </ul>
+                
+                <div class="tip">
+                    <strong>Herencia de Templates:</strong> Evita repetir código. Un archivo <code>base.html</code> contiene la estructura común (header, footer) y los demás templates extienden de él.
+                </div>
+                
+                <h3>B. Ejercicio Práctico (30 min)</h3>
+                
+                <p><strong>Paso 1:</strong> Crear <code>base.html</code></p>
+                <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;{% block title %}Mi App Flask{% endblock %}&lt;/title&gt;
+    &lt;style&gt;
+        body { font-family: Arial; margin: 20px; }
+        nav { background: #333; padding: 10px; }
+        nav a { color: white; margin: 0 10px; text-decoration: none; }
+        .container { margin-top: 20px; }
+        footer { margin-top: 50px; text-align: center; color: #666; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav&gt;
+        &lt;a href="/"&gt;Inicio&lt;/a&gt;
+        &lt;a href="/departamentos"&gt;Departamentos&lt;/a&gt;
+    &lt;/nav&gt;
+    &lt;div class="container"&gt;
+        {% block content %}
+        {% endblock %}
+    &lt;/div&gt;
+    &lt;footer&gt;© 2025 Profesorado de Tecnología&lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                
+                <p><strong>Paso 2:</strong> Crear <code>index.html</code> que extienda <code>base.html</code></p>
+                <pre><code class="language-html">{% extends "base.html" %}
+
+{% block title %}Departamentos de Guatemala{% endblock %}
+
+{% block content %}
+    &lt;h1&gt;Listado de Departamentos&lt;/h1&gt;
+    &lt;table border="1"&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Nombre&lt;/th&gt;
+            &lt;th&gt;Población&lt;/th&gt;
+        &lt;/tr&gt;
+        {% for dept in departamentos %}
+        &lt;tr&gt;
+            &lt;td&gt;{{ dept.nombre }}&lt;/td&gt;
+            &lt;td&gt;{{ dept.poblacion }}&lt;/td&gt;
+        &lt;/tr&gt;
+        {% endfor %}
+    &lt;/table&gt;
+{% endblock %}</code></pre>
+                
+                <p><strong>Paso 3:</strong> En el archivo Flask, crear lista y enviarla al template</p>
+                <pre><code class="language-python">from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    departamentos = [
+        {'nombre': 'Guatemala', 'poblacion': 3015081},
+        {'nombre': 'Quetzaltenango', 'poblacion': 789358},
+        {'nombre': 'Petén', 'poblacion': 545600}
+    ]
+    return render_template('index.html', departamentos=departamentos)
+
+if __name__ == '__main__':
+    app.run(debug=True)</code></pre>
+                
+                <div class="exercise-box">
+                    <h4><span class="exercise-number">7</span>Práctica: Condicionales en Jinja2</h4>
+                    <p><strong>Instrucciones:</strong> Modifica el template para que:</p>
+                    <ul>
+                        <li>Muestre en color verde los departamentos con más de 1 millón de habitantes</li>
+                        <li>Muestre "Población Alta" si tiene más de 1M, "Población Media" en caso contrario</li>
+                    </ul>
+                    
+                    <details>
+                        <summary><strong>Ver solución</strong></summary>
+                        <pre><code class="language-html">{% for dept in departamentos %}
+&lt;tr style="{% if dept.poblacion > 1000000 %}background-color: lightgreen;{% endif %}"&gt;
+    &lt;td&gt;{{ dept.nombre }}&lt;/td&gt;
+    &lt;td&gt;{{ dept.poblacion }}&lt;/td&gt;
+    &lt;td&gt;
+        {% if dept.poblacion > 1000000 %}
+            Población Alta
+        {% else %}
+            Población Media
+        {% endif %}
+    &lt;/td&gt;
+&lt;/tr&gt;
+{% endfor %}</code></pre>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Sección 5 -->
+            <div class="section">
+                <h2>5. Introducción a GitHub <span class="time-badge">15 min</span></h2>
+                
+                <div class="objective">
+                    <strong>Objetivo:</strong> Iniciar la práctica de control de versiones y colaboración.
+                </div>
+                
+                <h3>A. Conceptos Fundamentales (5 min)</h3>
+                <ul>
+                    <li><strong>Git:</strong> Sistema de control de versiones local</li>
+                    <li><strong>GitHub:</strong> Servicio de hosting para repositorios. "La nube donde guardamos el código"</li>
+                </ul>
+                
+                <p><strong>Flujo Básico:</strong></p>
+                <div style="text-align: center; margin: 25px 0;">
+                    <span class="flow-step">Staging</span>
+                    <span class="flow-arrow">→</span>
+                    <span class="flow-step">Commit</span>
+                    <span class="flow-arrow">→</span>
+                    <span class="flow-step">Push</span>
+                </div>
+                
+                <h3>B. Demostración Práctica (10 min)</h3>
+                <div class="activity">
+                    <strong>Pasos a seguir en clase:</strong>
+                </div>
+                
+                <pre><code class="language-bash"># 1. Inicializar repositorio
+git init
+
+# 2. Agregar archivos
+git add .
+
+# 3. Hacer commit
+git commit -m "Semana 2: Intro a Persistencia y Jinja2"
+
+# 4. Conectar con GitHub (después de crear repo en la web)
+git remote add origin https://github.com/usuario/nombre-repo.git
+
+# 5. Empujar cambios
+git push -u origin main</code></pre>
+                
+                <div class="tip">
+                    <strong>Tarea Continua:</strong> Los estudiantes deben seguir el flujo Commit/Push cada vez que completen un ejercicio o módulo del proyecto.
+                </div>
+                
+                <div class="exercise-box">
+                    <h4><span class="exercise-number">8</span>Ejercicio Git</h4>
+                    <p><strong>Instrucciones:</strong></p>
+                    <ol>
+                        <li>Crea un repositorio local en tu carpeta de proyecto</li>
+                        <li>Crea un archivo <code>.gitignore</code> con el siguiente contenido:</li>
+                    </ol>
+                    <pre><code class="language-plaintext">*.db
+__pycache__/
+*.pyc
+venv/
+.env</code></pre>
+                    <ol start="3">
+                        <li>Agrega todos los archivos al staging area</li>
+                        <li>Haz tu primer commit con un mensaje descriptivo</li>
+                        <li>Crea un repositorio en GitHub y conecta tu repo local</li>
+                        <li>Sube tus cambios a GitHub</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Sección 6 - NUEVA: Ejercicios Adicionales SQLite -->
+            <div class="section">
+                <h2>6. Ejercicios Adicionales de SQLite <span class="time-badge">30 min (opcional)</span></h2>
+                
+                <div class="objective">
+                    <strong>Objetivo:</strong> Profundizar en consultas SQL con ejercicios progresivos de dificultad.
+                </div>
+                
+                <h3>Ejercicio 9: Sistema de Biblioteca</h3>
+                <div class="exercise-box">
+                    <h4><span class="exercise-number">9</span>Base de Datos de Libros</h4>
+                    <p><strong>Instrucciones:</strong></p>
+                    
+                    <ol>
+                        <li>Crea una tabla <code>libros</code> con:
+                            <ul>
+                                <li>id (entero, llave primaria autoincremental)</li>
+                                <li>titulo (texto, no nulo)</li>
+                                <li>autor (texto)</li>
+                                <li>anio_publicacion (entero)</li>
+                                <li>precio (decimal)</li>
+                                <li>disponible (entero: 1=sí, 0=no)</li>
+                            </ul>
+                        </li>
+                        <li>Inserta al menos 5 libros diferentes</li>
+                        <li>Consulta todos los libros disponibles</li>
+                        <li>Consulta libros publicados después del año 2000</li>
+                        <li>Encuentra el libro más caro</li>
+                        <li>Calcula el precio promedio de todos los libros</li>
+                        <li>Marca como no disponible el libro con id = 3</li>
+                    </ol>
+                    
+                    <div class="practice-space" style="min-height: 250px;"></div>
+                    
+                    <details>
+                        <summary><strong>Ver solución</strong></summary>
+                        <pre><code class="language-sql">-- 1. Crear tabla
+CREATE TABLE libros (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    titulo TEXT NOT NULL,
+    autor TEXT,
+    anio_publicacion INTEGER,
+    precio REAL,
+    disponible INTEGER DEFAULT 1
+);
+
+-- 2. Insertar datos
+INSERT INTO libros (titulo, autor, anio_publicacion, precio, disponible) 
+VALUES ('Cien años de soledad', 'Gabriel García Márquez', 1967, 250.50, 1);
+
+INSERT INTO libros (titulo, autor, anio_publicacion, precio, disponible) 
+VALUES ('El Señor Presidente', 'Miguel Ángel Asturias', 1946, 180.00, 1);
+
+INSERT INTO libros (titulo, autor, anio_publicacion, precio, disponible) 
+VALUES ('La Casa de los Espíritus', 'Isabel Allende', 1982, 220.75, 1);
+
+INSERT INTO libros (titulo, autor, anio_publicacion, precio, disponible) 
+VALUES ('Rayuela', 'Julio Cortázar', 1963, 195.00, 0);
+
+INSERT INTO libros (titulo, autor, anio_publicacion, precio, disponible) 
+VALUES ('El Alquimista', 'Paulo Coelho', 1988, 150.00, 1);
+
+-- 3. Libros disponibles
+SELECT * FROM libros WHERE disponible = 1;
+
+-- 4. Publicados después del 2000
+SELECT * FROM libros WHERE anio_publicacion > 2000;
+
+-- 5. Libro más caro
+SELECT * FROM libros ORDER BY precio DESC LIMIT 1;
+
+-- 6. Precio promedio
+SELECT AVG(precio) as precio_promedio FROM libros;
+
+-- 7. Marcar como no disponible
+UPDATE libros SET disponible = 0 WHERE id = 3;</code></pre>
+                    </details>
+                </div>
+                
+                <h3>Ejercicio 10: Sistema de Estudiantes y Cursos</h3>
+                <div class="exercise-box">
+                    <h4><span class="exercise-number">10</span>Gestión de Notas</h4>
+                    <p><strong>Instrucciones:</strong></p>
+                    
+                    <ol>
+                        <li>Crea una tabla <code>notas</code> con:
+                            <ul>
+                                <li>id (entero, llave primaria)</li>
+                                <li>estudiante (texto)</li>
+                                <li>curso (texto)</li>
+                                <li>nota (entero, entre 0 y 100)</li>
+                                <li>fecha (texto)</li>
+                            </ul>
+                        </li>
+                        <li>Inserta 10 registros de notas de diferentes estudiantes y cursos</li>
+                        <li>Consulta todas las notas de un estudiante específico</li>
+                        <li>Encuentra todas las notas mayores o iguales a 80</li>
+                        <li>Calcula el promedio de notas por curso</li>
+                        <li>Encuentra la nota más alta y más baja de toda la tabla</li>
+                        <li>Cuenta cuántos estudiantes tienen notas mayores a 70</li>
+                    </ol>
+                    
+                    <div class="practice-space" style="min-height: 250px;"></div>
+                    
+                    <details>
+                        <summary><strong>Ver solución</strong></summary>
+                        <pre><code class="language-sql">-- 1. Crear tabla
+CREATE TABLE notas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    estudiante TEXT,
+    curso TEXT,
+    nota INTEGER CHECK(nota >= 0 AND nota <= 100),
+    fecha TEXT
+);
+
+-- 2. Insertar datos
+INSERT INTO notas (estudiante, curso, nota, fecha) VALUES 
+('María López', 'Matemáticas', 85, '2025-01-15'),
+('María López', 'Historia', 92, '2025-01-16'),
+('Carlos Pérez', 'Matemáticas', 78, '2025-01-15'),
+('Carlos Pérez', 'Historia', 88, '2025-01-16'),
+('Ana García', 'Matemáticas', 95, '2025-01-15'),
+('Ana García', 'Historia', 90, '2025-01-16'),
+('Pedro Martínez', 'Matemáticas', 65, '2025-01-15'),
+('Pedro Martínez', 'Historia', 72, '2025-01-16'),
+('Lucía Ramírez', 'Matemáticas', 88, '2025-01-15'),
+('Lucía Ramírez', 'Historia', 94, '2025-01-16');
+
+-- 3. Notas de un estudiante
+SELECT * FROM notas WHERE estudiante = 'María López';
+
+-- 4. Notas mayores o iguales a 80
+SELECT * FROM notas WHERE nota >= 80;
+
+-- 5. Promedio por curso
+SELECT curso, AVG(nota) as promedio FROM notas GROUP BY curso;
+
+-- 6. Nota más alta y más baja
+SELECT MAX(nota) as nota_maxima, MIN(nota) as nota_minima FROM notas;
+
+-- 7. Contar estudiantes con notas > 70
+SELECT COUNT(DISTINCT estudiante) as total_estudiantes 
+FROM notas WHERE nota > 70;</code></pre>
+                    </details>
+                </div>
+                
+                <h3>Ejercicio 11: Consultas Avanzadas</h3>
+                <div class="exercise-box">
+                    <h4><span class="exercise-number">11</span>Productos y Ventas</h4>
+                    <p><strong>Instrucciones:</strong> Crea dos tablas relacionadas</p>
+                    
+                    <ol>
+                        <li>Tabla <code>productos</code>:
+                            <ul>
+                                <li>id, nombre, categoria, precio, stock</li>
+                            </ul>
+                        </li>
+                        <li>Inserta 6 productos de diferentes categorías (Electrónica, Ropa, Alimentos)</li>
+                        <li>Consultas a realizar:
+                            <ul>
+                                <li>Productos de la categoría "Electrónica"</li>
+                                <li>Productos con stock menor a 10</li>
+                                <li>Productos ordenados por precio (de mayor a menor)</li>
+                                <li>Total de productos por categoría</li>
+                                <li>Precio promedio por categoría</li>
+                                <li>Producto más caro de cada categoría</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    
+                    <div class="practice-space" style="min-height: 300px;"></div>
+                    
+                    <details>
+                        <summary><strong>Ver solución</strong></summary>
+                        <pre><code class="language-sql">-- 1. Crear tabla
+CREATE TABLE productos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    categoria TEXT,
+    precio REAL,
+    stock INTEGER
+);
+
+-- 2. Insertar datos
+INSERT INTO productos (nombre, categoria, precio, stock) VALUES 
+('Laptop', 'Electrónica', 8500.00, 5),
+('Mouse', 'Electrónica', 250.00, 25),
+('Camiseta', 'Ropa', 150.00, 30),
+('Pantalón', 'Ropa', 350.00, 15),
+('Arroz 1kg', 'Alimentos', 8.50, 100),
+('Frijol 1kg', 'Alimentos', 12.00, 80);
+
+-- 3. Consultas
+-- Productos de Electrónica
+SELECT * FROM productos WHERE categoria = 'Electrónica';
+
+-- Stock menor a 10
+SELECT * FROM productos WHERE stock < 10;
+
+-- Ordenados por precio
+SELECT * FROM productos ORDER BY precio DESC;
+
+-- Total de productos por categoría
+SELECT categoria, COUNT(*) as total FROM productos GROUP BY categoria;
+
+-- Precio promedio por categoría
+SELECT categoria, AVG(precio) as precio_promedio 
+FROM productos GROUP BY categoria;
+
+-- Producto más caro por categoría
+SELECT categoria, MAX(precio) as precio_maximo 
+FROM productos GROUP BY categoria;</code></pre>
+                    </details>
+                </div>
+                
+                <div class="success">
+                    <strong>Funciones SQL útiles:</strong>
+                    <ul>
+                        <li><code>COUNT()</code> - Cuenta registros</li>
+                        <li><code>SUM()</code> - Suma valores</li>
+                        <li><code>AVG()</code> - Calcula promedio</li>
+                        <li><code>MAX()</code> - Encuentra el valor máximo</li>
+                        <li><code>MIN()</code> - Encuentra el valor mínimo</li>
+                        <li><code>GROUP BY</code> - Agrupa resultados</li>
+                        <li><code>ORDER BY</code> - Ordena resultados (ASC/DESC)</li>
+                        <li><code>LIMIT</code> - Limita número de resultados</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Cierre -->
+            <div class="section">
+                <h2>📋 Resumen y Próximos Pasos</h2>
+                <p><strong>Lo que cubrimos hoy:</strong></p>
+                <ul>
+                    <li>Concepto de persistencia de datos</li>
+                    <li>Diferencia entre JSON y Bases de Datos SQL</li>
+                    <li>Comandos SQL básicos y avanzados (CRUD)</li>
+                    <li>Funciones de agregación (COUNT, SUM, AVG, MAX, MIN)</li>
+                    <li>Templates dinámicos con Jinja2</li>
+                    <li>Control de versiones con Git y GitHub</li>
+                </ul>
+                
+                <div class="objective">
+                    <strong>Próxima Semana:</strong> Integración de SQLite con Flask usando Python y construcción de un CRUD completo con interfaz web.
+                </div>
+                
+                <div class="activity">
+                    <strong>Tarea para casa:</strong>
+                    <ol>
+                        <li>Completar todos los ejercicios de SQLite</li>
+                        <li>Crear un repositorio en GitHub con el proyecto</li>
+                        <li>Diseñar una base de datos propia (tema libre) con al menos 2 tablas</li>
+                        <li>Documentar en un archivo README.md el propósito de tu base de datos</li>
+                    </ol>
+                </div>
+                
+                <div class="tip">
+                    <strong>Recursos Adicionales:</strong>
+                    <ul>
+                        <li><a href="https://www.w3schools.com/sql/" target="_blank">W3Schools SQL Tutorial</a></li>
+                        <li><a href="https://sqliteonline.com/" target="_blank">SQLite Online (para practicar)</a></li>
+                        <li><a href="https://jinja.palletsprojects.com/" target="_blank">Documentación Jinja2</a></li>
+                        <li><a href="https://flask.palletsprojects.com/" target="_blank">Documentación Flask</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+</body>
+</html>
