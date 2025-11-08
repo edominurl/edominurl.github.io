@@ -1253,19 +1253,17 @@ if __name__ == '__main__':
                         <p><strong>Requisitos:</strong></p>
                         <ul style="margin-left: 20px;">
                             <li>Estructura de carpetas:
-                                <pre style="background: white; padding: 8px; margin: 5px 0; border-radius: 4px;">
-proyecto_equipo_X/
+<pre><code class="language-text">proyecto_equipo_X/
 ├── app.py
 ├── escuela.db
 ├── templates/
-│   ├── base.html (template padre)
+│   ├── base.html  # template padre
 │   ├── inicio.html
 │   ├── estudiantes.html
 │   ├── riesgo.html
 │   └── municipio.html
 └── static/
-    └── style.css
-                                </pre>
+    └── style.css</code></pre>
                             </li>
                             <li>Rutas Flask a crear:
                                 <ul style="margin-left: 20px;">
@@ -1278,7 +1276,7 @@ proyecto_equipo_X/
                             </li>
                             <li>Características de templates:
                                 <ul style="margin-left: 20px;">
-                                    <li>Usar template base ({% extends "base.html" %})</li>
+                                    <li>Usar template base (<code>{% extends 'base.html' %}</code>)</li>
                                     <li>Navegación entre páginas</li>
                                     <li>Colores según nivel de riesgo</li>
                                     <li>Loops con {% for %}</li>

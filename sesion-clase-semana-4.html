@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sesión de Clase Semana 4 - Programación 1</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+  <style>
+    body{font-family:Segoe UI,Tahoma,Arial,sans-serif; background:#f5f5f5; margin:0; padding:24px; color:#222;}
+    .container{max-width:1100px; margin:0 auto; background:#fff; padding:40px; box-shadow:0 2px 8px rgba(0,0,0,.1);}
+    h1{margin:0 0 6px; font-size:24px; color:#1a237e}
+    h2.section-title{margin:40px 0 16px; font-size:20px; color:#1a237e; border-bottom:2px solid #e0e0e0; padding-bottom:8px; display:flex; gap:8px; align-items:center}
+    .session-number{background:linear-gradient(135deg,#5c6bc0,#3949ab); color:#fff; padding:16px; border-radius:10px; font-size:22px; text-align:center; margin:20px 0;}
+    .activity-block{background:#f8f9fa; border-left:4px solid #1a237e; padding:20px; margin:20px 0; border-radius:8px;}
+    .step-indicator{display:flex; align-items:center; gap:12px; margin:30px 0 12px;}
+    .step-number{background:#1a237e;color:#fff;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:18px}
+    .time-badge{background:#4caf50;color:#fff;padding:4px 10px;border-radius:20px;font-size:13px;font-weight:bold;display:inline-flex;align-items:center;gap:6px}
+    pre[class*="language-"]{border-radius:8px; margin:12px 0}
+    code[class*="language-"]{font-size:13px}
+    .evaluation-box{background:#fff3e0; border:2px solid #ffb74d; padding:12px; border-radius:8px; margin-top:10px;}
+    ul,ol{margin-left:20px}
+    .mini{font-size:13px; color:#555}
+  </style>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sesión de Clase Semana 4 - Cierre CRUD + Deploy</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+  <style>
+    body{font-family:Segoe UI,Tahoma,Arial,sans-serif; background:#f5f5f5; margin:0; padding:24px; color:#222;}
+    .container{max-width:1100px; margin:0 auto; background:#fff; padding:40px; box-shadow:0 2px 8px rgba(0,0,0,.1);}    
+    h1{margin:0 0 6px; font-size:24px; color:#1a237e}
+    h2.section-title{margin:30px 0 14px; font-size:20px; color:#1a237e; border-bottom:2px solid #e0e0e0; padding-bottom:8px; display:flex; gap:8px; align-items:center}
+    .banner{background:linear-gradient(135deg,#5c6bc0,#3949ab); color:#fff; padding:16px; border-radius:10px; font-size:18px; text-align:center; margin:14px 0;}
+    .block{background:#f8f9fa; border-left:4px solid #1a237e; padding:18px; margin:16px 0; border-radius:8px;}
+    pre[class*="language-"]{border-radius:8px; margin:10px 0}
+    code[class*="language-"]{font-size:13px}
+    ul,ol{margin-left:20px}
+    .ok{background:#e8f5e9; border-left-color:#2e7d32}
+    .warn{background:#fff3e0; border-left-color:#ff9800}
+  </style>
+  <!-- Simple top links -->
+</head>
+<body>
+  <div class="container">
+    <h1>Universidad Rafael Landívar</h1>
+    <p>Facultad de Humanidades – Departamento de Educación</p>
+    <div class="banner"><i class="fas fa-calendar-check"></i> Sesión de Clase Semana 4 · Cierre de CRUD + SQL · Deploy en Render · GitHub para versionar</div>
+
+    <h2 class="section-title"><i class="fas fa-bullseye"></i> Objetivo mínimo del día</h2>
+    <div class="block">
+      <ul>
+        <li>Dejar funcionando el CRUD con SQLite (crear, listar, editar, eliminar).</li>
+        <li>Tener README y archivos de despliegue listos (<code>requirements.txt</code>, <code>Procfile</code>).</li>
+        <li>Subir el proyecto a GitHub y desplegar en Render.</li>
+      </ul>
+    </div>
+
+    <h2 class="section-title"><i class="fas fa-database"></i> Paso 1 · Base de datos y CRUD mínimo</h2>
+    <div class="block">
+<pre><code class="language-python"># db.py
+import sqlite3
+
+def get_conn():
+    c = sqlite3.connect('escuela.db')
+    c.row_factory = sqlite3.Row
+    return c
+
+def init_db():
+    with get_conn() as c:
+        c.execute('''CREATE TABLE IF NOT EXISTS estudiantes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nombre TEXT NOT NULL,
+            grado TEXT NOT NULL,
+            promedio REAL NOT NULL
+        )''')
+
+if __name__ == '__main__':
+    init_db(); print('✓ DB lista')</code></pre>
+<pre><code class="language-python"># app.py
+from flask import Flask, render_template, request, redirect, url_for, flash
+from db import get_conn, init_db
+
+app = Flask(__name__)
+app.secret_key = 'dev'
+init_db()
+
+@app.route('/')
+def inicio():
+    with get_conn() as c:
+        est = c.execute('SELECT id,nombre,grado,promedio FROM estudiantes').fetchall()
+    return render_template('inicio.html', estudiantes=est)
+
+@app.route('/crear', methods=['POST'])
+def crear():
+    nombre = request.form.get('nombre','').strip()
+    grado = request.form.get('grado','')
+    try:
+        promedio = float(request.form.get('promedio','0'))
+    except ValueError:
+        flash('Promedio inválido','danger'); return redirect(url_for('inicio'))
+    if len(nombre) &lt; 3:
+        flash('Nombre muy corto','danger'); return redirect(url_for('inicio'))
+    with get_conn() as c:
+        c.execute('INSERT INTO estudiantes(nombre,grado,promedio) VALUES(?,?,?)',(nombre,grado,promedio))
+    flash('Creado','success'); return redirect(url_for('inicio'))
+
+@app.route('/editar/&lt;int:id&gt;', methods=['POST'])
+def editar(id):
+    nombre = request.form['nombre'].strip(); grado = request.form['grado']
+    promedio = float(request.form.get('promedio','0') or 0)
+    with get_conn() as c:
+        c.execute('UPDATE estudiantes SET nombre=?,grado=?,promedio=? WHERE id=?',(nombre,grado,promedio,id))
+    flash('Actualizado','info'); return redirect(url_for('inicio'))
+
+@app.route('/eliminar/&lt;int:id&gt;', methods=['POST'])
+def eliminar(id):
+    with get_conn() as c:
+        c.execute('DELETE FROM estudiantes WHERE id=?',(id,))
+    flash('Eliminado','warning'); return redirect(url_for('inicio'))
+
+if __name__ == '__main__':
+    app.run(debug=True)</code></pre>
+<pre><code class="language-html">&lt;!-- templates/inicio.html (fragmento) --&gt;
+&lt;h1 class="h3"&gt;Estudiantes&lt;/h1&gt;
+{% for cat,msg in get_flashed_messages(with_categories=True) %}
+  &lt;div class="alert alert-{{cat}}"&gt;{{ msg }}&lt;/div&gt;
+{% endfor %}
+
+&lt;form method="post" action="/crear" class="row g-2 mb-3"&gt;
+  &lt;input class="form-control" name="nombre" placeholder="Nombre" required /&gt;
+  &lt;input class="form-control" name="grado" placeholder="Grado" required /&gt;
+  &lt;input class="form-control" name="promedio" type="number" min="0" max="100" step="0.1" placeholder="Promedio" required /&gt;
+  &lt;button class="btn btn-primary"&gt;Guardar&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;table class="table table-striped"&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Nombre&lt;/th&gt;&lt;th&gt;Grado&lt;/th&gt;&lt;th&gt;Promedio&lt;/th&gt;&lt;th&gt;Acciones&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+  {% for e in estudiantes %}
+    &lt;tr&gt;
+      &lt;td&gt;{{e.id}}&lt;/td&gt;&lt;td&gt;{{e.nombre}}&lt;/td&gt;&lt;td&gt;{{e.grado}}&lt;/td&gt;&lt;td&gt;{{e.promedio|round(1)}}&lt;/td&gt;
+      &lt;td class="d-flex gap-1"&gt;
+        &lt;form method="post" action="/editar/{{e.id}}" class="d-inline-flex gap-1"&gt;
+          &lt;input name="nombre" value="{{e.nombre}}" required class="form-control form-control-sm"/&gt;
+          &lt;input name="grado" value="{{e.grado}}" required class="form-control form-control-sm"/&gt;
+          &lt;input name="promedio" type="number" step="0.1" value="{{e.promedio}}" class="form-control form-control-sm"/&gt;
+          &lt;button class="btn btn-sm btn-secondary"&gt;Editar&lt;/button&gt;
+        &lt;/form&gt;
+        &lt;form method="post" action="/eliminar/{{e.id}}" onsubmit="return confirm('¿Eliminar?');"&gt;
+          &lt;button class="btn btn-sm btn-danger"&gt;Eliminar&lt;/button&gt;
+        &lt;/form&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  {% endfor %}
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+    </div>
+
+    <h2 class="section-title"><i class="fas fa-file-lines"></i> Paso 2 · README y archivos de despliegue</h2>
+    <div class="block">
+<pre><code class="language-text"># README.md (secciones mínimas)
+1) Requisitos: Python 3.10+, pip
+2) Setup rápido
+   python -m venv .venv
+   source .venv/Scripts/activate   # PowerShell: ./.venv/Scripts/Activate.ps1
+   pip install -r requirements.txt
+   python db.py  # crea la tabla
+   python app.py
+3) Uso: abrir http://localhost:5000
+4) Despliegue en Render: ver abajo
+5) Autor y licencia</code></pre>
+<pre><code class="language-text"># requirements.txt
+Flask==3.0.0
+gunicorn==21.2.0
+Jinja2==3.1.2
+Werkzeug==3.0.0
+click==8.1.7
+# pysqlite3-binary==0.5.3   # opcional solo si tu Python no trae sqlite3</code></pre>
+<pre><code class="language-text"># Procfile
+web: gunicorn app:app --log-file -</code></pre>
+    </div>
+
+    <h2 class="section-title"><i class="fab fa-git-alt"></i> Paso 3 · Versionado con Git y GitHub</h2>
+    <div class="block">
+<pre><code class="language-bash">git init
+git add .
+git commit -m "Proyecto CRUD mínimo listo"
+git branch -M main
+git remote add origin https://github.com/TU_USUARIO/TU_REPO.git
+git push -u origin main</code></pre>
+    </div>
+
+    <h2 class="section-title"><i class="fas fa-cloud-upload-alt"></i> Paso 4 · Despliegue en Render</h2>
+    <div class="block">
+      <ol>
+        <li>Crear cuenta en Render y conectar con tu GitHub.</li>
+        <li>New → Web Service → selecciona tu repo.</li>
+        <li>Start command: <code>gunicorn app:app</code> · (Build: automático).</li>
+        <li>Esperar build y abrir la URL pública para probar CRUD.</li>
+      </ol>
+      <p style="font-size:13px">Tip: si falla, revisa Logs. El error más común es faltar dependencias en <code>requirements.txt</code>.</p>
+    </div>
+
+    <h2 class="section-title"><i class="fas fa-list-check"></i> Checklist final de entrega</h2>
+    <div class="block ok">
+      <ul>
+        <li>CRUD funciona localmente y en Render.</li>
+        <li>El repo en GitHub contiene código + README + <code>requirements.txt</code> + <code>Procfile</code>.</li>
+        <li>Incluiste instrucciones de instalación y uso (README).</li>
+        <li>Compartiste la URL pública de Render.</li>
+        <li>Login sencillo y roles (admin puede editar / user solo lectura) opcional si seguiste Semana 3.</li>
+        <li>Archivo <code>seed.py</code> (opcional) para crear usuarios de ejemplo.</li>
+      </ul>
+    </div>
+
+    <h2 class="section-title"><i class="fas fa-file-circle-check"></i> Documentación y entregables (Semana 4)</h2>
+    <div class="block" style="border-left-color:#2e7d32; background:#e8f5e9">
+      <ul>
+        <li><strong>Video 1 – Demostración Técnica (3–4 min):</strong> Recorrido por CRUD completo, mensajes flash y cualquier gráfica si existe.</li>
+        <li><strong>Video 2 – Impacto / Caso de Uso (2–3 min):</strong> Explica el problema educativo/social que aborda y cómo el sistema ayuda a intervenir.</li>
+        <li><strong>Video 3 – Manual de Uso (3–5 min):</strong> Cómo instalar, ejecutar localmente y usar las funciones clave (login opcional).</li>
+        <li><strong>Documento README:</strong> Sección técnica + sección pedagógica (cómo integrarlo en una clase real).</li>
+        <li><strong>Guía breve docente (opcional):</strong> Pasos para replicar la actividad con estudiantes.</li>
+        <li><strong>Licencia sugerida:</strong> MIT o Creative Commons BY-NC (explica elección en README).</li>
+      </ul>
+      <p class="mini">Consejo: usa estructura clara en cada video: 1) Título/objetivo, 2) Desarrollo, 3) Cierre / próxima mejora. Revisa también la <a href="guia-aprendizaje-semana-4.html#entregables-docs">Guía Semana 4: Entregables</a>.</p>
+    </div>
+
+    <h2 class="section-title"><i class="fas fa-cloud"></i> Plataformas y costos</h2>
+    <div class="block" style="border-left-color:#0288d1; background:#e1f5fe">
+      <table style="width:100%; font-size:13px; border-collapse:collapse">
+        <thead><tr style="background:#0288d1; color:#fff"><th style="padding:6px; text-align:left">Plataforma</th><th style="padding:6px; text-align:left">Uso</th><th style="padding:6px; text-align:left">Costo inicial</th><th style="padding:6px; text-align:left">Límites clave</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:6px">GitHub Repo</td><td style="padding:6px">Código y versionado</td><td style="padding:6px">Gratis</td><td style="padding:6px">Repos ilimitados públicos</td></tr>
+          <tr><td style="padding:6px">Render (Web Service)</td><td style="padding:6px">Hosting Flask</td><td style="padding:6px">Free Tier</td><td style="padding:6px">Sleep tras inactividad, ~750h/mes</td></tr>
+          <tr><td style="padding:6px">Dominio (.com)</td><td style="padding:6px">Nombre personalizado</td><td style="padding:6px">US$10–15/año</td><td style="padding:6px">Renovación anual</td></tr>
+          <tr><td style="padding:6px">Escalado (Render Paid)</td><td style="padding:6px">Mayor concurrencia</td><td style="padding:6px">≈ US$7+/mes</td><td style="padding:6px">RAM y CPU incrementan</td></tr>
+        </tbody>
+      </table>
+      <ul style="margin-top:10px; font-size:13px">
+        <li><strong>Dominio opcional:</strong> comprar en Namecheap / GoDaddy → configurar DNS A/CNAME apuntando a Render.</li>
+        <li><strong>Escalado futuro:</strong> pasar de SQLite local a Postgres (Render ofrece instancias gratuitas pequeñas).</li>
+        <li><strong>Seguridad mínima:</strong> variable de entorno SECRET_KEY y evitar subir datos sensibles.</li>
+      </ul>
+    </div>
+
+    <h2 class="section-title"><i class="fas fa-list"></i> Rúbrica final resumida</h2>
+    <div class="block" style="border-left-color:#ff9800; background:#fff8e1">
+      <ul style="font-size:13px; line-height:1.55">
+        <li><strong>Funcionalidad Técnica (30%):</strong> CRUD sin errores, validaciones básicas, mensajes claros.</li>
+        <li><strong>Documentación & Videos (20%):</strong> README completo + 3 videos con estructura y buena calidad de audio.</li>
+        <li><strong>Impacto Social / Justificación (15%):</strong> Problema descrito, indicadores o situaciones concretas.</li>
+        <li><strong>Calidad del Código (15%):</strong> Organización, nombres descriptivos, comentarios útiles, sin duplicación excesiva.</li>
+        <li><strong>Presentación Final (10%):</strong> Claridad, manejo del tiempo, respuesta a preguntas.</li>
+        <li><strong>Reflexión Pedagógica (10%):</strong> Uso didáctico, propuesta de actividad, adaptaciones inclusivas.</li>
+      </ul>
+      <p class="mini">Para alcanzar nivel “Excelente” cada sección debe mostrar precisión técnica + conexión pedagógica clara. Detalle específico de la documentación de esta semana: ver <a href="guia-aprendizaje-semana-4.html#rubrica-docs">Rúbrica de documentación (Semana 4)</a>.</p>
+    </div>
+
+    <h2 class="section-title"><i class="fas fa-video"></i> Plantilla sugerida para video manual de uso</h2>
+    <div class="block" style="border-left-color:#7b1fa2; background:#f3e5f5">
+      <ol style="font-size:13px; line-height:1.5; margin:0">
+        <li><strong>Intro (10–15s):</strong> Nombre del sistema + objetivo.</li>
+        <li><strong>Instalación (40–60s):</strong> Clonar repo, crear venv, instalar requisitos.</li>
+        <li><strong>Ejecución local (30s):</strong> Mostrar comando <code>python app.py</code> y carga en navegador.</li>
+        <li><strong>Recorrido funciones (90–120s):</strong> Crear, editar, eliminar. Mensajes flash.</li>
+        <li><strong>Notas pedagógicas (30–60s):</strong> Cómo usarlo en clase / evidencia de aprendizaje.</li>
+        <li><strong>Mejoras futuras (15–30s):</strong> Qué agregarías (roles, reportes, API móvil).</li>
+      </ol>
+    </div>
+
+    <h2 class="section-title"><i class="fas fa-shield-alt"></i> Consideraciones finales</h2>
+    <div class="block" style="border-left-color:#455a64; background:#eceff1">
+      <ul style="font-size:13px; line-height:1.5">
+        <li>Evita datos reales de estudiantes en demostraciones públicas.</li>
+        <li>Incluye sección “Limitaciones” en README (seguridad, escalado, privacidad).</li>
+        <li>Si usas IA para partes del código, declara qué y por qué (transparencia).</li>
+      </ul>
+    </div>
+
+    <h2 class="section-title"><i class="fas fa-user-lock"></i> (Opcional) Login y roles súper simple</h2>
+    <p>Si decides incluir autenticación mínima (suma puntos pero no es obligatorio):</p>
+    <div class="block">
+      <ol>
+        <li>Crear tabla usuarios con campos: id, username UNIQUE, password_hash, role ('admin'|'user').</li>
+        <li>Sembrar un admin y un user (script <code>seed.py</code>).</li>
+        <li>Formulario de login (POST) verifica credenciales y guarda en <code>session</code>.</li>
+        <li>Decorador que bloquea acceso si no hay usuario en sesión.</li>
+        <li>Decorador adicional para rutas admin (editar/eliminar).</li>
+        <li>Vista condicional en template: si admin muestra botones, si user badge "Solo lectura".</li>
+      </ol>
+      <p>Ejemplo mínimo (añade esto debajo de tu CRUD si lo usas):</p>
+      <pre><code class="language-python">from werkzeug.security import generate_password_hash, check_password_hash
+from functools import wraps
+
+def login_requerido(f):
+    @wraps(f)
+    def envoltura(*args, **kwargs):
+        if 'usuario' not in session:
+            flash('Inicia sesión','warning')
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return envoltura
+
+def admin_requerido(f):
+    @wraps(f)
+    def envoltura(*args, **kwargs):
+        if session.get('role') != 'admin':
+            flash('Acceso solo admin','danger')
+            return redirect(url_for('index'))
+        return f(*args, **kwargs)
+    return envoltura
+
+@app.route('/login', methods=['GET','POST'])
+def login():
+    if request.method == 'POST':
+        u = request.form['username']
+        p = request.form['password']
+        conn = get_db()
+        row = conn.execute('SELECT * FROM usuarios WHERE username=?',(u,)).fetchone()
+        if row and check_password_hash(row['password_hash'], p):
+            session['usuario'] = u
+            session['role'] = row['role']
+            flash('Bienvenido '+u,'success')
+            return redirect(url_for('index'))
+        flash('Credenciales inválidas','danger')
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    flash('Sesión cerrada','info')
+    return redirect(url_for('login'))</code></pre>
+      <p>En tu template principal:</p>
+      <pre><code class="language-markup">{% if session.role == 'admin' %}
+  &lt;a class="btn btn-sm btn-primary" href="{{ url_for('editar', id=item.id) }}"&gt;Editar&lt;/a&gt;
+  &lt;a class="btn btn-sm btn-danger" href="{{ url_for('eliminar', id=item.id) }}"&gt;Borrar&lt;/a&gt;
+{% else %}
+  &lt;span class="badge bg-secondary"&gt;Solo lectura&lt;/span&gt;
+{% endif %}</code></pre>
+      <p>Si no añades esto, igual tu CRUD es válido. Solo asegúrate de no dejar contraseñas planas si implementas login: usa <code>generate_password_hash()</code>.</p>
+    </div>
+
+    <div class="block warn">
+      <h3 style="color:#e65100; margin:0 0 8px 0;"><i class="fas fa-bug"></i> Errores comunes</h3>
+      <ul>
+        <li><strong>ModuleNotFoundError:</strong> falta dependencia en <code>requirements.txt</code>.</li>
+        <li><strong>no such table:</strong> ejecuta <code>python db.py</code> antes de correr la app.</li>
+        <li><strong>405 Method Not Allowed:</strong> formularios deben usar <code>method="post"</code> y rutas <code>methods=['POST']</code>.</li>
+        <li><strong>URL de Render no carga CSS/JS:</strong> verifica rutas relativas y carpeta <code>templates/static</code>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+</body>
+</html>

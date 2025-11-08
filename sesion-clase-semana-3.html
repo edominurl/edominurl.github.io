@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sesión de Clase Semana 3</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f5f5f5; padding: 20px; }
+    .container { max-width: 1100px; margin: 0 auto; background: white; padding: 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    .header { text-align: center; border-bottom: 3px solid #1a237e; padding-bottom: 20px; margin-bottom: 30px; }
+    .header h1 { color: #1a237e; font-size: 24px; margin-bottom: 10px; }
+    .header-info { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; text-align: left; }
+    .header-info div { background: #f8f9fa; padding: 8px 12px; border-left: 3px solid #1a237e; font-size: 14px; }
+    .session-number { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px; margin: 20px 0; text-align: center; font-size: 24px; font-weight: bold; }
+    .section-title { font-size: 20px; color: #1a237e; margin: 40px 0 20px 0; padding-bottom: 10px; border-bottom: 2px solid #e0e0e0; display: flex; align-items: center; gap: 10px; }
+    .activity-block { background: #f8f9fa; padding: 25px; margin: 20px 0; border-radius: 8px; border-left: 4px solid #1a237e; }
+    .step-indicator { display: flex; align-items: center; gap: 10px; margin: 30px 0 15px 0; padding: 15px; background: linear-gradient(90deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 8px; border-left: 4px solid #1a237e; }
+    .step-number { background: #1a237e; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; }
+    .step-title { font-size: 18px; font-weight: bold; color: #1a237e; }
+    .time-badge { background: #4caf50; color: white; padding: 6px 12px; border-radius: 20px; font-size: 14px; font-weight: bold; display: inline-flex; align-items: center; gap: 5px; }
+    .evaluation-box { background: #fff3e0; border: 2px solid #ff9800; padding: 15px; border-radius: 8px; margin-top: 10px; }
+    pre[class*="language-"] { margin: 12px 0; border-radius: 8px; }
+    code[class*="language-"] { font-size: 13px; }
+    .course-nav { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 15px 20px; margin: -40px -40px 30px -40px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .course-nav-container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+    .nav-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .nav-dropdown { position: relative; display: inline-block; }
+    .nav-btn { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 8px 16px; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.3s; text-decoration: none; display: inline-block; }
+    .nav-btn:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
+    .nav-btn.active { background: white; color: #667eea; font-weight: bold; }
+    .dropdown-content { display: none; position: absolute; background: white; min-width: 220px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; border-radius: 5px; }
+    .dropdown-content a { color: #333; padding: 12px 16px; text-decoration: none; display: block; border-bottom: 1px solid #f0f0f0; transition: background 0.2s; }
+    .dropdown-content a:hover { background: #f8f9fa; }
+    .dropdown-content a.active-link { background: #e3f2fd; color: #1976d2; font-weight: bold; }
+    .nav-dropdown:hover .dropdown-content { display: block; }
+    .nav-home-btn { background: rgba(255,255,255,0.9); color: #667eea; font-weight: bold; }
+    @media (max-width: 768px) { .header-info{grid-template-columns:1fr;} .course-nav-container{flex-direction:column; align-items:stretch;} .nav-links{flex-direction:column;} .nav-btn{width:100%; text-align:center;} }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="course-nav">
+      <div class="course-nav-container">
+        <a href="index.html" class="nav-btn nav-home-btn"><i class="fas fa-home"></i> Inicio del Curso</a>
+        <div class="nav-links">
+          <div class="nav-dropdown">
+            <button class="nav-btn"><i class="fas fa-book"></i> Semana 1 <i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-content">
+              <a href="guia-aprendizaje-semana-1.html"><i class="fas fa-book-reader"></i> Guía de Aprendizaje 1</a>
+              <a href="sesion-clase-semana-1.html"><i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 1</a>
+            </div>
+          </div>
+          <div class="nav-dropdown">
+            <button class="nav-btn"><i class="fas fa-book"></i> Semana 2 <i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-content">
+              <a href="guia-aprendizaje-semana-2.html"><i class="fas fa-book-reader"></i> Guía de Aprendizaje 2</a>
+              <a href="sesion-clase-semana-2.html"><i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 2</a>
+            </div>
+          </div>
+          <div class="nav-dropdown">
+            <button class="nav-btn active"><i class="fas fa-book"></i> Semana 3 <i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-content">
+              <a href="guia-aprendizaje-semana-3.html"><i class="fas fa-book-reader"></i> Guía de Aprendizaje 3</a>
+              <a href="sesion-clase-semana-3.html" class="active-link"><i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 3</a>
+              <a href="hoja-resumen-semana-3.html"><i class="fas fa-file-lines"></i> Hoja resumen Semana 3</a>
+          <a href="ruta-rapida-semana-3.html"><i class="fas fa-bolt"></i> Ruta Rápida Semana 3</a>
+            </div>
+          </div>
+          <div class="nav-dropdown">
+            <button class="nav-btn"><i class="fas fa-book"></i> Semana 4 <i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-content">
+              <a href="guia-aprendizaje-semana-4.html"><i class="fas fa-book-reader"></i> Guía de Aprendizaje 4</a>
+              <a href="sesion-clase-semana-4.html"><i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 4</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="header">
+      <h1>Universidad Rafael Landívar</h1>
+      <p>Facultad de Humanidades</p>
+      <p>Departamento de Educación</p>
+      <h2 style="margin-top:20px; color:#1a237e;">Sesión de Clase Semana 3</h2>
+      <div class="header-info">
+        <div><strong>Profesorado:</strong> Profesorados con Especialidad en Tecnología</div>
+        <div><strong>Año:</strong> Psicopedagógico 2025</div>
+        <div><strong>Curso:</strong> Programación 1 - Python + Flask</div>
+      </div>
+    </div>
+
+    <!-- Eliminado el bloque de GitHub Pages: Flask no se despliega en Pages; ver sección de Render abajo -->
+        <nav class="course-nav">
+            <div class="course-nav-container">
+                <a href="index.html" class="nav-btn nav-home-btn"><i class="fas fa-home"></i> Inicio del Curso</a>
+                <div class="nav-links">
+                    <div class="nav-dropdown">
+                        <button class="nav-btn"><i class="fas fa-book"></i> Semana 1 <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="guia-aprendizaje-semana-1.html"><i class="fas fa-book-reader"></i> Guía de Aprendizaje 1</a>
+                            <a href="sesion-clase-semana-1.html"><i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 1</a>
+                        </div>
+                    </div>
+                    <div class="nav-dropdown">
+                        <button class="nav-btn"><i class="fas fa-book"></i> Semana 2 <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="guia-aprendizaje-semana-2.html"><i class="fas fa-book-reader"></i> Guía de Aprendizaje 2</a>
+                            <a href="sesion-clase-semana-2.html"><i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 2</a>
+                        </div>
+                    </div>
+                    <div class="nav-dropdown">
+                        <button class="nav-btn active"><i class="fas fa-book"></i> Semana 3 <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="guia-aprendizaje-semana-3.html"><i class="fas fa-book-reader"></i> Guía de Aprendizaje 3</a>
+                            <a href="sesion-clase-semana-3.html" class="active-link"><i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 3</a>
+              <a href="hoja-resumen-semana-3.html"><i class="fas fa-file-lines"></i> Hoja resumen Semana 3</a>
+                        </div>
+                    </div>
+                    <div class="nav-dropdown">
+                        <button class="nav-btn"><i class="fas fa-book"></i> Semana 4 <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="guia-aprendizaje-semana-4.html"><i class="fas fa-book-reader"></i> Guía de Aprendizaje 4</a>
+                            <a href="sesion-clase-semana-4.html"><i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 4</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="header">
+            <h1>Universidad Rafael Landívar</h1>
+            <p>Facultad de Humanidades</p>
+            <p>Departamento de Educación</p>
+            <h2 style="margin-top: 20px; color: #1a237e;">Sesión de Clase Semana 3</h2>
+            <div class="header-info">
+                <div><strong>Profesorado:</strong> Profesorados con Especialidad en Tecnología</div>
+                <div><strong>Año:</strong> Psicopedagógico 2025</div>
+                <div><strong>Curso:</strong> Programación 1 - Python + Flask</div>
+            </div>
+        </div>
+
+  <div class="session-number"><i class="fas fa-calendar-check"></i> Sesión sincrónica 3 — 6 h 30 min (ampliada)</div>
+
+    <!-- Nueva sección: Qué es requirements.txt y cómo crearlo -->
+    <div class="activity-block" style="background:#e3f2fd; border-left-color:#1976d2;">
+      <h3 style="color:#0d47a1; margin-bottom:10px;"><i class="fas fa-file-code"></i> requirements.txt (¿qué es y por qué?)</h3>
+      <p style="font-size:14px; line-height:1.5;">Es un archivo de texto que lista las dependencias Python (librerías) que tu aplicación necesita para funcionar. Plataformas como Render lo leen para instalar exactamente esas versiones. Si no existe, tu deploy puede fallar.</p>
+      <h4 style="color:#1a237e;">Formato básico</h4>
+      <pre><code class="language-text">Flask==3.0.0
+gunicorn==21.2.0
+Jinja2==3.1.2
+Werkzeug==3.0.0
+click==8.1.7
+# pysqlite3-binary==0.5.3  # solo si tu Python no trae sqlite3</code></pre>
+      <h4 style="color:#1a237e;">Cómo crearlo</h4>
+      <pre><code class="language-bash"># Activar entorno virtual primero
+python -m venv .venv
+source .venv/Scripts/activate    # PowerShell: ./.venv/Scripts/Activate.ps1
+
+pip install Flask gunicorn
+pip freeze > requirements.txt    # genera versiones exactas (ajusta si hay demasiado)</code></pre>
+      <p class="mini">Tip: Puedes editar manualmente para dejar SOLO lo que realmente usas y evitar inflar dependencias.</p>
+    </div>
+
+    <!-- Nueva sección: Intro a Bootstrap -->
+    <div class="activity-block" style="background:#f3e5f5; border-left-color:#7b1fa2;">
+      <h3 style="color:#4a148c; margin-bottom:10px;"><i class="fas fa-shapes"></i> ¿Qué es Bootstrap y cómo integrarlo?</h3>
+      <p style="font-size:14px;">Bootstrap es un framework CSS que te da clases ya listas para diseño responsive (adaptable a móvil/escritorio) y componentes (botones, tablas, modals).</p>
+      <h4 style="color:#311b92;">Incluirlo vía CDN (rápido)</h4>
+      <pre><code class="language-html">&lt;!-- En &lt;head&gt; de tu plantilla base --&gt;
+&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+&lt;!-- Antes de cerrar &lt;/body&gt; --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;</code></pre>
+      <h4 style="color:#311b92;">Ejemplos rápidos</h4>
+      <pre><code class="language-html">&lt;button class="btn btn-primary"&gt;Guardar&lt;/button&gt;
+&lt;div class="alert alert-success" role="alert"&gt;Operación exitosa&lt;/div&gt;
+&lt;table class="table table-striped"&gt;...&lt;/table&gt;
+&lt;form class="row g-2"&gt; &lt;input class="form-control" /&gt; &lt;/form&gt;</code></pre>
+      <p class="mini">Clases clave: <code>container</code>, <code>row</code>, <code>col-md-6</code>, <code>btn btn-primary</code>, <code>alert alert-danger</code>, <code>table table-striped</code>.</p>
+    </div>
+
+    <!-- Nueva sección: Rutas didácticas (cómo pensar las URL) -->
+    <div class="activity-block" style="background:#fffde7; border-left-color:#fbc02d;">
+      <h3 style="color:#e65100; margin-bottom:10px;"><i class="fas fa-route"></i> Cómo funcionan las rutas en Flask (explicación didáctica)</h3>
+      <ol style="font-size:14px; line-height:1.5;">
+        <li><strong>Una ruta</strong> es una URL que tu app atiende. Definida con <code>@app.route('/')</code>.</li>
+        <li><strong>La función</strong> debajo del decorador decide qué devolver (HTML, texto, JSON).</li>
+        <li><strong>Parámetros dinámicos</strong>: <code>@app.route('/estudiante/&lt;int:id&gt;')</code> captura un número y lo pasa como argumento.</li>
+        <li><strong>Métodos HTTP</strong>: por defecto GET. Para formularios que cambian datos, añade <code>methods=['POST']</code>.</li>
+        <li><strong>Buenas prácticas</strong>: nombres claros, usar plural para listas (<code>/estudiantes</code>) y singular para acciones sobre uno (<code>/estudiantes/&lt;id&gt;/editar</code>).</li>
+      </ol>
+      <pre><code class="language-python">@app.route('/estudiantes')      # lista
+def listar(): ...
+
+@app.route('/estudiantes/nuevo', methods=['POST'])  # crear
+def crear(): ...
+
+@app.route('/estudiantes/<int:id>/editar', methods=['POST'])  # actualizar
+def editar(id): ...
+
+@app.route('/estudiantes/<int:id>/eliminar', methods=['POST'])  # borrar
+def eliminar(id): ...</code></pre>
+    </div>
+
+    <!-- Nueva sección: HTML vs CSS vs Chart.js explicados -->
+    <div class="activity-block" style="background:#e8f5e9; border-left-color:#2e7d32;">
+      <h3 style="color:#2e7d32; margin-bottom:10px;"><i class="fas fa-layer-group"></i> HTML, CSS y Chart.js (roles distintos)</h3>
+      <ul style="font-size:14px; line-height:1.6;">
+        <li><strong>HTML</strong>: estructura y significado del contenido (etiquetas: &lt;h1&gt;, &lt;p&gt;, &lt;table&gt;).</li>
+        <li><strong>CSS</strong>: apariencia (colores, márgenes, tipografía). Bootstrap ofrece CSS listo.</li>
+        <li><strong>Chart.js</strong>: librería JavaScript que dibuja gráficas dentro de un &lt;canvas&gt;.</li>
+      </ul>
+      <h4 style="color:#1b5e20;">Ejemplo conjunto</h4>
+      <pre><code class="language-html">&lt;!-- HTML --&gt;
+&lt;canvas id="grafica" height="120"&gt;&lt;/canvas&gt;
+&lt;!-- CSS (Bootstrap ya incluye estilos) --&gt;
+&lt;style&gt;canvas{max-width:400px}&lt;/style&gt;
+&lt;!-- JS Chart.js --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/chart.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+const ctx = document.getElementById('grafica').getContext('2d');
+new Chart(ctx, {
+  type:'bar',
+  data:{labels:['A','B','C'], datasets:[{label:'Valores', data:[5,2,7], backgroundColor:'#1976d2'}]}
+});
+&lt;/script&gt;</code></pre>
+      <p class="mini">Nunca mezcles lógica de negocio (cálculos de promedio) dentro del JavaScript de la gráfica si puedes preparar los datos en Python y enviarlos como JSON.</p>
+    </div>
+
+        <h2 class="section-title"><i class="fas fa-bullseye"></i> Saberes y Desempeños</h2>
+        <div class="activity-block">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="evaluation-box">
+                        <h3 style="color:#1a237e; margin-bottom:8px;"><i class="fas fa-brain"></i> Saberes</h3>
+                        <ul>
+                            <li>Formularios HTML: input, textarea, select, button</li>
+                            <li>Métodos HTTP: POST vs GET (cuándo usar cada uno)</li>
+                            <li>Validación en servidor con Flask (request.form)</li>
+                            <li>Validación en el cliente con HTML5 y JavaScript</li>
+                            <li>UPDATE y DELETE en SQLite</li>
+                            <li>Bootstrap para diseño responsive</li>
+                            <li>Visualización de datos básica (Chart.js)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="evaluation-box" style="border-color:#4caf50; background:#e8f5e9;">
+                        <h3 style="color:#2e7d32; margin-bottom:8px;"><i class="fas fa-tasks"></i> Desempeños</h3>
+                        <ul>
+                            <li>Formulario para agregar/editar estudiantes con validaciones</li>
+                            <li>Implementación de UPDATE</li>
+                            <li>Implementación de DELETE con confirmación</li>
+                            <li>Aplicación de estilos Bootstrap</li>
+                            <li>Dashboard con estadísticas visuales</li>
+                            <li>Gráfica básica (barras/pastel)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title"><i class="fas fa-route"></i> Ruta de la Sesión</h2>
+
+        <!-- 1. Apertura y encuadre -->
+        <div class="step-indicator">
+            <div class="step-number">1</div>
+            <div class="step-title"><i class="fas fa-door-open"></i> Apertura, encuadre y objetivos</div>
+        </div>
+        <div class="activity-block">
+            <div class="field"><label><i class="fas fa-tasks"></i> Actividad:</label>
+                <div class="field-content">Bienvenida, objetivos de la sesión, reglas para trabajo en Teams. Breve repaso de la semana 2 (JSON, SQLite, templates).</div></div>
+            <div class="field"><label><i class="fas fa-clock"></i> Tiempo:</label><div><span class="time-badge"><i class="fas fa-hourglass-half"></i> 15 minutos</span></div></div>
+        </div>
+
+        <!-- 2. Verificación de entorno -->
+    <div class="step-indicator"><div class="step-number">2</div><div class="step-title"><i class="fas fa-check-circle"></i> Verificación de entorno</div></div>
+    <div class="activity-block">
+      <div class="field"><label><i class="fas fa-tasks"></i> Actividad:</label>
+        <div class="field-content">Crear venv, instalar dependencias y verificar SQLite.</div></div>
+  <pre><code class="language-bash"># Crear y activar entorno (Windows Git Bash)
+python -m venv .venv
+source .venv/Scripts/activate
+
+# Instalar solo lo necesario para iniciar
+pip install flask
+
+# Opcional (para despliegue/pruebas más adelante)
+# pip install gunicorn
+# pip install pytest</code></pre>
+      <pre><code class="language-python"># Verificación de SQLite y Flask
+import sqlite3
+import flask
+print("✓ sqlite3 y Flask disponibles")</code></pre>
+      <div class="field"><label><i class="fas fa-clock"></i> Tiempo:</label><div><span class="time-badge">15 minutos</span></div></div>
+      <div class="evaluation-box" style="margin-top:15px;">
+        <strong>Checklist rápido:</strong>
+        <ul style="margin:8px 0;">
+          <li>¿Entorno virtual activo? (prompt muestra (.venv))</li>
+          <li>¿Instalado Flask 3.x? <code>python -c "import flask;print(flask.__version__)"</code></li>
+          <li>¿Archivo <code>escuela.db</code> creado tras primer ejecución?</li>
+          <li>¿Estructura de carpetas clara?: <code>app.py</code>, <code>db.py</code>, <code>templates/</code>, <code>static/</code></li>
+        </ul>
+      </div>
+    </div>
+
+        <!-- 3. Formularios GET vs POST -->
+        <div class="step-indicator"><div class="step-number">3</div><div class="step-title"><i class="fas fa-code"></i> Formularios HTML — GET vs POST</div></div>
+        <div class="activity-block">
+            <div class="field"><label><i class="fas fa-lightbulb"></i> Concepto:</label>
+                <div class="field-content">Diferencias entre GET (idempotente, parámetros en URL) y POST (modifica estado, cuerpo). Usos recomendados.</div></div>
+            <pre><code class="language-html">&lt;!-- Formulario con Bootstrap y validación HTML5 --&gt;
+&lt;form method="post" action="/estudiantes/nuevo" class="row g-3" novalidate&gt;
+  &lt;div class="col-md-6"&gt;
+    &lt;label for="nombre" class="form-label"&gt;Nombre&lt;/label&gt;
+    &lt;input id="nombre" name="nombre" class="form-control" required minlength="3" /&gt;
+    &lt;div class="invalid-feedback"&gt;Ingrese al menos 3 caracteres.&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="col-md-3"&gt;
+    &lt;label for="grado" class="form-label"&gt;Grado&lt;/label&gt;
+    &lt;select id="grado" name="grado" class="form-select" required&gt;
+      &lt;option value="" selected disabled&gt;Seleccione...&lt;/option&gt;
+      &lt;option&gt;4to Primaria&lt;/option&gt;
+      &lt;option&gt;5to Primaria&lt;/option&gt;
+      &lt;option&gt;6to Primaria&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;div class="invalid-feedback"&gt;Seleccione un grado.&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="col-md-3"&gt;
+    &lt;label for="promedio" class="form-label"&gt;Promedio&lt;/label&gt;
+    &lt;input id="promedio" name="promedio" type="number" min="0" max="100" step="0.1" class="form-control" required /&gt;
+    &lt;div class="invalid-feedback"&gt;Ingrese un número entre 0 y 100.&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="col-12"&gt;
+    &lt;button class="btn btn-primary" type="submit"&gt;Guardar&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+            <pre><code class="language-javascript">// Validación Bootstrap (cliente)
+(() =&gt; {
+  'use strict';
+  const forms = document.querySelectorAll('form[novalidate]');
+  Array.from(forms).forEach(form =&gt; {
+    form.addEventListener('submit', event =&gt; {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();</code></pre>
+            <div class="field"><label><i class="fas fa-clock"></i> Tiempo:</label><div><span class="time-badge">35 minutos</span></div></div>
+        </div>
+
+        <!-- 4. Backend: crear, actualizar, eliminar -->
+        <div class="step-indicator"><div class="step-number">4</div><div class="step-title"><i class="fas fa-server"></i> Flask: CREATE, UPDATE, DELETE</div></div>
+        <div class="activity-block">
+            <div class="field"><label><i class="fas fa-database"></i> Base de datos:</label>
+                <div class="field-content">Estructura mínima y conexión cada solicitud.</div></div>
+          <pre><code class="language-python"># db.py (mínimo viable) — solo conexión y creación de tabla simple
+      import sqlite3
+
+      def get_conn():
+        c = sqlite3.connect('escuela.db')
+        c.row_factory = sqlite3.Row  # Permite acceder por nombre: row['nombre']
+        return c
+
+      def init_db():
+        with get_conn() as c:
+          c.execute('''CREATE TABLE IF NOT EXISTS estudiantes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nombre TEXT NOT NULL,
+            grado TEXT NOT NULL,
+            promedio REAL NOT NULL
+          )''')
+
+      if __name__ == '__main__':
+        init_db()
+        print('✓ Base creada (si no existía)')</code></pre>
+      <pre><code class="language-python"># app.py (CRUD simplificado — enfoque en claridad)
+from flask import Flask, render_template, request, redirect, url_for, flash
+from db import get_conn, init_db
+
+app = Flask(__name__)
+app.secret_key = 'dev'  # Para mensajes flash
+init_db()  # Asegura tabla creada al iniciar
+
+@app.route('/')
+def inicio():
+  # READ (listar)
+  with get_conn() as c:
+    estudiantes = c.execute('SELECT id, nombre, grado, promedio FROM estudiantes').fetchall()
+  return render_template('inicio.html', estudiantes=estudiantes)
+
+@app.route('/estudiantes/nuevo', methods=['POST'])
+def crear_estudiante():
+  # CREATE
+  nombre = request.form.get('nombre','').strip()
+  grado = request.form.get('grado','')
+  promedio_raw = request.form.get('promedio','')
+  # Validaciones muy simples
+  if len(nombre) < 3:
+    flash('Nombre demasiado corto', 'danger'); return redirect(url_for('inicio'))
+  try:
+    promedio = float(promedio_raw)
+  except ValueError:
+    flash('Promedio inválido', 'danger'); return redirect(url_for('inicio'))
+  with get_conn() as c:
+    c.execute('INSERT INTO estudiantes(nombre, grado, promedio) VALUES(?,?,?)', (nombre, grado, promedio))
+  flash('Estudiante creado', 'success')
+  return redirect(url_for('inicio'))
+
+@app.route('/estudiantes/<int:id>/editar', methods=['POST'])
+def actualizar_estudiante(id):
+  # UPDATE
+  nombre = request.form.get('nombre','').strip()
+  grado = request.form.get('grado','')
+  promedio_raw = request.form.get('promedio','0')
+  try:
+    promedio = float(promedio_raw)
+  except ValueError:
+    flash('Promedio inválido', 'danger'); return redirect(url_for('inicio'))
+  with get_conn() as c:
+    c.execute('UPDATE estudiantes SET nombre=?, grado=?, promedio=? WHERE id=?', (nombre, grado, promedio, id))
+  flash('Estudiante actualizado', 'info')
+  return redirect(url_for('inicio'))
+
+@app.route('/estudiantes/<int:id>/eliminar', methods=['POST'])
+def eliminar_estudiante(id):
+  # DELETE
+  with get_conn() as c:
+    c.execute('DELETE FROM estudiantes WHERE id=?', (id,))
+  flash('Estudiante eliminado', 'warning')
+  return redirect(url_for('inicio'))
+
+if __name__ == '__main__':
+  app.run(debug=True)</code></pre>
+            <pre><code class="language-html">&lt;!-- inicio.html (fragmento) --&gt;
+&lt;div class="container py-3"&gt;
+  &lt;h1 class="mb-3"&gt;Estudiantes&lt;/h1&gt;
+  {% for cat, msg in get_flashed_messages(with_categories=True) %}
+    &lt;div class="alert alert-{{ cat }}" role="alert"&gt;{{ msg }}&lt;/div&gt;
+  {% endfor %}
+
+  &lt;form method="post" action="/estudiantes/nuevo" class="row g-2 mb-3" novalidate&gt;
+    &lt;!-- campos como arriba --&gt;
+  &lt;/form&gt;
+
+  &lt;table class="table table-striped"&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;&lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Nombre&lt;/th&gt;&lt;th&gt;Grado&lt;/th&gt;&lt;th&gt;Promedio&lt;/th&gt;&lt;th&gt;Acciones&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;
+      {% for e in estudiantes %}
+      &lt;tr&gt;
+        &lt;td&gt;{{ e.id }}&lt;/td&gt;
+        &lt;td&gt;{{ e.nombre }}&lt;/td&gt;
+        &lt;td&gt;{{ e.grado }}&lt;/td&gt;
+        &lt;td&gt;{{ '%.1f'|format(e.promedio) }}&lt;/td&gt;
+        &lt;td class="d-flex gap-1"&gt;
+          &lt;!-- Editar (modal) --&gt;
+          &lt;button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#edit{{ e.id }}"&gt;Editar&lt;/button&gt;
+          &lt;form method="post" action="/estudiantes/{{ e.id }}/eliminar" onsubmit="return confirm('¿Eliminar definitivamente?');"&gt;
+            &lt;button class="btn btn-sm btn-danger" type="submit"&gt;Eliminar&lt;/button&gt;
+          &lt;/form&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+
+      &lt;!-- Modal de edición --&gt;
+      &lt;div class="modal fade" id="edit{{ e.id }}" tabindex="-1" aria-hidden="true"&gt;
+        &lt;div class="modal-dialog"&gt;
+          &lt;div class="modal-content"&gt;
+            &lt;form method="post" action="/estudiantes/{{ e.id }}/editar" novalidate&gt;
+              &lt;div class="modal-header"&gt;
+                &lt;h5 class="modal-title"&gt;Editar estudiante&lt;/h5&gt;
+                &lt;button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"&gt;&lt;/button&gt;
+              &lt;/div&gt;
+              &lt;div class="modal-body row g-2"&gt;
+                &lt;div class="col-12"&gt;
+                  &lt;label class="form-label" for="nombre{{ e.id }}"&gt;Nombre&lt;/label&gt;
+                  &lt;input class="form-control" id="nombre{{ e.id }}" name="nombre" value="{{ e.nombre }}" required minlength="3" /&gt;
+                &lt;/div&gt;
+                &lt;div class="col-md-6"&gt;
+                  &lt;label class="form-label" for="grado{{ e.id }}"&gt;Grado&lt;/label&gt;
+                  &lt;input class="form-control" id="grado{{ e.id }}" name="grado" value="{{ e.grado }}" required /&gt;
+                &lt;/div&gt;
+                &lt;div class="col-md-6"&gt;
+                  &lt;label class="form-label" for="prom{{ e.id }}"&gt;Promedio&lt;/label&gt;
+                  &lt;input class="form-control" id="prom{{ e.id }}" name="promedio" type="number" min="0" max="100" step="0.1" value="{{ e.promedio }}" required /&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div class="modal-footer"&gt;
+                &lt;button class="btn btn-secondary" data-bs-dismiss="modal"&gt;Cancelar&lt;/button&gt;
+                &lt;button class="btn btn-primary" type="submit"&gt;Guardar cambios&lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/form&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      {% endfor %}
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+      <div class="field"><label><i class="fas fa-clock"></i> Tiempo:</label><div><span class="time-badge">1 h 45 min</span></div></div>
+      <div class="evaluation-box">
+        <strong>Buenas prácticas extra:</strong>
+        <ul style="margin:8px 0;">
+          <li>Separar lógica DB en módulo independiente.</li>
+          <li>Usar <code>flash()</code> para cada operación CRUD.</li>
+          <li>Validar tipos numéricos y rangos antes de persistir.</li>
+          <li>Evitar SELECT * en producción (especificar columnas).</li>
+        </ul>
+        <strong>Mini-reto:</strong> Agregar campo <code>estado</code> (Aprobado/Reprobado) y derivarlo de promedio (&gt;= 60).
+      </div>
+      <pre><code class="language-python"># Extensión: cálculo automático de estado
+@app.route('/estudiantes/nuevo', methods=['POST'])
+def crear_estudiante_ext():
+  nombre = request.form.get('nombre','').strip()
+  grado = request.form.get('grado','')
+  promedio_raw = request.form.get('promedio','')
+  try:
+    promedio = float(promedio_raw)
+  except ValueError:
+    flash('Promedio inválido', 'danger')
+    return redirect(url_for('inicio'))
+  estado = 'Aprobado' if promedio >= 60 else 'Reprobado'
+  with get_conn() as c:
+    c.execute('INSERT INTO estudiantes(nombre, grado, promedio, estado) VALUES(?,?,?,?)', (nombre, grado, promedio, estado))
+  flash('Estudiante creado con estado calculado', 'success')
+  return redirect(url_for('inicio'))</code></pre>
+      <pre><code class="language-sql">-- Migración rápida (manual) para agregar columna estado
+ALTER TABLE estudiantes ADD COLUMN estado TEXT;
+UPDATE estudiantes SET estado = CASE WHEN promedio &gt;= 60 THEN 'Aprobado' ELSE 'Reprobado' END;</code></pre>
+    </div>
+
+    <!-- Login simple + vistas por rol (admin/usuario) -->
+    <div class="activity-block" style="background:#fffde7; border-left-color:#fbc02d;">
+      <h3 style="color:#e65100; margin-bottom:10px;"><i class="fas fa-user-shield"></i> Login simple + vistas por rol (admin/usuario)</h3>
+      <p style="font-size:14px">Objetivo: permitir que el <strong>admin</strong> vea botones de editar/eliminar y que el <strong>usuario</strong> solo pueda ver la lista (solo lectura). Mantendremos todo <em>mínimo</em>.</p>
+      <h4 style="color:#1a237e; margin-top:6px;">1) Tabla de usuarios (SQLite)</h4>
+      <pre><code class="language-sql">CREATE TABLE IF NOT EXISTS usuarios (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT UNIQUE NOT NULL,
+  password_hash TEXT NOT NULL,
+  role TEXT NOT NULL CHECK(role IN ('admin','user'))
+);
+-- Crea dos usuarios de ejemplo (hazlo una vez desde un script Python)
+-- admin / 123456    | user / 123456</code></pre>
+      <h4 style="color:#1a237e;">2) Semilla rápida (opcional) en Python</h4>
+      <pre><code class="language-python"># seed.py (ejecutar una vez)
+from werkzeug.security import generate_password_hash
+from db import get_conn, init_db
+
+init_db()
+with get_conn() as c:
+    c.execute('CREATE TABLE IF NOT EXISTS usuarios (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE, password_hash TEXT, role TEXT)')
+    c.execute('INSERT OR IGNORE INTO usuarios(username,password_hash,role) VALUES (?,?,?)', ('admin', generate_password_hash('123456'), 'admin'))
+    c.execute('INSERT OR IGNORE INTO usuarios(username,password_hash,role) VALUES (?,?,?)', ('user', generate_password_hash('123456'), 'user'))
+print('✓ usuarios de ejemplo creados')</code></pre>
+      <h4 style="color:#1a237e;">3) Rutas de login/logout y protección</h4>
+      <pre><code class="language-python"># app.py (agrega)
+from flask import session
+from werkzeug.security import check_password_hash
+from functools import wraps
+
+def login_requerido(f):
+  @wraps(f)
+  def w(*a, **kw):
+    if 'user' not in session:
+      return redirect(url_for('login'))
+    return f(*a, **kw)
+  return w
+
+def admin_requerido(f):
+  @wraps(f)
+  def w(*a, **kw):
+    if session.get('role') != 'admin':
+      flash('Solo admin', 'danger'); return redirect(url_for('inicio'))
+    return f(*a, **kw)
+  return w
+
+@app.route('/login', methods=['GET','POST'])
+def login():
+  if request.method == 'POST':
+    u = request.form.get('username',''); p = request.form.get('password','')
+    with get_conn() as c:
+      row = c.execute('SELECT * FROM usuarios WHERE username=?', (u,)).fetchone()
+    if row and check_password_hash(row['password_hash'], p):
+      session['user'] = u; session['role'] = row['role']
+      flash('Bienvenido '+u, 'success'); return redirect(url_for('inicio'))
+    flash('Credenciales inválidas', 'danger')
+  return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+  session.clear(); flash('Sesión cerrada', 'info'); return redirect(url_for('inicio'))</code></pre>
+      <h4 style="color:#1a237e;">4) Plantillas: mostrar/ocultar acciones según rol</h4>
+      <pre><code class="language-html">&lt;!-- templates/inicio.html (acciones) --&gt;
+&lt;td class="d-flex gap-1"&gt;
+  {% if session.get('role') == 'admin' %}
+    &lt;form method="post" action="/editar/{{ e.id }}" class="d-inline-flex gap-1"&gt;...&lt;/form&gt;
+    &lt;form method="post" action="/eliminar/{{ e.id }}" onsubmit="return confirm('¿Eliminar?');"&gt;
+      &lt;button class="btn btn-sm btn-danger"&gt;Eliminar&lt;/button&gt;
+    &lt;/form&gt;
+  {% else %}
+    &lt;span class="badge bg-secondary" title="Solo lectura"&gt;Solo lectura&lt;/span&gt;
+  {% endif %}
+&lt;/td&gt;</code></pre>
+      <h4 style="color:#1a237e;">5) Vista de login mínima</h4>
+      <pre><code class="language-html">&lt;!-- templates/login.html --&gt;
+&lt;h1 class="h4"&gt;Iniciar sesión&lt;/h1&gt;
+&lt;form method="post" class="vstack gap-2"&gt;
+  &lt;input name="username" placeholder="Usuario" required class="form-control" /&gt;
+  &lt;input name="password" type="password" placeholder="Contraseña" required class="form-control" /&gt;
+  &lt;button class="btn btn-primary"&gt;Entrar&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+      <div class="evaluation-box">
+        <strong>Meta:</strong> con usuario <code>admin</code> verás botones de editar/eliminar; con <code>user</code> solo lectura. Mantén simple: no olvides <code>app.secret_key</code> y crear la tabla <code>usuarios</code>.
+      </div>
+    </div>
+
+        <!-- 5. Dashboard y gráficas -->
+        <div class="step-indicator"><div class="step-number">5</div><div class="step-title"><i class="fas fa-chart-pie"></i> Dashboard y gráficas</div></div>
+        <div class="activity-block">
+            <div class="field"><label><i class="fas fa-chart-simple"></i> Visualizaciones:</label>
+                <div class="field-content">Barras por categoría, pastel por estado, línea por evolución de promedios.</div></div>
+            <pre><code class="language-html">&lt;!-- dashboard.html (fragmento) --&gt;
+&lt;div class="container py-3"&gt;
+  &lt;h2&gt;Dashboard&lt;/h2&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-6"&gt;
+      &lt;canvas id="chartBarras" height="140"&gt;&lt;/canvas&gt;
+    &lt;/div&gt;
+    &lt;div class="col-md-6"&gt;
+      &lt;canvas id="chartPastel" height="140"&gt;&lt;/canvas&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/chart.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+const barras = document.getElementById('chartBarras').getContext('2d');
+new Chart(barras, {type:'bar', data:{labels:['4to','5to','6to'], datasets:[{label:'Estudiantes', data:[12,9,7], backgroundColor:'#1976d2'}]}});
+const pastel = document.getElementById('chartPastel').getContext('2d');
+new Chart(pastel, {type:'pie', data:{labels:['Aprobados','Reprobados'], datasets:[{data:[22,6], backgroundColor:['#2e7d32','#c62828']}]} });
+&lt;/script&gt;</code></pre>
+            <div class="field"><label><i class="fas fa-clock"></i> Tiempo:</label><div><span class="time-badge">45 minutos</span></div></div>
+            <div class="evaluation-box" style="margin-top:15px;">
+                <strong>Extensión opcional:</strong>
+                <ul style="margin:8px 0;">
+                    <li>Agregar una gráfica de línea con evolución de promedio semanal.</li>
+                    <li>Transformar datos dinámicamente vía JSON endpoint (<code>/api/estadisticas</code>).</li>
+                    <li>Incluir tooltip accesible con formato personalizado.</li>
+                </ul>
+            </div>
+            <pre><code class="language-python"># Endpoint API para gráficas dinámicas
+@app.route('/api/estadisticas')
+def api_estadisticas():
+    with get_conn() as c:
+        rows = c.execute('SELECT grado, COUNT(*) cant FROM estudiantes GROUP BY grado').fetchall()
+        estados = c.execute('SELECT estado, COUNT(*) cant FROM estudiantes GROUP BY estado').fetchall()
+    return {
+        'por_grado': {r['grado']: r['cant'] for r in rows},
+        'por_estado': {e['estado']: e['cant'] for e in estados}
+    }</code></pre>
+            <pre><code class="language-javascript">// Carga dinámica de datos para Chart.js
+fetch('/api/estadisticas').then(r =&gt; r.json()).then(data =&gt; {
+  const ctx = document.getElementById('chartBarras').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: Object.keys(data.por_grado),
+      datasets: [{
+        label: 'Estudiantes',
+        data: Object.values(data.por_grado),
+        backgroundColor: '#1565c0'
+      }]
+    }
+  });
+});</code></pre>
+        </div>
+
+        <!-- 6. Cierre y evaluación -->
+        <div class="step-indicator"><div class="step-number">6</div><div class="step-title"><i class="fas fa-flag-checkered"></i> Cierre y evaluación</div></div>
+        <div class="activity-block">
+            <div class="evaluation-box">
+                <p style="margin:0 0 8px 0"><strong>Productos evaluables en Teams:</strong></p>
+                <ul>
+                    <li>Formulario con validaciones (captura o repo)</li>
+                    <li>UPDATE y DELETE funcionando (video corto o repo)</li>
+                    <li>Dashboard con 1 gráfica funcional</li>
+                </ul>
+            </div>
+            <div class="field"><label><i class="fas fa-clock"></i> Tiempo:</label><div><span class="time-badge">30 minutos</span></div></div>
+        </div>
+
+    <div class="activity-block" style="background:#e3f2fd; border-left-color:#1976d2;">
+      <h3 style="color:#0d47a1; margin-bottom:10px;"><i class="fas fa-triangle-exclamation"></i> Recomendaciones de Accesibilidad</h3>
+      <ul>
+        <li>Usar etiquetas &lt;label&gt; asociadas a campos</li>
+        <li>Contraste suficiente en botones y textos</li>
+        <li>Navegación por teclado (focus visible)</li>
+        <li>Mensajes claros de error/éxito</li>
+      </ul>
+      <p style="margin-top:10px; font-size:13px;">Tip: Probar la interfaz sólo con teclado (Tab, Shift+Tab, Enter, Space) para detectar bloqueos de foco.</p>
+    </div>
+
+    <div class="activity-block" style="background:#f3e5f5; border-left-color:#7b1fa2;">
+      <h3 style="color:#4a148c; margin-bottom:10px;"><i class="fas fa-lightbulb"></i> Retos (si hay tiempo)</h3>
+      <ul>
+        <li>Agregar paginación a la tabla</li>
+        <li>Filtro por grado o estado</li>
+        <li>Descarga CSV</li>
+      </ul>
+      <pre><code class="language-python"># Idea para exportar CSV rápidamente
+@app.route('/export.csv')
+def export_csv():
+  import csv, io
+  output = io.StringIO()
+  writer = csv.writer(output)
+  writer.writerow(['id','nombre','grado','promedio','estado'])
+  with get_conn() as c:
+    for row in c.execute('SELECT id, nombre, grado, promedio, estado FROM estudiantes'):
+      writer.writerow([row['id'], row['nombre'], row['grado'], row['promedio'], row.get('estado','')])
+  resp = app.response_class(output.getvalue(), mimetype='text/csv')
+  resp.headers['Content-Disposition'] = 'attachment; filename=estudiantes.csv'
+  return resp</code></pre>
+      <pre><code class="language-javascript">// Búsqueda rápida en tabla (cliente)
+const inputFiltro = document.getElementById('filtroNombre');
+if (inputFiltro) {
+  inputFiltro.addEventListener('input', () =&gt; {
+  const term = inputFiltro.value.toLowerCase();
+  document.querySelectorAll('table tbody tr').forEach(tr =&gt; {
+    const nombre = tr.children[1].textContent.toLowerCase();
+    tr.style.display = nombre.includes(term) ? '' : 'none';
+  });
+  });
+}</code></pre>
+    </div>
+    
+    <!-- Ruta rápida extraída a página independiente -->
+    <div class="activity-block" style="background:#e8f5e9; border-left-color:#2e7d32;">
+      <h3 style="color:#2e7d32; margin-bottom:10px;"><i class="fas fa-feather"></i> Ruta rápida (modo simple)</h3>
+      <p style="margin:6px 0 10px 0;">Movimos esta sección a una página dedicada con ejemplos listos para copiar y explicación de Rutas, HTML, CSS y Chart.js.</p>
+      <p><a class="btn btn-success" href="ruta-rapida-semana-3.html"><i class="fas fa-bolt"></i> Abrir Ruta Rápida Semana 3</a></p>
+    </div>
+    <!-- Mini chuleta: Jinja + Rutas + SQL + CRUD (muy simple) -->
+    <div class="activity-block" style="background:#fffde7; border-left-color:#f9a825;">
+      <h3 style="color:#f57f17; margin-bottom:10px;"><i class="fas fa-list-ul"></i> Mini chuleta: Jinja + Rutas + SQL + CRUD</h3>
+      <p style="margin-bottom:8px;">Guía express para conectar formulario → Flask → SQL sin enredos. Copia, pega y adapta.</p>
+      <h4 style="color:#1a237e;">1) Jinja básico (en plantilla .html)</h4>
+      <pre><code class="language-html">&lt;!-- Mostrar variables --&gt;
+&lt;p&gt;Hola, {{ nombre }}&lt;/p&gt;
+
+&lt;!-- Condicional simple --&gt;
+{% if promedio &gt;= 60 %}
+  &lt;span class="badge bg-success"&gt;Aprobado&lt;/span&gt;
+{% else %}
+  &lt;span class="badge bg-danger"&gt;Reprobado&lt;/span&gt;
+{% endif %}
+
+&lt;!-- Recorrer lista --&gt;
+&lt;ul&gt;
+{% for e in estudiantes %}
+  &lt;li&gt;{{ e.nombre }} ({{ e.grado }})&lt;/li&gt;
+{% endfor %}
+&lt;/ul&gt;
+
+&lt;!-- Filtros útiles --&gt;
+&lt;p&gt;{{ e.nombre|upper }} — total: {{ estudiantes|length }} — prom: {{ e.promedio|round(1) }}&lt;/p&gt;</code></pre>
+
+      <h4 style="color:#1a237e;">2) Rutas mínimas en app.py (CRUD)</h4>
+      <pre><code class="language-python">from flask import Flask, render_template, request, redirect, url_for, flash
+import sqlite3
+
+app = Flask(__name__)
+app.secret_key = 'dev'
+
+def get_conn():
+    c = sqlite3.connect('escuela.db')
+    c.row_factory = sqlite3.Row
+    return c
+
+@app.route('/')
+def listar():
+    with get_conn() as c:
+        ests = c.execute('SELECT id, nombre, grado, promedio FROM estudiantes').fetchall()
+    return render_template('inicio.html', estudiantes=ests)
+
+@app.route('/crear', methods=['POST'])
+def crear():
+    nombre = request.form.get('nombre','').strip()
+    grado = request.form.get('grado','')
+    promedio = float(request.form.get('promedio','0') or 0)
+    with get_conn() as c:
+        c.execute('INSERT INTO estudiantes(nombre, grado, promedio) VALUES(?,?,?)', (nombre, grado, promedio))
+    flash('Creado', 'success')
+    return redirect(url_for('listar'))
+
+@app.route('/editar/&lt;int:id&gt;', methods=['POST'])
+def editar(id):
+    nombre = request.form.get('nombre','').strip()
+    grado = request.form.get('grado','')
+    promedio = float(request.form.get('promedio','0') or 0)
+    with get_conn() as c:
+        c.execute('UPDATE estudiantes SET nombre=?, grado=?, promedio=? WHERE id=?', (nombre, grado, promedio, id))
+    flash('Actualizado', 'info')
+    return redirect(url_for('listar'))
+
+@app.route('/eliminar/&lt;int:id&gt;', methods=['POST'])
+def eliminar(id):
+    with get_conn() as c:
+        c.execute('DELETE FROM estudiantes WHERE id=?', (id,))
+    flash('Eliminado', 'warning')
+    return redirect(url_for('listar'))</code></pre>
+
+      <h4 style="color:#1a237e;">3) Formulario HTML mínimo (envío de datos)</h4>
+      <pre><code class="language-html">&lt;form method="post" action="/crear" class="row g-2"&gt;
+  &lt;input name="nombre" placeholder="Nombre" required class="form-control" /&gt;
+  &lt;input name="grado" placeholder="Grado" required class="form-control" /&gt;
+  &lt;input name="promedio" type="number" min="0" max="100" step="0.1" placeholder="Promedio" class="form-control" /&gt;
+  &lt;button class="btn btn-primary" type="submit"&gt;Guardar&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;!-- Botón eliminar (en cada fila) --&gt;
+&lt;form method="post" action="/eliminar/{{ e.id }}" onsubmit="return confirm('¿Eliminar?');"&gt;
+  &lt;button class="btn btn-sm btn-danger" type="submit"&gt;Eliminar&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+      <h4 style="color:#1a237e;">4) SQL básico (parametrizado)</h4>
+      <pre><code class="language-sql">-- Crear tabla si no existe
+CREATE TABLE IF NOT EXISTS estudiantes (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nombre TEXT NOT NULL,
+  grado TEXT NOT NULL,
+  promedio REAL NOT NULL
+);
+
+-- Insertar (los valores reales van con ? en Python)
+INSERT INTO estudiantes(nombre, grado, promedio) VALUES (?, ?, ?);
+
+-- Consultar todos
+SELECT id, nombre, grado, promedio FROM estudiantes;
+
+-- Actualizar uno
+UPDATE estudiantes SET nombre=?, grado=?, promedio=? WHERE id=?;
+
+-- Eliminar uno
+DELETE FROM estudiantes WHERE id=?;</code></pre>
+
+      <ul style="margin-top:10px;">
+        <li>Usa <strong>POST</strong> para crear/editar/eliminar.</li>
+        <li>Los <code>name="..."</code> de los inputs deben coincidir con <code>request.form['...']</code>.</li>
+        <li>Siempre parametriza consultas con <code>?</code> para evitar inyección SQL.</li>
+        <li>Después de una operación, usa <code>flash()</code> y <code>redirect()</code> para volver a la lista.</li>
+      </ul>
+    </div>
+
+    <!-- Apéndice técnico -->
+    <div class="activity-block" style="background:#fafafa; border-left-color:#424242;">
+      <h3 style="color:#212121; margin-bottom:10px;"><i class="fas fa-toolbox"></i> Apéndice técnico</h3>
+      <h4 style="color:#1a237e;">Manejo de errores</h4>
+      <pre><code class="language-python"># Ejemplo de manejo básico de errores
+@app.errorhandler(404)
+def not_found(e):
+  return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def server_error(e):
+  flash('Ocurrió un error inesperado', 'danger')
+  return render_template('500.html'), 500</code></pre>
+      <h4 style="color:#1a237e;">Seguridad mínima</h4>
+      <ul>
+        <li>Usar métodos POST para mutaciones.</li>
+        <li>Escapar variables en plantillas (Jinja por defecto).</li>
+        <li>No exponer la secret key en repos públicos.</li>
+        <li>Validar longitud y tipo antes de insertar datos.</li>
+      </ul>
+      <h4 style="color:#1a237e;">Próximos pasos sugeridos</h4>
+      <ol>
+        <li>Agregar autenticación (login/logout).</li>
+        <li>Separar Blueprints: <code>estudiantes</code>, <code>dashboard</code>.</li>
+        <li>Implementar tests con <code>pytest</code>.</li>
+        <li>Crear capa de repositorio para consultas.</li>
+      </ol>
+    </div>
+
+    <!-- Errores comunes y soluciones (Semana 3) -->
+    <div class="activity-block" style="background:#fff3e0; border-left-color:#ff9800;">
+      <h3 style="color:#e65100; margin-bottom:10px;"><i class="fas fa-bug"></i> Errores comunes y cómo solucionarlos</h3>
+      <ul style="font-size:14px; line-height:1.6; margin-bottom:12px;">
+        <li><strong>ImportError: No module named 'flask'</strong> → Activar venv o ejecutar <code>pip install flask</code>.</li>
+        <li><strong>sqlite3.OperationalError: no such table</strong> → Ejecutar función <code>init_db()</code> antes de usar rutas o borrar el archivo .db y recrear.</li>
+        <li><strong>ValueError al convertir promedio</strong> → Validar que el campo no esté vacío y usar <code>try: float(...)</code>.</li>
+        <li><strong>Gráfica vacía</strong> → Revisar consola del navegador; validar que el endpoint devuelve JSON (probar en pestaña nueva).</li>
+        <li><strong>POST 405 Method Not Allowed</strong> → Verificar que la ruta tiene <code>methods=['POST']</code> y el formulario usa <code>method="post"</code>.</li>
+        <li><strong>Flash no se muestra</strong> → Asegurar <code>app.secret_key</code> definido y bloque Jinja para mensajes presente.</li>
+        <li><strong>Modal no abre</strong> → Incluir <code>bootstrap.bundle.min.js</code> antes de cerrar <code>&lt;/body&gt;</code>.</li>
+        <li><strong>Caracteres raros en acentos</strong> → Confirmar <code>&lt;meta charset="UTF-8"/&gt;</code> en el &lt;head&gt;.</li>
+      </ul>
+      <h4 style="color:#e65100;">Pasos rápidos de diagnóstico</h4>
+      <ol style="font-size:14px; line-height:1.6;">
+        <li>Revisar terminal por traceback → leer última línea.</li>
+        <li>Agregar <code>print()</code> temporal en la ruta que falla.</li>
+        <li>Probar endpoint directo en navegador (ej: <code>/api/estadisticas</code>).</li>
+        <li>Confirmar nombres de campos del formulario = claves en <code>request.form</code>.</li>
+        <li>Si todo falla: crear script mínimo con una sola ruta '/' y expandir.</li>
+      </ol>
+    </div>
+
+    <!-- Venv PowerShell alternativa -->
+    <div class="activity-block" style="background:#e1f5fe; border-left-color:#0288d1;">
+      <h3 style="color:#01579b; margin-bottom:10px;"><i class="fas fa-terminal"></i> Activar venv en PowerShell (alternativa)</h3>
+      <pre><code class="language-bash"># Si usas PowerShell en lugar de Git Bash:
+python -m venv .venv
+./.venv/Scripts/Activate.ps1   # Activar
+
+# Desactivar
+deactivate</code></pre>
+      <p style="font-size:13px;">Si aparece error de políticas de ejecución: abrir PowerShell como administrador y ejecutar <code>Set-ExecutionPolicy RemoteSigned</code> (aceptar). Luego intentar activar de nuevo.</p>
+    </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
