@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía: Desplegar Flask en PythonAnywhere</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .intro {
+            background: #f0f7ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+        
+        .intro h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .step {
+            margin-bottom: 40px;
+            padding: 25px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            background: #fafafa;
+            transition: all 0.3s ease;
+        }
+        
+        .step:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border-radius: 50%;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+        }
+        
+        .step h3 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        
+        .step p, .step li {
+            margin-bottom: 12px;
+            font-size: 1.05em;
+        }
+        
+        .step ul {
+            margin-left: 25px;
+        }
+        
+        .highlight {
+            background: #fff9e6;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .warning {
+            background: #ffe6e6;
+            padding: 15px;
+            border-left: 4px solid #f44336;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .success {
+            background: #e6ffe6;
+            padding: 15px;
+            border-left: 4px solid #4caf50;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+        
+        .screenshot-placeholder {
+            background: #e3f2fd;
+            border: 2px dashed #2196f3;
+            padding: 30px;
+            text-align: center;
+            margin: 15px 0;
+            border-radius: 10px;
+            color: #1976d2;
+            font-weight: bold;
+        }
+        
+        .tip {
+            background: #e8f5e9;
+            padding: 15px;
+            border-left: 4px solid #4caf50;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .tip::before {
+            content: "💡 TIP: ";
+            font-weight: bold;
+            color: #2e7d32;
+        }
+        
+        .important {
+            background: #fff3e0;
+            padding: 15px;
+            border-left: 4px solid #ff9800;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+        
+        .important::before {
+            content: "⚠️ IMPORTANTE: ";
+            font-weight: bold;
+            color: #e65100;
+        }
+        
+        .checklist {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .checklist-item {
+            padding: 10px;
+            margin: 8px 0;
+            background: #f5f5f5;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .checklist-item:hover {
+            background: #e8f5e9;
+            transform: translateX(5px);
+        }
+        
+        .footer {
+            background: #f5f5f5;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+            border-top: 3px solid #667eea;
+        }
+        
+        .footer-emoji {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .step {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Guía Paso a Paso</h1>
+            <p>Cómo Desplegar tu App Flask con SQLite en PythonAnywhere</p>
+        </div>
+        
+        <div class="content">
+            <div class="intro">
+                <h2>👋 ¡Hola! Bienvenido a esta guía</h2>
+                <p>En esta guía aprenderás a publicar tu aplicación Flask con base de datos SQLite en internet usando PythonAnywhere. Es más sencillo de lo que piensas. ¡Vamos paso a paso!</p>
+            </div>
+            
+            <div class="highlight">
+                <strong>¿Qué necesitas antes de comenzar?</strong>
+                <ul>
+                    <li>✅ Tu aplicación Flask funcionando en tu computadora</li>
+                    <li>✅ Tu archivo de base de datos SQLite (ejemplo: escuela.db)</li>
+                    <li>✅ Todos los archivos de tu proyecto (HTML, CSS, etc.)</li>
+                    <li>✅ Una cuenta de correo electrónico válida</li>
+                    <li>✅ Conexión a internet</li>
+                </ul>
+            </div>
+
+            <!-- PASO 1 -->
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Crear tu Cuenta en PythonAnywhere</h3>
+                
+                <p><strong>1.1</strong> Abre tu navegador web (Chrome, Firefox, Edge, etc.)</p>
+                
+                <p><strong>1.2</strong> Ve a la dirección: <span style="color: #667eea; font-weight: bold;">www.pythonanywhere.com</span></p>
+                
+                <p><strong>1.3</strong> En la página principal, busca el botón que dice <strong>"Start running Python online in less than a minute!"</strong> o <strong>"Pricing & signup"</strong> y haz clic en él.</p>
+                
+                <div class="screenshot-placeholder">
+                    📸 Verás la página principal de PythonAnywhere con un botón grande de registro
+                </div>
+                
+                <p><strong>1.4</strong> Selecciona la opción <strong>"Create a Beginner account"</strong> (es completamente GRATIS)</p>
+                
+                <p><strong>1.5</strong> Llena el formulario de registro:</p>
+                <ul>
+                    <li><strong>Username:</strong> Elige un nombre de usuario (sin espacios, puedes usar letras y números). Por ejemplo: <em>maria2024</em> o <em>juanperez</em></li>
+                    <li><strong>Email:</strong> Escribe tu correo electrónico</li>
+                    <li><strong>Password:</strong> Crea una contraseña segura (mínimo 8 caracteres)</li>
+                </ul>
+                
+                <div class="important">
+                    Anota tu nombre de usuario y contraseña en un lugar seguro. ¡Los necesitarás para entrar después!
+                </div>
+                
+                <p><strong>1.6</strong> Haz clic en el botón <strong>"Register"</strong></p>
+                
+                <p><strong>1.7</strong> Ve a tu correo electrónico y busca el mensaje de PythonAnywhere. Abre el correo y haz clic en el enlace de confirmación.</p>
+                
+                <div class="success">
+                    ✅ ¡Perfecto! Ya tienes tu cuenta creada y confirmada.
+                </div>
+            </div>
+
+            <!-- PASO 2 -->
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Preparar tus Archivos Localmente</h3>
+                
+                <p>Antes de subir todo a PythonAnywhere, necesitamos hacer algunos ajustes a tu código.</p>
+                
+                <div class="important">
+                    Este paso es MUY importante para que tu base de datos SQLite funcione correctamente.
+                </div>
+                
+                <p><strong>2.1</strong> Abre tu archivo principal de Flask (puede llamarse <code>app.py</code>, <code>main.py</code> o <code>flask_app.py</code>)</p>
+                
+                <p><strong>2.2</strong> Busca la línea donde conectas la base de datos. Probablemente se ve así:</p>
+                
+                <div class="code">
+conn = sqlite3.connect('escuela.db')
+                </div>
+                
+                <p><strong>2.3</strong> Necesitas cambiar esta línea para que use la ruta completa del archivo. Agrega estas líneas AL PRINCIPIO de tu archivo:</p>
+                
+                <div class="code">
+import os
+from os import path
+
+# Esta línea encuentra dónde está tu archivo
+ROOT = path.dirname(path.realpath(__file__))
+                </div>
+                
+                <p><strong>2.4</strong> Ahora cambia la conexión a la base de datos por esto:</p>
+                
+                <div class="code">
+# Antes era así:
+# conn = sqlite3.connect('escuela.db')
+
+# Ahora debe ser así:
+conn = sqlite3.connect(path.join(ROOT, 'escuela.db'))
+                </div>
+                
+                <div class="tip">
+                    Este cambio hace que tu código funcione tanto en tu computadora como en PythonAnywhere sin problemas.
+                </div>
+                
+                <p><strong>2.5</strong> Busca en tu código si tienes la línea <code>app.run()</code>. Debe estar dentro de un bloque <code>if __name__ == '__main__':</code> así:</p>
+                
+                <div class="code">
+# ✅ CORRECTO
+if __name__ == '__main__':
+    app.run()
+
+# ❌ INCORRECTO (sin el if)
+app.run()
+                </div>
+                
+                <p><strong>2.6</strong> Si no está dentro del <code>if</code>, enciérralo correctamente.</p>
+                
+                <p><strong>2.7</strong> Guarda todos los cambios en tu archivo.</p>
+            </div>
+
+            <!-- PASO 3 -->
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Subir tus Archivos a PythonAnywhere</h3>
+                
+                <p><strong>3.1</strong> Inicia sesión en PythonAnywhere con tu usuario y contraseña.</p>
+                
+                <p><strong>3.2</strong> Una vez dentro, verás tu "Dashboard" (panel de control). En la parte superior hay varias pestañas.</p>
+                
+                <div class="screenshot-placeholder">
+                    📸 Verás pestañas como: Dashboard, Consoles, Files, Web, Tasks, Databases
+                </div>
+                
+                <p><strong>3.3</strong> Haz clic en la pestaña <strong>"Files"</strong> (Archivos)</p>
+                
+                <p><strong>3.4</strong> Verás tu directorio principal que se llama: <code>/home/tunombredeusuario/</code></p>
+                
+                <p><strong>3.5</strong> Haz clic en el botón <strong>"Upload a file"</strong> (Subir un archivo) que está en color naranja.</p>
+                
+                <div class="important">
+                    Solo puedes subir un archivo a la vez. Es normal, ¡no te preocupes!
+                </div>
+                
+                <p><strong>3.6</strong> Sube primero tu archivo principal de Flask (app.py o como lo llames):</p>
+                <ul>
+                    <li>Haz clic en <strong>"Elegir archivo"</strong> o <strong>"Choose File"</strong></li>
+                    <li>Busca tu archivo en tu computadora</li>
+                    <li>Haz clic en <strong>"Upload"</strong></li>
+                    <li>Espera a que aparezca en la lista de archivos</li>
+                </ul>
+                
+                <p><strong>3.7</strong> Sube tu archivo de base de datos (escuela.db):</p>
+                <ul>
+                    <li>Haz clic otra vez en <strong>"Upload a file"</strong></li>
+                    <li>Selecciona tu archivo .db</li>
+                    <li>Haz clic en <strong>"Upload"</strong></li>
+                </ul>
+                
+                <p><strong>3.8</strong> Si tienes una carpeta <strong>"templates"</strong> con archivos HTML:</p>
+                <ul>
+                    <li>En la sección "Directories" (Directorios), escribe: <strong>templates</strong></li>
+                    <li>Haz clic en el botón <strong>"New directory"</strong></li>
+                    <li>Entra a esa carpeta haciendo clic en su nombre</li>
+                    <li>Sube todos tus archivos HTML uno por uno</li>
+                </ul>
+                
+                <p><strong>3.9</strong> Si tienes una carpeta <strong>"static"</strong> con archivos CSS, imágenes o JavaScript:</p>
+                <ul>
+                    <li>Regresa al directorio principal haciendo clic en <code>/home/tunombredeusuario/</code></li>
+                    <li>Crea la carpeta <strong>static</strong></li>
+                    <li>Entra a ella y sube tus archivos</li>
+                </ul>
+                
+                <div class="tip">
+                    Si tienes muchos archivos, puedes crear un archivo ZIP en tu computadora con todo tu proyecto, subirlo, y luego descomprimirlo usando la consola. ¡Te enseñaremos cómo más adelante!
+                </div>
+                
+                <div class="success">
+                    ✅ ¡Excelente! Todos tus archivos ya están en PythonAnywhere.
+                </div>
+            </div>
+
+            <!-- PASO 4 -->
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Crear tu Aplicación Web</h3>
+                
+                <p><strong>4.1</strong> En el Dashboard, haz clic en la pestaña <strong>"Web"</strong> (está en la parte superior)</p>
+                
+                <p><strong>4.2</strong> Haz clic en el botón grande azul que dice <strong>"Add a new web app"</strong> (Agregar una nueva aplicación web)</p>
+                
+                <div class="screenshot-placeholder">
+                    📸 Verás un botón azul grande en el centro de la página
+                </div>
+                
+                <p><strong>4.3</strong> Te aparecerá una ventana. Haz clic en <strong>"Next"</strong> (Siguiente)</p>
+                
+                <p><strong>4.4</strong> Te preguntará qué framework quieres usar. Selecciona <strong>"Flask"</strong></p>
+                
+                <div class="screenshot-placeholder">
+                    📸 Verás opciones como Django, Flask, web2py - elige Flask
+                </div>
+                
+                <p><strong>4.5</strong> Selecciona la versión de Python. Elige la más reciente disponible (ejemplo: <strong>Python 3.10</strong>)</p>
+                
+                <p><strong>4.6</strong> Te mostrará una ruta como: <code>/home/tunombredeusuario/mysite/flask_app.py</code></p>
+                
+                <div class="important">
+                    ¡ATENCIÓN! Aquí necesitas cambiar "flask_app.py" por el nombre de TU archivo. Por ejemplo, si tu archivo se llama "app.py", cambia la ruta a: <code>/home/tunombredeusuario/mysite/app.py</code>
+                </div>
+                
+                <p><strong>4.7</strong> Haz clic en <strong>"Next"</strong></p>
+                
+                <div class="success">
+                    ✅ ¡Ya se creó tu aplicación web! Ahora necesitamos configurarla.
+                </div>
+            </div>
+
+            <!-- PASO 5 -->
+            <div class="step">
+                <div class="step-number">5</div>
+                <h3>Configurar el Archivo WSGI</h3>
+                
+                <p>Este es un paso técnico pero MUY importante. El archivo WSGI le dice a PythonAnywhere cómo ejecutar tu aplicación.</p>
+                
+                <p><strong>5.1</strong> En la página Web (donde estás ahora), busca la sección que dice <strong>"Code"</strong></p>
+                
+                <p><strong>5.2</strong> Verás una línea que dice <strong>"WSGI configuration file"</strong> con un enlace que termina en <code>_pythonanywhere_com_wsgi.py</code></p>
+                
+                <p><strong>5.3</strong> Haz clic en ese enlace. Se abrirá un editor de código.</p>
+                
+                <div class="screenshot-placeholder">
+                    📸 Verás un archivo con mucho texto. ¡No te asustes! Solo modificaremos una pequeña parte.
+                </div>
+                
+                <p><strong>5.4</strong> Baja con el scroll hasta encontrar la sección que dice:</p>
+                
+                <div class="code">
+# +++++++++++ FLASK +++++++++++
+                </div>
+                
+                <p><strong>5.5</strong> Debajo de esa línea, verás código comentado (con el símbolo #). Busca estas líneas:</p>
+                
+                <div class="code">
+#from flask_app import app as application
+                </div>
+                
+                <p><strong>5.6</strong> BORRA toda la sección de Flask que está comentada y reemplázala por este código:</p>
+                
+                <div class="code">
+import sys
+
+# Cambia 'tunombredeusuario' por TU nombre de usuario real
+path = '/home/tunombredeusuario/'
+if path not in sys.path:
+    sys.path.insert(0, path)
+
+# Si tu archivo se llama 'app.py', usa esto:
+from app import app as application
+
+# Si tu archivo se llama 'main.py', usa esto en su lugar:
+# from main import app as application
+
+# Si tu archivo se llama 'flask_app.py', usa esto en su lugar:
+# from flask_app import app as application
+                </div>
+                
+                <div class="warning">
+                    ⚠️ IMPORTANTE: Debes cambiar:
+                    <ul>
+                        <li><strong>tunombredeusuario</strong> por tu nombre de usuario real de PythonAnywhere</li>
+                        <li><strong>from app</strong> por el nombre de tu archivo (si no se llama app.py)</li>
+                    </ul>
+                </div>
+                
+                <p><strong>5.7</strong> Una vez que hayas hecho los cambios, haz clic en el botón verde <strong>"Save"</strong> (Guardar) que está arriba a la derecha.</p>
+                
+                <div class="success">
+                    ✅ ¡Perfecto! El archivo WSGI está configurado correctamente.
+                </div>
+            </div>
+
+            <!-- PASO 6 -->
+            <div class="step">
+                <div class="step-number">6</div>
+                <h3>Verificar la Ruta del Código</h3>
+                
+                <p><strong>6.1</strong> Regresa a la pestaña <strong>"Web"</strong> (haz clic en la pestaña superior)</p>
+                
+                <p><strong>6.2</strong> En la sección <strong>"Code"</strong>, busca donde dice <strong>"Source code"</strong></p>
+                
+                <p><strong>6.3</strong> Asegúrate que la ruta sea correcta. Debe mostrar:</p>
+                
+                <div class="code">
+/home/tunombredeusuario/
+                </div>
+                
+                <p><strong>6.4</strong> Si dice algo diferente (como /home/tunombredeusuario/mysite/), haz clic en el lápiz ✏️ para editar</p>
+                
+                <p><strong>6.5</strong> Cámbialo a <code>/home/tunombredeusuario/</code> (donde están tus archivos)</p>
+                
+                <p><strong>6.6</strong> Haz clic en el ✅ para guardar</p>
+            </div>
+
+            <!-- PASO 7 -->
+            <div class="step">
+                <div class="step-number">7</div>
+                <h3>¡Activar tu Aplicación!</h3>
+                
+                <p><strong>7.1</strong> Sube hasta arriba de la página Web</p>
+                
+                <p><strong>7.2</strong> Verás un botón verde grande que dice <strong>"Reload tunombredeusuario.pythonanywhere.com"</strong></p>
+                
+                <div class="screenshot-placeholder">
+                    📸 Es un botón verde muy visible en la parte superior
+                </div>
+                
+                <p><strong>7.3</strong> Haz clic en ese botón. Verás un mensaje que dice "Reloading..." (Recargando...)</p>
+                
+                <p><strong>7.4</strong> Espera unos segundos hasta que el proceso termine</p>
+                
+                <p><strong>7.5</strong> Ahora busca el enlace que dice: <strong>tunombredeusuario.pythonanywhere.com</strong></p>
+                
+                <p><strong>7.6</strong> Haz clic en ese enlace. Se abrirá una nueva pestaña.</p>
+                
+                <div class="success">
+                    🎉 ¡FELICIDADES! Si todo salió bien, verás tu aplicación Flask funcionando en internet.
+                </div>
+            </div>
+
+            <!-- PASO 8 -->
+            <div class="step">
+                <div class="step-number">8</div>
+                <h3>¿Algo Salió Mal? Cómo Revisar Errores</h3>
+                
+                <p>Si ves un mensaje de error en lugar de tu aplicación, no te preocupes. Aquí te enseño cómo encontrar el problema:</p>
+                
+                <p><strong>8.1</strong> Regresa a la pestaña <strong>"Web"</strong> en PythonAnywhere</p>
+                
+                <p><strong>8.2</strong> Baja hasta la sección <strong>"Log files"</strong> (Archivos de registro)</p>
+                
+                <p><strong>8.3</strong> Haz clic en el enlace que dice <strong>"Error log"</strong> o <strong>"Server log"</strong></p>
+                
+                <p><strong>8.4</strong> Se abrirá un archivo con mensajes. Baja hasta el final del archivo.</p>
+                
+                <p><strong>8.5</strong> Lee los últimos mensajes de error (están en rojo). Te dirán exactamente qué está mal.</p>
+                
+                <div class="tip">
+                    Los errores más comunes son:
+                    <ul>
+                        <li>📁 Ruta incorrecta de la base de datos</li>
+                        <li>📝 Nombre del archivo mal escrito en el WSGI</li>
+                        <li>🔧 Falta alguna librería (pip install)</li>
+                    </ul>
+                </div>
+                
+                <p><strong>8.6</strong> Corrige el error en tu código o configuración</p>
+                
+                <p><strong>8.7</strong> Haz clic otra vez en el botón verde <strong>"Reload"</strong></p>
+                
+                <p><strong>8.8</strong> Vuelve a probar tu aplicación</p>
+            </div>
+
+            <!-- PASO 9 -->
+            <div class="step">
+                <div class="step-number">9</div>
+                <h3>Compartir tu Aplicación</h3>
+                
+                <p>¡Tu aplicación ya está en internet! Ahora puedes compartirla con cualquier persona.</p>
+                
+                <p><strong>9.1</strong> Tu URL (dirección web) es: <code>tunombredeusuario.pythonanywhere.com</code></p>
+                
+                <p><strong>9.2</strong> Copia esa dirección y compártela con tus amigos, familiares o profesores</p>
+                
+                <p><strong>9.3</strong> Cualquier persona con internet puede ver tu aplicación escribiendo esa dirección en su navegador</p>
+                
+                <div class="success">
+                    🌟 ¡Increíble! Tu aplicación Flask con base de datos SQLite está publicada en internet.
+                </div>
+            </div>
+
+            <!-- PASO 10 -->
+            <div class="step">
+                <div class="step-number">10</div>
+                <h3>Actualizar tu Aplicación en el Futuro</h3>
+                
+                <p>Si haces cambios en tu aplicación, aquí está cómo actualizar la versión en línea:</p>
+                
+                <p><strong>10.1</strong> Ve a <strong>Files</strong> en PythonAnywhere</p>
+                
+                <p><strong>10.2</strong> Busca el archivo que quieres modificar</p>
+                
+                <p><strong>10.3</strong> Tienes dos opciones:</p>
+                <ul>
+                    <li><strong>Opción A:</strong> Haz clic en el archivo y edítalo directamente en PythonAnywhere</li>
+                    <li><strong>Opción B:</strong> Elimina el archivo viejo y sube la nueva versión</li>
+                </ul>
+                
+                <p><strong>10.4</strong> Si modificaste la base de datos, sube el nuevo archivo .db</p>
+                
+                <p><strong>10.5</strong> Ve a la pestaña <strong>Web</strong></p>
+                
+                <p><strong>10.6</strong> Haz clic en el botón verde <strong>"Reload"</strong></p>
+                
+                <p><strong>10.7</strong> ¡Listo! Los cambios ya están en línea</p>
+                
+                <div class="tip">
+                    Si subes una nueva versión de escuela.db, se reemplazará la base de datos completa. ¡Ten cuidado de no perder datos importantes!
+                </div>
+            </div>
+
+            <!-- CHECKLIST FINAL -->
+            <div class="checklist">
+                <h3 style="color: #667eea; margin-bottom: 15px;">✅ Checklist Final - Verifica que todo esté listo:</h3>
+                <div class="checklist-item">✓ Creé mi cuenta en PythonAnywhere</div>
+                <div class="checklist-item">✓ Modifiqué el código para usar path.join()</div>
+                <div class="checklist-item">✓ Subí mi archivo principal (.py)</div>
+                <div class="checklist-item">✓ Subí mi base de datos (.db)</div>
+                <div class="checklist-item">✓ Subí mis archivos HTML (templates/)</div>
+                <div class="checklist-item">✓ Subí mis archivos CSS/JS (static/)</div>
+                <div class="checklist-item">✓ Creé la aplicación web en la pestaña Web</div>
+                <div class="checklist-item">✓ Configuré correctamente el archivo WSGI</div>
+                <div class="checklist-item">✓ Verifiqué la ruta del código fuente</div>
+                <div class="checklist-item">✓ Hice clic en el botón Reload</div>
+                <div class="checklist-item">✓ Probé mi aplicación en el navegador</div>
+            </div>
+
+            <div class="success" style="text-align: center; padding: 25px;">
+                <h3 style="margin-bottom: 15px;">🎉 ¡Felicidades! 🎉</h3>
+                <p>Has desplegado exitosamente tu aplicación Flask con SQLite en PythonAnywhere.</p>
+                <p style="margin-top: 10px; font-weight: bold;">Tu aplicación está ahora disponible en:</p>
+                <div class="code" style="text-align: center; font-size: 1.2em;">
+                    https://tunombredeusuario.pythonanywhere.com
+                </div>
+                <p style="margin-top: 15px;">¡Comparte este enlace con quien quieras!</p>
+            </div>
+
+            <div class="tip">
+                <strong>Recordatorio:</strong> Tu cuenta gratuita de PythonAnywhere se suspenderá después de 3 meses de inactividad. 
+                Para mantenerla activa, simplemente inicia sesión al menos una vez cada 3 meses.
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-emoji">🚀</div>
+            <h3>¡Has llegado al final de la guía!</h3>
+            <p>Esperamos que esta guía te haya sido útil para desplegar tu aplicación Flask.</p>
+            <p style="margin-top: 10px;">Si tienes preguntas o necesitas ayuda, recuerda revisar los logs de error en PythonAnywhere.</p>
+            <p style="margin-top: 15px; font-style: italic;">¡Sigue programando y creando cosas increíbles!</p>
+        </div>
+    </div>
+
+    <script>
+        // Script simple para hacer interactivos los items del checklist
+        document.addEventListener('DOMContentLoaded', function() {
+            const checklistItems = document.querySelectorAll('.checklist-item');
+            
+            checklistItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    this.classList.toggle('checked');
+                    
+                    if (this.classList.contains('checked')) {
+                        this.style.background = '#e8f5e9';
+                        this.style.textDecoration = 'line-through';
+                        this.style.color = '#4caf50';
+                    } else {
+                        this.style.background = '#f5f5f5';
+                        this.style.textDecoration = 'none';
+                        this.style.color = 'inherit';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

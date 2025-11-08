@@ -13,6 +13,10 @@
     h1{font-size:22px; margin:0 0 12px;}
     h2{font-size:18px; margin:18px 0 8px; color:#1a237e}
     .grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+    @media (max-width:760px){
+      .grid{grid-template-columns:1fr;}
+      pre{white-space:pre-wrap; word-break:break-word;}
+    }
     .card{border:1px solid #e0e0e0; border-left:4px solid #1976d2; padding:12px; border-radius:6px;}
     .card.warn{border-left-color:#ff9800}
     .card.ok{border-left-color:#2e7d32}
@@ -99,27 +103,29 @@ def crear():
     return redirect(url_for('home'))</code></pre>
       </div>
       <div class="card ok">
-        <h2><i class="fas fa-cloud-upload-alt"></i> 5) Despliegue (resumen)</h2>
+        <h2><i class="fas fa-cloud-upload-alt"></i> 5) Despliegue (PythonAnywhere)</h2>
         <ul>
-          <li>GitHub Pages: solo HTML/CSS/JS.</li>
-          <li>Render: Flask con <code>requirements.txt</code> y <code>Procfile</code>.</li>
+          <li><strong>PythonAnywhere:</strong> hosting sencillo para Flask con <strong>SQLite</strong> soportado. No requiere <code>Procfile</code> ni <code>gunicorn</code> manual.</li>
+          <li><strong>Sube tu proyecto:</strong> archivos <code>app.py</code>, <code>templates/</code>, <code>db.py</code> y tu <code>.db</code> si ya existe.</li>
+          <li><strong>WSGI:</strong> edita el archivo WSGI en PythonAnywhere para apuntar a tu <code>app</code> de Flask.</li>
+          <li><strong>Rutas absolutas:</strong> usa <code>os.path.join</code> con <code>__file__</code> para que SQLite encuentre el <code>.db</code> en el servidor.</li>
         </ul>
-        <pre><code class="language-text">requirements.txt
-Flask==3.0.0
-gunicorn==21.2.0
-Jinja2==3.1.2
-Werkzeug==3.0.0
-click==8.1.7
-# pysqlite3-binary==0.5.3  # solo si tu Python no trae sqlite3
-
-Procfile
-web: gunicorn app:app --log-file -</code></pre>
-        <pre><code class="language-bash"># Pasos Render
-# 1. Subir repo a GitHub
-# 2. Crear servicio Web en Render y conectar repo
-# 3. Start command: gunicorn app:app
-# 4. Verificar URL pública (CRUD operativo)
-# 5. Revisar logs si falla</code></pre>
+        <pre><code class="language-python"># db.py (ruta segura al archivo .db)
+import os, sqlite3
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, 'escuela.db')
+def get_conn():
+    c = sqlite3.connect(DB_PATH)
+    c.row_factory = sqlite3.Row
+    return c</code></pre>
+        <pre><code class="language-bash"># Pasos PythonAnywhere (mínimos)
+# 1) Crear cuenta y entrar a Files → subir tu carpeta/archivos del proyecto
+# 2) Ir a Web → Add a new web app → Manual configuration (o Flask) → Python 3.x
+# 3) Editar el archivo WSGI para importar "from app import app as application"
+# 4) Ajustar la ruta del proyecto (Source code) a tu carpeta subida
+# 5) Reload (botón) y abrir la URL pública para probar CRUD
+# 6) Si falla: revisar "Error log" y "Server log" en la pestaña Web</code></pre>
+        <p style="font-size:12px; margin-top:6px;">Guía completa paso a paso: <a href="guia-python-anywhere.html"><i class="fas fa-cloud"></i> Despliegue detallado en PythonAnywhere</a></p>
       </div>
       <div class="card warn">
         <h2><i class="fas fa-bug"></i> 6) Errores comunes</h2>

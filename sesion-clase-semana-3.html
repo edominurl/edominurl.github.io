@@ -67,6 +67,7 @@
               <a href="sesion-clase-semana-3.html" class="active-link"><i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 3</a>
               <a href="hoja-resumen-semana-3.html"><i class="fas fa-file-lines"></i> Hoja resumen Semana 3</a>
           <a href="ruta-rapida-semana-3.html"><i class="fas fa-bolt"></i> Ruta Rápida Semana 3</a>
+              <a href="guia-python-anywhere.html"><i class="fas fa-cloud-upload-alt"></i> Guía Despliegue PythonAnywhere</a>
             </div>
           </div>
           <div class="nav-dropdown">
@@ -92,62 +93,14 @@
       </div>
     </div>
 
-    <!-- Eliminado el bloque de GitHub Pages: Flask no se despliega en Pages; ver sección de Render abajo -->
-        <nav class="course-nav">
-            <div class="course-nav-container">
-                <a href="index.html" class="nav-btn nav-home-btn"><i class="fas fa-home"></i> Inicio del Curso</a>
-                <div class="nav-links">
-                    <div class="nav-dropdown">
-                        <button class="nav-btn"><i class="fas fa-book"></i> Semana 1 <i class="fas fa-chevron-down"></i></button>
-                        <div class="dropdown-content">
-                            <a href="guia-aprendizaje-semana-1.html"><i class="fas fa-book-reader"></i> Guía de Aprendizaje 1</a>
-                            <a href="sesion-clase-semana-1.html"><i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 1</a>
-                        </div>
-                    </div>
-                    <div class="nav-dropdown">
-                        <button class="nav-btn"><i class="fas fa-book"></i> Semana 2 <i class="fas fa-chevron-down"></i></button>
-                        <div class="dropdown-content">
-                            <a href="guia-aprendizaje-semana-2.html"><i class="fas fa-book-reader"></i> Guía de Aprendizaje 2</a>
-                            <a href="sesion-clase-semana-2.html"><i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 2</a>
-                        </div>
-                    </div>
-                    <div class="nav-dropdown">
-                        <button class="nav-btn active"><i class="fas fa-book"></i> Semana 3 <i class="fas fa-chevron-down"></i></button>
-                        <div class="dropdown-content">
-                            <a href="guia-aprendizaje-semana-3.html"><i class="fas fa-book-reader"></i> Guía de Aprendizaje 3</a>
-                            <a href="sesion-clase-semana-3.html" class="active-link"><i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 3</a>
-              <a href="hoja-resumen-semana-3.html"><i class="fas fa-file-lines"></i> Hoja resumen Semana 3</a>
-                        </div>
-                    </div>
-                    <div class="nav-dropdown">
-                        <button class="nav-btn"><i class="fas fa-book"></i> Semana 4 <i class="fas fa-chevron-down"></i></button>
-                        <div class="dropdown-content">
-                            <a href="guia-aprendizaje-semana-4.html"><i class="fas fa-book-reader"></i> Guía de Aprendizaje 4</a>
-                            <a href="sesion-clase-semana-4.html"><i class="fas fa-chalkboard-teacher"></i> Sesión de Clase 4</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-        <div class="header">
-            <h1>Universidad Rafael Landívar</h1>
-            <p>Facultad de Humanidades</p>
-            <p>Departamento de Educación</p>
-            <h2 style="margin-top: 20px; color: #1a237e;">Sesión de Clase Semana 3</h2>
-            <div class="header-info">
-                <div><strong>Profesorado:</strong> Profesorados con Especialidad en Tecnología</div>
-                <div><strong>Año:</strong> Psicopedagógico 2025</div>
-                <div><strong>Curso:</strong> Programación 1 - Python + Flask</div>
-            </div>
-        </div>
+  <!-- Eliminado bloque duplicado de navegación y cabecera -->
 
   <div class="session-number"><i class="fas fa-calendar-check"></i> Sesión sincrónica 3 — 6 h 30 min (ampliada)</div>
 
     <!-- Nueva sección: Qué es requirements.txt y cómo crearlo -->
     <div class="activity-block" style="background:#e3f2fd; border-left-color:#1976d2;">
-      <h3 style="color:#0d47a1; margin-bottom:10px;"><i class="fas fa-file-code"></i> requirements.txt (¿qué es y por qué?)</h3>
-      <p style="font-size:14px; line-height:1.5;">Es un archivo de texto que lista las dependencias Python (librerías) que tu aplicación necesita para funcionar. Plataformas como Render lo leen para instalar exactamente esas versiones. Si no existe, tu deploy puede fallar.</p>
+  <h3 style="color:#0d47a1; margin-bottom:10px;"><i class="fas fa-file-code"></i> requirements.txt (¿qué es y por qué?)</h3>
+  <p style="font-size:14px; line-height:1.5;">Es un archivo de texto que lista las dependencias Python (librerías) que tu aplicación necesita para funcionar. Sirve para instalar dependencias de forma reproducible en cualquier entorno y hosting. En algunos hostings se lee automáticamente; en <strong>PythonAnywhere</strong> no es obligatorio para publicar, pero sigue siendo útil para documentar e instalar tu entorno local.</p>
       <h4 style="color:#1a237e;">Formato básico</h4>
       <pre><code class="language-text">Flask==3.0.0
 gunicorn==21.2.0

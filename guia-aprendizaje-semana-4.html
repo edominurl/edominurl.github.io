@@ -19,15 +19,15 @@
 <body>
   <div class="content">
     <h1>Guía de Aprendizaje Semana 4</h1>
-  <p>Entrega de proyecto mínimo: CRUD con SQLite, README, control de versiones y despliegue en Render. Esta semana el foco principal es la <strong>documentación y evidencia en video</strong> además de verificar que el CRUD esté estable.</p>
+  <p>Entrega de proyecto mínimo: CRUD con SQLite, README, control de versiones y despliegue en <strong>PythonAnywhere</strong>. Esta semana el foco principal es la <strong>documentación y evidencia en video</strong> además de verificar que el CRUD esté estable.</p>
 
     <h2 class="section-title"><i class="fas fa-map"></i> 1) Objetivos de esta semana</h2>
     <div class="subsection">
       <ul>
         <li>Terminar y pulir el CRUD (mensajes, validaciones básicas).</li>
         <li>Generar documentación clara (README completo + videos).</li>
-        <li>Preparar despliegue estable en Render y verificar URL.</li>
-        <li>Reflexionar sobre costo/plataforma y límites del plan gratuito.</li>
+  <li>Preparar despliegue estable en PythonAnywhere y verificar URL.</li>
+  <li>Reflexionar sobre costo/plataforma y límites del plan gratuito (PythonAnywhere Free).</li>
       </ul>
     </div>
 
@@ -38,7 +38,7 @@
         <li><strong>Video de caso de uso / impacto (2–3 min):</strong> contexto educativo y problema que resuelve.</li>
         <li><strong>Video manual de uso (3–5 min):</strong> instalación local, ejecución, recorrido de la interfaz.</li>
         <li><strong>README:</strong> instalación, uso, estructura, despliegue, licencia, sección pedagógica y límites.</li>
-        <li><strong>URLs públicas:</strong> enlace al repositorio GitHub y a la app en Render.</li>
+  <li><strong>URLs públicas:</strong> enlace al repositorio GitHub y a la app en PythonAnywhere.</li>
       </ul>
       <p style="font-size:13px">Opcional: Guía rápida PDF para docentes (capturas + pasos). Suma puntos extra.</p>
     </div>
@@ -47,11 +47,11 @@
     <div class="subsection" style="border-left-color:#0288d1; background:#e1f5fe">
       <ul>
         <li><strong>GitHub:</strong> repos públicos gratuitos para versionar y colaborar.</li>
-        <li><strong>Render:</strong> plan gratuito suficiente para demo; se suspende tras inactividad (cold start más lento).</li>
-        <li><strong>Dominio opcional:</strong> ~US$10–15/año (.com). Configuración DNS apunta al servicio Render.</li>
-        <li><strong>Escalado futuro:</strong> migrar a plan pago y considerar Postgres si crece el volumen.</li>
+        <li><strong>PythonAnywhere (Free):</strong> suficiente para demo educativa con Flask + SQLite.</li>
+        <li><strong>Dominio opcional:</strong> ~US$10–15/año (.com). Puedes redirigir al subdominio <code>usuario.pythonanywhere.com</code>.</li>
+        <li><strong>Escalado futuro:</strong> migrar a plan pago o a otro hosting y considerar base externa (Postgres/MySQL).</li>
       </ul>
-      <p style="font-size:13px">GitHub Pages no sirve para Flask dinámico: usar Render (o alternativas como Railway/Heroku).</p>
+  <p style="font-size:13px">GitHub Pages no sirve para Flask dinámico: usar PythonAnywhere (o alternativas como Railway/Heroku si cambias stack).</p>
     </div>
 
   <h2 class="section-title" id="rubrica-docs"><i class="fas fa-list"></i> Rúbrica de documentación (semana 4)</h2>
@@ -59,7 +59,7 @@
       <ul>
         <li><strong>Videos (12 pts):</strong> técnico (5), impacto (3), manual (4).</li>
         <li><strong>README (10 pts):</strong> completo, claro, con límites y sección pedagógica.</li>
-        <li><strong>Despliegue (5 pts):</strong> URL Render funcional + verificación CRUD.</li>
+  <li><strong>Despliegue (5 pts):</strong> URL PythonAnywhere funcional + verificación CRUD.</li>
         <li><strong>Costos/transparencia (3 pts):</strong> explicación de plan gratuito y dominio opcional.</li>
       </ul>
       <p style="font-size:13px">Total: 30 pts (parte de la nota final del proyecto).</p>
@@ -173,23 +173,26 @@ git remote add origin https://github.com/TU_USUARIO/TU_REPO.git
 git push -u origin main</code></pre>
     </div>
 
-    <h2 class="section-title"><i class="fas fa-cloud-upload-alt"></i> 6) Despliegue en Render</h2>
+    <h2 class="section-title"><i class="fas fa-cloud-upload-alt"></i> 6) Despliegue en PythonAnywhere</h2>
     <div class="subsection">
       <ol>
-        <li>New → Web Service → conecta tu repo.</li>
-        <li>Start command: <code>gunicorn app:app</code>.</li>
-        <li>Abre la URL pública y valida CRUD.</li>
+        <li>Sube tu carpeta (Files) con <code>app.py</code>, <code>db.py</code>, <code>templates/</code> y tu <code>.db</code>.</li>
+        <li>Asegura que en <code>db.py</code> usas ruta absoluta con <code>os.path.join</code>.</li>
+        <li>Web → “Add a new web app” → Manual configuration (Python 3.x).</li>
+        <li>Edita WSGI: <code>from app import app as application</code> y ajusta la ruta de código fuente.</li>
+        <li>Reload y abre la URL para validar CRUD y gráficos.</li>
       </ol>
-      <p style="font-size:13px">Si falla, revisa Logs y confirma dependencias.</p>
+      <p style="font-size:13px">Si falla, revisar Error log (ruta incorrecta, import fallido) o Server log (trazas).</p>
+      <p style="font-size:12px;">Guía extendida: <a href="guia-python-anywhere.html">Despliegue detallado PythonAnywhere</a></p>
     </div>
 
     <h2 class="section-title"><i class="fas fa-clipboard-check"></i> 7) Checklist de entrega</h2>
     <div class="subsection">
       <ul>
-        <li>CRUD local y en Render funcionando.</li>
-        <li>Repo con README, requirements y Procfile.</li>
-        <li>Instrucciones de instalación claras.</li>
-        <li>URL pública compartida.</li>
+  <li>CRUD local y en PythonAnywhere funcionando.</li>
+  <li>Repo con README y requirements.</li>
+  <li>Instrucciones de instalación claras + nota de despliegue.</li>
+  <li>URL pública de PythonAnywhere compartida.</li>
         <li>Roles simples implementados (admin: crea/edita/borra; user: lectura) - opcional pero suma puntos.</li>
         <li>Form de login básico y cierre de sesión - opcional.</li>
         <li><code>seed.py</code> para crear usuarios de ejemplo (opcional).</li>
@@ -260,7 +263,8 @@ def logout():
         <li><strong>ImportError flask</strong>: activa venv e instala Flask.</li>
         <li><strong>no such table</strong>: ejecuta <code>init_db()</code> (o <code>python db.py</code>).</li>
         <li><strong>405</strong>: usa POST en formularios y rutas.</li>
-        <li><strong>Render 500</strong>: revisa logs, puede faltar dependencia.</li>
+  <li><strong>Error 500 WSGI</strong>: revisa Error log (import incorrecto o variable application no definida).</li>
+  <li><strong>DB no encontrada</strong>: ajustar ruta absoluta con <code>os.path.join</code>.</li>
       </ul>
     </div>
 

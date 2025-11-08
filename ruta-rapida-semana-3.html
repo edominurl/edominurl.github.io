@@ -119,7 +119,7 @@ def enviar():
 
     <h2><i class="fas fa-code"></i> 5. requirements.txt</h2>
     <div class="block">
-      <p style="font-size:14px;">Lista dependencias para instalar en servidores como Render.</p>
+  <p style="font-size:14px;">Lista dependencias para instalar en servidores como PythonAnywhere (o similares si cambias de plataforma).</p>
       <pre><code class="language-text">Flask==3.0.0
 gunicorn==21.2.0
 Jinja2==3.1.2
@@ -191,17 +191,17 @@ def eliminar(id):
     flash('Eliminado','warning'); return redirect('/')</code></pre>
     </div>
 
-    <h2><i class="fas fa-cloud-upload-alt"></i> 8. Despliegue Render (pasos mínimos)</h2>
+    <h2><i class="fas fa-cloud-upload-alt"></i> 8. Despliegue PythonAnywhere (mínimo)</h2>
     <div class="block ok">
       <ol style="font-size:14px;line-height:1.5;">
-        <li>Añade <code>requirements.txt</code> y <code>Procfile</code>.</li>
-        <li>Sube a GitHub.</li>
-        <li>Render → New Web Service → conecta repo.</li>
-        <li>Start command: <code>gunicorn app:app</code>.</li>
-        <li>Verifica la URL (código 200 y CRUD operativo).</li>
+        <li>Crea cuenta y sube tu proyecto (Files).</li>
+        <li>Asegura rutas a SQLite con <code>os.path.join</code>.</li>
+        <li>Web → Add new web app → Manual / Flask.</li>
+        <li>Edita WSGI: <code>from app import app as application</code>.</li>
+        <li>Reload y prueba CRUD en la URL pública.</li>
+        <li>Si falla: revisa Error log.</li>
       </ol>
-      <pre><code class="language-text">Procfile
-web: gunicorn app:app --log-file -</code></pre>
+      <p class="mini">Guía completa: <a href="guia-python-anywhere.html">Despliegue detallado PythonAnywhere</a></p>
     </div>
 
     <h2><i class="fas fa-terminal"></i> 9. Comandos esenciales</h2>
